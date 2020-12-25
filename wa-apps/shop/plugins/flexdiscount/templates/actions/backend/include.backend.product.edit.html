@@ -1,0 +1,13 @@
+<div class="field">
+    <div class="name">[`Minimal price`]</div>
+    <div class="value">
+        <input type="text" class="short" name="product[flexdiscount_minimal_discount_price]" value="{if isset($product['flexdiscount_minimal_discount_price'])}{$product['flexdiscount_minimal_discount_price']|intval}{/if}">
+        <select name="product[flexdiscount_minimal_discount_currency]">
+            {foreach $currencies as $c}
+                <option value='{$c.code}' {if !empty($product['flexdiscount_minimal_discount_currency']) && $product['flexdiscount_minimal_discount_currency'] == $c['code']}selected{/if}>{$c['sign']} {$c['code']}</option>
+            {/foreach}
+        </select>
+        <label><input type="checkbox" name="minimal_price_for_all"> [`for all skus`]</label>
+        <p class="hint">{_wp('Price with all discounts (from plugin Flexdiscount) will never be lower than specified value. Make sure that setting "Product discount limit" is enabled and has value "product field"')}</p>
+    </div>
+</div>

@@ -1,0 +1,13 @@
+{strip}
+<div class="catalog-pg__side-sect mt-hide pos-rel">
+	<div class="descr-mode pos-abs"><span class="pos-rel">ABOUT</span></div>
+	<div class="sidebar-section cart-help">
+		<div class="cart-help__header">{$theme_settings.shop_sidebars_sections_about_title|default:"[`Information`]"}</div>
+		<div class="cart-help__text"><p>{$theme_settings.shop_sidebars_sections_about_text|nl2br}</p></div>
+		<div class="cart-help__contacts">
+			{if !empty($theme_settings.shop_sidebars_sections_about_phone)}<p><a class="cart-help__tel" href="tel:{$theme_settings.shop_sidebars_sections_about_phone|regex_replace:"/[^+0-9]/":""}">{$theme_settings.shop_sidebars_sections_about_phone}</a></p>{/if}
+			{if !empty($theme_settings.shop_sidebars_sections_about_email)}<p><a class="cart-help__email" href="mailto:{$theme_settings.shop_sidebars_sections_about_email}">{$theme_settings.shop_sidebars_sections_about_email}</a></p>{/if}
+		</div>
+	</div>
+</div>
+{/strip}

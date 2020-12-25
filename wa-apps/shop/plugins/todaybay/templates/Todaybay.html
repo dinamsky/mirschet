@@ -1,0 +1,87 @@
+<style type="text/css">
+    .todaybay {
+        text-align: center;
+    }
+    
+    .todaybay ul {        
+        list-style-type: none;
+        padding-left: 0px;
+    } 
+    
+    .todaybay ul li {
+        border: 1px solid #e5e5e5;
+        background-color: #fff;
+        box-shadow: 0px 5px 10px rgba(0,0,0,.7);
+        padding: 0px 0px 5px 10px;
+        margin: 5px 0px 10px 5px;        
+    }
+    
+    .todaybay_name {
+        text-align: left;
+    }
+    .todaybay_name a {
+        text-decoration: none;                        
+    }
+    
+    .todaybay_price {        
+        color: red;
+        font-weight: bold;
+    }
+    
+    .todaybay_img {
+        float: left;
+    }
+    
+    .prodd {
+        padding-top: 40px;
+        padding-bottom: 5px;
+    }
+    
+</style>
+
+{if isset($list)}
+<div class="todaybay">
+    <h1 class="caption-name">Сегодня у нас купили</h1>
+    <ul>
+    {foreach $list as $p}    
+    <li>
+        <div class="todaybay_name">
+                <a href="{$p.frontend_url}" title="{$p.name|escape}">
+                    {$p.name|escape}
+                </a>
+            </div>  
+        <div class="todaybay_img">
+            <a href="{$p.frontend_url}" title="{$p.name|escape}">
+                {$wa->shop->productImgHtml($p, '100x100', ['itemprop' => 'image', 'alt' => $p.name])}
+            </a>
+        </div>
+        <div class="prodd">             
+            <div class="prd-rating">
+                {if $p.rating > 0}
+                <span class="rating nowrap">{$wa->shop->ratingHtml($p.rating, 12)}</span>
+                {else}
+                <br/>
+                {/if}
+            </div>
+            <div class="todaybay_price">
+                {shop_currency($p.price|escape)}
+            </div>
+            <div class="cart">
+                {if $wa->shop->settings('ignore_stock_count') || $p.count === null || $p.count > 0}
+                    <form class="addtocart" method="post" action="{$wa->getUrl('/frontendCart/add')}"{if $p.sku_count > 1} data-url="{$p.frontend_url}?cart=1"{/if}>
+                        <input type="hidden" name="product_id" value="{$p.id}">
+                        <input type="submit" value="В корзину">
+                    </form>
+                    <link itemprop="availability" href="http://schema.org/InStock" />
+                {else}
+              		<span class="available">Нет на складе</span>
+                    <link itemprop="availability" href="http://schema.org/OutOfStock" />
+                {/if}
+            </div>
+        </div>        
+    </li> 
+    <div class="clear-both"></div>
+    {/foreach}
+    </ul>
+</div>
+{/if}

@@ -1,0 +1,670 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: shop/plugins/delpayfilter\n"
+"POT-Creation-Date: 2016-12-16 19:09+0400\n"
+"PO-Revision-Date: \n"
+"Last-Translator: shop/plugins/delpayfilter\n"
+"Language-Team: shop/plugins/delpayfilter\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Poedit-SourceCharset: utf-8\n"
+"X-Poedit-Basepath: .\n"
+"Language: en_US\n"
+"X-Generator: Poedit 1.6.5\n"
+"X-Poedit-SearchPath-0: .\n"
+"X-Poedit-SearchPath-1: .\n"
+
+msgid "Select product"
+msgstr ""
+
+msgid "close"
+msgstr ""
+
+msgid "or select the category to find product you need."
+msgstr ""
+
+msgid "Name"
+msgstr ""
+
+msgid "Price"
+msgstr ""
+
+msgid "More products"
+msgstr ""
+
+msgid "Products not found"
+msgstr ""
+
+msgid "Select user"
+msgstr ""
+
+msgid "All contacts"
+msgstr ""
+
+msgid "or select the category to find user you need."
+msgstr ""
+
+msgid "More users"
+msgstr ""
+
+msgid "Users not found"
+msgstr ""
+
+msgid "Start typing user name or email"
+msgstr ""
+
+msgid "Back"
+msgstr ""
+
+msgid "No name filter"
+msgstr ""
+
+msgid "Delete filter"
+msgstr ""
+
+msgid "delete"
+msgstr ""
+
+msgid "Status"
+msgstr ""
+
+msgid "Disabled"
+msgstr ""
+
+msgid "Enabled"
+msgstr ""
+
+msgid "Description"
+msgstr ""
+
+msgid "Conditions"
+msgstr ""
+
+msgid "IF"
+msgstr ""
+
+msgid "Wait, please..."
+msgstr ""
+
+msgid "Add condition"
+msgstr ""
+
+msgid "Then hide methods"
+msgstr ""
+
+msgid "Shipping"
+msgstr ""
+
+msgid "Payment"
+msgstr ""
+
+msgid "Add target"
+msgstr ""
+
+msgid "Product"
+msgstr ""
+
+msgid "Category"
+msgstr ""
+
+msgid "Category and subcategories"
+msgstr ""
+
+msgid "Product set"
+msgstr ""
+
+msgid "Product type"
+msgstr ""
+
+msgid "Product features"
+msgstr ""
+
+msgid "Cart"
+msgstr ""
+
+msgid "Total quantity of all products"
+msgstr ""
+
+msgid "Quantity of product"
+msgstr ""
+
+msgid "Quantity of product from category"
+msgstr ""
+
+msgid "Quantity of product from category and subcategories"
+msgstr ""
+
+msgid "Quantity of products with features"
+msgstr ""
+
+msgid "Quantity of unique items"
+msgstr ""
+
+msgid "Order price with discount"
+msgstr ""
+
+msgid "Total price of all products"
+msgstr ""
+
+msgid "Total price of products from category"
+msgstr ""
+
+msgid "Total price of products from category and subcategories"
+msgstr ""
+
+msgid "Total price of all products with features"
+msgstr ""
+
+msgid "Price of any product"
+msgstr ""
+
+msgid "Price of each product"
+msgstr ""
+
+msgid "User"
+msgstr ""
+
+msgid "User category"
+msgstr ""
+
+msgid "Create datetime"
+msgstr ""
+
+msgid "Completed orders"
+msgstr ""
+
+msgid "Total sum of all orders"
+msgstr ""
+
+msgid "Sum of orders for period.."
+msgstr ""
+
+msgid "Quantity of all orders"
+msgstr ""
+
+msgid "Quantity of orders for period.."
+msgstr ""
+
+msgid "Orders have product"
+msgstr ""
+
+msgid "Orders have product for period.."
+msgstr ""
+
+msgid "Orders have product from category"
+msgstr ""
+
+msgid "Orders have product from category and subcategories"
+msgstr ""
+
+msgid "Orders have product from category for period.."
+msgstr ""
+
+msgid "Orders have product from category and subcategories for period.."
+msgstr ""
+
+msgid "Date and time"
+msgstr ""
+
+msgid "Date"
+msgstr ""
+
+msgid "Day of week"
+msgstr ""
+
+msgid "Time"
+msgstr ""
+
+msgid "Variables"
+msgstr ""
+
+msgid "Cookie"
+msgstr ""
+
+msgid "Session"
+msgstr ""
+
+msgid "Storefront"
+msgstr ""
+
+msgid "Select condition"
+msgstr ""
+
+msgid "Add group of conditions"
+msgstr ""
+
+msgid "Select target"
+msgstr ""
+
+msgid "edit"
+msgstr ""
+
+msgid "Save"
+msgstr ""
+
+msgid "AND"
+msgstr ""
+
+msgid "OR"
+msgstr ""
+
+msgid "Leave a review"
+msgstr ""
+
+msgid "https://www.webasyst.com/store/vendor/969712/"
+msgstr ""
+
+msgid "Other products of developer"
+msgstr ""
+
+msgid "Delivery and payment filter"
+msgstr ""
+
+msgid "Loading..."
+msgstr ""
+
+msgid "Change status"
+msgstr ""
+
+msgid "Open filter"
+msgstr ""
+
+msgid "Delete"
+msgstr ""
+
+msgid "Delete selected"
+msgstr ""
+
+msgid "Description, name"
+msgstr ""
+
+msgid "Hide shipping"
+msgstr ""
+
+msgid "Hide payment"
+msgstr ""
+
+msgid "You don't have any filters"
+msgstr ""
+
+msgid "Create filter"
+msgstr ""
+
+msgid "equal"
+msgstr ""
+
+msgid "not equal"
+msgstr ""
+
+msgid "contains"
+msgstr ""
+
+msgid "not contains"
+msgstr ""
+
+msgid "begins with"
+msgstr ""
+
+msgid "No result text"
+msgstr ""
+
+msgid "select product"
+msgstr ""
+
+msgid "any product"
+msgstr ""
+
+msgid "select contact"
+msgstr ""
+
+msgid "to"
+msgstr ""
+
+msgid "from category"
+msgstr ""
+
+msgid "from category and subcategories of"
+msgstr ""
+
+msgid "Monday"
+msgstr ""
+
+msgid "Tuesday"
+msgstr ""
+
+msgid "Wednesday"
+msgstr ""
+
+msgid "Thursday"
+msgstr ""
+
+msgid "Friday"
+msgstr ""
+
+msgid "Saturday"
+msgstr ""
+
+msgid "Sunday"
+msgstr ""
+
+msgid "All conditions return true"
+msgstr ""
+
+msgid "Any of condition returns true"
+msgstr ""
+
+msgid "HH"
+msgstr ""
+
+msgid "MM"
+msgstr ""
+
+msgid "Select category"
+msgstr ""
+
+msgid "Select product set"
+msgstr ""
+
+msgid "Select product type"
+msgstr ""
+
+msgid "Product feature"
+msgstr ""
+
+msgid "Select product feature"
+msgstr ""
+
+msgid "Select feature value"
+msgstr ""
+
+msgid "select category"
+msgstr ""
+
+msgid "Total price of products"
+msgstr ""
+
+msgid "equals"
+msgstr ""
+
+msgid "Select shipping"
+msgstr ""
+
+msgid "Select payment"
+msgstr ""
+
+msgid "Select user category"
+msgstr ""
+
+msgid "Contact"
+msgstr ""
+
+msgid "Contact create datetime"
+msgstr ""
+
+msgid "Sum of orders for period from"
+msgstr ""
+
+msgid "Quantity of orders for period from"
+msgstr ""
+
+msgid "for period from"
+msgstr ""
+
+msgid "Select domain"
+msgstr ""
+
+msgid "Select route"
+msgstr ""
+
+msgid "Select at least 1 filter rule"
+msgstr ""
+
+msgid "Do you really want to delete filter rule?"
+msgstr ""
+
+msgid "Do you really want to delete condition group?"
+msgstr ""
+
+msgid "Something wrong"
+msgstr ""
+
+msgid "prev"
+msgstr ""
+
+msgid "next"
+msgstr ""
+
+msgid "$__COOKIE[\""
+msgstr ""
+
+msgid "\"]"
+msgstr ""
+
+msgid "$__SESSION[\""
+msgstr ""
+
+msgid "$__GET[\""
+msgstr ""
+
+msgid "$__POST[\""
+msgstr ""
+
+msgid "No name"
+msgstr ""
+
+msgid "Filters delivery and payment methods by any criteria"
+msgstr ""
+
+msgid "Services"
+msgstr ""
+
+msgid "Quantity of product from set"
+msgstr ""
+
+msgid "Quantity of product from type"
+msgstr ""
+
+msgid "Quantity of all products from category"
+msgstr ""
+
+msgid "Quantity of all products from category and subcategories"
+msgstr ""
+
+msgid "Quantity of all products from set"
+msgstr ""
+
+msgid "Quantity of all products from type"
+msgstr ""
+
+msgid "Total sum of features values"
+msgstr ""
+
+msgid "Country"
+msgstr ""
+
+msgid "Not isset"
+msgstr ""
+
+msgid "https://www.webasyst.com/store/plugin/shop/delpayfilter/reviews/"
+msgstr ""
+
+msgid "Copy filter"
+msgstr ""
+
+msgid "select"
+msgstr ""
+
+msgid "Service"
+msgstr ""
+
+msgid "Select service"
+msgstr ""
+
+msgid "Select service variant"
+msgstr ""
+
+msgid "from set"
+msgstr ""
+
+msgid "from type"
+msgstr ""
+
+msgid "Contact country"
+msgstr ""
+
+msgid "Select country"
+msgstr ""
+
+msgid "Error shipping text"
+msgstr ""
+
+msgid "Keep field blank, if you want to hide shipping methods"
+msgstr ""
+
+msgid "Error payment text"
+msgstr ""
+
+msgid "Keep field blank, if you want to hide payment methods"
+msgstr ""
+
+msgid "Country and region"
+msgstr ""
+
+msgid "reset selection"
+msgstr ""
+
+msgid "Contact country and region"
+msgstr ""
+
+msgid "Select region"
+msgstr ""
+
+msgid "User city"
+msgstr ""
+
+msgid "Status of any order"
+msgstr ""
+
+msgid "Select status"
+msgstr ""
+
+msgid "Stock count"
+msgstr ""
+
+msgid "User data"
+msgstr ""
+
+msgid "Developer Igor Gaponov"
+msgstr ""
+
+msgid "each sku is separate"
+msgstr ""
+
+msgid "summarize skus"
+msgstr ""
+
+msgid "virtual and real"
+msgstr ""
+
+msgid "virtual"
+msgstr ""
+
+msgid "real"
+msgstr ""
+
+msgid "Product stock count"
+msgstr ""
+
+msgid "on"
+msgstr ""
+
+msgid "all stocks"
+msgstr ""
+
+msgid "Select data"
+msgstr ""
+
+msgid "all real stocks"
+msgstr ""
+
+msgid "any real stock"
+msgstr ""
+
+msgid "each real stock"
+msgstr ""
+
+msgid "any stock"
+msgstr ""
+
+msgid "each stock"
+msgstr ""
+
+msgid "IF user not authorized"
+msgstr ""
+
+msgid "in case of a contact with the entered email address, use the data of this contact."
+msgstr ""
+
+msgid "in case of a contact with the entered phone, use the data of this contact."
+msgstr ""
+
+msgid "For example, if at the purchase the customer is not authorized, you can check information about the orders, using entered email or the phone as the fields on which the user will be identified."
+msgstr ""
+
+msgid "Check if user is authorized"
+msgstr ""
+
+msgid "authorized"
+msgstr ""
+
+msgid "Shipping price"
+msgstr ""
+
+msgid "relevant for multi-step checkout"
+msgstr ""
+
+msgid "Stock count and product quantity in the order"
+msgstr ""
+
+msgid "product quantity in the order"
+msgstr ""
+
+msgid "Coupon"
+msgstr ""
+
+msgid "Isset active coupon"
+msgstr ""
+
+msgid "Start typing product or SKU name"
+msgstr ""
+
+msgid "Tags"
+msgstr ""
+
+msgid "Product has tag"
+msgstr ""
+
+msgid "Select tags"
+msgstr ""
+
+msgid "from"
+msgstr ""
+
+msgid "Quantity of all products with tags"
+msgstr ""
+
+msgid "select tags"
+msgstr ""
+
+msgid "Order price with discount + Shipping price"
+msgstr ""
+
+msgid "Order price without discount"
+msgstr ""
+
+msgid "Order price without discount + Shipping price"
+msgstr ""
+
+msgid "Total discount"
+msgstr ""

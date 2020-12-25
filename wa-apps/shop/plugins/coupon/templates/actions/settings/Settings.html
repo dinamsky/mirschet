@@ -1,0 +1,64 @@
+<div class="block double-padded">
+
+    <h1>[`Discount coupons generator`]</h1>
+
+    <div class="sidebar left200px">
+        <ul class="menu-v with-icons s-coupon-list bottom-padded">
+            <li class="bottom-padded">
+                <a href="javascript:void(0)" class="bold" data-coupon-id=""><i class="icon16 add"></i>[`New generator`]</a>
+            </li>
+
+            {foreach $generators as $g}
+                <li>
+                    <a href="javascript:void(0)" class="gray" data-coupon-id="{$g.id}">
+                        <i class="icon16 ss coupon"></i>{$g.comment|escape}
+                    </a>
+                </li>
+            {/foreach}
+        </ul>
+
+        <div class="form">
+        <form id="plugins-settings-form" action="?module=plugins&id=coupon&action=save" method="post">
+            <p class="hint"><label>[`Remove expired`] <input name="shop_coupon[remove_expired]" type="checkbox" value="1"{if !empty($remove_expired)} checked{/if}></label></p>
+            <p class="hint">[`If checked plugin will automatically delete all expired coupons including created manually.`]</p>
+        </form>
+        </div>
+    </div>
+
+    <div class="content left200px">
+        <i class="icon16 loading"></i>[`Loading...`]
+    </div>
+</div>
+
+<script>$(function() { "use strict";
+
+        // Highlight <li> in leftmost sidebar
+
+        var sidebar = $('#wa-plugins-content .sidebar');
+        var content = $('#wa-plugins-content .content');
+
+        // Helper to load editor content
+        var rand = null;
+        var loadCouponEditor = function(id) {
+            var rn = rand = Math.random();
+            id = id || '';
+            sidebar.find('a[data-coupon-id="'+id+'"]').parent().addClass('selected').siblings('.selected').removeClass('selected');
+            $.get('?plugin=coupon&module=settings&action=editor&id='+id, function(r) {
+                if (rand === rn) {
+                    content.html(r);
+                }
+            });
+        };
+
+        loadCouponEditor(0);
+
+        // Click on a coupon in sidebar (or a link to add new one) loads it in editor.
+        sidebar.children('.s-coupon-list').on('click', 'a', function() {
+            loadCouponEditor($(this).data('couponId'));
+        });
+
+        $('input', $('#plugins-settings-form')).change(function() {
+            var f = $(this).closest('form');
+            $.post(f.prop('action'), f.serialize());
+        })
+    });</script>

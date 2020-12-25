@@ -1,0 +1,61 @@
+<div class="s-plugin-sdekint">
+    <h4>{strip}
+            {$info.point_type_human|escape} {$info.name|escape}
+        {/strip}</h4>
+
+    <p>{strip}
+            <b>Адрес: </b>
+            {$info.city}, {$info.address|escape}
+            {if $info.phone}
+                <br>
+                <b>Телефон:</b> {$info.phone|escape}
+            {/if}
+            {if $info.work_time}
+                <br><b>Время работы:</b> {$info.work_time|escape}
+            {/if}
+            {if $info.note}
+                <br><b>Примечание:</b> <i>{$info.note|escape}</i>
+            {/if}
+        {/strip}</p>
+    <div class="map">
+
+    </div>
+</div>
+{if !$no_map && $info.coord_x && $info.coord_y}
+<script type="text/javascript">
+    if(window.jQuery) {
+        $(function () {
+            if ((typeof ymaps) === 'undefined') {
+                $.getScript('https://api-maps.yandex.ru/2.1/?lang=ru_RU', function () {
+                    showMap();
+                })
+            } else {
+                showMap();
+            }
+
+            function showMap() {
+                ymaps.ready(function () {
+                    var $container = $('.map', '.s-plugin-sdekint').first();
+                    var width = $container.width() > 550 ? $container.width('550px').width() : $container.width();
+                    $container.height(width * 0.75 + 'px');
+                    var map = new ymaps.Map($container[0], {
+                        center: [{$info.coord_y|replace:',':'.'}, {$info.coord_x|replace:',':'.'}],
+                        zoom: 16,
+                        controls: ['smallMapDefaultSet']
+                    });
+                    var placemark = new ymaps.Placemark(
+                            [{$info.coord_y|replace:',':'.'}, {$info.coord_x|replace:',':'.'}],
+                            {
+                                iconContent: '{$info.point_type_human|escape} {$info.name|escape}'.trim()
+                            },
+                            {
+                                preset: 'islands#darkGreenStretchyIcon'
+                            }
+                    );
+                    map.geoObjects.add(placemark);
+                })
+            }
+        });
+    }
+</script>
+{/if}

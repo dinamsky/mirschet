@@ -1,0 +1,42 @@
+{strip}
+{if waRequest::isXMLHttpRequest()}
+	<div class="comment{if $comment.user.id} is-admin{/if}{if $comment.depth > 0 && $comment.depth < 10} is-reply{/if}" data-id={$comment.id}>
+{/if}
+<div class="comment__content">
+	<a name="comment{$comment.id}"></a>
+	<div class="comment__details">
+		<div class="comment__av">{$comment.name|escape|mb_substr:0:1}</div>
+		{if !empty($comment.site)}
+			<a class="comment__author" href="{$comment.site}" itemprop="creator">{$comment.name}</a>
+		{else}
+			<span class="comment__author" itemprop="creator">{$comment.name}</span>
+		{/if}
+		{* @event prepare_comments_frontend.%plugin_id%.authorname_suffix *}
+        {if !empty($comment.plugins.authorname_suffix)}
+            {foreach $comment.plugins.authorname_suffix as $plugin => $output}{$output}{/foreach}
+        {/if}
+		<meta itemprop="commentTime" content="{$comment.datetime|date_format:'Y-m-d\TH:i'}">
+		{if $comment.user.id}
+			<div class="comment__label">{$wa->accountName()}</div>
+		{/if}
+		<div class="comment__date">{$comment.datetime|wa_datetime:"humandatetime"}</div>
+	</div>
+	<div class="comment__text">
+		{* @event prepare_comments_frontend.%plugin_id%.before *}
+		{if !empty($comment.plugins.before)}
+			{foreach $comment.plugins.before as $plugin => $output}{$output}{/foreach}
+		{/if}
+
+		<div itemprop="commentText">{$comment.text|nl2br}</div>
+
+		{* @event prepare_comments_frontend.%plugin_id%.after *}
+		{if !empty($comment.plugins.after)}
+			{foreach $comment.plugins.after as $plugin => $output}{$output}{/foreach}
+		{/if}
+	</div>
+	<div class="comment__btn btn btn_default btn_sec-5">[`reply`]</div>
+</div>
+{if waRequest::isXMLHttpRequest()}
+	</div>
+{/if}
+{/strip}

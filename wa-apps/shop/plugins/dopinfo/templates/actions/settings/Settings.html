@@ -1,0 +1,259 @@
+<link rel="stylesheet" href="{$wa_url}wa-content/js/jquery-plugins/ibutton/jquery.ibutton.min.css?v={$wa->version()}">
+<script src="{$wa_url}wa-content/js/jquery-plugins/ibutton/jquery.ibutton.min.js"></script>
+<h1>DopInfo</h1>
+<h4>ver. 3.1</h4>
+<p class="gray">
+    Дополнительная информация о покупателе
+</p>
+<div class="fields form" style='min-width: 500px;'>     
+    <form action="?plugin=dopinfo&action=save" method="post" id="plugins-settings-form">
+        {$wa->csrf()}
+    <div class="field">
+        <div class="name">Включить/Выключить плагин</div>
+        <div class="value">
+            <input type="checkbox" id="on_off" name="settings[state]"
+                   value="1"
+                   {if isset($settings['state']) && ($settings['state'] == 1)}
+                   checked="checked"
+                   {/if}
+                   />
+        </div>
+    </div>
+    <div class="field">
+        <div class="name">Заказы по статусам</div>
+        <div class="value">
+            <input type="checkbox" id="state_info" name="settings[state_info]"
+                   value="1"
+                   {if isset($settings['state_info']) && $settings['state_info'] == 1}
+                   checked="checked"
+                   {/if}
+                   />
+        </div>
+        <br/>
+        <p class="gray">
+            Вывод заказов клиента по статусам
+        </p>
+    </div>  
+    <div class="field">
+        <div class="name">Заказы по email</div>
+        <div class="value">
+            <input type="checkbox" id="email_check" name="settings[email_check]"
+                   value="1"
+                   {if isset($settings['email_check']) && $settings['email_check'] == 1}
+                   checked="checked"
+                   {/if}
+                   />
+        </div>
+        <br/>
+        <p class="gray">
+            Вывод клиентов с таким же email
+        </p>
+    </div>
+    <div class="field">
+        <div class="name">Проверка по телефону</div>
+        <div class="value">
+            <input type="checkbox" id="phone_check" name="settings[phone_check]"
+                   value="1"
+                   {if isset($settings['phone_check']) && $settings['phone_check'] == 1}
+                   checked="checked"
+                   {/if}
+                   />
+        </div>
+        <br/>
+        <p class="gray">
+            Вывод клиентов с таким же телефоном (если есть)
+        </p>
+    </div>
+    <div class="field">
+        <div class="name">Цифр для поиска</div>
+        <div class="value">
+            <input type="text" id="phone_number" name="settings[phone_number]" 
+                   placeholder = '7'
+                   {if isset($settings['phone_number'])}
+                   value = "{$settings['phone_number']|escape}"
+                   {/if}
+                   />
+        </div>
+        <br/>
+        <p class="gray">
+            Сколько цифр телефона для поиска (с конца)
+        </p>
+    </div>     
+    <div class="field">
+        <div class="name">Проверка по ip</div>
+        <div class="value">
+            <input type="checkbox" id="ip_check" name="settings[ip_check]"
+                   value="1"
+                   {if isset($settings['ip_check']) && $settings['ip_check'] == 1}
+                   checked="checked"
+                   {/if}
+                   />
+        </div>
+        <br/>
+        <p class="gray">
+            Вывод клиентов сделавших заказ с похожего ip<br/>
+            <i class="icon16 exclamation"></i>
+            Похожий ip - это ip в диапазоне *.*.*.0 - *.*.*.255. Т.е. первые три группы такие же, как у текущего покупателя
+        </p>
+    </div>    
+    {if isset($contact_category)}
+    <div class="field">
+        <div class="name">Проверка по черному списку</div>
+        <div class="value">
+            <input id='bl_state' type="checkbox" 
+                   name="settings[black_list_state]" 
+                   value="1" 
+                   {if isset($settings['black_list_state']) && $settings['black_list_state'] == 1}
+                   checked="checked"
+                   {/if}
+                   />
+        </div>
+        <br/><br/>
+        <p class="gray">
+            Проверять, находится ли клиент в черном списке.
+        </p>
+    </div>
+    <div class="field" id='bl_value'
+         {if isset($settings['black_list_state']) && $settings['black_list_state'] == 0}
+         style="display: none;"
+         {/if}>
+        <div class="name">Категория черного списка</div>
+        <div class="value" >
+            <select  name="settings[black_list]">
+            {foreach $contact_category as $val}
+            <option value="{$val['id']|escape}"
+                    {if isset($settings['black_list']) && ($settings['black_list'] == $val['id'])}
+                    selected {/if}>
+                    {$val['name']|escape}
+            </option>
+            {/foreach}
+            </select>            
+        </div>
+        <br/>
+        <p class="gray">
+            <i class="icon16 exclamation"></i>
+            Выберите категорию покупателей, которая задана для черного списка
+        </p>
+    </div>
+    {/if}
+    <div class="field">
+        <div class="name">Выводить группы покупателя</div>
+        <div class="value">
+            <input type="checkbox" id="client_group" name="settings[client_group]"
+                   value="1"
+                   {if isset($settings['client_group']) && $settings['client_group'] == 1}
+                   checked="checked"
+                   {/if}
+                   />
+        </div>
+        <br/><br/>
+        <p class="gray">
+            Показывать или нет к каким группам покупателей относится клиент
+        </p>
+    </div> 
+    
+    <div class="field">
+        <div class="value submit">
+            <input id="submit-button" type="submit" class="button green" value="Сохранить">
+            <span id="plugins-settings-form-status" style="display:none">
+                <i style="vertical-align:middle" class="icon16 yes"></i> [`Saved`]
+            </span>
+        </div>
+    </div>
+    </form>
+    <div class="copyright">
+        <span class="gray">&copy; 2014 Студия Было Непросто</span><br/>
+        <span class="gray"><a href="{$wa_backend_url}webasyst/installer/#/plugins&vendor=986052/shop/" target="_blank">Все плагины</a></span>
+    </div>
+</div>
+<script type="text/javascript">
+    
+    $(function() {
+        
+        $("#on_off").iButton({
+            labelOn: "Вкл",
+            labelOff: "Выкл",
+            className: 'mini'
+        });
+        
+        $("#state_info").iButton({
+            labelOn: "Вкл",
+            labelOff: "Выкл",
+            className: 'mini'
+        });
+        
+        $("#email_check").iButton({
+            labelOn: "Вкл",
+            labelOff: "Выкл",
+            className: 'mini'
+        });
+        
+        $("#phone_check").iButton({
+            labelOn: "Да",
+            labelOff: "Нет",
+            className: 'mini'
+        });
+        
+        $("#ip_check").iButton({
+            labelOn: "Да",
+            labelOff: "Нет",
+            className: 'mini'
+        });
+        
+        $(".switcher").iButton({
+            labelOn: "Вкл",
+            labelOff: "Выкл",
+            className: 'mini'
+        });
+        
+        $("#order_info").iButton({
+            labelOn: "Только отмеченные",
+            labelOff: "Все",
+            className: 'mini'
+        });
+        
+        $("#client_group").iButton({
+            labelOn: "Да",
+            labelOff: "Нет",
+            className: 'mini'
+        });
+        
+        
+        $("#bl_state").iButton({
+            labelOn: "Да",
+            labelOff: "Нет",
+            className: 'mini',
+            change: function ($input){
+                if($input.is(":checked")){
+                    $("#bl_value").show();
+                }else{
+                    $("#bl_value").hide();
+                }                
+            }
+        }).trigger("change");;
+        
+        
+        $("#plugins-settings-form").submit(function () {
+            var f = $(this);
+            $.post(f.attr('action'), f.serialize(), function (response) {
+                if(response.status == 'ok') {
+                    console.log(response);
+                    $('#submit-button').removeClass('red').addClass('green');                    
+                    $("#plugins-settings-form-status").html(response.data.message);
+                    $("#plugins-settings-form-status").fadeIn('slow', function () {
+                        $(this).fadeOut(1000);
+                    });
+                } else {
+                    $('#submit-button').removeClass('green').addClass('red');                    
+                    $("#plugins-settings-form-status").html(response.errors.join(', '));
+                    $("#plugins-settings-form-status").fadeIn('slow');
+                }
+            }, "json")
+            return false;
+        });      
+        
+        
+    });
+    </script>
+    
+    

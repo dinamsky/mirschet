@@ -1,0 +1,108 @@
+{strip}
+{$balance = round($customer.affiliate_bonus, 2)|wa_format_number:false}
+<div class="account-pg">
+	<div class="layout-center">
+		<div class="info-pg__top">
+			<div class="info-pg__tab-menu">
+				<div class="info-pg__tab-menu-btn" href="#">
+					<svg class="icon" width="12" height="14">
+						<use xlink:href="#icon-user"></use>
+					</svg>
+					<span>[`Personal navigation`]</span>
+				</div>
+			</div>
+			<div class="info-pg__dropdown"></div>
+		</div>
+	</div>
+	<div class="layout-center">
+		<h2 class="account-pg__title">[`Affiliate program`]</h2>
+	</div>
+	<div class="account-pg__main b-row">
+		<div class="b-row__inner">
+			{include file="`$wa_parent_theme_path`/my.menu.html" inline}
+			<div class="account-pg__content col-4-of-5">
+				<div class="acc-partner">
+					<div class="acc-partner__points">
+						<div class="circle-icon-box circle-icon-box_star">
+							<svg class="icon cent-icon" width="31" height="30">
+								<use xlink:href="#icon-star-big"></use>
+							</svg>
+						</div>
+						<div class="points-box">
+							<strong>{$balance}</strong>
+							<span>[`points`]</span>
+						</div>
+					</div>
+					<div class="acc-partner__descr">
+						<div class="acc-partner__descr-title">[`Bonus info`]</div>
+						<div class="acc-partner__descr-text">
+							{sprintf('[`Your current affiliate bonus of %s points allows you to get an additonal discount of up to %s`]', $balance, "<span class=\"affiliate-discount-available\">{shop_currency_html(($wa->shop->settings('affiliate_usage_rate') * $customer.affiliate_bonus), $wa->shop->currency())}</span>")}
+						</div>
+					</div>
+				</div>
+				{$_aff_plugins_active = 0}
+				<!-- plugin hook: 'frontend_my_affiliate' -->
+				{* @event frontend_my_affiliate.%plugin_id% *}
+				{foreach $frontend_my_affiliate as $_}{$_}{$_aff_plugins_active = 1}{/foreach}
+				{if $_aff_plugins_active || !empty($affiliate_history)}
+					<div class="account-pg__title account-pg__title_m">[`Bonus activity log`]</div>
+				{/if}
+				{if !empty($affiliate_history)}
+					<div class="acc-partner-his">
+						<table class="acc-partner-his__list">
+							<tbody>
+								<tr class="acc-partner-his__row acc-partner-his__row_header">
+									<th class="acc-partner-his__heading">[`Date`]</th>
+									<th class="acc-partner-his__heading">[`Comment`]</th>
+									<th class="acc-partner-his__heading">[`Credit`]</th>
+									<th class="acc-partner-his__heading">[`Debit`]</th>
+									<th class="acc-partner-his__heading">[`Balance`]</th>
+								</tr>
+								{foreach $affiliate_history as $h}
+									<tr class="acc-partner-his__row">
+										<td class="acc-partner-his__cell acc-partner-his__cell_date">
+											<div>{$h.create_datetime|wa_date:'humandatetime'}</div>
+										</td>
+										<td class="acc-partner-his__cell acc-partner-his__cell_comment">
+											{if $h.order_id && !empty($h.order_url)}
+												<a class="acc-partner-his__ord-num" href="{$h.order_url}">[`Order`] {$wa->shop->orderId($h.order_id)}</a>
+											{/if}
+											{if $h.comment}
+												<div>{$h.comment|escape}</div>
+											{/if}
+										</td>
+										<td class="acc-partner-his__cell acc-partner-his__cell_in">
+											<span>[`Credit`]</span>
+											<div>
+												{if $h.amount > 0}
+													+ {round($h.amount,2)|wa_format_number:false}
+												{/if}
+											</div>
+										</td>
+										<td class="acc-partner-his__cell acc-partner-his__cell_out">
+											<span>[`Debit`]</span>
+											<div>
+												{if $h.amount < 0}
+													&minus;{round(abs($h.amount),2)|wa_format_number:false}
+												{/if}
+											</div>
+										</td>
+										<td class="acc-partner-his__cell acc-partner-his__cell_balance">
+											<span>[`Balance`]</span>
+											<div>{round($h.balance,2)|wa_format_number:false}</div>
+										</td>
+									</tr>
+								{/foreach}
+							</tbody>
+						</table>
+					</div>
+				{else}
+					<div class="acc-info-box">
+						<div class="acc-info-box__title">[`You have no affiliate history yet.`]</div>
+					</div>
+				{/if}
+			</div>
+		</div>
+	</div>
+</div>
+{/strip}

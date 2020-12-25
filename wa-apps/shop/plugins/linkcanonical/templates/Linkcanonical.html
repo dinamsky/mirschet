@@ -1,0 +1,55 @@
+{$has_storefronts = count($linkcanonical_storefronts|default:array()) > 1}
+{if $has_storefronts}
+<hr>
+{/if}
+<div class="field-group" id="linkcanonical_group">
+	{if $has_storefronts}
+	<div class="field">
+		<div class="name">[`Storefronts`]</div>
+		<div class="value no-shift">
+			<select name="linkcanonical_storefronts" title="">
+				<option value="*" selected="selected">[`General`]</option>
+				{foreach $linkcanonical_storefronts as $storefront}
+					<option value="{$storefront}"
+							{if isset($linkcanonical_canonicals[$storefront])} style="background: green"{/if}>{$storefront}</option>
+				{/foreach}
+			</select>
+		</div>
+	</div>
+	{/if}
+	<div class="field">
+		<div class="name">[`Canonical link`]</div>
+		<div class="value no-shift">
+			<input class="long input"
+					type="text"
+					title=""
+					placeholder="https://example.com/example-page/"
+					name="linkcanonical_canonicals[*]"
+					value="{$linkcanonical_canonicals['*']|default:''}">
+			{if $has_storefronts}
+				{foreach $linkcanonical_storefronts as $storefront}
+					<input class="long input"
+							type="text"
+							title=""
+							style="display: none;"
+							placeholder="/example-page/"
+							name="linkcanonical_canonicals[{$storefront}]"
+							value="{$linkcanonical_canonicals[$storefront]|default:''}">
+				{/foreach}
+			{/if}
+		</div>
+	</div>
+</div>
+{if $has_storefronts}
+	<hr>
+{/if}
+<script>
+	jQuery(function ($) {
+		var $group = $('#linkcanonical_group');
+		$group.find('select[name="linkcanonical_storefronts"]').on('change', function () {
+			var $this = $(this);
+			$group.find("input").hide();
+			$group.find('input[name="linkcanonical_canonicals[' + $this.val() + ']"]').show();
+		});
+	});
+</script>

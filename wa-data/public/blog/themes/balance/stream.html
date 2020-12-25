@@ -1,0 +1,21 @@
+{strip}
+<a name="page_{$page}"></a>
+{if $is_search}
+	{include file="stream_search.html" inline}
+{else}
+	{include file="stream_posts.html" inline}
+{/if}
+{if !$is_lazyloading && $pages>1}
+	<div class="info-pg__pagen">
+		<div class="pagination">
+			<ul class="pagination__list">
+				{for $p=1 to $pages}
+					<li{if $p eq $page} class="selected"{/if}>
+						<a href="?page={$p}">{$p}</a>
+					</li>
+				{/for}
+			</ul>
+		</div>
+	</div>
+{/if}
+{/strip}

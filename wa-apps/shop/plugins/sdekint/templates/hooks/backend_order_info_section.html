@@ -1,0 +1,103 @@
+{$deliv_types = ['stock'=>'склад', 'postomat'=>'постомат', 'door'=>'дверь']}
+{$available_services = [3=>'Доставка в выходной день', 30=>'Примерка на дому', 36=>'Частичная доставка', 37=>'Осмотр вложения']}
+
+<div id="s-plugin-sdekint-info-wrapper"{if $sdekint_print && $sdekint_print == 'none'} class="s-plugin-sdekint-no-print"{/if}>
+    <h3><span class="gray">Отправление СДЭК &mdash;</span> <strong>{$sdekint_info.dispatch_number}</strong>
+        <a href="?plugin=sdekint&module=printform&order_id={$order.id}" target="_blank" title="Накладная в PDF"
+                ><i class="icon16 s-sdekint format-pdf"></i></a>
+        <a href="?plugin=sdekint&module=printBarcode&order_id={$order.id}" target="_blank" title="Штрихкоды мест PDF"
+        ><i class="icon16 s-sdekint barcode"></i></a>
+        {*<a href="javascript:void()" class="small inline-link"><b><i>подробнее</i></b></a>*}
+    </h3>
+
+    <div id="s-plugin-sdekint-info"{if $sdekint_print && $sdekint_print == 'dispatch_number'} class="s-plugin-sdekint-no-print"{/if}>
+        {if $sdekint_info.packages}
+            <p>
+            {_wp('%d package', '%d packages', $sdekint_info.packages|count)}
+            {if $sdekint_info.packages|count == 1}
+                {$pkg = $sdekint_info.packages[0]}
+                весом <i>{$pkg.weight} кг.</i>, размер <i>{$pkg.size_str} см.</i>
+                </p>
+            {else}
+                :</p>
+                <ul id="s-plugin-sdekint-package-info">
+                    {foreach $sdekint_info.packages as $pkg}
+                        <li>Номер <i>{$pkg.number}</i>{if ifempty($pkg.barcode)}, штрихкод: <i>{$pkg.barcode}</i>{/if}, весом
+                            <i>{$pkg.weight} кг.</i> и размером <i>{$pkg.size_str} см.</i></li>
+                    {/foreach}
+                </ul>
+            {/if}
+        {/if}
+        <dl>
+            {if $sdekint_info.tariff}
+            <dt>Тариф</dt>
+            <dd>{$sdekint_info.tariff.full_name}</dd>
+            {/if}
+            {if $sdekint_info.services}
+                <dt>Доп. услуги</dt><dd>{implode(', ', array_column($sdekint_info.services, 'name'))}</dd>
+            {/if}
+                <dt>Доставка</dt>
+                <dd>{strip}
+                {if in_array($sdekint_info.tariff.to, ['stock', 'postomat'])}
+                    в {if $sdekint_info.tariff.to=='stock'}ПВЗ{else}постомат{/if} {$sdekint_info.address.stock.name}
+                    <br>
+                    {$addr_parts=[]}
+                    {if $sdekint_info.address.stock.city}{$addr_parts[] = $sdekint_info.address.stock.city}{/if}
+                    {if $sdekint_info.address.stock.address}{$addr_parts[]=$sdekint_info.address.stock.address}{/if}
+                    {if !empty($addr_parts)}{$addr_parts=[implode($addr_parts, ', ')]}{/if}
+                    {if $sdekint_info.address.stock.work_time}{$addr_parts[] = $sdekint_info.address.stock.work_time}{/if}
+                    {if $sdekint_info.address.stock.phone}{$addr_parts[]='<i class="icon16 phone"></i> '|cat:$sdekint_info.address.stock.phone}{/if}
+                    {if $sdekint_info.address.stock.note}{$addr_parts[]=$sdekint_info.address.stock.note}{/if}
+                    {$addr_parts|implode:'<br>'}
+                {elseif $sdekint_info.tariff.to == 'door'}
+                    по адресу {$sdekint_info.address.oneline}
+                {/if}
+                    {/strip}</dd>
+            {if $sdekint_info.contact}
+                <dt>Получатель</dt>
+                <dd>{strip}
+                    {$contact_parts=[]}
+                    {if $sdekint_info.contact.name}{$contact_parts[]=$sdekint_info.contact.name}{/if}
+                    {if $sdekint_info.contact.email}{$contact_parts[]=$sdekint_info.contact.email}{/if}
+                    {if $sdekint_info.contact.phone}{$contact_parts[]=$sdekint_info.contact.phone}{/if}
+                        {$contact_parts|implode:', '}
+                    {/strip}</dd>
+            {/if}
+            {if $sdekint_info.pickup && is_array($sdekint_info.pickup)}
+                <dt>Забор</dt>
+                <dd>{strip}
+                        {if ifempty($sdekint_info, 'pickup', 'date', null)}<b>{$sdekint_info.pickup.date|wa_date:'humandate'}</b>{/if}, {ifempty($sdekint_info, 'pickup', 'from', '')}&ndash;{ifempty($sdekint_info, 'pickup', 'to', '')}
+                        {if ifempty($sdekint_info, 'pickup', 'date', null) && ifempty($sdekint_info, 'pickup', 'address', [])}<br>{/if}
+                        {if ifempty($sdekint_info, 'pickup', 'address', 'street', '')}{$sdekint_info.pickup.address.street}{/if}{if ifempty($sdekint_info, 'pickup', 'address', 'house', '')}, д. {$sdekint_info.pickup.address.house}{/if}{if ifempty($sdekint_info, 'pickup', 'address', 'house', '')}, кв./офис {$sdekint_info.pickup.address.house}{/if}
+                {/strip}</dd>
+            {/if}
+        </dl>
+        {if $sdekint_info.schedule}
+            <table>
+                <caption>Расписание доставки</caption>
+                <thead>
+                <tr>
+                    <th>Дата</th>
+                    <th>Интервал</th>
+                    <th>Получатель</th>
+                    <th>Адрес</th>
+                    <th>Телефон</th>
+                </tr>
+                </thead>
+                <tbody>
+                {foreach $sdekint_info.schedule as $sc}
+                    <tr>
+                        <td>{$sc.date_human}</td>
+                        <td>{$sc.time_range}</td>
+                        <td{if !$sc.name} class="s-plugin-sdekint-default-value"{/if}>{if !empty($sc.name)}{$sc.name}{/if}</td>
+                        <td{if empty($sc.address_str)} class="s-plugin-sdekint-default-value"{/if}>
+                            {if !empty($sc.address_str)}{$sc.address_str}{/if}
+                        </td>
+                        <td{if empty($sc.phone)} class="s-plugin-sdekint-default-value"{/if}>{if !empty($sc.phone)}{$sc.phone}{/if}</td>
+                    </tr>
+                {/foreach}
+                </tbody>
+            </table>
+        {/if}
+    </div>
+</div>

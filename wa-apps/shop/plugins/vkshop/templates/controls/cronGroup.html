@@ -1,0 +1,9 @@
+{if !empty($groups)}
+    <select name="shop_vkshop[cron_group]" id="s-plugin-cron-group" onchange="$.Vkshop_settings.groupselect(this);" >
+        {foreach $groups as $group}
+            <option value="{$group.id}"{if $group.id == $settings.cron_group} selected="selected"{/if}>{$group.name|escape}</option>
+        {/foreach}
+    </select>
+{else}
+    <span class="errormsg">[`Check the settings for the groups in the plugin settings. If the group is set, save the settings and reload the page.`]</span>
+{/if}

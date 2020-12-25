@@ -1,0 +1,100 @@
+{strip}
+{if $theme_settings.shop_homepage_slider_view ne "none"}
+	{$_slides_count = 0}
+	<div class="home-pg__section home-pg__section_main-slider{if $theme_settings.shop_homepage_slider_view ne 'always'} {$theme_settings.shop_homepage_slider_view}{/if}">
+		<div class="main-slider-row pos-rel">
+			<div class="descr-mode pos-abs"><span class="pos-rel">SLIDER</span></div>
+			{if !empty($theme_settings.shop_homepage_slider_banners_1_image) || !empty($theme_settings.shop_homepage_slider_banners_2_image)}
+				<div class="main-slider-row__banners">
+					<div class="sld-side-banrs">
+						<div class="sld-side-banrs__inner">
+							{if !empty($theme_settings.shop_homepage_slider_banners_1_image)}
+								{if !empty($theme_settings.shop_homepage_slider_banners_1_link)}<a class="sld-side-banrs__item" href="{$theme_settings.shop_homepage_slider_banners_1_link}">
+								{else}<span class="sld-side-banrs__item">{/if}
+										<img src="{$wa_theme_url}{$theme_settings.shop_homepage_slider_banners_1_image}" alt>
+								{if !empty($theme_settings.shop_homepage_slider_banners_1_link)}</a>
+								{else}</span>{/if}
+							{/if}
+							{if !empty($theme_settings.shop_homepage_slider_banners_2_image)}
+								{if !empty($theme_settings.shop_homepage_slider_banners_2_link)}<a class="sld-side-banrs__item" href="{$theme_settings.shop_homepage_slider_banners_2_link}">
+								{else}<span class="sld-side-banrs__item">{/if}
+										<img src="{$wa_theme_url}{$theme_settings.shop_homepage_slider_banners_2_image}" alt>
+								{if !empty($theme_settings.shop_homepage_slider_banners_2_link)}</a>
+								{else}</span>{/if}
+							{/if}
+						</div>
+					</div>
+				</div>
+			{/if}
+			<div class="main-slider-row__slider">
+				<div class="main-slider main-slider_js swiper-container" data-auto="{$theme_settings.shop_homepage_slider_autodelay}000">
+					<div class="main-slider__inner swiper-wrapper">
+						{if !empty($theme_settings.homepage_slider_slide_1_image)}
+							{$_slides_count = $_slides_count+1}
+							{if !empty($theme_settings.homepage_slider_slide_1_link)}<a class="main-slider__slide swiper-slide" href="{$theme_settings.homepage_slider_slide_1_link}">
+							{else}<span class="main-slider__slide swiper-slide">{/if}
+									<img data-src="{$wa_theme_url}{$theme_settings.homepage_slider_slide_1_image}" src="data:image/gif;base64,R0lGODlh6gDqAIAAAP///wAAACH5BAEAAAEALAAAAADqAOoAAAL+jI+py+0Po5y02ouz3rz7D4biSJbmiabqyrbuC8fyTNf2jef6zvf+DwwKh8Si8YhMKpfMpvMJjUqn1Kr1is1qt9yu9wsOi8fksvmMTqvX7Lb7DY/L5/S6/Y7P6/f8vv8PGCg4SFhoeIiYqLjI2Oj4CBkpOUlZaXmJmam5ydnp+QkaKjpKWmp6ipqqusra6voKGys7S1tre4ubq7vL2+v7CxwsPExcbHyMnKy8zNzs/AwdLT1NXW19jZ2tvc3d7f0NHi4+Tl5ufo6err7O3u7+Dh8vP09fb3+Pn6+/z9/v/w8woMCBBAsaPIgwocKFDBs6fAgxosSJFCtavIgxo8Y9jRw7evwIMqTIkSRLmjyJMqXKlSxbunwJM6bMmTRr2ryJM6fOnTx7+vwJNKjQoUSLGj2KNKnSpUybOo1UAAA7" alt>
+									<span class="swiper-lazy-preloader swiper-lazy-preloader-black"></span>
+							{if !empty($theme_settings.homepage_slider_slide_1_link)}</a>
+							{else}</span>{/if}
+						{/if}
+						{if !empty($theme_settings.homepage_slider_slide_2_image)}
+							{$_slides_count = $_slides_count+1}
+							{if !empty($theme_settings.homepage_slider_slide_2_link)}<a class="main-slider__slide swiper-slide" href="{$theme_settings.homepage_slider_slide_2_link}">
+							{else}<span class="main-slider__slide swiper-slide">{/if}
+									<img data-src="{$wa_theme_url}{$theme_settings.homepage_slider_slide_2_image}" src="data:image/gif;base64,R0lGODlh6gDqAIAAAP///wAAACH5BAEAAAEALAAAAADqAOoAAAL+jI+py+0Po5y02ouz3rz7D4biSJbmiabqyrbuC8fyTNf2jef6zvf+DwwKh8Si8YhMKpfMpvMJjUqn1Kr1is1qt9yu9wsOi8fksvmMTqvX7Lb7DY/L5/S6/Y7P6/f8vv8PGCg4SFhoeIiYqLjI2Oj4CBkpOUlZaXmJmam5ydnp+QkaKjpKWmp6ipqqusra6voKGys7S1tre4ubq7vL2+v7CxwsPExcbHyMnKy8zNzs/AwdLT1NXW19jZ2tvc3d7f0NHi4+Tl5ufo6err7O3u7+Dh8vP09fb3+Pn6+/z9/v/w8woMCBBAsaPIgwocKFDBs6fAgxosSJFCtavIgxo8Y9jRw7evwIMqTIkSRLmjyJMqXKlSxbunwJM6bMmTRr2ryJM6fOnTx7+vwJNKjQoUSLGj2KNKnSpUybOo1UAAA7" alt>
+									<span class="swiper-lazy-preloader swiper-lazy-preloader-black"></span>
+							{if !empty($theme_settings.homepage_slider_slide_2_link)}</a>
+							{else}</span>{/if}
+						{/if}
+						{if !empty($theme_settings.homepage_slider_slide_3_image)}
+							{$_slides_count = $_slides_count+1}
+							{if !empty($theme_settings.homepage_slider_slide_3_link)}<a class="main-slider__slide swiper-slide" href="{$theme_settings.homepage_slider_slide_3_link}">
+							{else}<span class="main-slider__slide swiper-slide">{/if}
+									<img data-src="{$wa_theme_url}{$theme_settings.homepage_slider_slide_3_image}" src="data:image/gif;base64,R0lGODlh6gDqAIAAAP///wAAACH5BAEAAAEALAAAAADqAOoAAAL+jI+py+0Po5y02ouz3rz7D4biSJbmiabqyrbuC8fyTNf2jef6zvf+DwwKh8Si8YhMKpfMpvMJjUqn1Kr1is1qt9yu9wsOi8fksvmMTqvX7Lb7DY/L5/S6/Y7P6/f8vv8PGCg4SFhoeIiYqLjI2Oj4CBkpOUlZaXmJmam5ydnp+QkaKjpKWmp6ipqqusra6voKGys7S1tre4ubq7vL2+v7CxwsPExcbHyMnKy8zNzs/AwdLT1NXW19jZ2tvc3d7f0NHi4+Tl5ufo6err7O3u7+Dh8vP09fb3+Pn6+/z9/v/w8woMCBBAsaPIgwocKFDBs6fAgxosSJFCtavIgxo8Y9jRw7evwIMqTIkSRLmjyJMqXKlSxbunwJM6bMmTRr2ryJM6fOnTx7+vwJNKjQoUSLGj2KNKnSpUybOo1UAAA7" alt>
+									<span class="swiper-lazy-preloader swiper-lazy-preloader-black"></span>
+							{if !empty($theme_settings.homepage_slider_slide_3_link)}</a>
+							{else}</span>{/if}
+						{/if}
+						{if !empty($theme_settings.homepage_slider_slide_4_image)}
+							{$_slides_count = $_slides_count+1}
+							{if !empty($theme_settings.homepage_slider_slide_4_link)}<a class="main-slider__slide swiper-slide" href="{$theme_settings.homepage_slider_slide_4_link}">
+							{else}<span class="main-slider__slide swiper-slide">{/if}
+									<img data-src="{$wa_theme_url}{$theme_settings.homepage_slider_slide_4_image}" src="data:image/gif;base64,R0lGODlh6gDqAIAAAP///wAAACH5BAEAAAEALAAAAADqAOoAAAL+jI+py+0Po5y02ouz3rz7D4biSJbmiabqyrbuC8fyTNf2jef6zvf+DwwKh8Si8YhMKpfMpvMJjUqn1Kr1is1qt9yu9wsOi8fksvmMTqvX7Lb7DY/L5/S6/Y7P6/f8vv8PGCg4SFhoeIiYqLjI2Oj4CBkpOUlZaXmJmam5ydnp+QkaKjpKWmp6ipqqusra6voKGys7S1tre4ubq7vL2+v7CxwsPExcbHyMnKy8zNzs/AwdLT1NXW19jZ2tvc3d7f0NHi4+Tl5ufo6err7O3u7+Dh8vP09fb3+Pn6+/z9/v/w8woMCBBAsaPIgwocKFDBs6fAgxosSJFCtavIgxo8Y9jRw7evwIMqTIkSRLmjyJMqXKlSxbunwJM6bMmTRr2ryJM6fOnTx7+vwJNKjQoUSLGj2KNKnSpUybOo1UAAA7" alt>
+									<span class="swiper-lazy-preloader swiper-lazy-preloader-black"></span>
+							{if !empty($theme_settings.homepage_slider_slide_4_link)}</a>
+							{else}</span>{/if}
+						{/if}
+						{if !empty($theme_settings.homepage_slider_slide_5_image)}
+							{$_slides_count = $_slides_count+1}
+							{if !empty($theme_settings.homepage_slider_slide_5_link)}<a class="main-slider__slide swiper-slide" href="{$theme_settings.homepage_slider_slide_5_link}">
+							{else}<span class="main-slider__slide swiper-slide">{/if}
+									<img data-src="{$wa_theme_url}{$theme_settings.homepage_slider_slide_5_image}" src="data:image/gif;base64,R0lGODlh6gDqAIAAAP///wAAACH5BAEAAAEALAAAAADqAOoAAAL+jI+py+0Po5y02ouz3rz7D4biSJbmiabqyrbuC8fyTNf2jef6zvf+DwwKh8Si8YhMKpfMpvMJjUqn1Kr1is1qt9yu9wsOi8fksvmMTqvX7Lb7DY/L5/S6/Y7P6/f8vv8PGCg4SFhoeIiYqLjI2Oj4CBkpOUlZaXmJmam5ydnp+QkaKjpKWmp6ipqqusra6voKGys7S1tre4ubq7vL2+v7CxwsPExcbHyMnKy8zNzs/AwdLT1NXW19jZ2tvc3d7f0NHi4+Tl5ufo6err7O3u7+Dh8vP09fb3+Pn6+/z9/v/w8woMCBBAsaPIgwocKFDBs6fAgxosSJFCtavIgxo8Y9jRw7evwIMqTIkSRLmjyJMqXKlSxbunwJM6bMmTRr2ryJM6fOnTx7+vwJNKjQoUSLGj2KNKnSpUybOo1UAAA7" alt>
+									<span class="swiper-lazy-preloader swiper-lazy-preloader-black"></span>
+							{if !empty($theme_settings.homepage_slider_slide_5_link)}</a>
+							{else}</span>{/if}
+						{/if}
+					</div>
+					{if $_slides_count > 1}
+						<div class="main-slider__nav">
+							<button class="slider-ar slider-ar_round pos-rel default-btn">
+								<svg class="icon cent-icon" width="8" height="15">
+									<use xlink:href="#arrow-left-big"></use>
+								</svg>
+							</button>
+							<button class="slider-ar slider-ar_round pos-rel default-btn">
+								<svg class="icon cent-icon" width="8" height="15">
+									<use xlink:href="#arrow-right-big"></use>
+								</svg>
+							</button>
+						</div>
+						<div class="main-slider__pag">
+							<div class="swiper-pagination"></div>
+						</div>
+					{/if}
+				</div>
+			</div>
+		</div>
+	</div>
+{/if}
+{/strip}

@@ -1,0 +1,17 @@
+bcf8f9fe39ec6469cab360bf44044bdb *img/f7logo16.png
+ab64b520d5095eabdffab043401006d6 *js/f7root.js
+209634bb0238704c4874c35d615ae59e *lib/.htaccess
+cb93c1243f6474449e2cd0835a15bf99 *lib/action/shopF7rootPluginBackendFeatures.action.php
+e910ad1ed917e244c0cf8453c3ab96a7 *lib/action/shopF7rootPluginBackendFeaturevalues.action.php
+3c83db5612a8c3ef3f80ccf101bcd153 *lib/config/plugin.php
+042e4b15a5730dc6ac08a0662f09afe3 *lib/config/settings.php
+13a955e291b2479ab99dc406385b4133 *lib/models/shopF7root.model.php
+2289da2536d9701729162468bafbaec7 *lib/shopF7root.plugin.php
+a1751e1f10a3b96b05d0401c97e72008 *locale/.htaccess
+456ea275a7a789a1f5d68f71461d3dc5 *locale/en_US/LC_MESSAGES/shop_f7root.mo
+fcd4e469b33aa9ddf82b50f2bd0447f7 *locale/en_US/LC_MESSAGES/shop_f7root.po
+512759aa37abe6eff95ce187eea96e16 *locale/ru_RU/LC_MESSAGES/shop_f7root.mo
+4d18261e3faf371444beda3fad8dea7a *locale/ru_RU/LC_MESSAGES/shop_f7root.po
+209634bb0238704c4874c35d615ae59e *templates/.htaccess
+cef886166705fad2a5e6acc3d720500a *templates/actions/backend/BackendFeatures.html
+51e8526b413e1a4b111f9c5ae62458f5 *templates/actions/backend/BackendFeaturevalues.html

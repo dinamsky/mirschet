@@ -1,0 +1,148 @@
+<link href="{$wa_url}wa-apps/shop/plugins/giftcard/css/settings.css" type="text/css" rel="stylesheet"/>
+<h1>Подарочный сертификат</h1>
+<div class="fields form">
+	<hr>
+	<h2>Основные настройки</h2>
+	<form class="gc_common">
+		<div class="field">
+			<div class="name">Включить плагин</div>
+			<div class="value">
+				<input type="checkbox" name="gc_common[engage_plugin]" class="rc_textcontent_value" {if $gc_sys_settings.engage_plugin}checked{/if}>
+				<br>
+				<span class="hint">Если убрать галочку, плагин будет отключен и не будет обрабатывать заказы, автоматически генерировать и отзывать сертификаты</span>
+			</div>
+		</div>
+		<div class="field">
+			<div class="name">ID товара-карты</div>
+			<div class="value">
+				<input type="text" name="gc_common[giftcardid]" class="gc_textcontent_value" value="{if $gc_sys_settings.giftcardid}{$gc_sys_settings.giftcardid}{/if}">
+				<br>
+				<span class="hint">Откройте товар, который Вы хотите назначить подарочной картой, и увидите его id в правом верхнем углу. Обязательно укажите корректный id.</span>
+			</div>
+		</div>
+		<div class="field">
+			<div class="name">Заголовок (title) страницы подарочного сертификата</div>
+			<div class="value">
+				<input type="text" name="gc_common[frontend_title]" class="gc_textcontent_value" value="{if $gc_sys_settings.frontend_title}{$gc_sys_settings.frontend_title}{/if}">
+				<br>
+				<span class="hint">Заголовок (title) специальной страницы /giftcard/, отвечающей за отдельное представление подарочного сертификата.</span>
+			</div>
+		</div>
+		<div class="field">
+			<div class="name">META Keywords страницы подарочного сертификата</div>
+			<div class="value">
+				<input type="text" name="gc_common[frontend_keywords]" class="gc_textcontent_value" value="{if $gc_sys_settings.frontend_keywords}{$gc_sys_settings.frontend_keywords}{/if}">
+				<br>
+				<span class="hint">META Keywords специальной страницы /giftcard/, отвечающей за отдельное представление подарочного сертификата.</span>
+			</div>
+		</div>
+		<div class="field">
+			<div class="name">META Description страницы подарочного сертификата</div>
+			<div class="value">
+				<textarea name="gc_common[frontend_description]" class="gc_textcontent_value">{if $gc_sys_settings.frontend_description}{$gc_sys_settings.frontend_description}{/if}</textarea>
+				<br>
+				<span class="hint">META Description специальной страницы /giftcard/, отвечающей за отдельное представление подарочного сертификата.</span>
+			</div>
+		</div>
+		<input type="submit" class="gc_button gc_button_common" value="Сохранить настройки"/>
+		<div class="gc_saving gc_saving_settings"><div class="gc_saving_preloader"></div>Подождите, идет сохранение настроек..</div>
+		<div class="gc_saved gc_saved_settings"></div>
+	</form>
+	<hr>
+	<h2>Шаблоны</h2>
+	<div class="gc_tpl">
+		<h3>Шаблон страницы покупки подарочной карты во фронтенде (<a href="{$wa->getUrl('shop/frontend/giftpage', ['plugin' => 'giftcard'], true)}" target="blank">{$wa->getUrl('shop/frontend/giftpage', ['plugin' => 'giftcard'], true)}</a>)</h3>
+		<textarea class="gc_tpl_frontend_giftcard gc_codemirror" data-file="frontend_giftcard">{$gc_templates.frontend_giftcard}</textarea>
+		<textarea class="gc_original" data-file="frontend_giftcard">{$gc_templates.frontend_giftcard_original}</textarea>
+		<input type="button" class="gc_button gc_tpl_button gc_tpl_save" data-file="frontend_giftcard" value="Сохранить изменения"/>
+		<div class="gc_saving gc_saving_tpl" data-file="frontend_giftcard"><div class="gc_saving_preloader"></div>Подождите, идет сохранение шаблона..</div>
+		<div class="gc_saved gc_saved_tpl" data-file="frontend_giftcard"></div>
+		<input type="button" class="gc_button gc_tpl_button gc_red_button gc_tpl_reset" data-file="frontend_giftcard" value="Сбросить изменения"/>
+		<div class="gc_saving gc_resetting_tpl" data-file="frontend_giftcard"><div class="gc_saving_preloader"></div>Подождите, идет сброс шаблона..</div>
+		<div class="gc_saved gc_resetted_tpl" data-file="frontend_giftcard"></div>
+	</div>
+	<div class="gc_tpl">
+		<h3>Шаблон списка подарочных сертификатов на страницы заказа в личном кабинете</h3>
+		<textarea class="gc_tpl_frontend_order gc_codemirror" data-file="frontend_order">{$gc_templates.frontend_order}</textarea>
+		<textarea class="gc_original" data-file="frontend_order">{$gc_templates.frontend_order_original}</textarea>
+		<input type="button" class="gc_button gc_tpl_button gc_tpl_save" data-file="frontend_order" value="Сохранить изменения"/>
+		<div class="gc_saving gc_saving_tpl" data-file="frontend_order"><div class="gc_saving_preloader"></div>Подождите, идет сохранение шаблона..</div>
+		<div class="gc_saved gc_saved_tpl" data-file="frontend_order"></div>
+		<input type="button" class="gc_button gc_tpl_button gc_red_button gc_tpl_reset" data-file="frontend_order" value="Сбросить изменения"/>
+		<div class="gc_saving gc_resetting_tpl" data-file="frontend_order"><div class="gc_saving_preloader"></div>Подождите, идет сброс шаблона..</div>
+		<div class="gc_saved gc_resetted_tpl" data-file="frontend_order"></div>
+	</div>
+	<div class="gc_tpl">
+		<h3>Шаблон подарочного сертификата</h3>
+		<textarea class="gc_tpl_print_card gc_codemirror" data-file="print_card">{$gc_templates.print_card}</textarea>
+		<textarea class="gc_original" data-file="print_card">{$gc_templates.print_card_original}</textarea>
+		<input type="button" class="gc_button gc_tpl_button gc_tpl_save" data-file="print_card" value="Сохранить изменения"/>
+		<div class="gc_saving gc_saving_tpl" data-file="print_card"><div class="gc_saving_preloader"></div>Подождите, идет сохранение шаблона..</div>
+		<div class="gc_saved gc_saved_tpl" data-file="print_card"></div>
+		<input type="button" class="gc_button gc_tpl_button gc_red_button gc_tpl_reset" data-file="print_card" value="Сбросить изменения"/>
+		<div class="gc_saving gc_resetting_tpl" data-file="print_card"><div class="gc_saving_preloader"></div>Подождите, идет сброс шаблона..</div>
+		<div class="gc_saved gc_resetted_tpl" data-file="print_card"></div>
+	</div>
+</div>
+
+<script type="text/javascript">
+	$(document).ready(function() {
+		var codemirror_array = new Array();
+		$(".gc_codemirror").each(function () {
+            var file = $(this).attr('data-file');
+			codemirror_array[file] = CodeMirror.fromTextArea(this, {
+                mode: "text/html",
+                tabMode: "indent",
+                lineWrapping: true,
+				onChange: function() {
+					$('.gc_tpl_save[data-file="'+file+'"]').addClass('gc_yellow_button');
+				}
+            });
+        });
+		
+		$('.gc_tpl_save').click(function() {
+			var this_button = $(this);
+			$('.gc_saving_tpl[data-file="'+this_button.attr('data-file')+'"]').slideDown();
+			$.post('?plugin=giftcard&module=backend&action=savetemplate', 'tpl_name='+this_button.attr('data-file')+'&tpl_content='+encodeURIComponent(codemirror_array[this_button.attr('data-file')].getValue()), function(JData) {
+				this_button.removeClass('gc_yellow_button');
+				$('.gc_saving_tpl[data-file="'+this_button.attr('data-file')+'"]').slideUp();
+				$('.gc_saved_tpl[data-file="'+this_button.attr('data-file')+'"]').html(JData.data.message).slideDown().delay(5000).slideUp();
+			} , "json");
+		});
+		
+		$('.gc_tpl_reset').click(function() {
+			if(confirm("Вы уверены, что хотите сбросить изменения шаблона?")) {
+				var this_button = $(this);
+				$('.gc_resetting_tpl[data-file="'+this_button.attr('data-file')+'"]').slideDown();
+				$.post('?plugin=giftcard&module=backend&action=resettemplate', 'tpl_name='+this_button.attr('data-file')+'&tpl_content='+encodeURIComponent(codemirror_array[this_button.attr('data-file')].getValue()), function(JData) {
+					$('.gc_resetting_tpl[data-file="'+this_button.attr('data-file')+'"]').slideUp();
+					$('.gc_resetted_tpl[data-file="'+this_button.attr('data-file')+'"]').html(JData.data.message).slideDown().delay(5000).slideUp();
+					codemirror_array[this_button.attr('data-file')].setValue($('.gc_original[data-file="'+this_button.attr('data-file')+'"]').val());
+					$('.gc_tpl_save[data-file="'+this_button.attr('data-file')+'"]').removeClass('gc_yellow_button');
+				} , "json");
+			}
+		});
+		
+		$('.gc_common').submit(function() {
+			$('.gc_saving_settings').slideDown();
+			$.post('?plugin=giftcard&module=backend&action=savepluginsettings', $(this).serialize(), function(JData) {
+				$('.gc_saving_settings').slideUp();
+				var save_result = '';
+				if(JData.data.success == '0') { save_result = '<span style="color: red;">'; }
+				else { save_result = '<span style="color: green;">'; }
+				save_result += JData.data.message + '</span>';
+				$('.gc_saved_settings').html(save_result).slideDown().delay(5000).slideUp();
+				$('.gc_button_common').removeClass('gc_yellow_button');
+				//console.log(JData);
+			} , "json");
+			return false;
+		});
+		
+		$('.gc_textcontent_value').change(function() {
+			$('.gc_button_common').addClass('gc_yellow_button');
+		});
+		$('.gc_textcontent_value').keydown(function() {
+			$('.gc_button_common').addClass('gc_yellow_button');
+		});
+	});
+</script>

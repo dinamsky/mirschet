@@ -1,0 +1,80 @@
+{strip}
+<div class="site-actions__mini-cart">
+	<div class="minicart js-minicart" data-carturl="{$wa->getUrl('shop/frontend/cart')}" data-dummyimg="{$wa_theme_url}img/dummy96.png">
+		<div class="u-cen-txt">
+			<h4 class="minicart__title">[`Products in cart`]</h4>
+		</div>
+		<ul class="minicart__list cst-reset">
+			{foreach $_topcart_items as $item}
+			<li class="minicart__item" data-id="{$item.id}">
+				<div class="mini-item">
+					<a class="mini-item__image" href="{$wa->shop->productUrl($item.product)}">
+						{$wa->shop->productImgHtml($item.product, '96x96', ['default' => "`$wa_theme_url`img/dummy96.png", 'alt' => $item.product.name|escape])}
+					</a>
+					<div class="mini-item__content">
+						<a class="mini-item__name" href="{$wa->shop->productUrl($item.product)}">{$item.product.name|escape}</a>
+						<div class="mini-item__price-list">
+							{if $item.compare_price > $item.price && 0}
+								<div class="mini-item__price mini-item__price_old">
+									<span>{wa_currency($item.compare_price, $wa->shop->currency())}</span>
+								</div>
+							{/if}
+							<div class="mini-item__price mini-item__price_regl">
+								<span>{wa_currency($item.price, $wa->shop->currency())}</span>
+								<span> x</span>
+								<span> {$item.quantity}</span>
+							</div>
+						</div>
+						{if $item.compare_price > $item.price && 0}
+						<div class="mini-item__label">
+							<span class="label label_econom" style="background-color: #ffe500;">[`saving`] <strong></strong></span>
+						</div>
+						{/if}
+						{if isset($item.services) && !empty($item.services)}
+							<div class="mini-item__extra">
+								{foreach $item.services as $s}
+									<div class="mini-item__extra-item">
+										<span>+ {$s.name}</span>
+										<strong> {wa_currency($s.price, $wa->shop->currency())}</strong>
+										<span> x</span>
+										<span>{$s.quantity}</span>
+									</div>
+								{/foreach}
+							</div>
+						{/if}
+					</div>
+				</div>
+				<div class="minicart__delete">
+					<button class="close-x">
+						<svg class="icon cent-icon" width="8" height="8">
+							<use xlink:href="#arrow-x"></use>
+						</svg>
+						<span class="visually-hidden">[`remove`]</span>
+					</button>
+				</div>
+			</li>
+			{/foreach}
+		</ul>
+		<div class="minicart__total">
+			<div class="minicart__total-text">[`Total`]:</div>
+			<div class="minicart__total-price js-minicart-total">{wa_currency_html($cart_total, $wa->shop->currency())}</div>
+		</div>
+		<div class="minicart__btn-wrapper">
+			{if $wa->getUrl('shop/frontend/cart') eq $_cart_url}
+				<div class="minicart__btn">
+					<a href="{$_cart_url}" class="btn {$theme_settings.main_buttons_style|replace:'img/themebuttons/':''|replace:'.gif':''} btn_sec-3">
+						<span class="hover-anim"></span>
+						<span>[`Cart`]</span>
+					</a>
+				</div>
+			{/if}
+			<div class="minicart__btn">
+				<a href="{if method_exists($wa->shop, 'checkout')}{$_cart_url}{else}{$wa->getUrl('shop/frontend/checkout')}{/if}" class="btn {$theme_settings.main_buttons_style|replace:'img/themebuttons/':''|replace:'.gif':''} btn_main-1">
+					<div class="hover-anim"></div>
+					<span>[`Proceed to checkout`]</span>
+				</a>
+			</div>
+		</div>
+	</div>
+</div>
+{/strip}

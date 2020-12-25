@@ -1,0 +1,69 @@
+{strip}
+{if $theme_settings.homepage_news_view ne "none" && $wa->blog}
+	{$news = $wa->blog->posts($theme_settings.homepage_news_blog_id|default:null,5)}
+	{if !empty($news)}
+		{$_blog_details = ""}
+		{if $theme_settings.homepage_news_blog_id > 0}
+			{$_blog_details = $wa->blog->blog($theme_settings.homepage_news_blog_id)}
+		{/if}
+		{if empty($_blog_details)}
+			{$_blogs = $wa->blog->blogs()}
+			{foreach $_blogs as $blog}
+				{$_blog_details = $blog}
+				{break}
+			{/foreach}
+		{/if}
+		<div class="home-pg__section home-pg__section_blog{if $theme_settings.homepage_news_view ne 'always'} {$theme_settings.homepage_news_view}{/if} pos-rel">
+			<div class="descr-mode pos-abs"><span class="pos-rel">NEWS</span></div>
+			<div class="home-pg__section-header home-pg__section-header_link">
+				<h3 class="section-title">{$_blog_details.name|escape}</h3>
+				<a class="home-pg__section-header-link link link_sec" href="{$_blog_details.link}">[`all posts`]</a>
+			</div>
+			<div class="home-blog">
+				<div class="home-blog__inner">
+					{$_first_imaged = false}
+					{foreach $news as $post}
+						{if isset($post.preview) && !empty($post.preview)}
+							{$post.preview = $post.preview}
+						{elseif method_exists("blogMainpicPluginViewHelper","getPostMainpicUrlById")}
+							{$post.preview = blogMainpicPluginViewHelper::getPostMainpicUrlById($post.id, 'image')}
+						{else}
+							{$post.preview = false}
+						{/if}
+						{if $post@first}
+							<div class="home-blog__item{if $post.preview} home-blog__item_2x{/if}">
+								<div class="b-post-horz">
+									{if $post.preview}
+										<a class="b-post-horz__image mb-hide" href="{$post.link}">
+											<img src="data:image/gif;base64,R0lGODlh6gDqAIAAAP///wAAACH5BAEAAAEALAAAAADqAOoAAAL+jI+py+0Po5y02ouz3rz7D4biSJbmiabqyrbuC8fyTNf2jef6zvf+DwwKh8Si8YhMKpfMpvMJjUqn1Kr1is1qt9yu9wsOi8fksvmMTqvX7Lb7DY/L5/S6/Y7P6/f8vv8PGCg4SFhoeIiYqLjI2Oj4CBkpOUlZaXmJmam5ydnp+QkaKjpKWmp6ipqqusra6voKGys7S1tre4ubq7vL2+v7CxwsPExcbHyMnKy8zNzs/AwdLT1NXW19jZ2tvc3d7f0NHi4+Tl5ufo6err7O3u7+Dh8vP09fb3+Pn6+/z9/v/w8woMCBBAsaPIgwocKFDBs6fAgxosSJFCtavIgxo8Y9jRw7evwIMqTIkSRLmjyJMqXKlSxbunwJM6bMmTRr2ryJM6fOnTx7+vwJNKjQoUSLGj2KNKnSpUybOo1UAAA7" data-src="{$post.preview}" class="lazy-img" alt="">
+										</a>
+									{/if}
+									<div class="b-post-horz__content">
+										<div class="b-post-horz__date grey">{$post.datetime|wa_datetime:"humandate"}</div>
+										<a class="b-post-horz__title link link_ter" href="{$post.link}">{$post.title|escape}</a>
+										<a class="b-post-horz__btn btn {$theme_settings.main_buttons_style|replace:'img/themebuttons/':''|replace:'.gif':''} btn_sec-9" href="{$post.link}">
+											<div class="hover-anim"></div>
+											<span>[`Read more`]</span>
+										</a>
+									</div>
+								</div>
+							</div>
+							{if $post.preview}{$_first_imaged = true}{/if}
+						{else}
+							<div class="home-blog__item">
+								<a class="b-post-tile" href="{$post.link}"{if $post.preview} style="background-image: url({$post.preview})"{/if}>
+									<span class="b-post-tile__inner">
+										<span class="b-post-tile__day">{$post.datetime|wa_datetime:"humandate"}</span>
+										<span class="b-post-tile__title">{$post.title|escape}</span>
+									</span>
+								</a>
+							</div>
+						{/if}
+						{if $post@iteration eq 4 && $_first_imaged}{break}{/if}
+					{/foreach}
+				</div>
+			</div>
+		</div>
+	{/if}
+{/if}
+{/strip}

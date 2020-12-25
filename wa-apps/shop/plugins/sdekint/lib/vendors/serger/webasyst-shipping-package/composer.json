@@ -1,0 +1,21 @@
+{
+  "name": "serger/webasyst-shipping-package",
+  "license": "proprietary",
+  "description": "Class for single package and collection of packages",
+  "authors": [{
+    "name": "Serge Rodovnichenko",
+    "homepage": "https://www.syrnik.com",
+    "email": "serge@syrnik.com"
+  }],
+  "keywords": ["package"],
+  "require": {
+    "php": "^5.6 || 7.0",
+    "doctrine/collections": "^1.4",
+    "php-units-of-measure/php-units-of-measure": "^2.1.0"
+  },
+  "autoload": {
+    "psr-4": {
+      "SergeR\\Webasyst\\Shipping\\Packages\\": "src/"
+    }
+  }
+}

@@ -1,0 +1,51 @@
+{strip}
+<div class="wrapper{if $theme_settings.header_design eq 'view-10'} in-header-content{/if}">
+	<div class="main"{if empty($page.id) && empty($page.content)} itemscope itemtype="http://schema.org/WebPage" role="main"{/if}>
+	{if $wa->globals("showParentBreadcrumbs")}
+		{if !empty($breadcrumbs)}
+			<div class="layout-center">
+				<div class="info-pg__top">
+					<div class="info-pg__bc">
+						<div class="breadcrumbs breadcrumbs_{$theme_settings.breadcrumbs_design}">
+							<ul class="breadcrumbs__list">
+								<li class="breadcrumbs__item">
+									<a class="breadcrumbs__link" href="{$wa_url}">[`Home`]</a>
+								</li>
+								{foreach $breadcrumbs as $bc}
+									<li class="breadcrumbs__item"><a class="breadcrumbs__link" href="{$bc.url}">{$bc.name|escape}</a></li>
+								{/foreach}
+							</ul>
+						</div>
+					</div>
+					<div class="info-pg__tab-menu">
+						<div class="info-pg__tab-menu-btn" href="#">
+							<svg class="icon" width="16" height="10"><use xlink:href="#icon-blog-menu"></use></svg>
+							<span>[`Navigation`]</span>
+						</div>
+					</div>
+					<div class="info-pg__dropdown"></div>
+				</div>
+			</div>
+		{/if}		
+	{/if}	
+	{if $wa->currentUrl() == $wa_app_url && (empty($page.id) && empty($page.content))}
+		<div class="info-pg">
+			<div class="info-pg__main b-row">
+				<div class="b-row__inner">
+					<div class="info-pg__content col-4-of-5">
+						<div class="info-sec">
+							<h1 class="info-sec__title">[`Welcome to your new site!`]</h1>
+							<div class="info-sec__main">
+								<p>{sprintf('[`Start by <a href="%s">creating a page</a> in your site backend.`]', $wa_backend_url|cat:'site/#/pages/')}</p>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	{else}
+		{$content}
+	{/if}
+	</div>
+</div>
+{/strip}

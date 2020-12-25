@@ -1,0 +1,60 @@
+<h1>[`VK Shop`]</h1>
+<form id="plugins-settings-form" target="plugins-settings-iframe" enctype="multipart/form-data" method="post"
+      action="?module=plugins&id=vkshop&action=save">
+    <div style="display: table; width: 100%;">
+        <div style="display: table-cell">
+            <ul class="tabs" id="vkshop-tabs">
+                <li class="selected"><a href="#vkshop-basic">[`Basic settings`]</a></li>
+                {foreach $tabs as $key => $tab}
+                    <li><a href="#vkshop-{$key}">{$tab.name}</a></li>
+                {/foreach}
+            </ul>
+            <div class="tab-content" id="vkshop-tabs-content">
+                <div class="block" id="vkshop-basic">
+                    {include file="./Basic.html" inline}
+                </div>
+                {foreach $tabs as $key => $tab}
+                    <div class="block" id="vkshop-{$key}">
+                        {include file="./{$tab.template}"  inline}
+                    </div>
+                {/foreach}
+            </div>
+            <div class="fields">
+                <div class="field">
+                    <div class="value submit">
+                        <input class="button green" type="submit" value="[`Save`]">
+                        <span id="plugins-settings-form-status" style="display:none"></span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</form>
+<iframe id="plugins-settings-iframe" name="plugins-settings-iframe" style="display:none">
+    <html>
+    <head></head>
+    <body></body>
+    </html>
+</iframe>
+
+<script>
+    $(function () {
+        $.when(
+                $.Deferred(function (deferred) {
+                    if ($.Vkshop_settings) deferred.resolve();
+                    else {
+                        $.shop.trace('Loading vkshop_settings.js', []);
+                        $.getScript('{$wa_app_static_url}plugins/vkshop/js/vkshop_settings.{if !$wa->debug()}min.{/if}js', deferred.resolve)
+                    }
+                })
+        ).done(function () {
+            setTimeout(function () {
+                $.Vkshop_settings.confirm_string = '[`Are you sure? Deleting a group will make it impossible to continue working with products of this group.`]';
+                $.Vkshop_settings.init();
+                $.shop.trace('$.Vkshop_settings initialized', []);
+            }, 500);
+        });
+    });
+</script>
+
+

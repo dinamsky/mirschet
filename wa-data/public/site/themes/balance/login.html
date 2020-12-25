@@ -1,0 +1,85 @@
+{strip}
+<div class="sign-pg">
+	<div class="layout-center">
+		<div class="u-cen-txt">
+			<h1 class="sign-pg__title">[s`Login`]</h1>
+		</div>
+		<div class="sign-pg__content">
+			<div class="form-ui-wr form-ui-wr_m-pad">
+				<div class="form-ui-wr__inner">
+					<div class="auth-form">
+						<div class="auth-form__form">
+							{$wa->loginForm($error, [
+								'show_title'          => false,
+								'show_sub_title'      => false,
+								'include_css'         => false,
+								'show_oauth_adapters' => false
+							])}
+						</div>
+						{* SOCIAL ACCOUNTS *}
+						{$auth_adapters = $wa->authAdapters(true)}
+						{if $auth_adapters}
+							{$linked_adapters = []}
+							{$other_adapters = []}
+							{foreach $auth_adapters as $a}
+								{if $wa->user("{$a->getId()}_id")}
+									{$linked_adapters[] = $a}
+								{else}
+									{$other_adapters[] = $a}
+								{/if}
+							{/foreach}
+
+							{if $other_adapters}
+								{$_social_svg_styles = [
+									'vkontakte' => [
+										'id' => 'vk',
+										'icon' => '<svg class="icon cent-icon" width="16" height="9"><use xlink:href="#icon-vk"></use></svg>'
+									],
+									'facebook' => [
+										'id' => 'fb',
+										'icon' => '<svg class="icon cent-icon" width="7" height="16"><use xlink:href="#icon-fb"></use></svg>'
+									],
+									'google' => [
+										'id' => 'ggp',
+										'icon' => '<svg class="icon cent-icon" width="18" height="10"><use xlink:href="#icon-gp"></use></svg>'
+									],
+									'twitter' => [
+										'id' => 'tw',
+										'icon' => '<svg class="icon cent-icon" width="16" height="13"><use xlink:href="#icon-tw"></use></svg>'
+									],
+									'yandex' => [
+										'id' => 'ya',
+										'icon' => '<svg class="icon cent-icon" width="8" height="15"><use xlink:href="#icon-ya"></use></svg>'
+									],
+									'mailru' => [
+										'id' => 'magent',
+										'icon' => '<svg class="icon cent-icon" width="16" height="15"><use xlink:href="#icon-magent"></use></svg>'
+									]
+								]}
+								<div class="auth-form__social">
+									<div class="u-cen-txt">
+										<div class="auth-form__social-title">[`Authorize either by entering your contact information, or through one of the websites listed below`]</div>
+									</div>
+									<div class="auth-form__social-btns">
+										<div class="soc-list">
+											<div class="soc-list__inner balance__auth-adapters">
+												{foreach $other_adapters as $a}
+													<div class="soc-list__i">
+														<a class="soc-btn soc-btn_{$_social_svg_styles[$a->getId()].id}" href="{$a->getUrl()}">
+															{$_social_svg_styles[$a->getId()].icon}
+														</a>
+													</div>
+												{/foreach}
+											</div>
+										</div>
+									</div>
+								</div>
+							{/if}
+						{/if}
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+{/strip}

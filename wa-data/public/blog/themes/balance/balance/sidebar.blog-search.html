@@ -1,0 +1,17 @@
+{strip}
+<div class="info-sdb__wr">
+	<div class="site-search default no-bd">
+		<form method="get" action="{$wa_app_url}">
+			<div class="site-search__inner">
+				<input class="site-search__input site-search__input_merged" type="search" name="query"{if !empty($blog_query)} value="{$blog_query}"{/if} placeholder="[`Search posts`]">
+				<button class="site-search__btn default-btn">
+					<svg class="icon cent-icon" width="16" height="16">
+						<use xlink:href="#icon-search"></use>
+					</svg>
+					<span class="site-search__btn-text">[`Search`]</span>
+				</button>
+			</div>
+		</form>
+	</div>
+</div>
+{/strip}

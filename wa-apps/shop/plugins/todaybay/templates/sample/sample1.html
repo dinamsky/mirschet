@@ -1,0 +1,35 @@
+<h2>Сегодня у нас купили</h2>
+<div class="promo">
+    {$todays = shopTodaybayPlugin::getProductCollection()}
+    {if $todays && count($todays)}
+    <ul class="bxslider">
+        {foreach $todays as $p}
+        <li itemscope itemtype ="http://schema.org/Product">
+            <a href="{$p.frontend_url}" title="{$p.name}{if $p.summary} &ndash; {strip_tags($p.summary)|escape}{/if}">
+                <div class="info">
+                    <h2 itemprop="name">
+                        <span class="name">{$p.name}</span>
+                    </h2>
+                    {if $p.compare_price > 0}
+                    <span class="compare-at-price nowrap">
+                        {shop_currency($p.compare_price)} 
+                    </span>
+                    {/if}
+                    <p class="purchase"><span class="price nowrap">{shop_currency($p.price)}</span></p>
+                    {if $p.summary}
+                    <p itemprop="description">{strip_tags($p.summary)}</p>
+                    {/if}
+                </div>
+                <div class="image">
+                    {$badge_html = $wa->shop->badgeHtml($p.badge)}
+                    {if $badge_html}
+                    <div class="corner top right">{$badge_html}</div>
+                    {/if}
+                    {$wa->shop->productImgHtml($p, '400', ['itemprop' => 'image', 'alt' => $p.name, 'default' => "`$wa_theme_url`img/dummy200.png"])}
+                </div>
+            </a>
+        </li>
+        {/foreach}
+    </ul>
+    {/if}
+</div>

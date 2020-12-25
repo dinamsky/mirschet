@@ -1,0 +1,10 @@
+{strip}
+<div class="sidebar-section cart-help">
+	<div class="cart-help__header">{$theme_settings.shop_checkout_steps_info_title|default:"[`Information`]"}</div>
+	<div class="cart-help__text">{$theme_settings.shop_checkout_steps_info_text}</div>
+	<div class="cart-help__contacts">
+		{if !empty($theme_settings.shop_checkout_steps_phone)}<a class="cart-help__tel" href="tel:{$theme_settings.shop_checkout_steps_phone|regex_replace:"/[^+0-9]/":""}">{$theme_settings.shop_checkout_steps_phone}</a>{/if}
+		{if !empty($theme_settings.shop_checkout_steps_email)}<a class="cart-help__email" href="mailto:{$theme_settings.shop_checkout_steps_email}">{$theme_settings.shop_checkout_steps_email}</a>{/if}
+	</div>
+</div>
+{/strip}

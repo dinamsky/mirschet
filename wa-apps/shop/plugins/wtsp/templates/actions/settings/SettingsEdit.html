@@ -1,0 +1,31 @@
+{*smarty*}
+{*редактор шаблона*}
+<h1>Создать новый шаблон</h1>
+<div class="field-group">
+    <div class="field">
+        <div class="name">Название шаблона</div>
+        <div class="value">
+            <input type="text" name="name" value="{if isset($param) }{$param.name|escape}{/if}">
+        </div>
+    </div>
+    <div class="field">
+        <div class="name">Сообщение</div>
+        <div class="value">
+            <textarea name="description">{if isset($param) }{$param.description|escape}{/if}</textarea>
+        </div>
+    </div>
+    <div class="field">
+        <div class="name"></div>
+        <div class="value">
+            <div class="errors" style="color:red"></div>
+        </div>
+    </div>
+
+    {if isset($param) }<input type="hidden" name="id" value="{$param.id}">{/if}
+    {$wa->getCheatSheetButton(["app" => {$wa->app()}, 'key' => 'notifications'])}
+</div>
+{if isset($param) }
+<div>
+    <a class="wtsp-templates-delete" href="javascript:void(0);" data-id="{$param.id}"><i class="icon16 delete"></i>Удалить</a>
+</div>
+{/if}

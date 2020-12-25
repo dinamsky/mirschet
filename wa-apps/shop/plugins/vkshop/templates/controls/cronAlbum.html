@@ -1,0 +1,9 @@
+{if !empty($albums)}
+    <select name="shop_vkshop[cron_album]" id="s-plugin-cron-album">
+        {foreach $albums as $album}
+            <option value="{$album.album_id}"{if $album.album_id == $settings.cron_album} selected="selected"{/if}>{$album.name|escape}</option>
+        {/foreach}
+    </select>
+{else}
+    <span class="errormsg">[`Check the settings for the albums in the plugin settings. If the album is set, save the settings and reload the page.`]</span>
+{/if}

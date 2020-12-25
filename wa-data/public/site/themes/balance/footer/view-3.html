@@ -1,0 +1,208 @@
+{strip}
+<div class="site-footer site-footer_3{if $theme_settings.footer_design_dark} site-footer_dark{/if}">
+	<div class="site-footer__top-line mt-hide"></div>
+	<div class="site-footer__top">
+		<div class="f-row f-row_custom">
+			{if $theme_settings.show_scrolltop_button}
+				<div class="site-footer__item site-footer__item_scroll-top">
+					<span>
+						[`scroll to top`]
+						<svg class="icon" width="8" height="9">
+							<use xlink:href="#icon-arrow-up"></use>
+						</svg>
+					</span>
+				</div>
+			{/if}
+			<div class="site-footer__item site-footer__item_about col-lg">
+				<div class="f-info">
+					<h3 class="f-info__header">
+						<span class="f-info__header-text">[`Contacts`]</span>
+						<svg class="icon icon-down" width="11" height="7">
+							<use xlink:href="#icon-down-arrow"></use>
+						</svg>
+					</h3>
+					<div class="f-info__body">
+						{if !empty($theme_settings.footer_contacts_phone1)}
+							<div class="f-block">
+								<a class="f-phone iconed-text" href="tel:{$theme_settings.footer_contacts_phone1|regex_replace:"/[^+0-9]/":""}">
+									<svg class="icon" width="16" height="16">
+										<use xlink:href="#icon-phone"></use>
+									</svg>
+									<span class="f-phone__num">{$theme_settings.footer_contacts_phone1}</span>
+								</a>
+							</div>
+						{/if}
+						{if !empty($theme_settings.footer_contacts_phone2)}
+							<div class="f-block">
+								<a class="f-phone iconed-text" href="tel:{$theme_settings.footer_contacts_phone2|regex_replace:"/[^+0-9]/":""}">
+									<svg class="icon" width="16" height="16">
+										<use xlink:href="#icon-phone"></use>
+									</svg>
+									<span class="f-phone__num">{$theme_settings.footer_contacts_phone2}</span>
+								</a>
+							</div>
+						{/if}
+						{if !empty($theme_settings.footer_contacts_phone_text)}
+							<div class="f-worktime">
+								<div class="f-worktime__days">{$theme_settings.footer_contacts_phone_text}</div>
+							</div>
+						{/if}
+						{if !empty($theme_settings.footer_contacts_email)}
+							<div class="f-address iconed-text">
+								<svg class="icon" width="16" height="16">
+									<use xlink:href="#icon-mail"></use>
+								</svg>
+								<a href="mailto:{$theme_settings.footer_contacts_email}" class="link_sec drive-map">{$theme_settings.footer_contacts_email}</a>
+							</div>
+						{/if}
+						{if !empty($theme_settings.footer_contacts_address)}
+							<div class="f-address iconed-text">
+								<svg class="icon" width="16" height="16">
+									<use xlink:href="#icon-compass"></use>
+								</svg>
+								<div class="f-address__text">{$theme_settings.footer_contacts_address}</div>
+							</div>
+						{/if}
+						{if !empty($theme_settings.address_map)}
+							<div class="f-block">
+								<a class="link_sec drive-map popup-show_map" href="#">[`Location map`]</a>
+							</div>
+						{/if}
+					</div>
+				</div>
+			</div>
+			{$_balance_footer_links = $wa->block("balance_footer_links")}
+			{if !empty($_balance_footer_links)}
+				{$_balance_footer_links}
+			{else}
+				{include file="footer/links.html"}
+			{/if}
+			<div class="site-footer__item col-lg">
+				<div class="f-info">
+					<a class="logo" href="{$wa_url}" title="{$wa->accountName()}"><img src="{$wa_theme_url}{if !empty($theme_settings.footer_logo)}{$theme_settings.footer_logo}{else}{$theme_settings.header_logo}{/if}?v{$wa_theme_version}" alt="{$wa->accountName()}"></a>
+					<div class="logo-text">{$theme_settings.footer_about}</div>
+					<h3 class="f-info__header">
+						<span class="f-info__header-text">[`Follow us`]</span>
+						<svg class="icon" width="11" height="7">
+							<use xlink:href="#icon-down-arrow"></use>
+						</svg>
+					</h3>
+					<div class="f-info__body">
+						<ul class="f-info__list f-info__list_flex">
+							{if !empty($theme_settings.vk)}
+								<li class="f-info__i">
+									<a class="f-info__l" href="{$theme_settings.vk}" target="_blank">
+										<span class="f-soc">
+											<span class="soc-btn soc-btn soc-btn_vk">
+												<svg class="icon cent-icon" width="16" height="9"><use xlink:href="#icon-vk"></use></svg>
+											</span>
+											<span class="f-soc__text">[s`VK`]</span>
+										</span>
+									</a>
+								</li>
+							{/if}
+							{if !empty($theme_settings.facebook)}
+								<li class="f-info__i">
+									<a class="f-info__l" href="{$theme_settings.facebook}" target="_blank">
+										<span class="f-soc">
+											<span class="soc-btn soc-btn soc-btn_fb">
+												<svg class="icon cent-icon" width="7" height="16"><use xlink:href="#icon-fb"></use></svg>
+											</span>
+											<span class="f-soc__text">[s`Facebook`]</span>
+										</span>
+									</a>
+								</li>
+							{/if}
+							{if !empty($theme_settings.instagram)}
+								<li class="f-info__i">
+									<a class="f-info__l" href="{$theme_settings.instagram}" target="_blank">
+										<span class="f-soc">
+											<span class="soc-btn soc-btn soc-btn_instagram">
+												<img class="cent-icon" src="{$wa_theme_url}img/icon-instagram-color.svg" alt width="16" height="17">
+												<svg class="icon cent-icon" width="16" height="17"><use xlink:href="#icon-instagram-monochrome"></use></svg>
+											</span>
+											<span class="f-soc__text">[s`Instagram`]</span>
+										</span>
+									</a>
+								</li>
+							{/if}
+							{if !empty($theme_settings.youtube)}
+								<li class="f-info__i">
+									<a class="f-info__l" href="{$theme_settings.youtube}" target="_blank">
+										<span class="f-soc">
+											<span class="soc-btn soc-btn soc-btn_ytb">
+												<svg class="icon cent-icon" width="30" height="21"><use xlink:href="#icon-yt-monochrome"></use></svg>
+											</span>
+											<span class="f-soc__text">[s`Youtube`]</span>
+										</span>
+									</a>
+								</li>
+							{/if}
+							{if !empty($theme_settings.telegram)}
+								<li class="f-info__i">
+									<a class="f-info__l" href="{$theme_settings.telegram}" target="_blank">
+										<span class="f-soc">
+											<span class="soc-btn soc-btn soc-btn_telegram">
+												<svg class="icon cent-icon" width="16" height="13"><use xlink:href="#icon-telegram"></use></svg>
+											</span>
+											<span class="f-soc__text">[s`Telegram`]</span>
+										</span>
+									</a>
+								</li>
+							{/if}
+							{if !empty($theme_settings.twitter)}
+								<li class="f-info__i">
+									<a class="f-info__l" href="{$theme_settings.twitter}" target="_blank">
+										<span class="f-soc">
+											<span class="soc-btn soc-btn soc-btn_tw">
+												<svg class="icon cent-icon" width="16" height="13"><use xlink:href="#icon-tw"></use></svg>
+											</span>
+											<span class="f-soc__text">[s`Twitter`]</span>
+										</span>
+									</a>
+								</li>
+							{/if}
+						</ul>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	{if isset($frontend_footer)}
+		<!-- plugin hook: 'frontend_footer' -->
+		{* @event frontend_footer.%plugin_id% *}
+		{foreach $frontend_footer as $_}<div class="s-footer-plugin">{$_}</div>{/foreach}
+	{/if}
+	{if ($wa->shop && $theme_settings.footer_payments) || !empty($theme_settings.footer_copyright) || $theme_settings.footer_walogo}
+		<div class="site-footer__bottom">
+			<div class="f-row">
+				<div class="col-lg">
+					<div class="site-footer__copy-right">{include file="string:`$theme_settings.footer_copyright`"}</div>
+					{if $theme_settings.footer_walogo}
+						<div class="site-footer__vendor-sign">
+							<a href="[`http://www.shop-script.com/`]" target="_blank">
+								<span role="complementary"><img src="{$wa_url}wa-content/img/dots/all-dots-default-order.png" alt="[`We are using Webasyst`]"/></span>
+							</a>
+						</div>
+					{/if}
+				</div>
+				{if $wa->shop && $theme_settings.footer_payments}
+					<div class="col-lg">
+						<div class="f-payments">
+							{$availabe_options = $wa->shop->payment()}
+							{$_cnt = 0}
+							{foreach $availabe_options as $option name=options}
+								{if $_cnt == 8}{break}{/if}
+								{if $option.logo}
+									<div class="f-payments__item"><img src="{$option.logo}" alt="{$option.name|escape}"></div>
+									{$_cnt = $_cnt + 1}
+								{/if}
+							{/foreach}
+						</div>
+					</div>
+				{/if}
+			</div>
+		</div>
+	{/if}
+</div>
+{/strip}

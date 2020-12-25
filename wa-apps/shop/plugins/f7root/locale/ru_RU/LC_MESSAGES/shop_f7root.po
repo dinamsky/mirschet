@@ -1,0 +1,193 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: shop/plugins/f7root\n"
+"POT-Creation-Date: 2016-08-29 20:57+0300\n"
+"PO-Revision-Date: \n"
+"Last-Translator:  shop/plugins/f7root\n"
+"Language-Team:  shop/plugins/f7root\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=3; plural=((((n%10)==1)&&((n%100)!=11))?(0):(((((n%10)>=2)&&((n%10)<=4))&&(((n%100)<10)||((n%100)>=20)))?(1):2));\n"
+"X-Poedit-Language: ru_RU\n"
+"X-Poedit-SourceCharset: utf-8\n"
+"X-Poedit-Basepath: .\n"
+"X-Poedit-SearchPath-0: .\n"
+"X-Poedit-SearchPath-1: .\n"
+
+#: /wa-apps/shop/plugins/f7root/templates/actions/backend/BackendFeatures.html:1
+#: /wa-apps/shop/plugins/f7root/lib/shopF7root.plugin.php:15
+msgid "select feature"
+msgstr "Выберите характеристику"
+
+#: /wa-apps/shop/plugins/f7root/templates/actions/backend/BackendFeaturevalues.html:1
+#: /wa-apps/shop/plugins/f7root/lib/shopF7root.plugin.php:14
+msgid "feature value"
+msgstr "Значение характеристики"
+
+#: /wa-apps/shop/plugins/f7root/templates/actions/backend/BackendFeaturevalues.html:2
+msgid "select feature value"
+msgstr "Выберите значение"
+
+#: /wa-apps/shop/plugins/f7root/templates/actions/backend/BackendFeaturevalues.html:10
+msgid "nothing found"
+msgstr "ничего не найдено"
+
+#: /wa-apps/shop/plugins/f7root/lib/shopF7root.plugin.php:13
+msgid "feature"
+msgstr "Характеристика"
+
+#: /wa-apps/shop/plugins/f7root/lib/shopF7root.plugin.php:17
+msgid "hidden"
+msgstr "Скрытые"
+
+#: /wa-apps/shop/plugins/f7root/lib/shopF7root.plugin.php:18
+msgid "without category"
+msgstr "Без категорий"
+
+#: /wa-apps/shop/plugins/f7root/lib/shopF7root.plugin.php:19
+msgid "without picture"
+msgstr "Без картинок"
+
+#: /wa-apps/shop/plugins/f7root/lib/shopF7root.plugin.php:19
+msgid "select items"
+msgstr "Выберите фильтр"
+
+#: /wa-apps/ alert(hash2);shop/plugins/f7root/lib/shopF7root.plugin.php:102
+msgid "no title"
+msgstr "Без заголовка"
+
+#: /wa-apps/shop/plugins/f7root/lib/shopF7root.plugin.php:103
+msgid "no keywords"
+msgstr "Без ключевых слов"
+
+#: /wa-apps/shop/plugins/f7root/lib/shopF7root.plugin.php:104
+msgid "no META-description"
+msgstr "Без META-описания"
+
+#: /wa-apps/shop/plugins/f7root/lib/shopF7root.plugin.php:105
+msgid "no description"
+msgstr "Без описания"
+
+#: /wa-apps/shop/plugins/f7root/lib/config/settings.php:10
+msgid "To use more exact method of search of items for without category"
+msgstr "Использовать более точный метод поиска товаров для без категории"
+
+#: /wa-apps/shop/plugins/f7root/lib/config/settings.php:17
+msgid "To use more exact method of search of items for without pictures"
+msgstr "Использовать более точный метод поиска товаров для без картинок"
+
+#: /wa-apps/shop/plugins/f7root/lib/config/settings.php:24
+msgid "The minimum quantity of symbols for fields"
+msgstr "Минимальное количество символов для полей"
+
+#: /wa-apps/shop/plugins/f7root/lib/config/settings.php:25
+msgid "Allows to specify the minimum quantity of symbols at which to consider fields empty"
+msgstr "Позволяет указать минимальное количество символов, при котором считать поля пустыми"
+
+#: /wa-apps/shop/plugins/f7root/lib/config/settings.php:11
+#: /wa-apps/shop/plugins/f7root/lib/config/settings.php:17
+msgid "Attention!!! The raised load of the server. What in case of a large amount of goods/categories, can negatively to affect the speed of operation of your server"
+msgstr "Внимание!!! Повышенная нагрузка на сервер. Что при большом количестве товаров/категорий, может негативно сказаться на скорости работы вашего сервера"
+
+#: /wa-apps/shop/plugins/f7root/lib/config/plugin.php:4
+msgid "Items without category, without pictures, hidden, with a certain characteristic, and also other filters of items"
+msgstr "Товары без категории, без картинок, скрытые, по характеристикам и другие фильтры"
+
+#: /wa-apps/shop/plugins/f7root/lib/config/plugin.php:6
+msgid "fast search of items without category, without pictures, hidden, with a certain characteristic, and also other filters of items"
+msgstr "быстрый поиск товаров без категории,без картинок, скрытых, с определенной характеристикой, а также другие фильтры товаров"
+
+#: /wa-apps/shop/plugins/f7root/lib/shopF7root.plugin.php:90
+msgid "with badge"
+msgstr "с наклейкой"
+
+#: /wa-apps/shop/plugins/f7root/lib/shopF7root.plugin.php:91
+msgid "without badge"
+msgstr "без наклеек"
+
+#: /wa-apps/shop/plugins/f7root/lib/shopF7root.plugin.php:92
+msgid "sku not available"
+msgstr "с артикулами недоступными для заказа"
+
+#: /wa-apps/shop/plugins/f7root/lib/shopF7root.plugin.php:93
+msgid "sku more one"
+msgstr "более 1 аритикула в товаре"
+
+#: /wa-apps/shop/plugins/f7root/lib/shopF7root.plugin.php:94
+msgid "sku only one"
+msgstr "только 1 артикул в товаре"
+
+#: /wa-apps/shop/plugins/f7root/lib/shopF7root.plugin.php:95
+msgid "sku type"
+msgstr "товары с выбором параметров"
+
+#: /wa-apps/shop/plugins/f7root/lib/shopF7root.plugin.php:96
+msgid "without type"
+msgstr "не назначен тип товара"
+
+#: /wa-apps/shop/plugins/f7root/lib/shopF7root.plugin.php:97
+msgid "with image"
+msgstr "с картинками"
+
+#: /wa-apps/shop/plugins/f7root/lib/config/settings.php:30
+msgid "Include subcategory"
+msgstr "Включить подкатегории"
+
+#: /wa-apps/shop/plugins/f7root/lib/config/settings.php:30
+msgid "Include subcategory in filters by features, if category selected"
+msgstr "Включать подкатегории при выборе характеристик, если категория выбрана"
+
+#: /wa-apps/shop/plugins/f7root/lib/action/shopF7rootPluginBackendFeaturevalues.action.php:7
+#: /wa-apps/shop/plugins/f7root/lib/shopF7root.plugin.php:108
+msgid "Any appointed"
+msgstr "Любое назначенное"
+
+#: /wa-apps/shop/plugins/f7root/lib/action/shopF7rootPluginBackendFeaturevalues.action.php:8
+#: /wa-apps/shop/plugins/f7root/lib/shopF7root.plugin.php:109
+msgid "isn't appointed"
+msgstr "Не назначенно"
+
+#: /wa-apps/shop/plugins/f7root/lib/shopF7root.plugin.php:160
+msgid "Category"
+msgstr "Категория"
+
+#: /wa-apps/shop/plugins/f7root/lib/shopF7root.plugin.php:96
+msgid "sku name duplicate"
+msgstr "В товаре повторяется Имя артикула"
+
+#: /wa-apps/shop/plugins/f7root/lib/shopF7root.plugin.php:97
+msgid "sku code duplicate"
+msgstr "В товаре повторяется Код артикула"
+
+#: /wa-apps/shop/plugins/f7root/lib/shopF7root.plugin.php:19
+msgid "search goods in category"
+msgstr "поиск товара в категории"
+
+#: /wa-apps/shop/plugins/f7root/lib/config/settings.php:36
+msgid "view feature code"
+msgstr "показывать код характеристики"
+
+#: /wa-apps/shop/plugins/f7root/lib/config/settings.php:36
+msgid "view feature code in select box"
+msgstr "показывать код характеристики в списке"
+
+#: /wa-apps/shop/plugins/f7root/lib/shopF7root.plugin.php:107
+msgid "no summary"
+msgstr "без краткого описания"
+
+#: /wa-apps/shop/plugins/f7root/lib/shopF7root.plugin.php:119
+msgid "no url"
+msgstr "без ссылки"
+
+#: /wa-apps/shop/plugins/f7root/lib/shopF7root.plugin.php:119
+msgid "url eq id"
+msgstr "ссылка товара равна его коду"
+
+#: /wa-apps/shop/plugins/f7root/lib/config/settings.php:43
+msgid "Include subcategory for search text"
+msgstr "Включать подкатегории при поиске текста в названиях"
+
+#: /wa-apps/shop/plugins/f7root/lib/config/settings.php:43
+msgid "Include subcategory for search text, if category selected"
+msgstr "Включать подкатегории при поиске текста в названиях"

@@ -1,0 +1,8 @@
+{
+    "name": "syrnik/html",
+    "version": "1.0.0",
+    "license": "mit",
+    "autoload": {
+        "psr-4": {"Syrnik\\" : "src/"}
+    }
+}

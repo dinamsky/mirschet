@@ -1,0 +1,11 @@
+{strip}
+	<div class="posts">
+		<div class="no-post">
+			<h1 class="no-post__title">
+				{if $error_code}{$error_code}. {/if}
+				{$error_message|default:"[`Error`]"}
+			</h1>
+			<div class="no-post__text">[`The requested resource is not available.`]</div>
+		</div>
+	</div>
+{/strip}

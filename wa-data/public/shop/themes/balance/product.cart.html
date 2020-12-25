@@ -1,0 +1,528 @@
+{strip}
+{$_is_dialog = ($wa->get('cart') || waRequest::isXMLHttpRequest())}
+{if $_is_dialog}
+	{$theme_settings.shop_productpage_view = 1}
+{/if}
+{function name=in_stock n=0 low=5 critical=2}
+	{if $n > $low or $n === null}
+		<div class="stock-info stock">
+			<svg class="icon" width="10" height="7">
+				<use xlink:href="#icon-tick"></use>
+			</svg>
+			<div class="stock-info__text">[`In stock`]</div>
+		</div>
+	{elseif $n > $critical}
+		<div class="stock-info less-stock">
+			<svg class="icon" width="10" height="7">
+				<use xlink:href="#icon-tick"></use>
+			</svg>
+			<div class="stock-info__text">{_w("Only a few items left")}</div>
+		</div>
+	{elseif $n > 0 && $n != 1}
+		<div class="stock-info less-stock">
+			<svg class="icon" width="10" height="7">
+				<use xlink:href="#icon-tick"></use>
+			</svg>
+			<div class="stock-info__text">{_w("Only %d left in stock", "Only %d left in stock", $n)}</div>
+		</div>
+	{elseif $n == 1}
+		<div class="stock-info single-stock">
+			<div class="stock-info__text">{_w("Only %d left in stock", "Only %d left in stock", $n)}</div>
+		</div>
+	{else}
+		<div class="stock-info no-stock">
+			<div class="stock-info__text">{if $wa->shop->settings('ignore_stock_count')}[`Pre-order only`]{else}[`Out of stock`]{/if}</div>
+		</div>
+	{/if}
+{/function}
+<div class="pd-cart">
+	{if $theme_settings.shop_productpage_view eq 3}
+		<div class="pd-cart__rating-sku">
+			{if $theme_settings.products_show_reviews && ($theme_settings.products_show_rating_stars eq "always" || ($theme_settings.products_show_rating_stars eq "nonempty" && $product.rating > 0))}
+				{$_rating = round($product.rating)}
+				<div class="item-rating item-rating_ip mt-hide">
+					<div class="item-rating__stars">
+						<div class="stars stars_m">
+							<div class="stars__list">
+								{for $i=1 to 5}
+								<div class="stars__i{if $i <= $_rating} stars__i_checked{/if}">
+									<svg class="icon" width="16" height="15">
+										<use xlink:href="#icon-star"></use>
+									</svg>
+								</div>
+								{/for}
+							</div>
+						</div>
+					</div>
+					<div class="item-rating__revs">
+						<svg class="icon" width="15" height="14">
+							<use xlink:href="#icon-bubble"></use>
+						</svg>
+						<a class="grey" href="{$wa->shop->productUrl($product, 'reviews')}">{_w('%d review', '%d review', $product.rating_count|default:0)}</a>
+					</div>
+				</div>
+			{/if}
+			<div class="pd-cart__artikul grey s-product-sku{if $product.sku_type || (!$product.sku_type && (count($product.skus) > 1 || empty($product.skus[$product.sku_id].sku|default:null)))} is-hidden{/if}">[`SKU code`]:
+				{if $product.sku_type}
+					{foreach $product.skus as $sku}
+						{if isset($sku.sku) && !empty($sku.sku)}
+							<span class="s-product-sku-{$sku.id}" style="display:none"> {$sku.sku}</span>
+						{/if}
+					{/foreach}
+				{else}
+					{if count($product.skus) > 1}
+						<span> -</span>
+					{else}
+						<span> {$product.skus[$product.sku_id].sku|default:" -"}</span>
+					{/if}
+				{/if}
+			</div>
+		</div>
+		{if $theme_settings.shop_productpage_show_summary && $product.summary}
+			<div class="pd-cart__descr">{$product.summary}</div>
+		{/if}
+		{if $theme_settings.products_show_reviews && ($theme_settings.products_show_rating_stars eq "always" || ($theme_settings.products_show_rating_stars eq "nonempty" && $product.rating > 0))}
+			<div class="item-rating item-rating_ip ds-hide">
+				<div class="item-rating__stars">
+					<div class="stars stars_m">
+						<div class="stars__list">
+							{for $i=1 to 5}
+							<div class="stars__i{if $i <= $_rating} stars__i_checked{/if}">
+								<svg class="icon" width="16" height="15">
+									<use xlink:href="#icon-star"></use>
+								</svg>
+							</div>
+							{/for}
+						</div>
+					</div>
+				</div>
+				<div class="item-rating__revs">
+					<svg class="icon" width="15" height="14">
+						<use xlink:href="#icon-bubble"></use>
+					</svg>
+					<a class="grey" href="{$wa->shop->productUrl($product, 'reviews')}">{_w('%d review', '%d review', $product.rating_count|default:0)}</a>
+				</div>
+			</div>
+		{/if}
+	{/if}
+	<div class="pd-cart__main">
+		<form id="cart-form{if $_is_dialog}-dialog{/if}" data-image="{$wa->shop->productImgUrl($product, "200")|default:"`$wa_parent_theme_url`img/dummy200.png"}" method="post" action="{$wa->getUrl('/frontendCart/add')}">
+			<div class="js-product_title is-hidden">{$product.name|escape}</div>
+			{if $theme_settings.shop_productpage_view ne 2}
+				<div class="pd-cart__price-wrapper pd-cart__price-wrapper_default">
+					<div class="pd-cart__price-mob-text">[`Price`]</div>
+					<div class="pd-cart__price">
+						<div class="pd-price">
+							<div class="pd-price__reg-price s-product-price" data-price="{shop_currency($product.price, null, null, 0)}">{shop_currency_html($product.price)}</div>
+							{if $product.compare_price > 0}
+								<div class="pd-price__old-price s-product-oldprice" data-compare-price="{shop_currency_html($product.compare_price, null, null, 0)}">{shop_currency_html($product.compare_price)}</div>
+							{/if}
+						</div>
+					</div>
+					{if $theme_settings.shop_productpage_saving ne "none"}
+						<div class="pd-cart__save">
+							<div class="pd-save s-product-saving{if $product.compare_price <= $product.price} is-hidden{/if}">
+								<svg class="icon" width="14" height="14">
+									<use xlink:href="#icon-econom"></use>
+								</svg>
+								<strong>[`Saving`]</strong>
+								{if $theme_settings.shop_productpage_saving eq "full" || $theme_settings.shop_productpage_saving eq "percent"}
+									{$_saving_percent = 0}
+									{if $product.compare_price > $product.price}
+										{$_saving_percent = (($product.compare_price - $product.price)*100)/$product.compare_price}
+										{if $theme_settings.products_show_saving_rounding_type eq 'floor'}
+											{$_saving_percent = $_saving_percent|floor}
+										{elseif $theme_settings.products_show_saving_rounding_type eq 'ceil'}
+											{$_saving_percent = $_saving_percent|ceil}
+										{elseif $theme_settings.products_show_saving_rounding_type eq 'round'}
+											{$_saving_percent = $_saving_percent|round}
+										{/if}
+									{/if}
+									<div class="pr-discount-label s-saving-percent">
+										<span>{$_saving_percent}%</span>
+									</div>
+								{/if}
+								{if $theme_settings.shop_productpage_saving eq "full"}
+									<span>[`or`]</span>
+								{/if}
+								{if $theme_settings.shop_productpage_saving eq "full" || $theme_settings.shop_productpage_saving eq "currency"}
+									<div class="pr-discount-label s-saving-currency">
+										<span>{if $product.compare_price > $product.price}{shop_currency_html($product.compare_price - $product.price)}{/if}</span>
+									</div>
+								{/if}
+							</div>
+						</div>
+					{/if}
+				</div>
+			{/if}
+			<div class="pd-options-list">
+				{if $product.sku_type}
+					{$default_sku_features = $product.sku_features}
+					{$product_available = $product.status}
+					{* list all SKUs for Schema.org markup *}
+					{foreach $product.skus as $sku}
+						<div itemprop="offers" itemscope itemtype="http://schema.org/Offer">
+							{$sku_available =  $product.status && $sku.available && ($wa->shop->settings('ignore_stock_count') || $sku.count === null || $sku.count > 0)}
+							{if $sku.name}<meta itemprop="name" content="{$sku.name|escape}">{/if}
+							<meta itemprop="price" content="{$sku.price}">
+							<meta itemprop="priceCurrency" content="{$product.currency}">
+							<meta itemprop="url" content="{$wa->currentUrl(0,1)}?sku={$sku.id}">
+							{if (!($sku.count === null) && $sku.count <= 0)}
+								<link itemprop="availability" href="http://schema.org/OutOfStock" />
+							{else}
+								<link itemprop="availability" href="http://schema.org/InStock" />
+							{/if}
+						</div>
+					{/foreach}
+					{foreach $features_selectable as $f}
+						<div class="pd-options-list__item">
+							<div class="pd-options-list__item-title bold single-line">{$f.name}</div>
+							<div class="pd-options-list__body">
+								{if $theme_settings.shop_productpage_selectable_features_control == 'select'}
+									<select data-feature-id="{$f.id}" class="sku-feature" name="features[{$f.id}]">
+										{foreach $f.values as $v_id => $v}
+										<option value="{$v_id}" {if $v_id == ifset($default_sku_features[$f.id])}selected{/if}>{$v}</option>
+										{/foreach}
+									</select>
+								{else}
+									{if $f.type == 'color'}
+										<div class="pd-colors">
+											<div class="pd-colors__list">
+												{foreach $f.values as $v_id => $v}
+													{if !isset($default_sku_features[$f.id])}{$default_sku_features[$f.id]=$v_id}{/if}
+													<div class="pd-colors__i">
+														<div class="pd-color tippy pd-color{if $v->code eq 16777215} pd-color_white{/if}{if $v_id == ifset($default_sku_features[$f.id])} active{/if}" style="{$v->style}" data-tippy-content="{strip_tags($v)}" data-tippy-delay="[1000, 200]" data-sku-id="{$f.id}:{$v_id};" data-value="{$v_id}">
+															<div class="visually-hidden">{strip_tags($v)}</div>
+														</div>
+													</div>
+												{/foreach}
+											</div>
+										</div>
+									{else}
+										<div class="btn-options">
+											<div class="btn-options__list">
+												{foreach $f.values as $v_id => $v}
+													{if !isset($default_sku_features[$f.id])}{$default_sku_features[$f.id]=$v_id}{/if}
+													<div class="btn-options__i">
+														<div class="btn-option{if $v_id == ifset($default_sku_features[$f.id])} active{/if}" data-sku-id="{$f.id}:{$v_id};" data-value="{$v_id}">{$v}</div>
+													</div>
+												{/foreach}
+											</div>
+										</div>
+									{/if}
+									<input type="hidden" data-feature-id="{$f.id}" class="sku-feature" name="features[{$f.id}]" value="{ifset($default_sku_features[$f.id])}">
+								{/if}
+							</div>
+						</div>
+					{/foreach}
+				{else}
+					{$product_available = false}
+					{if count($product.skus) > 1}
+						<div class="pd-options-list__item">
+							<div class="pd-options-list__body">
+								<div class="form-option">
+									<div class="form-option__list skus">
+										{foreach $product.skus as $sku}
+											{$sku_available =  $product.status && $sku.available && ($wa->shop->settings('ignore_stock_count') || $sku.count === null || $sku.count > 0)}
+											<div class="form-option__i" itemprop="offers" itemscope itemtype="http://schema.org/Offer">
+												<label{if !$sku.available} class="disabled"{/if}>
+													<input name="sku_id" type="radio" value="{$sku.id}" data-compare-price="{shop_currency($sku.compare_price, $product.currency, null, 0)}" data-price="{shop_currency($sku.price, $product.currency, null, 0)}"{if $sku.sku} data-sku="{$sku.sku|escape}"{/if}{if !$sku.available} disabled="true"{/if}{if !$sku_available} data-disabled="1"{/if}{if $sku.id == $product.sku_id} checked="checked"{/if}{if $sku.image_id} data-image-id="{$sku.image_id}"{/if}>
+													<span itemprop="name">{$sku.name|escape}</span>
+													<meta itemprop="price" content="{$sku.price}">
+													<meta itemprop="priceCurrency" content="{$product.currency}">
+													<meta itemprop="url" content="{$wa->currentUrl(0,1)}?sku={$sku.id}">
+													{if (!($sku.count === null) && $sku.count <= 0)}
+														<link itemprop="availability" href="http://schema.org/OutOfStock" />
+													{else}
+														<link itemprop="availability" href="http://schema.org/InStock" />
+													{/if}
+												</label>
+											</div>
+											{$product_available = $product_available or $sku_available}
+										{/foreach}
+									</div>
+								</div>
+							</div>
+						</div>
+					{else}
+						<div itemprop="offers" itemscope itemtype="http://schema.org/Offer">
+							{$sku = $product.skus[$product.sku_id]}
+							{if $sku.name}<meta itemprop="name" content="{$sku.name|escape}">{/if}
+							<meta itemprop="price" content="{$sku.price}">
+							<meta itemprop="priceCurrency" content="{$product.currency}">
+							<meta itemprop="url" content="{$wa->currentUrl(0,1)}">
+							{if !$sku.available}
+								<link itemprop="availability" href="http://schema.org/Discontinued" />
+								<p><em class="bold error">[`This product is not available for purchase`]</em></p>
+							{elseif !$wa->shop->settings('ignore_stock_count') && !($sku.count === null || $sku.count > 0)}
+								<link itemprop="availability" href="http://schema.org/OutOfStock" />
+							{else}
+								<link itemprop="availability" href="http://schema.org/InStock" />
+							{/if}
+							<input name="sku_id" type="hidden" value="{$product.sku_id}">
+							{$product_available = $product.status && $sku.available && ($wa->shop->settings('ignore_stock_count') || $sku.count === null || $sku.count > 0)}
+						</div>
+					{/if}
+				{/if}
+				{if $services}
+					<div class="pd-options-list__item">
+						<div class="pd-options-list__body">
+							<div class="form-option">
+								<div class="form-option__list s-product-services">
+									{foreach $services as $s}
+										<div class="form-option__i service-{$s.id}">
+											<label>
+												<span>{$s.name|escape}{if $s.price && !isset($s.variants)} <strong>(+{shop_currency_html($s.price, $s.currency)})</strong>{/if}</span>
+												<input data-price="{shop_currency($s.price, $s.currency, null, 0)}" {if !$product_available}disabled="disabled"{/if} type="checkbox" name="services[]" value="{$s.id}">
+											</label>
+										</div>
+										{if isset($s.variants)}
+											<div class="form-option__i">
+												<select data-variant-id="{$s.variant_id}" class="service-variants" name="service_variant[{$s.id}]" disabled>
+													{foreach $s.variants as $v}
+														<option {if $s.variant_id == $v.id}selected{/if} data-price="{shop_currency($v.price, $s.currency, null, 0)}" value="{$v.id}">{$v.name|escape} (+{shop_currency($v.price, $s.currency)})</option>
+													{/foreach}
+												</select>
+											</div>
+										{else}
+											<input type="hidden" name="service_variant[{$s.id}]" value="{$s.variant_id}">
+										{/if}
+									{/foreach}
+								</div>
+							</div>
+						</div>
+					</div>
+				{/if}
+				{if $_is_dialog}
+					<div class="pd-cart__stock-wrapper s-product-stocks">
+						{foreach $product.skus as $sku}
+							{if $sku.stock}
+								{foreach $stocks as $stock_id => $stock}
+									<div class="pd-stock s-product-stock sku-{$sku.id}-stock"{if $sku.id != $product.sku_id} style="display:none"{/if} data-sku-count="{$sku.count}">
+										{if isset($sku.stock[$stock_id])}
+											{$stock_count = $sku.stock[$stock_id]}
+										{else}
+											{$stock_count = null}
+										{/if}
+										<div class="pd-stock-title">{$stock.name|escape}</div>
+										{in_stock n=$stock_count low=$stock.low_count critical=$stock.critical_count}
+									</div>
+								{/foreach}
+							{else}
+								<div class="pd-stock s-product-stock sku-{$sku.id}-stock"{if $sku.id != $product.sku_id} style="display:none"{/if} data-sku-count="{$sku.count}">
+									{in_stock n=$sku.count}
+								</div>
+							{/if}
+						{/foreach}
+					</div>
+				{/if}
+			</div>
+			{if $theme_settings.shop_productpage_view eq 2}
+				<div class="pd-cart__main pd-cart__main_custom">
+					<div class="pd-cart__price-wrapper pd-cart__price-wrapper_custom">
+						<div class="pd-cart__price-mob-text">[`Price`]</div>
+						<div class="pd-cart__price">
+							<div class="pd-price">
+								<div class="pd-price__reg-price s-product-price" data-price="{shop_currency($product.price, null, null, 0)}">{shop_currency_html($product.price)}</div>
+								{if $product.compare_price > 0}
+									<div class="pd-price__old-price s-product-oldprice" data-compare-price="{shop_currency_html($product.compare_price, null, null, 0)}">{shop_currency_html($product.compare_price)}</div>
+								{/if}
+							</div>
+						</div>
+						{if $theme_settings.shop_productpage_saving ne "none"}
+							<div class="pd-cart__save">
+								<div class="pd-save s-product-saving{if $product.compare_price <= $product.price} is-hidden{/if}">
+									<svg class="icon" width="14" height="14">
+										<use xlink:href="#icon-econom"></use>
+									</svg>
+									<strong>[`Saving`]</strong>
+									{if $theme_settings.shop_productpage_saving eq "full" || $theme_settings.shop_productpage_saving eq "percent"}
+										{$_saving_percent = 0}
+										{if $product.compare_price > $product.price}
+											{$_saving_percent = (($product.compare_price - $product.price)*100)/$product.compare_price}
+											{if $theme_settings.products_show_saving_rounding_type eq 'floor'}
+												{$_saving_percent = $_saving_percent|floor}
+											{elseif $theme_settings.products_show_saving_rounding_type eq 'ceil'}
+												{$_saving_percent = $_saving_percent|ceil}
+											{elseif $theme_settings.products_show_saving_rounding_type eq 'round'}
+												{$_saving_percent = $_saving_percent|round}
+											{/if}
+										{/if}
+										<div class="pr-discount-label s-saving-percent">
+											<span>{$_saving_percent}%</span>
+										</div>
+									{/if}
+									{if $theme_settings.shop_productpage_saving eq "full"}
+										<span>[`or`]</span>
+									{/if}
+									{if $theme_settings.shop_productpage_saving eq "full" || $theme_settings.shop_productpage_saving eq "currency"}
+										<div class="pr-discount-label s-saving-currency">
+											<span>{if $product.compare_price > $product.price}{shop_currency_html($product.compare_price - $product.price)}{/if}</span>
+										</div>
+									{/if}
+								</div>
+							</div>
+						{/if}
+					</div>
+			{/if}
+					{if $product.sku_type}
+						<div class="sku-no-stock" style="padding-bottom:15px;display:none;">
+							<strong class="stock-info no-stock">[`Product with the selected option combination is not available for purchase`]</strong>
+						</div>
+					{/if}
+					<div class="pd-cart__processing-wrapper">
+						<div class="pd-cart__process">
+							{if $theme_settings.shop_productpage_quantity}
+								<div class="pd-cart__qty">
+									<div class="qty{if !$product_available} qty_disabled{/if}">
+										<div class="qty__inner">
+											<button class="qty__btn qty__btn_decr default-btn" type="button">
+												<svg class="icon" width="9" height="9">
+													<use xlink:href="#icon-minus"></use>
+												</svg>
+											</button>
+											<input class="qty__field" type="text" name="quantity" value='1' />
+											<button class="qty__btn qty__btn_incr default-btn" type="button">
+												<svg class="icon" width="9" height="9">
+													<use xlink:href="#icon-plus"></use>
+												</svg>
+											</button>
+										</div>
+									</div>
+								</div>
+							{/if}
+							<button class="pd-cart__add-cart btn btn_main-1 btn {$theme_settings.main_buttons_style|replace:'img/themebuttons/':''|replace:'.gif':''} item-list-c__cartbtn" type="submit"{if !$product_available} disabled="disabled"{/if}>
+								<span>[`Add to cart`]</span>
+								<div class="hover-anim"></div>
+							</button>
+							{if method_exists("shopQuickorderPlugin","quickorderForm")}
+								{$_quickbuy_button = shopQuickorderPlugin::quickorderForm($product)}
+								{if !empty($_quickbuy_button)}
+									<div class="pd-cart__one-click btn btn_sec-8 {$theme_settings.main_buttons_style|replace:'img/themebuttons/':''|replace:'.gif':''} item-list-c__oneclick">
+										{$_quickbuy_button}
+										<div class="hover-anim"></div>
+									</div>
+								{/if}
+							{/if}
+						</div>
+						{if !$_is_dialog}
+							<div class="pd-cart__stock-wrapper s-product-stocks">
+								{foreach $product.skus as $sku}
+									{if $sku.stock}
+										{foreach $stocks as $stock_id => $stock}
+											<div class="pd-stock s-product-stock sku-{$sku.id}-stock"{if $sku.id != $product.sku_id} style="display:none"{/if} data-sku-count="{$sku.count}">
+												{if isset($sku.stock[$stock_id])}
+													{$stock_count = $sku.stock[$stock_id]}
+												{else}
+													{$stock_count = null}
+												{/if}
+												<div class="pd-stock__title">{$stock.name|escape}</div>
+												{in_stock n=$stock_count low=$stock.low_count critical=$stock.critical_count}
+											</div>
+										{/foreach}
+									{else}
+										<div class="pd-stock s-product-stock sku-{$sku.id}-stock"{if $sku.id != $product.sku_id} style="display:none"{/if} data-sku-count="{$sku.count}">
+											{in_stock n=$sku.count}
+										</div>
+									{/if}
+								{/foreach}
+							</div>
+						{/if}
+					</div>
+					<!-- plugin hook: 'frontend_product.cart' -->
+					{* @event frontend_product.%plugin_id%.cart *}
+					{foreach $frontend_product as $_}{$_.cart}{/foreach}
+					<!-- plugin hook: 'frontend_product.block_aux' -->
+					{* @event frontend_product.%plugin_id%.block_aux *}
+					{if !empty($frontend_product)}
+						<div class="aux">
+							{foreach $frontend_product as $_}{$_.block_aux}{/foreach}
+						</div>
+					{/if}
+			{if $theme_settings.shop_productpage_view eq 2}
+				</div>
+			{/if}
+			<input type="hidden" name="product_id" value="{$product.id}">
+			{$wa->globals("viewed_product_id",$product.id)}
+		</form>
+	</div>
+	{* Do not remove this empty block below *}
+	<div class="pd-cart__mob-qty-stock td-hide"></div>
+	{if !$_is_dialog}
+		{if $theme_settings.products_show_compare || $theme_settings.products_show_wishlist}
+			<div class="pd-cart__actions">
+				<div class="pd-cart__actions-wrapper">
+					{if $theme_settings.products_show_compare}
+						{$_product_image_src = $wa->shop->productImgUrl($product, "200")}
+						<a class="pd-action-btn pd-action-btn_comp btn-compare btn-compare-{$product.id}{if in_array($product.id,$compare)} active{/if}" data-url="{$wa->getUrl('/frontend/compare/', ['id' => implode(',', $compare) ])}" data-product="{$product.id}" href="#" data-product_name="{$product.name|escape}" data-product_url="{$product.frontend_url}" data-product_image='{$_product_image_src|default:"`$wa_parent_theme_url`img/dummy200.png"}'>
+							<svg class="icon" width="16" height="16">
+								<use xlink:href="#icon-chart"></use>
+							</svg>
+							<span>[`Compare`]</span>
+						</a>
+					{/if}
+					{if $theme_settings.products_show_wishlist}
+						<a class="pd-action-btn pd-action-btn_fav btn-fav btn-fav-{$product.id}{if in_array($product.id,$theme_favorite)} active{/if}" data-product="{$product.id}" href="#">
+							<svg class="icon" width="16" height="14">
+								<use xlink:href="#icon-heart-2"></use>
+							</svg>
+							<span>[`Favorites`]</span>
+						</a>
+					{/if}
+				</div>
+			</div>
+		{/if}
+		{capture assign="_shop_productpage_phone"}
+			{include file="string:`$theme_settings.shop_productpage_phone`" inline}
+		{/capture}
+		{if !empty($_shop_productpage_phone)}
+			<div class="pd-call-order">
+				<svg class="icon" width="12" height="12">
+					<use xlink:href="#icon-phone"></use>
+				</svg>
+				<span>[`Order by phone`]</span>
+				<a href='tel:{$_shop_productpage_phone|escape|regex_replace:"/[^+0-9]/":""}'>{$_shop_productpage_phone}</a>
+			</div>
+		{/if}
+		{if $theme_settings.shop_productpage_affiliate && shopAffiliate::isEnabled() && $wa->shop->settings('affiliate_credit_rate') > 0}
+			<div class="pd-cart__bonus">
+				<div class="pd-bonus">
+					<div class="pd-bonus__content">
+						<div class="circle-icon-box circle-icon-box_star">
+							<svg class="icon cent-icon" width="12" height="13">
+								<use xlink:href="#icon-star-big"></use>
+							</svg>
+						</div>
+						<strong class="s-product-bonuspoints">+{($product.price / $wa->shop->settings('affiliate_credit_rate'))|number_format:0}</strong><span>[`points`]</span>
+					</div>
+					<div class="pd-bonus__info">
+						<div class="info-tooltip tippy" data-tippy-content="{include file="string:`$theme_settings.shop_productpage_affiliate_text|replace:"\"":"'"`" inline}">?</div>
+					</div>
+				</div>
+			</div>
+		{/if}
+	{/if}
+</div>
+<script>
+( function($) {
+	var is_product_exist = (typeof Product === "function");
+
+	(!is_product_exist) ? $.getScript("{$wa_theme_url}js/product.js?v{$wa_theme_version}", initProduct) : initProduct();
+
+	function initProduct() {
+		new Product({
+			$form: $("#cart-form{if $_is_dialog}-dialog{/if}"),
+			is_dialog: {if $_is_dialog}true{else}false{/if},
+			affiliate_rate: "{if $theme_settings.shop_productpage_affiliate && shopAffiliate::isEnabled() && $wa->shop->settings('affiliate_credit_rate') > 0}{$wa->shop->settings('affiliate_credit_rate')}{else}0{/if}",
+			saving: "{$theme_settings.shop_productpage_saving}",
+			saving_percent_min: {$theme_settings.products_show_saving_percent_min|default:0},
+			saving_currency_min: {$theme_settings.products_show_saving_currency_min|default:0},
+			saving_rounding: "{$theme_settings.products_show_saving_rounding_type}",
+			currency: {json_encode($currency_info)},
+			services: {if count($product.skus) > 1 or $product.sku_type}{json_encode($sku_services)}{else}false{/if},
+			features: {if $product.sku_type}{json_encode($sku_features_selectable)}{else}false{/if}
+		});
+	}
+})(jQuery);
+</script>
+{/strip}

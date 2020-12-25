@@ -1,0 +1,81 @@
+{strip}
+<div itemscope itemtype="http://schema.org/BlogPosting">
+	<div class="info-sec" role="main">
+		<h1 class="info-sec__title">
+			<span itemprop="name">{$post.title}</span>
+			{* @event prepare_posts_frontend.%plugin_id%.post_title *}
+			{if !empty($post.plugins.post_title)}
+				{foreach $post.plugins.post_title as $plugin => $output}{$output}{/foreach}
+			{/if}
+		</h1>
+		<div class="info-sec__details">
+			<div class="post-details">
+				{if $theme_settings.blog_show_authors}
+					{if $post.contact_id}
+						<a class="post-details__author" href="{$post.user.posts_link}">
+							<span class="post-details__author-pic">
+								<img src="{$post.user.photo_url_20}" alt="">
+							</span>
+							<span class="post-details__author-text" itemprop="author">{$post.user.name}</span>
+						</a>
+					{else}
+						<span class="post-details__author">
+							<span class="post-details__author-pic">
+								<img src="{$post.user.photo_url_20}" alt="">
+							</span>
+							<span class="post-details__author-text" itemprop="author">{$post.user.name}</span>
+						</span>
+					{/if}
+				{else}
+					<meta itemprop="author" content="{$post.user.name}">
+				{/if}
+				<meta itemprop="datePublished" content="{$post.datetime|date_format:'Y-m-d\TH:i'}">
+				<div class="post-details__date iconed-text">
+					<svg class="icon" width="16" height="16">
+						<use xlink:href="#icon-cal"></use>
+					</svg>
+					<span>{$post.datetime|wa_datetime:"humandate"}</span>
+				</div>
+				{if $show_comments && $post.comments_allowed}
+					<a class="post-details__comments iconed-text" href="#comments">
+						<svg class="icon" width="15" height="14">
+							<use xlink:href="#icon-bubble"></use>
+						</svg>
+						<span>{_w('%d comment','%d comments',$post.comment_count)}</span>
+					</a>
+				{/if}
+			</div>
+		</div>
+		<div class="info-sec__main">
+			{* @event prepare_posts_frontend.%plugin_id%.before *}
+			{if !empty($post.plugins.before)}
+				<div class="text_before">
+					{foreach $post.plugins.before as $plugin => $output}{$output}{/foreach}
+				</div>
+			{/if}
+
+			<div class="text" itemprop="articleBody">
+				{$post.text}
+			</div>
+			
+			{* @event prepare_posts_frontend.%plugin_id%.after *}
+			{if !empty($post.plugins.after)}
+				<div class="text_after">
+					{foreach $post.plugins.after as $plugin => $output}{$output}{/foreach}
+				</div>
+			{/if}
+		</div>
+		{* @event frontend_post.%plugin_id%.footer *}
+		{foreach $frontend_post as $plugin => $output}
+			{if !empty($output.footer)}{$output.footer}{/if}
+		{/foreach}
+	</div>
+	{if $show_comments && $post.comments_allowed}
+		{if $post.status eq blogPostModel::STATUS_PUBLISHED}
+			{include 'comments.html' inline}
+		{else}
+			<h2>[`Comments for non published posts are disabled`]</h2>
+		{/if}
+	{/if}
+</div>
+{/strip}

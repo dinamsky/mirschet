@@ -1,0 +1,9 @@
+{strip}
+	<a href="{$catalogreviews_reviews_catalog_page_url|escape}">
+		{if $catalogreviews_nav_link_text|trim !== ''}
+			{$catalogreviews_nav_link_text}
+		{else}
+			Отзывы на {$catalogreviews_category.name}
+		{/if}
+	</a>
+{/strip}

@@ -1,0 +1,98 @@
+{strip}
+<header class="cart-header">
+	<div class="cart-header__inner">
+		<div class="cart-header__top">
+			<a class="cart-header__nav-link cart-header__nav-link_to-back" href="{$wa->getUrl('shop/frontend/cart')}">
+				<svg class="icon cent-icon" width="19.5" height="16">
+				  <use xlink:href="#icon-cart"></use>
+				</svg>
+			</a>
+			<div class="cart-header__top-text">[`Checkout`]</div>
+			<a class="cart-header__nav-link cart-header__nav-link_home" href="{$wa_app_url}">
+				<svg class="icon cent-icon" width="14" height="14">
+				  <use xlink:href="#icon-home"></use>
+				</svg>
+			</a>
+		</div>
+		<div class="cart-header__middle">
+			<div class="cart-header__logo">
+				<a class="logo" href="{$wa_url}">
+					<img src="{$wa_parent_theme_url}{$theme_settings.header_logo}?v{$wa_theme_version}" alt="{$wa->accountName()}">
+				</a>
+			</div>
+			{if isset($checkout_steps)}
+				<div class="cart-header__menu">
+					<nav class="cart-menu">
+						<ul class="cart-menu__list">
+							{foreach $checkout_steps as $step_id => $s}
+								{$item_class = "done"}
+								{$link_href = "{$wa->getUrl('/frontend/checkout')}{$step_id}"}
+
+								{if !empty($_after_current)}
+									{$item_class = "next"}
+									{$link_href = "javascript:void(0);"}
+								{/if}
+
+								{if $step_id == $checkout_current_step}
+									{$_after_current = true}
+									{$item_class = "active"}
+									{$link_href = "javascript:void(0);"}
+								{/if}
+								<li class="cart-menu__item {$item_class}"><a class="cart-menu__link" href="{$link_href}" data-step-id="{$step_id}" data-step-href="{$link_href}">{$s.name|escape}</a></li>
+							{/foreach}
+						</ul>
+					</nav>
+				</div>
+			{/if}
+			{if !empty($theme_settings.header_contacts_phone_1)}
+				<div class="cart-header__tel">
+					<div class="callback-wr">
+						<div class="callback-info">
+							<div class="callback-info__inner">
+								<div class="callback-info__main-num callback-info__main-num_top">
+									<svg class="icon" width="16" height="16">
+										<use xlink:href="#icon-phone"></use>
+									</svg>
+									<div class="callback-info__main-num-text has-down-arrow">{$theme_settings.header_contacts_phone_1}</div>
+									<div class="callback-info__main-content">
+										<div class="callback-info__main-content-top">
+											<div class="callback-info__call-text">{$theme_settings.header_contacts_phone_1_text}</div>
+											{if !empty($theme_settings.header_contacts_phone_2)}
+												<div class="callback-info__main-num">
+													<svg class="icon" width="16" height="16">
+														<use xlink:href="#icon-phone"></use>
+													</svg>
+													<div class="callback-info__main-num-text">{$theme_settings.header_contacts_phone_2}</div>
+												</div>
+												<div class="callback-info__call-text">{$theme_settings.header_contacts_phone_2_text}</div>
+											{/if}
+											{if $theme_settings.header_contacts_btn_callback}
+												<div class="callback-info__call-btn btn {$theme_settings.main_buttons_style|replace:'img/themebuttons/':''|replace:'.gif':''} btn_main-2 balance_callback">
+													<span>[`Callback`]</span>
+													<div class="hover-anim"></div>
+												</div>
+											{/if}
+										</div>
+										{if !empty($theme_settings.header_contacts_workhours)}
+											<div class="callback-info__main-content-bottom">
+												<div class="callback-info__daytime-title">[`Working hours`]:</div>
+												<div class="callback-info__daytime-text">{$theme_settings.header_contacts_workhours}</div>
+											</div>
+										{/if}
+									</div>
+								</div>
+							</div>
+						</div>
+						<div class="callback-popup">
+							<a class="btn balance_callback {$theme_settings.main_buttons_style|replace:'img/themebuttons/':''|replace:'.gif':''} btn_sec-6" href="#">
+								<div class="hover-anim"></div>
+								<span>обратный звонок</span>
+							</a>
+						</div>
+					</div>
+				</div>
+			{/if}
+		</div>
+	</div>
+</header>
+{/strip}

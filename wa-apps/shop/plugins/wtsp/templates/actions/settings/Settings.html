@@ -1,0 +1,114 @@
+<style>
+#wtsp-dialog-plugin .wa-cheatsheet-dropdown .wa-cheatsheet-dropdown-block{
+    bottom: auto;
+}
+#wtsp-dialog-plugin .wa-cheatsheet-dropdown .wa-cheatsheet-dropdown-content{
+    max-height: 285px;
+}
+</style>
+<div class="wtsp">
+    <h1 class="main-title">Пишем клиентам в WhatsApp</h1>
+    <div class="block">
+        <div class="sidebar left250px">
+            <ul class="menu-v with-icons">
+                <li class="selected" data-tab="sorting"><a href="#/wtsp/"><i class="icon16 sort"></i>Шаблоны</a></li>
+                <li data-tab="fields"><a href="#/wtsp/"><i class="icon16 settings"></i>Настройки</a></li>
+            </ul>
+        </div>
+        <div class="content left250px">
+            <div class="block" data-content="sorting" id="sorting">
+                <table class="zebra">
+                    <tr class="header">
+                      <th>Название шаблона</th>
+                      <th class="min-width"><i class="icon16 settings"></i></th>
+                    </tr>
+
+                      {foreach $list as $k => $v}
+                      <tr>
+                          <td><b>{$v.name|escape}</b></td>
+                          <td class="align-right">
+                              <a href="javascript:void(0);" class="wtsp-action-add" data-id="{$v.id}"><i class="icon16 edit"></i></a></a>
+                          </td>
+                      </tr>
+                      {foreachelse}
+                      <tr>
+                          <td>Шаблоны отсутствуют, создайте новый шаблон</td>
+                      </tr>
+                      {/foreach}
+                </table>
+
+                <br><br>
+                <a href="javascript:void(0);" class="inline-link wtsp-action-add" data-id="0">
+                    <i class="icon16 add"></i><b><i>Новый шаблон</i></b>
+                </a>
+            </div>
+            <div class="block double-padded" data-content="fields" style="display:none">
+                <h2>Настройки</h2><br>
+                <form action="?module=plugins&id=wtsp&action=save" method="post" id="plugins-settings-form" enctype="multipart/form-data" target="plugins-settings-iframe">
+                    <div class="field">
+                        <div class="name">WhatsApp</div>
+                        <div class="value">
+                            <label><input type="checkbox" name="shop_wtsp[settings][whatsapp]" value="1" class="checkbox" {if isset($settings['whatsapp'])}checked="checked"{/if} title="Включён"> Включить</label>
+                        </div>
+                    </div>
+                    <div class="field">
+                        <div class="name">Viber</div>
+                        <div class="value">
+                            <label><input type="checkbox" name="shop_wtsp[settings][viber]" value="1" class="checkbox" {if isset($settings['viber'])}checked="checked"{/if} title="Включён"> Включить</label>
+                        </div>
+                    </div>
+                    <div class="field">
+                        <div class="name">Telegram</div>
+                        <div class="value">
+                            <label><input type="checkbox" name="shop_wtsp[settings][telegram]" value="1" class="checkbox" {if isset($settings['telegram'])}checked="checked"{/if} title="Включён"> Включить</label>
+                        </div>
+                    </div>
+                    <div class="field">
+                        <div class="name">Skype</div>
+                        <div class="value">
+                            <label><input type="checkbox" name="shop_wtsp[settings][skype]" value="1" class="checkbox" {if isset($settings['skype'])}checked="checked"{/if} title="Включён"> Включить</label>
+                        </div>
+                    </div>
+                    {*<div class="field">
+                        <div class="name">Vk</div>
+                        <div class="value">
+                            <label><input type="checkbox" name="shop_wtsp[settings][vk]" value="1" class="checkbox" {if isset($settings['vk'])}checked="checked"{/if} title="Включён"> Включить</label>
+                        </div>
+                    </div>
+                    <div class="field">
+                        <div class="name">Facebook</div>
+                        <div class="value">
+                            <label><input type="checkbox" name="shop_wtsp[settings][facebook]" value="1" class="checkbox" {if isset($settings['facebook'])}checked="checked"{/if} title="Включён"> Включить</label>
+                        </div>
+                    </div>*}
+                    <div class="field">
+                        <div class="value submit">
+                            <input type="submit" class="button green" value="Сохранить">
+                            <span id="plugins-settings-form-status" style="display:none"><!-- message placeholder --></span>
+                        </div>
+                    </div>
+                </form>
+            </div>
+      </div>
+      <div class="clear-both"></div>
+    </div>
+</div>
+
+<script type="text/javascript">
+
+var len = $('script').filter(function () {
+    return ($(this).attr('src') == '{$wa_app_static_url}plugins/wtsp/js/wtsp_settings.js');
+}).length;
+
+if (len === 0) {
+    loadScript('{$wa_app_static_url}plugins/wtsp/js/wtsp_settings.js');
+}
+
+function loadScript(scriptLocationAndName) {
+    var head = document.getElementsByTagName('head')[0];
+    var script = document.createElement('script');
+    script.type = 'text/javascript';
+    script.src = scriptLocationAndName;
+    head.appendChild(script);
+}
+</script>

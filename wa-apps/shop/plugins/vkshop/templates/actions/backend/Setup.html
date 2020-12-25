@@ -1,0 +1,217 @@
+<div class="block double-padded" id="s-vkshop-form">
+
+    <h1>[`VK Shop`]</h1>
+
+    <p>
+        [`Authorization settings can be found in the `]<a href="?action=plugins#/vkshop/">[`vkshop plugin settings`]</a>.
+    </p>
+
+    <form action="?plugin=vkshop&module=run" id="s-plugin-vkshop" method="post">
+        <div class="fields form">
+            {if isset($groups)}
+                {foreach $groups as $group}
+                    <div style="float: left; margin: 10px 10px 0 0; width: 250px; padding: 5px; background: #f0f0f0;">
+                        <div class="field">
+                            <div>
+                                <h3 style="text-align: center;"><a href="https://vk.com/club{$group.id}" target="_blank">{$group.group_name} ({$group.id})</a></h3>
+                            </div>
+                            <div>
+                                {if !empty($group.errors_template)}
+                                    <div class="field">
+                                        {$group.errors_template}
+                                    </div>
+                                {else}
+                                    <div class="field">
+                                        <div id="vkshop-login-{$group.id}">
+                                            {include file="./login.html" inline}
+                                        </div>
+                                    </div>
+                                {/if}
+                            </div>
+                        </div>
+                    </div>
+                {/foreach}
+            {else}
+                <span style="color: red;">[`No groups defined in the plugin settings`]</span>
+            {/if}
+
+            <div id="vkshop-export" style="display: {*if empty($groups)}none{else}block{/if*}block;">
+                <div class="field">
+                    <div class="name">[`Export images`]</div>
+                    <div class="value">
+                        <input type="checkbox" name="config[images]" value="1" checked/>
+                        <br>
+                        <span class="hint">[`If you are exporting new products, then this option must be enabled. Without pictures, new products are not loaded. It makes sense to switch off only when you export the goods again and, for example, want to sync rates. Then disable images download option saves time for export.`]</span>
+                    </div>
+                </div>
+                <div class="field">
+                    <div class="name">[`Export only new products`]</div>
+                    <div class="value">
+                        <input type="checkbox" name="config[new]" value="1" checked/>
+                        <br>
+                        <span class="hint">[`If this option is enabled, only those products are exported, which had not previously been exported in the trade group.`]</span>
+                    </div>
+                </div>
+                <div class="field">
+                    <div class="name">[`Export only products that are in stock`]</div>
+                    <div class="value">
+                        <input type="checkbox" name="config[in_stock]" value="1" checked/>
+                        <br>
+                        <span class="hint">[`If the goods are not available, they will not be exported.`]</span>
+                    </div>
+                </div>
+                <div class="field">
+                    <div class="name">[`Remove items that ended in stock`]</div>
+                    <div class="value">
+                        <input type="checkbox" name="config[delete_nostock]" value="1" checked/>
+                        <br>
+                        <span class="hint">[`If the goods have been exported previously, but have ended, they will be removed from the group.`]</span>
+                    </div>
+                </div>
+                <div class="field">
+                    <div class="name">[`The maximum number of attempts to send the product`]</div>
+                    <div class="value">
+                        <input type="text" name="config[maxcount]" value="20"/>
+                        <br>
+                        <span class="hint">[`When exporting large quantities of goods, VK API sometimes does not accept some of the goods, so you can set the maximum number of attempts to export. Some products may still be exported. This is either due to not matching the pictures of goods Vkontakte requirements or due to exceeding the daily limit for API calls. Sometimes it makes sense to repeat the operation in a day or inspect the dimensions of the image of the goods, which was not loaded.`]</span>
+                    </div>
+                </div>
+                <div class="field">
+                    <div class="name">[`Select VK category`]</div>
+                    <div class="value">
+                        {shopVkshopPluginViewHelper::getVkCatsHtml('config')}
+                    </div>
+                </div>
+                <div class="field">
+                    <div class="name">[`Select VK group`]</div>
+                    <div class="value" id="vkshop-export-groups">
+                        {include file="./groups.html" inline}
+                    </div>
+                </div>
+                <div class="field">
+                    <div class="name">[`Select an action to export products`]</div>
+                    <div class="value">
+                        <input type="radio" name="config[action]" value="queue" checked onclick="$.Vkshop.radio(this)"/>[`Export queued products`] - {$queued}
+                    </div>
+                    <div class="value">
+                        <input type="radio" name="config[action]" value="delete" onclick="$.Vkshop.radio(this)"/>[`Delete queued products`] - {$queued}
+                        <br>
+                        <span class="hint">[`If you decide to remove items from the group, put them in queue and use this option.`]</span>
+                    </div>
+                    <div class="value">
+                        <input type="radio" name="config[action]" value="set" onclick="$.Vkshop.radio(this)"/>[`Export product set`]
+                        <br>
+                        <span class="hint">[`If you export items from the set, then in the group VK will be created album with the name of the set, and the items will be added at the same time in it and in the main album.`]</span>
+                    </div>
+                    {if !empty($types)}
+                        <div class="value">
+                            <input type="radio" name="config[action]" value="type" onclick="$.Vkshop.radio(this)"/>[`Export product type`]
+                            <br>
+                            <span class="hint">[`If you export items from the type, then in the group VK will be created album with the name of the type, and the items will be added at the same time in it and in the main album.`]</span>
+                        </div>
+                    {/if}
+                    <div class="value">
+                        <input type="radio" name="config[action]" value="all" onclick="$.Vkshop.radio(this)"/>[`Export all products`]
+                    </div>
+                </div>
+                {if !empty($types)}
+                    <div class="field vkshop-select" id="vkshop-types" style="display: none;">
+                        <div class="name">[`Type of products`]</div>
+                        <div class="value">
+                            <select name="config[type_id]">
+                                {foreach $types as $id=>$type}
+                                    <option value="{$id}">
+                                        {$type.name|escape}
+                                    </option>
+                                {/foreach}
+                            </select>
+                        </div>
+                    </div>
+                {/if}
+                <div class="field vkshop-select" id="vkshop-sets" style="display: none;">
+                    <div class="name">[`Set of products`]</div>
+                    <div class="value">
+                        <select name="config[set_id]">
+                            {foreach $sets as $id=>$set}
+                                <option value="{$set.id}">
+                                    {$set.name|escape}
+                                </option>
+                            {/foreach}
+                        </select>
+                    </div>
+                </div>
+                <div class="field vkshop-select" id="vkshop-vk-album">
+                    <div class="name">[`VK Album`]</div>
+                    <div class="value" id="vkshop-albums">
+                        {include file="./albums.html" inline}
+                    </div>
+                </div>
+                <div class="field vkshop-select" id="vkshop-vk-new-album">
+                    <div class="name">[`Create new VK Album`]</div>
+                    <div class="value">
+                        <input name="config[vk_new_album] type=" text" />
+                        <br>
+                        <span class="hint">[`If this field is not empty, the new album will be created with the specified name, and the goods will be placed in it.`]</span>
+                    </div>
+                </div>
+
+                <div class="field-group" id="plugin-vkshop-submit">
+                    <div class="field">
+                        <hr/>
+                        <span style="color: red;">
+                            [`VK takes the goods with an image size of at least 400x400 pixels. If the image size is smaller, the goods will be not loaded.`]
+                        </span>
+                        <hr/>
+                    </div>
+                    <div class="field">
+                        <div class="value submit">
+                            <button type="submit" class="button green">[`Start`]</button>
+                            <br><br>
+
+                            <div class="js-progressbar-container" style="display:none">
+                                <div class="progressbar blue float-left" style="display:none;width:70%">
+                                    <div class="progressbar-outer">
+                                        <div class="progressbar-inner" style="width:0"></div>
+                                    </div>
+                                </div>
+                                <img src="{$wa_url}wa-content/img/loading32.gif" alt="Loading"
+                                     style="float:left;margin-top:8px">
+
+                                <div class="clear"></div>
+                                <span class="progressbar-description"></span>
+                                <br style="clear:left"><br>
+                            <span class="small italic">
+                                [`Do not close the browser window and not leave the page as long as the process is completed`]
+                            </span>
+                            </div>
+                            <br><br>
+                            <em class="errormsg"></em>
+
+                        </div>
+                    </div>
+                </div>
+
+                <div class="field-group" id="plugin-vkshop-report" style="display: none">
+                    <div class="field">
+                        <div class="value"></div>
+                    </div>
+                </div>
+            </div>
+
+
+        </div>
+    </form>
+
+</div>
+<script type="text/javascript">
+    if ($.importexport.plugins.vkshop) {
+        $.importexport.plugins.vkshop.init();
+        $.Vkshop.init();
+    }
+    else {
+        $.getScript('{$wa_app_static_url}plugins/vkshop/js/vkshop-export.js', function () {
+            $.importexport.plugins.vkshop.init();
+            $.Vkshop.init();
+        });
+    }
+</script>

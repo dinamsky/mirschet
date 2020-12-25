@@ -1,0 +1,8 @@
+<option value="" >[`select feature`]</option>
+{foreach from=$features key=id item=f}
+    {if $f}
+        <option value="{$id|escape}" {if $id==$feature_id} selected {/if}>{$f|escape}</option>
+    {else}
+        <option disabled></option>
+    {/if}
+{/foreach}

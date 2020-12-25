@@ -1,0 +1,141 @@
+<div id="vkshop-groups">
+    {$i=0}
+    {if !empty($settings.groups)}
+        {foreach $settings.groups as $g}
+            <table class="vkshop-group-row" style="background: #f0f0f0;">
+                <tr>
+                    <td style="padding-left: 5px;">
+                        [`VK group ID:`]
+                    </td>
+                    <td>
+                        &nbsp;<input class="vkshop-row-input-id vkshop-row-input" style="width: 50px;" name="shop_vkshop[groups][{$i}][id]" type="text" value="{$g.id}">
+                    </td>
+                    <td>
+                        &nbsp;
+                    </td>
+                </tr>
+                <tr>
+                    <td style="padding-left: 5px;">
+                        [`VK group name:`]
+                    </td>
+                    <td>
+                        &nbsp;<input class="vkshop-row-input-name vkshop-row-input" style="width: 50px;" name="shop_vkshop[groups][{$i}][name]" type="text" value="{$g.name}">
+                    </td>
+                    <td style="padding-left: 20px; padding-right: 5px;">
+                    </td>
+                </tr>
+                <tr>
+                    <td style="padding-left: 5px;">
+                        [`Application ID:`]
+                    </td>
+                    <td>
+                        &nbsp;<input class="vkshop-row-input-app_id vkshop-row-input" style="width: 50px;" name="shop_vkshop[groups][{$i}][app_id]" type="text" value="{$g.app_id}">
+                    </td>
+                    <td style="padding-left: 20px; padding-right: 5px;">
+                        <i class="icon16 delete" onclick="$.Vkshop_settings.minus(this);"></i>
+                    </td>
+                </tr>
+                <tr>
+                    <td style="padding-left: 5px;">
+                        [`App secret:`]
+                    </td>
+                    <td>
+                        &nbsp;<input class="vkshop-row-input-app_secret vkshop-row-input" style="width: 50px;" name="shop_vkshop[groups][{$i}][app_secret]" type="text" value="{$g.app_secret}">
+                    </td>
+                    <td style="padding-left: 20px; padding-right: 5px;">
+                    </td>
+                </tr>
+                <tr>
+                    <td style="padding-left: 5px;">
+                        [`Settlement:`]
+                    </td>
+                    <td>
+                        <select class="vkshop-row-select-settlement" name="shop_vkshop[groups][{$i}][settlement]">
+                            {foreach $settlements as $settlement}
+                                <option value="{$settlement}" {if $g.settlement == $settlement}selected{/if}>{$settlement}</option>
+                            {/foreach}
+                        </select><br />
+                    </td>
+                    <td>
+                    </td>
+                </tr>
+            </table>
+            {$i = $i + 1}
+        {/foreach}
+        <i class="icon16 add" onclick="$.Vkshop_settings.plus();"></i>
+    {else}
+        <table class="vkshop-group-row" style="background: #f0f0f0;">
+            <tr>
+                <td style="padding-left: 5px;">
+                    [`VK group ID:`]
+                </td>
+                <td>
+                    &nbsp;<input class="vkshop-row-input-id vkshop-row-input" style="width: 50px;" name="shop_vkshop[groups][0][id]" type="text">
+                </td>
+                <td>
+                    &nbsp;
+                </td>
+            </tr>
+            <tr>
+                <td style="padding-left: 5px;">
+                    [`VK group name:`]
+                </td>
+                <td>
+                    &nbsp;<input class="vkshop-row-input-name vkshop-row-input" style="width: 50px;" name="shop_vkshop[groups][0][name]" type="text">
+                </td>
+                <td style="padding-left: 20px; padding-right: 5px;">
+                </td>
+            </tr>
+            <tr>
+                <td style="padding-left: 5px;">
+                    [`Application ID:`]
+                </td>
+                <td>
+                    &nbsp;<input class="vkshop-row-input-app_id vkshop-row-input" style="width: 50px;" name="shop_vkshop[groups][0][app_id]" type="text">
+                </td>
+                <td style="padding-left: 20px; padding-right: 5px;">
+                    <i class="icon16 delete" onclick="$.Vkshop_settings.minus(this);"></i>
+                </td>
+            </tr>
+            <tr>
+                <td style="padding-left: 5px;">
+                    [`App secret:`]
+                </td>
+                <td>
+                    &nbsp;<input class="vkshop-row-input-app_secret vkshop-row-input" style="width: 50px;" name="shop_vkshop[groups][0][app_secret]" type="text">
+                </td>
+                <td style="padding-left: 20px; padding-right: 5px;">
+                </td>
+            </tr>
+            <tr>
+                <td style="padding-left: 5px;">
+                    [`Settlement:`]
+                </td>
+                <td>
+                    <select class="vkshop-row-select-settlement" name="shop_vkshop[groups][0][settlement]">
+                        {foreach $settlements as $settlement}
+                            <option value="{$settlement}">{$settlement}</option>
+                        {/foreach}
+                    </select><br />
+                </td>
+                <td>
+                </td>
+            </tr>
+        </table>
+        <i class="icon16 add" onclick="$.Vkshop_settings.plus();"></i>
+    {/if}
+</div>
+
+<script>
+    $(function () {
+        setTimeout(function () {
+            $.Vkshop_settings.row = $('.vkshop-group-row:first').clone();
+            $.Vkshop_settings.n = {$i};
+            $.Vkshop_settings.row.find('.vkshop-option').each(function() {
+                $(this).removeAttr('selected')
+            });
+            $.Vkshop_settings.row.find('.vkshop-row-input').val('');
+        }, 1000);
+    });
+</script>
+

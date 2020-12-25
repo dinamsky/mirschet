@@ -1,0 +1,178 @@
+{strip}
+{$current_user_id = $wa->userId()}
+<div class="comments-sec__form{if $post.comments|count > 0} is-hidden{else} is-static{/if}">
+	<div class="form-l" id="b-comments-form">
+		<div class="form-ui-wr form-ui-wr_m-pad">
+			<div class="form-ui-wr__inner">
+				{$_add_userform = false}
+				{if empty($current_user_id) && $require_authorization}
+					{$_add_userform = true}
+					<div class="rev-form rev-form_no-guest">
+						<div class="rev-form__form">
+							<a class="rev-form__close-btn rev-form__close-btn_js x-btn" href="#">[`close`]</a>
+							<div class="rev-form__top">
+								<div class="rev-form__descr">
+									<h3 class="rev-form__no-guest-title">Чтобы написать отзыв нужно авторизоватся </h3>
+									<div class="rev-form__no-guest-descr">Используйте свой логин пароль или авторизуйтесь используя социальные сети </div>
+								</div>
+							</div>
+							<div class="rev-form__no-guest-auth">
+								<div class="rev-form__sign-in"> {* 123123 *}
+									<div class="rev-form__sign-in-inner">
+										<div class="sign-in">
+											{$wa->loginForm($error|default:[], [
+												'show_title'          => false,
+												'show_sub_title'      => false,
+												'include_css'         => false,
+												'need_redirects'      => false,
+												'show_oauth_adapters' => false
+											])}
+										</div>
+									</div>
+								</div>
+								{$auth_adapters = $wa->authAdapters(true)}
+								{if $auth_adapters}
+									<div class="rev-form__social">
+										<div class="soc-list">
+											<h4 class="soc-list__title">Вход через социальные сети </h4>
+											<div class="soc-list__inner balance__auth-adapters">
+												{foreach $auth_adapters as $a}
+													<div class="soc-list__i">
+														<a class="soc-btn soc-btn_fb" href="{$a->getUrl()}" title="{$a->getName()}">
+															<img src="{$a->getIcon()}" alt>
+														</a>
+													</div>
+												{/foreach}
+											</div>
+										</div>
+									</div>
+								{/if}
+							</div>
+						</div>
+					</div>
+					<script>
+					$(document).on("wa_auth_contact_logged", function(e,r) {
+						$("#comment-username").html(r.name);
+						$(".rev-form.is-hidden").removeClass("is-hidden");
+						$(".rev-form_no-guest, .rev-form__f-guestonly").remove();
+					});
+					</script>
+				{/if}
+				<div class="rev-form{if $_add_userform} is-hidden{/if}">
+					<form class="rev-form__form" method="post" action="{$post.comment_link}" data-redirect-url="{$post.comment_link}">
+						<a class="rev-form__close-btn rev-form__close-btn_js x-btn" href="#">[`close`]</a>
+						<div class="u-cen-txt rev-form__f-guestonly">
+							<h4 class="rev-form__title iconed-text">
+								<svg class="icon" width="15" height="14">
+									<use xlink:href="#icon-bubble"></use>
+								</svg>
+								<span>[`Add comment`]</span>
+							</h4>
+						</div>
+						{if empty($current_user_id) && $auth_adapters}
+							<div class="rev-form__top rev-form__f-guestonly">
+								<div class="rev-form__descr">[`Authorize either by entering your contact information, or through one of the listed websites`]</div>
+								<div class="rev-form__social">
+									<div class="soc-list">
+										<div class="soc-list__inner balance__auth-adapters" id="user-auth-provider">
+											{foreach $auth_adapters as $adapter}
+												{$adapter_id = $adapter->getId()}
+												<div class="soc-list__i">
+													<a class="soc-btn{if $current_auth_source == $adapter_id} selected{/if}" href="{$adapter->getCallbackUrl(0)}&app=shop{if !$require_authorization}&guest=1{/if}" data-provider="{$adapter_id}">
+														<img src="{$adapter->getIcon()}" alt>
+													</a>
+												</div>
+											{/foreach}
+										</div>
+									</div>
+								</div>
+							</div>
+						{/if}
+						<div class="rev-form__content">
+							{if !empty($current_user_id) || $_add_userform}
+								<div class="rev-form__f-row">
+									<div class="rev-form__f-dd">[`Your name`]</div>
+									<div class="rev-form__f-dt">
+										<div class="rev-form__user-name">
+											<strong id="comment-username">{$wa->user('name')}</strong>
+											<a class="link link_sec" href="?logout">([`log out`])</a>
+										</div>
+									</div>
+								</div>
+							{elseif !empty($auth_adapters[$current_auth_source])}
+								{$adapter = $auth_adapters[$current_auth_source]}
+								<div class="rev-form__f-row">
+									<div class="rev-form__f-dd">[`Your name`]</div>
+									<div class="rev-form__f-dt">
+										<div class="rev-form__user-name">
+											<strong>{$current_auth.name|escape}</strong>
+											<a class="link link_sec" href="?logout">([`log out`])</a>
+										</div>
+									</div>
+								</div>
+							{else}
+								<div class="rev-form__f-row">
+									<div class="rev-form__f-dd">[`Your name`]</div>
+									<div class="rev-form__f-dt rev-form__f-dt_short input">
+										<div class="inputs__field-wr">
+											<input type="text" name="name" id="comment-name" value="">
+										</div>
+									</div>
+								</div>
+								<div class="rev-form__f-row">
+									<div class="rev-form__f-dd">[`Email`]</div>
+									<div class="rev-form__f-dt rev-form__f-dt_short input">
+										<div class="inputs__field-wr">
+											<input type="text" name="email" id="comment-email">
+										</div>
+									</div>
+								</div>
+								<div class="rev-form__f-row">
+									<div class="rev-form__f-dd">[`Website`]</div>
+									<div class="rev-form__f-dt rev-form__f-dt_short input">
+										<div class="inputs__field-wr">
+											<input type="text" name="site" id="comment-site">
+										</div>
+									</div>
+								</div>
+							{/if}
+							<div class="rev-form__f-row">
+								<div class="rev-form__f-dd">[`Comment`]</div>
+								<div class="rev-form__f-dt input">
+									<div class="inputs__field-wr">
+										<textarea class="rev-form__textarea" id="comment-text" name="text"></textarea>
+									</div>
+								</div>
+							</div>
+							{if $request_captcha && empty($current_user_id)}
+								<div class="rev-form__f-row rev-form__f-guestonly">
+									<div class="rev-form__f-dd"></div>
+									<div class="rev-form__f-dt rev-form__f-dt_flex">
+										{$wa->captcha()}
+									</div>
+								</div>
+							{/if}
+							<div class="rev-form__f-row">
+								<div class="rev-form__f-dd"></div>
+								<div class="rev-form__f-dt">
+									<div class="rev-form__btn-wr">
+										<input type="hidden" name="auth_provider" value="{$current_auth_source|default:blogCommentModel::AUTH_GUEST}">
+										<input type="hidden" name="parent" value="0">
+										<button class="rev-form__btn btn btn_shiny btn_main-2" type="submit">
+											<span class="rev-form__btn-text is-status">[`Add comment`]</span>
+											<span class="rev-form__btn-text__reply is-status is-hidden">[`reply`]</span>
+											<span class="rev-form__btn-loading is-status is-hidden"><img src="{$wa_parent_theme_url}img/ajax-loader.gif" alt="[`Loading`]" /> [`Checking...`]</span>
+											<span class="hover-anim"></span>
+										</button>
+										<div class="rev-form__ctrl-submit">Ctrl+Enter</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</form>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+{/strip}

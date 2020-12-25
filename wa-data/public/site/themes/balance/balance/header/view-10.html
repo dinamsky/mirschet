@@ -1,0 +1,467 @@
+{strip}
+<header class="site-header site-header_desk site-header_10 site-header_dark">
+	<div class="site-header__top">
+		<div class="site-header__top-inner">
+			{include file="header/cityselect.html" inline}
+			{if !empty($_theme_config.header_links)}
+				<div class="site-header__top-menu">
+					<div class="top-menu top-menu_js">
+						<ul class="top-menu__list">
+							{foreach $_theme_config.header_links as $page}
+							<li class="top-menu__item{if !empty($page.childs)} univ-drop-lnk{/if}">
+								<a class="top-menu__link{if !empty($page.childs)} has-down-arrow{/if}" href="{$page.url}">{$page.name|escape}</a>
+								{if !empty($page.childs)}
+								<ul class="top-menu__subm univ-dropd univ-dropd_list">
+									{foreach $page.childs as $child}
+									<li class="top-menu__subm-item"><a class="top-menu__subm-link" href="{$child.url}">{$child.name|escape}</a></li>
+									{/foreach}
+								</ul>
+								{/if}
+							</li>
+							{/foreach}
+						</ul>
+						<div class="top-menu__btn-toggler more-btn">
+							<svg class="icon" width="13" height="3">
+								<use xlink:href="#dots-more"></use>
+							</svg>
+							<div class="top-menu__sec-menu univ-dropd univ-dropd_list">
+								<ul class="top-menu__sec-menu-list">
+								</ul>
+							</div>
+						</div>
+					</div>
+				</div>
+			{/if}
+			<div class="site-header__contacts">
+				<div class="site-header__social">
+					{include file="header/socials.html" color="#fff"}
+				</div>
+				{if !empty($theme_settings.header_contacts_phone_1)}
+					<div class="site-header__callback">
+						<div class="callback-wr">
+							<div class="callback-info">
+								<div class="callback-info__inner">
+									<div class="callback-info__main-num callback-info__main-num_top">
+										<svg class="icon" width="16" height="16">
+											<use xlink:href="#icon-phone"></use>
+										</svg>
+										<div class="callback-info__main-num-text has-down-arrow">{$theme_settings.header_contacts_phone_1}</div>
+										<div class="callback-info__main-content">
+											<div class="callback-info__main-content-top">
+												<div class="callback-info__call-text">{$theme_settings.header_contacts_phone_1_text}</div>
+												{if !empty($theme_settings.header_contacts_phone_2)}
+													<div class="callback-info__main-num">
+														<svg class="icon" width="16" height="16">
+															<use xlink:href="#icon-phone"></use>
+														</svg>
+														<div class="callback-info__main-num-text">{$theme_settings.header_contacts_phone_2}</div>
+													</div>
+													<div class="callback-info__call-text">{$theme_settings.header_contacts_phone_2_text}</div>
+												{/if}
+												{if $theme_settings.header_contacts_btn_callback}
+													<div class="callback-info__call-btn btn {$theme_settings.main_buttons_style|replace:'img/themebuttons/':''|replace:'.gif':''} btn_main-2 balance_callback">
+														<span>[`Callback`]</span>
+														<div class="hover-anim"></div>
+													</div>
+												{/if}
+											</div>
+											{if !empty($theme_settings.header_contacts_workhours)}
+												<div class="callback-info__main-content-bottom">
+													<div class="callback-info__daytime-title">[`Working hours`]:</div>
+													<div class="callback-info__daytime-text">{$theme_settings.header_contacts_workhours}</div>
+												</div>
+											{/if}
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				{/if}
+				{if $wa->isAuthEnabled()}
+					<a href="{$wa->myUrl()}" class="site-header__profile">
+						<div class="profile-link profile-link_white">
+							<div class="profile-link__body">
+								<svg class="icon" width="17" height="16">
+									<use xlink:href="#icon-user"></use>
+								</svg>
+								<div class="profile-link__text">[`Personal area`]</div>
+							</div>
+						</div>
+					</a>
+				{/if}
+			</div>
+		</div>
+	</div>
+	<div class="site-header__mid{if $theme_settings.mainmenu_childs_grid eq 'mega'} site-header__mid_btn-mega site-header__mid_btn-in-mid{elseif $theme_settings.mainmenu_childs_grid eq 'book'} site-header__mid_btn-mega site-header__mid_btn-in-mid{else} site-header__mid_btn-vert{/if}">
+		<div class="site-header__mid-inner">
+			<div class="site-header__mid-main">
+				<div class="site-header__mid-logo">
+					<a class="logo" href="{$wa_url}"><img src="{$wa_theme_url}{$theme_settings.header_logo}?v{$wa_theme_version}" alt="{$wa->accountName()}"></a>
+				</div>
+				<div class="site-header__cat-btn">
+					<a class="cat-menu-btn-desk cat-menu-btn-desk_sec" href="#">
+						<span class="cat-menu-btn-desk__inner">
+							<span class="cat-btn-text">
+								<span class="icon-hamb"><span></span><span></span><span></span></span>
+								<span class="cat-btn-text__text">{if $theme_settings.mainmenu_links eq "shop-categories"}[`Catalog`]{else}[`Navigation`]{/if}</span>
+								<svg class="icon icon-arrow" width="12" height="7">
+									<use xlink:href="#arrow-down-big"></use>
+								</svg>
+							</span>
+						</span>
+					</a>
+					{if !empty($_theme_config.mainmenu_links)}
+						{if $theme_settings.mainmenu_childs_grid eq 'mega'}
+							<div class="site-header__nav site-header__nav_btn-mega">
+								<div class="mega-m">
+									<ul class="mega-m__inner">
+										{foreach $_theme_config.mainmenu_links as $cat}
+											{if isset($cat.params.mainmenu_hide)}{continue}{/if}
+											<li class="mega-m__item">
+												<div class="menu-categ">
+													<div class="menu-categ__header">
+														{if !empty($cat.menu_icon)}
+														<a class="menu-categ__image" href="{$cat.url}">
+															<img class="menu-categ__img lazy-img" src="data:image/gif;base64,R0lGODlh6gDqAIAAAP///wAAACH5BAEAAAEALAAAAADqAOoAAAL+jI+py+0Po5y02ouz3rz7D4biSJbmiabqyrbuC8fyTNf2jef6zvf+DwwKh8Si8YhMKpfMpvMJjUqn1Kr1is1qt9yu9wsOi8fksvmMTqvX7Lb7DY/L5/S6/Y7P6/f8vv8PGCg4SFhoeIiYqLjI2Oj4CBkpOUlZaXmJmam5ydnp+QkaKjpKWmp6ipqqusra6voKGys7S1tre4ubq7vL2+v7CxwsPExcbHyMnKy8zNzs/AwdLT1NXW19jZ2tvc3d7f0NHi4+Tl5ufo6err7O3u7+Dh8vP09fb3+Pn6+/z9/v/w8woMCBBAsaPIgwocKFDBs6fAgxosSJFCtavIgxo8Y9jRw7evwIMqTIkSRLmjyJMqXKlSxbunwJM6bMmTRr2ryJM6fOnTx7+vwJNKjQoUSLGj2KNKnSpUybOo1UAAA7" data-src="{$cat.menu_icon}" alt="{$cat.name|escape}" />
+														</a>
+														{/if}
+														<a class="menu-categ__title" href="{$cat.url}">
+															<div class="menu-categ__title-text">{$cat.name}</div>
+															{if !empty($cat.params.menu_label_text)}
+															<span class="menu-categ__label"><span class="label label_light label_micro" style="{if !empty($cat.params.menu_label_background)}background-color:{$cat.params.menu_label_background};{/if}{if !empty($cat.params.menu_label_color)}color:{$cat.params.menu_label_color};{/if}">{$cat.params.menu_label_text}</span></span>
+															{/if}
+														</a>
+													</div>
+													{if !empty($cat.childs)}
+													<ul class="menu-categ__list{if $theme_settings.mainmenu_submenu_collapse > 0} menu-categ__list_show-more{/if}"{if $theme_settings.mainmenu_submenu_collapse > 0} data-show="{$theme_settings.mainmenu_submenu_collapse}" data-more-text="[`show more`]" data-less-text="[`hide`]"{/if}>
+														{foreach $cat.childs as $subcat}
+														<li class="menu-categ__item">
+															<a class="menu-categ__link" href="{$subcat.url}">
+																<span class="menu-categ__link-txt">{$subcat.name}</span>
+																{if !empty($subcat.params.menu_label_text)}
+																	<span class="label label_light label_micro" style="{if !empty($subcat.params.menu_label_background)}background-color:{$subcat.params.menu_label_background};{/if}{if !empty($subcat.params.menu_label_color)}color:{$subcat.params.menu_label_color};{/if}">{$subcat.params.menu_label_text}</span>
+																{/if}
+															</a>
+														</li>
+														{/foreach}
+													</ul>
+													{/if}
+												</div>
+											</li>
+										{/foreach}
+									</ul>
+								</div>
+							</div>
+						{elseif $theme_settings.mainmenu_childs_grid eq 'book'}
+							<div class="site-header__nav site-header__nav_btn-mega">
+								<div class="book-m book-m_flex">
+									<div class="vert-m vert-m_g book-m__side-menu">
+										<ul class="vert-m__list">
+											{foreach $_theme_config.mainmenu_links as $cat}
+												{if isset($cat.params.mainmenu_hide)}{continue}{/if}
+												<li class="vert-m__item{if !empty($cat.childs)} vert-m__item_has-submenu{/if}">
+													{if !empty($cat.childs)}
+														<div class="vert-m__submenu-book">
+															<div class="vert-m__submenu-title">{$cat.name}</div>
+															<div class="mega-m">
+																<ul class="mega-m__inner nulled-font">
+																	{foreach $cat.childs as $subcat}
+																	<li class="mega-m__item mega-m__item_book{if !empty($subcat.childs)} vert-m__item_has-submenu{/if}">
+																		<div class="menu-categ">
+																			<div class="menu-categ__header">
+																				{if !empty($subcat.menu_icon)}
+																				<a class="menu-categ__image" href="{$subcat.url}">
+																					<img class="menu-categ__img lazy-img" src="data:image/gif;base64,R0lGODlh6gDqAIAAAP///wAAACH5BAEAAAEALAAAAADqAOoAAAL+jI+py+0Po5y02ouz3rz7D4biSJbmiabqyrbuC8fyTNf2jef6zvf+DwwKh8Si8YhMKpfMpvMJjUqn1Kr1is1qt9yu9wsOi8fksvmMTqvX7Lb7DY/L5/S6/Y7P6/f8vv8PGCg4SFhoeIiYqLjI2Oj4CBkpOUlZaXmJmam5ydnp+QkaKjpKWmp6ipqqusra6voKGys7S1tre4ubq7vL2+v7CxwsPExcbHyMnKy8zNzs/AwdLT1NXW19jZ2tvc3d7f0NHi4+Tl5ufo6err7O3u7+Dh8vP09fb3+Pn6+/z9/v/w8woMCBBAsaPIgwocKFDBs6fAgxosSJFCtavIgxo8Y9jRw7evwIMqTIkSRLmjyJMqXKlSxbunwJM6bMmTRr2ryJM6fOnTx7+vwJNKjQoUSLGj2KNKnSpUybOo1UAAA7" data-src="{$subcat.menu_icon}" alt="{$subcat.name|escape}" />
+																				</a>
+																				{/if}
+																				<a class="menu-categ__title" href="{$subcat.url}">
+																					<div class="menu-categ__title-text">{$subcat.name}</div>
+																					{if !empty($subcat.params.menu_label_text)}
+																						<span class="label label_light label_micro" style="{if !empty($subcat.params.menu_label_background)}background-color:{$subcat.params.menu_label_background};{/if}{if !empty($subcat.params.menu_label_color)}color:{$subcat.params.menu_label_color};{/if}">{$subcat.params.menu_label_text}</span>
+																					{/if}
+																				</a>
+																			</div>
+																			{if !empty($subcat.childs)}
+																				<ul class="menu-categ__list{if $theme_settings.mainmenu_submenu_collapse > 0} menu-categ__list_show-more{/if}"{if $theme_settings.mainmenu_submenu_collapse > 0} data-show="{$theme_settings.mainmenu_submenu_collapse}" data-more-text="[`show more`]" data-less-text="[`hide`]"{/if}>
+																					{foreach $subcat.childs as $subsubcat}
+																					<li class="menu-categ__item">
+																						<a class="menu-categ__link" href="{$subsubcat.url}">
+																							<span class="menu-categ__link-txt">{$subsubcat.name}</span>
+																							{if !empty($subsubcat.params.menu_label_text)}
+																								<span class="label label_light label_micro" style="{if !empty($subsubcat.params.menu_label_background)}background-color:{$subsubcat.params.menu_label_background};{/if}{if !empty($subsubcat.params.menu_label_color)}color:{$subsubcat.params.menu_label_color};{/if}">{$subsubcat.params.menu_label_text}</span>
+																							{/if}
+																						</a>
+																					</li>
+																					{/foreach}
+																				</ul>
+																			{/if}
+																		</div>
+																	</li>
+																	{/foreach}
+																</ul>
+															</div>
+														</div>
+													{/if}
+													<a class="vert-m__link" href="{$cat.url}">
+														{if !empty($cat.menu_icon)}
+															<span class="vert-m__item-icon">
+																<img class="lazy-img" src="data:image/gif;base64,R0lGODlh6gDqAIAAAP///wAAACH5BAEAAAEALAAAAADqAOoAAAL+jI+py+0Po5y02ouz3rz7D4biSJbmiabqyrbuC8fyTNf2jef6zvf+DwwKh8Si8YhMKpfMpvMJjUqn1Kr1is1qt9yu9wsOi8fksvmMTqvX7Lb7DY/L5/S6/Y7P6/f8vv8PGCg4SFhoeIiYqLjI2Oj4CBkpOUlZaXmJmam5ydnp+QkaKjpKWmp6ipqqusra6voKGys7S1tre4ubq7vL2+v7CxwsPExcbHyMnKy8zNzs/AwdLT1NXW19jZ2tvc3d7f0NHi4+Tl5ufo6err7O3u7+Dh8vP09fb3+Pn6+/z9/v/w8woMCBBAsaPIgwocKFDBs6fAgxosSJFCtavIgxo8Y9jRw7evwIMqTIkSRLmjyJMqXKlSxbunwJM6bMmTRr2ryJM6fOnTx7+vwJNKjQoUSLGj2KNKnSpUybOo1UAAA7" data-src="{$cat.menu_icon}" alt="{$cat.name|escape}">
+															</span>
+														{/if}
+														<span class="vert-m__text">
+															<span class="vert-m__text-node">{$cat.name}</span>
+															{if !empty($cat.params.menu_label_text)}
+																<span class="vert-m__label"><span class="label label_light label_micro" style="{if !empty($cat.params.menu_label_background)}background-color:{$cat.params.menu_label_background};{/if}{if !empty($cat.params.menu_label_color)}color:{$cat.params.menu_label_color};{/if}">{$cat.params.menu_label_text}</span></span>
+															{/if}
+														</span>
+														{if !empty($cat.childs)}
+															<span class="vert-m__arrow">
+																<svg class="icon" width="6" height="12">
+																	<use xlink:href="#arrow-vert-menu"></use>
+																</svg>
+																<svg class="icon icon-hover" width="6" height="12">
+																	<use xlink:href="#arrow-vert-menu-hover"></use>
+																</svg>
+															</span>
+														{/if}
+													</a>
+												</li>
+											{/foreach}
+										</ul>
+									</div>
+									<div class="book-m__content-side">
+										<div class="book-m__call-to-action">
+											<svg class="icon" width="16" height="12">
+												<use xlink:href="#icon-hamburger"></use>
+											</svg>
+											[`Choose a category`]
+										</div>
+									</div>
+								</div>
+							</div>
+						{else}
+							<div class="site-header__nav site-header__nav_vert">
+								<div class="vert-m vert-m_g vert-m_js">
+									<ul class="vert-m__list side-menu">
+										{foreach $_theme_config.mainmenu_links as $cat}
+											{if isset($cat.params.mainmenu_hide)}{continue}{/if}
+											{if $cat.submenu_mono_viewtype eq 'opened'}
+												<li class="vert-m__item{if !empty($cat.childs)} vert-m__item_minisubm{/if} not-easy-menu">
+													{if !empty($cat.childs)}
+														<div class="vert-m__mini-subm">
+															<ul class="vert-m__mini-subm-list">
+																{foreach $cat.childs as $subcat}
+																<li class="vert-m__mini-subm-i">
+																	<a class="vert-m__mini-subm-l" href="{$subcat.url}">{$subcat.name}</a>
+																</li>
+																{/foreach}
+															</ul>
+														</div>
+													{/if}
+													<a class="vert-m__link" href="{$cat.url}">
+														<span class="vert-m__text">
+															<span class="vert-m__text-node">{$cat.name}</span>
+															{if !empty($cat.params.menu_label_text)}
+																<span class="vert-m__label"><span class="label label_light label_micro" style="{if !empty($cat.params.menu_label_background)}background-color:{$cat.params.menu_label_background};{/if}{if !empty($cat.params.menu_label_color)}color:{$cat.params.menu_label_color};{/if}">{$cat.params.menu_label_text}</span></span>
+															{/if}
+														</span>
+													</a>
+												</li>
+											{else}
+												<li class="vert-m__item{if empty($cat.childs)} not-easy-menu{/if}">
+													{if !empty($cat.childs)}
+														<ul class="vert-m__submenu">
+															{foreach $cat.childs as $subcat}
+																{if $subcat.submenu_mono_viewtype eq 'opened'}
+																	<li class="vert-m__item{if !empty($subcat.childs)} vert-m__item_minisubm{/if} not-easy-menu">
+																		{if !empty($subcat.childs)}
+																			<div class="vert-m__mini-subm">
+																				<ul class="vert-m__mini-subm-list">
+																					{foreach $subcat.childs as $subsubcat}
+																					<li class="vert-m__mini-subm-i">
+																						<a class="vert-m__mini-subm-l" href="{$subsubcat.url}">{$subsubcat.name}</a>
+																					</li>
+																					{/foreach}
+																				</ul>
+																			</div>
+																		{/if}
+																		<a class="vert-m__link" href="{$subcat.url}">
+																			<span class="vert-m__text">
+																				<span class="vert-m__text-node">{$subcat.name}</span>
+																				{if !empty($subcat.params.menu_label_text)}
+																					<span class="vert-m__label"><span class="label label_light label_micro" style="{if !empty($subcat.params.menu_label_background)}background-color:{$subcat.params.menu_label_background};{/if}{if !empty($subcat.params.menu_label_color)}color:{$subcat.params.menu_label_color};{/if}">{$subcat.params.menu_label_text}</span></span>
+																				{/if}
+																			</span>
+																		</a>
+																	</li>
+																{else}
+																	<li class="vert-m__item{if empty($subcat.childs)} not-easy-menu{/if}">
+																		{if !empty($subcat.childs)}
+																			<ul class="vert-m__submenu">
+																				{foreach $subcat.childs as $subsubcat}
+																					<li class="vert-m__item">
+																						<a class="vert-m__link" href="{$subsubcat.url}">
+																							{if !empty($subsubcat.menu_icon)}
+																								<span class="vert-m__item-icon">
+																									<img class="lazy-img" src="data:image/gif;base64,R0lGODlh6gDqAIAAAP///wAAACH5BAEAAAEALAAAAADqAOoAAAL+jI+py+0Po5y02ouz3rz7D4biSJbmiabqyrbuC8fyTNf2jef6zvf+DwwKh8Si8YhMKpfMpvMJjUqn1Kr1is1qt9yu9wsOi8fksvmMTqvX7Lb7DY/L5/S6/Y7P6/f8vv8PGCg4SFhoeIiYqLjI2Oj4CBkpOUlZaXmJmam5ydnp+QkaKjpKWmp6ipqqusra6voKGys7S1tre4ubq7vL2+v7CxwsPExcbHyMnKy8zNzs/AwdLT1NXW19jZ2tvc3d7f0NHi4+Tl5ufo6err7O3u7+Dh8vP09fb3+Pn6+/z9/v/w8woMCBBAsaPIgwocKFDBs6fAgxosSJFCtavIgxo8Y9jRw7evwIMqTIkSRLmjyJMqXKlSxbunwJM6bMmTRr2ryJM6fOnTx7+vwJNKjQoUSLGj2KNKnSpUybOo1UAAA7" data-src="{$subsubcat.menu_icon}" alt="{$subsubcat.name|escape}">
+																								</span>
+																							{/if}
+																							<span class="vert-m__text">
+																								<span class="vert-m__text-node">{$subsubcat.name}</span>
+																								{if !empty($subsubcat.params.menu_label_text)}
+																									<span class="vert-m__label"><span class="label label_light label_micro" style="{if !empty($subsubcat.params.menu_label_background)}background-color:{$subsubcat.params.menu_label_background};{/if}{if !empty($subsubcat.params.menu_label_color)}color:{$subsubcat.params.menu_label_color};{/if}">{$subsubcat.params.menu_label_text}</span></span>
+																								{/if}
+																							</span>
+																						</a>
+																					</li>
+																				{/foreach}
+																			</ul>
+																		{/if}
+																		<a class="vert-m__link" href="{$subcat.url}">
+																			{if !empty($subcat.menu_icon)}
+																				<span class="vert-m__item-icon">
+																					<img class="lazy-img" src="data:image/gif;base64,R0lGODlh6gDqAIAAAP///wAAACH5BAEAAAEALAAAAADqAOoAAAL+jI+py+0Po5y02ouz3rz7D4biSJbmiabqyrbuC8fyTNf2jef6zvf+DwwKh8Si8YhMKpfMpvMJjUqn1Kr1is1qt9yu9wsOi8fksvmMTqvX7Lb7DY/L5/S6/Y7P6/f8vv8PGCg4SFhoeIiYqLjI2Oj4CBkpOUlZaXmJmam5ydnp+QkaKjpKWmp6ipqqusra6voKGys7S1tre4ubq7vL2+v7CxwsPExcbHyMnKy8zNzs/AwdLT1NXW19jZ2tvc3d7f0NHi4+Tl5ufo6err7O3u7+Dh8vP09fb3+Pn6+/z9/v/w8woMCBBAsaPIgwocKFDBs6fAgxosSJFCtavIgxo8Y9jRw7evwIMqTIkSRLmjyJMqXKlSxbunwJM6bMmTRr2ryJM6fOnTx7+vwJNKjQoUSLGj2KNKnSpUybOo1UAAA7" data-src="{$subcat.menu_icon}" alt="{$subcat.name|escape}">
+																				</span>
+																			{/if}
+																			<span class="vert-m__text">
+																				<span class="vert-m__text-node">{$subcat.name}</span>
+																				{if !empty($subcat.params.menu_label_text|default:"")}
+																					<span class="vert-m__label"><span class="label label_light label_micro" style="{if !empty($subcat.params.menu_label_background)}background-color:{$subcat.params.menu_label_background};{/if}{if !empty($subcat.params.menu_label_color)}color:{$subcat.params.menu_label_color};{/if}">{$subcat.params.menu_label_text}</span></span>
+																				{/if}
+																			</span>
+																			{if !empty($subcat.childs)}
+																				<span class="vert-m__arrow">
+																					<svg class="icon" width="6" height="12">
+																						<use xlink:href="#arrow-vert-menu"></use>
+																					</svg>
+																					<svg class="icon icon-hover" width="6" height="12">
+																						<use xlink:href="#arrow-vert-menu-hover"></use>
+																					</svg>
+																				</span>
+																			{/if}
+																		</a>
+																	</li>
+																{/if}
+															{/foreach}
+														</ul>
+													{/if}
+													<a class="vert-m__link" href="{$cat.url}">
+														{if !empty($cat.menu_icon)}
+															<span class="vert-m__item-icon">
+																<img class="lazy-img" src="data:image/gif;base64,R0lGODlh6gDqAIAAAP///wAAACH5BAEAAAEALAAAAADqAOoAAAL+jI+py+0Po5y02ouz3rz7D4biSJbmiabqyrbuC8fyTNf2jef6zvf+DwwKh8Si8YhMKpfMpvMJjUqn1Kr1is1qt9yu9wsOi8fksvmMTqvX7Lb7DY/L5/S6/Y7P6/f8vv8PGCg4SFhoeIiYqLjI2Oj4CBkpOUlZaXmJmam5ydnp+QkaKjpKWmp6ipqqusra6voKGys7S1tre4ubq7vL2+v7CxwsPExcbHyMnKy8zNzs/AwdLT1NXW19jZ2tvc3d7f0NHi4+Tl5ufo6err7O3u7+Dh8vP09fb3+Pn6+/z9/v/w8woMCBBAsaPIgwocKFDBs6fAgxosSJFCtavIgxo8Y9jRw7evwIMqTIkSRLmjyJMqXKlSxbunwJM6bMmTRr2ryJM6fOnTx7+vwJNKjQoUSLGj2KNKnSpUybOo1UAAA7" data-src="{$cat.menu_icon}" alt="{$cat.name|escape}">
+															</span>
+														{/if}
+														<span class="vert-m__text">
+															<span class="vert-m__text-node">{$cat.name}</span>
+															{if !empty($cat.params.menu_label_text|default:"")}
+																<span class="vert-m__label"><span class="label label_light label_micro" style="{if !empty($cat.params.menu_label_background)}background-color:{$cat.params.menu_label_background};{/if}{if !empty($cat.params.menu_label_color)}color:{$cat.params.menu_label_color};{/if}">{$cat.params.menu_label_text}</span></span>
+															{/if}
+														</span>
+														{if !empty($cat.childs)}
+															<span class="vert-m__arrow">
+																<svg class="icon" width="6" height="12">
+																	<use xlink:href="#arrow-vert-menu"></use>
+																</svg>
+																<svg class="icon icon-hover" width="6" height="12">
+																	<use xlink:href="#arrow-vert-menu-hover"></use>
+																</svg>
+															</span>
+														{/if}
+													</a>
+												</li>
+											{/if}
+										{/foreach}
+									</ul>
+								</div>
+							</div>
+						{/if}
+					{/if}
+				</div>
+				{if !empty($_theme_config.search.url)}
+					<div class="site-header__search">
+						<div class="site-search colorbg">
+							<form{if $theme_settings.searchautocomplete_on} class="search__form-autocomplete {$_theme_config.search.class}"{/if} action="{$_theme_config.search.url}" data-images="{$theme_settings.searchautocomplete_show_photos}" data-limit="{$theme_settings.searchautocomplete_max_results|default:3}">
+								<div class="site-search__inner">
+									<div class="site-search__input-wrapper">
+										<input class="site-search__input site-search__input_merged" type="search" name="query" autocomplete="off" placeholder="{$_theme_config.search.placeholder}" value="{if !empty($_theme_config.search.query)}{$_theme_config.search.query}{/if}" />
+										<div class="site-search__loader"></div>
+									</div>
+									<button class="site-search__btn default-btn" type="submit">
+										<svg class="icon cent-icon" width="16" height="16">
+											<use xlink:href="#icon-search"></use>
+										</svg>
+										<span class="site-search__btn-text">[`Search`]</span>
+									</button>
+								</div>
+							</form>
+							{if $theme_settings.searchautocomplete_on}
+								<div class="autocomplete-suggestions">
+									<div class="autocomplete-suggestion autocomplete-suggestion-showall">
+										<a class="btn {$theme_settings.main_buttons_style|replace:'img/themebuttons/':''|replace:'.gif':''} btn_sec-9 view-all" href="{$_theme_config.search.url}" data-href="{$_theme_config.search.url}?*">
+											<div class="hover-anim"></div>
+											<span>[`Show all results`]</span>
+										</a>
+									</div>
+								</div>
+							{/if}
+						</div>
+					</div>
+				{/if}
+			</div>
+			{if $wa->shop}
+				<div class="site-header__action">
+					<div class="site-actions site-actions_10">
+						{if $theme_settings.products_show_compare}
+							<div class="site-actions__btn">
+								<a class="action-btn action-btn_10{if $compare|count > 1} not-empty{/if} has-tooltip js-compare-link js-compare-status{if $compare|count > 1} not-empty{/if}" data-title="[`Compare`]" href="{if count($compare)>1}{$wa->getUrl('/frontend/compare/', ['id' => implode(',', $compare) ])}{else}javascript:void(0);{/if}">
+									<span class="action-btn__inner">
+										<svg class="icon" width="20" height="20">
+											<use xlink:href="#icon-chart"></use>
+										</svg>
+										<span class="action-btn__text">[`Compare`]</span>
+										<span class="action-btn__qty sm"><span class="js-compare-count">{$compare|count}</span></span>
+									</span>
+								</a>
+							</div>
+						{/if}
+						{if $theme_settings.products_show_wishlist}
+							<div class="site-actions__btn">
+								<a class="action-btn action-btn_10 has-tooltip js-wishlist-status{if $theme_favorite|count > 0} not-empty{/if}" data-title="[`Favorites`]" href="{$wa->getUrl('/frontend/search/')}?_balance_type=favorites">
+									<span class="action-btn__inner">
+										<svg class="icon" width="22" height="21">
+											<use xlink:href="#icon-heart"></use>
+										</svg>
+										<span class="action-btn__text">[`Favorites`]</span>
+										<span class="action-btn__qty sm"><span class="js-wishlist-count">{$theme_favorite|count}</span></span>
+									</span>
+								</a>
+							</div>
+						{/if}
+						<div class="site-actions__btn site-actions__btn_cart js-minicart-status{if !empty($_topcart_items)} not-empty{else} is-empty{/if} js-minicart-wrapper js-minicart-flystatus" data-carturl="{$wa->getUrl('shop/frontend/cart')}" data-dummyimg="{$wa_theme_url}img/dummy96.png">
+							<a class="cart-btn cart-btn_10" href="{$_cart_url}">
+								<span class="cart-btn__inner">
+									<span class="action-btn action-btn_10 action-btn_10-cart js-minicart-status{if !empty($_topcart_items)} not-empty{else} is-empty{/if}">
+										<span class="action-btn__inner">
+											<svg class="icon" width="21" height="22">
+												<use xlink:href="#icon-cart"></use>
+											</svg>
+											<span class="action-btn__qty sm"><span class="js-minicart-count">{$wa->shop->cart->count()}</span></span>
+										</span>
+									</span>
+									<span class="cart-btn__text">
+										[`Cart`]&nbsp;
+										<span class="cart-btn__price-wr js-minicart-total">{wa_currency_html($cart_total, $wa->shop->currency())}</span>
+										<span class="cart-empty__price-wr">[`is empty`]</span>
+									</span>
+								</span>
+							</a>
+							{include file="header/minicart.html"}
+						</div>
+					</div>
+				</div>
+			{/if}
+		</div>
+	</div>
+</header>
+{/strip}

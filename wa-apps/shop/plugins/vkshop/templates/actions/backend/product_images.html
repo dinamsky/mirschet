@@ -1,0 +1,16 @@
+{if $images}
+    <ul style="list-style-type: none;">
+        <li>
+            <select id="vkshop-product-images" class="image-picker show-html" data-limit="5" multiple="multiple">
+                {foreach $images as $image}
+                    <option data-img-src="{$image.url_crop}" data-image-id="{$image.id}"
+                            value="{$image.id}">{$image.filename}</option>
+                {/foreach}
+            </select>
+        </li>
+        <li>
+            <a href="javascript:void(0)" class="button yellow"
+               onclick="$.Vkshop.prepare({$product.id});">[`Prepare`]</a>
+        </li>
+    </ul>
+{/if}

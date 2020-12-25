@@ -1,0 +1,12 @@
+<div class="field">
+    <div class="name">[`Minimal price`]</div>
+    <div class="value">
+        <input type="text" name="skus[{$sku_id}][flexdiscount_minimal_discount_price]" value="{if !empty($sku['flexdiscount_minimal_discount_price'])}{$sku['flexdiscount_minimal_discount_price']|floatval}{/if}" class="short numerical">
+        <select name="skus[{$sku_id}][flexdiscount_minimal_discount_currency]">
+            {foreach $currencies as $c}
+                <option value='{$c.code}' {if !empty($sku['flexdiscount_minimal_discount_currency']) && $sku['flexdiscount_minimal_discount_currency'] == $c['code']}selected{/if}>{$c['sign']} {$c['code']}</option>
+            {/foreach}
+            </select>
+        <p class="hint">{_wp('Price with all discounts (from plugin Flexdiscount) will never be lower than specified value. Make sure that setting "Product discount limit" is enabled and has value "product field"')}</p>
+    </div>
+</div>

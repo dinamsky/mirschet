@@ -1,0 +1,13 @@
+<select id="vkshop-albums-selector" name="config[vk_album_id]">
+    {if !(empty($albums))}
+        {foreach $albums as $album}
+            <option class="vkshop-album-option" value="{$album.album_id}" data-group_id="{$album.group_id}">
+                {$album.name}
+            </option>
+        {/foreach}
+    {else}
+        <option value="0">
+            [`Main album`]
+        </option>
+    {/if}
+</select>

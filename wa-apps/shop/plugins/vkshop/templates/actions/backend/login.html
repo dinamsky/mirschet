@@ -1,0 +1,29 @@
+{if !empty({$group.user_id})}
+    <table style="border-spacing: 5px 5px !important; border-collapse: separate; width: 100%;">
+        <tr>
+            <td width="50">
+                <img width="50" src="{$group.photo_50}">
+            </td>
+            <td>
+                {$group.first_name}&nbsp;{$group.last_name}
+            </td>
+        </tr>
+        <tr>
+            <td colspan="2">
+            </td>
+        </tr>
+        <tr>
+            <td colspan="2" style="text-align: center;">
+                <a href="javascript:void(0);" class="button red" onclick="$.Vkshop.logout({$group.id});">[`Logout`]</a>
+            </td>
+        </tr>
+    </table>
+{else}
+    <table style="border-spacing: 5px 5px !important; border-collapse: separate; width: 100%;">
+        <tr>
+            <td style="text-align: center;">
+                <a href="{$group.login_url}" class="button yellow">[`Login`]{*<img src="{$wa_app_static_url}plugins/vkshop/img/vkshop_login_button.png"/>*}</a>
+            </td>
+        </tr>
+    </table>
+{/if}

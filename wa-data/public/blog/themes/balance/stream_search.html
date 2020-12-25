@@ -1,0 +1,61 @@
+{strip}
+{if !empty($posts)}
+	<div class="posts">
+		<div class="posts__list">
+			{foreach $posts as $post}
+				<div class="posts__item">
+					<div class="b-post-card b-post-card_list">
+						<h3>
+							<a class="b-post-card__title" href="{$post.link}" itemprop="url">«{$post.title}»</a>
+							{* @event prepare_posts_frontend.%plugin_id%.post_title *}
+							{if !empty($post.plugins.post_title)}
+								{foreach $post.plugins.post_title as $plugin => $output}{$output}{/foreach}
+							{/if}
+						</h3>
+						<div class="b-post-card__postinfo">
+							{if $theme_settings.blog_show_authors}
+								{if $post.user.posts_link}
+									<a class="b-post-card__author" href="#">{$post.user.name}</a>
+								{else}
+									<span class="b-post-card__author" href="#">{$post.user.name}</span>
+								{/if}
+							{/if}
+							<div class="b-post-card__date iconed-text">
+								<svg class="icon" width="16" height="16">
+									<use xlink:href="#icon-cal"></use>
+								</svg>
+								<span>{$post.datetime|wa_datetime:"humandate"}</span>
+							</div>
+						</div>
+						<div class="b-post-card__text">
+							{* @event prepare_posts_frontend.%plugin_id%.before *}
+							{if !empty($post.plugins.before)}
+								<div class="text_before">
+									{foreach $post.plugins.before as $plugin => $output}{$output}{/foreach}
+								</div>
+							{/if}
+							{$post.text}
+							{* @event prepare_posts_frontend.%plugin_id%.after *}
+							{if !empty($post.plugins.after)}
+								<div class="text_after">
+									{foreach $post.plugins.after as $plugin => $output}{$output}{/foreach}
+								</div>
+							{/if}
+						</div>
+						{if $post.cutted}
+							<a class="b-post-card__btn btn btn_default btn_sec-5" href="{$post.link}">{$post.cut_link_label|default:'[`Continue reading →`]'}</a>
+						{/if}
+					</div>
+				</div>
+			{/foreach}
+		</div>
+	</div>
+{else}
+	<div class="posts">
+		<div class="no-post">
+			<h1 class="no-post__title">Увы!</h1>
+			<div class="no-post__text">По вашему запросу не найдено ни одной записи.</div>
+		</div>
+	</div>
+{/if}
+{/strip}

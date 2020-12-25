@@ -1,0 +1,32 @@
+<h3><span class="gray">Подарочные сертификаты</span></h3>
+{if !count($gc_coupons)}
+	<div style="width: 50%; margin-top: 10px; margin-bottom: 10px;">Для данного заказа не сгенерированы подарочные сертификаты (генерируются для оплаченных и выполненных заказов, в которых есть товар-подарочная карта).</div>
+{else}
+<table class="zebra" style="width: 50%; margin-top: 10px; margin-bottom: 10px;">
+<tr>
+	<th>Сертификат</th>
+	<th>Стоимость</th>
+	<th>Использование</th>
+</tr>
+{foreach $gc_coupons as $coupon}
+	<tr>
+		{if $coupon.code}
+			<td><a href="#/coupons/{$coupon.coupon}">{$coupon.code}</a></td>
+		{else}
+			<td><span style="color: red;">Удален администратором</span></td>
+		{/if}
+		
+		{if $coupon.price}
+			<td>{floatval($coupon.price)} {$coupon.type}</td>
+		{else}
+			<td>Нет данных</td>
+		{/if}
+		<td>
+			{if $coupon.used === null}<span style="color: blue;">Нет данных</span>{/if}
+			{if $coupon.used > 0}<span style="color: red;">Использован</span>{/if}
+			{if $coupon.used === '0'}<span style="color: green;">Не использовался</span>{/if}
+		</td>
+	</tr>
+{/foreach}
+</table>
+{/if}

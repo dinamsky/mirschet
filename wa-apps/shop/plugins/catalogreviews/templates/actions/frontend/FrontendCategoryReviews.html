@@ -1,0 +1,78 @@
+<h1>{$h1|escape}</h1>
+
+{if $is_client_sorting_enabled}
+	<!-- sorting -->
+	<ul class="sorting">
+		<li>[`Sort by`]:</li>
+		{strip}
+			{foreach $sort_options as $sort_params}
+				<li{if $active_sort == $sort_params.sort} class="selected"{/if}>
+					{$catalogreviews_helper->getSortUrl($sort_params.sort, $sort_params.default_order, $sort_params.name, $active_sort, $active_order)}
+				</li>
+				{if $wa->get('sort') == $sort_params.sort}{$wa->title( $wa->title()|cat:' — '|cat:$sort_params.name)}{/if}
+			{/foreach}
+		{/strip}
+	</ul>
+{/if}
+
+<!-- reviews begin -->
+{function review_reviews}
+	{$depth = -1}
+	{foreach $reviews as $review}
+		{if $review.depth < $depth}
+			{$loop=($depth-$review.depth)}
+			{section name="end-review" loop=$loop}
+				<ul class="reviews-branch"></ul>
+				</li>
+				</ul>
+			{/section}
+
+			{$depth = $review.depth}
+		{/if}
+
+		{if $review.depth == $depth}
+			</li>
+			<li data-id="{$review.id}" data-parent-id="{$review.parent_id}">
+		{/if}
+
+		{if $review.depth > $depth}
+			<ul class="reviews-branch">
+			<li data-id={$review.id} data-parent-id="{$review.parent_id}">
+			{$depth = $review.depth}
+		{/if}
+
+		{include file=$sub_templates['review'] reply_allowed=false single_view=true review=$review inline}
+		<!-- sub review placeholder -->
+	{/foreach}
+
+	{section name="end-review" loop=$depth}
+		<ul class="reviews-branch"></ul>
+		</li>
+		</ul>
+	{/section}
+{/function}
+
+<section class="reviews product-info">
+	<!-- existing reviews list -->
+	<ul class="reviews-branch">
+		{foreach $reviews as $review}
+			<li data-id={$review.id} data-parent-id="0">
+				{include file=$sub_templates['review'] reply_allowed=false inline}
+				{if !empty($review.replies)}
+					{review_reviews reviews=$review.replies}
+				{else}
+					<ul class="reviews-branch"></ul>
+				{/if}
+			</li>
+		{/foreach}
+	</ul>
+</section>
+<!-- reviews end -->
+
+{if $pages_count > 1}
+	<div class="block paging-nav">
+		{wa_pagination total=$pages_count attrs=['class' => "menu-h"]}
+	</div>
+{/if}
+
+<div class="description">{$description}</div>

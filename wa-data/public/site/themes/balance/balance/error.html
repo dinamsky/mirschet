@@ -1,0 +1,33 @@
+{strip}
+<div class="pg-not-found">
+	<div class="layout-center">
+		<div class="pg-not-found__numbers u-cen-txt">
+			<div class="pg-not-found__number bold single-line">
+				{if $error_code && $error_code eq "404"}
+					<div class="pg-not-found__num">4</div>
+					<div class="pg-not-found__num pg-not-found__num_zero">0</div>
+					<div class="pg-not-found__num">4</div>
+				{else}
+					<div class="pg-not-found__num">{$error_code}</div>
+				{/if}
+			</div>
+			<div class="pg-not-found__not-found-text">{if $error_message}{$error_message}{else}[s`Error`]{/if}</div>
+		</div>
+		<div class="pg-not-found__text-wrapper">
+			<div class="pg-not-found__reason-title bold">Ошибка могла произойти по нескольким причинам:</div>
+			<ol class="pg-not-found__reasons">
+				<li class="pg-not-found__reason-i">Вы ввели неправильный адрес.</li>
+				<li class="pg-not-found__reason-i">Страница, на которую вы хотели зайти, устарела и была удалена.</li>
+				<li class="pg-not-found__reason-i">Акция, ранее действовавшая на сайте, закончилась.</li>
+				<li class="pg-not-found__reason-i">На сервере произошла ошибка. Если так, то мы уже знаем о ней и обязательно исправим.</li>
+			</ol>
+			<div class="pg-not-found__advice bold">
+				<div class="pg-not-found__advice-text">Для того чтобы найти интересующую вас информацию, воспользуйтесь строкой поиска</div>
+				<svg class="icon" width="16" height="16">
+					<use xlink:href="#icon-icon"></use>
+				</svg>
+			</div>
+		</div>
+	</div>
+</div>
+{/strip}

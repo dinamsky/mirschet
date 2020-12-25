@@ -1,0 +1,159 @@
+{strip}
+{include file="`$wa_parent_theme_path`/system.html" scope="parent" inline}
+<meta itemprop="name" content="{$wa->shop->settings('name')|escape}">
+<meta itemprop="telephone" content="{$wa->shop->settings('phone')}">
+<meta itemprop="address" content="{$wa->shop->settings('country')}">
+<meta itemprop="currenciesAccepted" content="{$wa->shop->currency()}">
+<meta itemprop="image" content="{$wa_parent_theme_url}{$theme_settings.header_logo}?v{$wa_theme_version}">
+<div class="home-pg">
+	<div class="b-row">
+		<div class="b-row__inner">
+			{$_theme_config_sidebar = explode(",",$theme_settings.shop_sidebars_home_sections)}
+			{$_theme_config.sidebar = []}
+			{foreach $_theme_config_sidebar as $section}
+				{$section = $section|trim}
+				{if $section eq "viewed"}
+					{$_viewed_pids = waRequest::cookie('balance_viewed')}
+					{if !empty($_viewed_pids)}
+						{if $theme_settings.shop_sidebars_sections_viewed_limit > 0}
+							{$limit = $theme_settings.shop_sidebars_sections_viewed_limit}
+						{else}
+							{$limit = 4}
+						{/if}
+						{$_viewed_products = $wa->shop->products("id/`$_viewed_pids`",$limit)}
+						{if !empty($_viewed_products)}
+							{$_theme_config.sidebar[] = ['type' => 'section', 'value' => $section]}
+						{/if}
+					{/if}
+				{elseif $section eq "tags"}
+					{if $theme_settings.shop_sidebars_sections_tags_limit_max > 0}
+						{$limit = $theme_settings.shop_sidebars_sections_tags_limit_max}
+					{else}
+						{$limit = 20}
+					{/if}
+					{$_shop_tags = $wa->shop->tags($limit)}
+					{if !empty($_shop_tags)}
+						{$_theme_config.sidebar[] = ['type' => 'section', 'value' => $section]}
+					{/if}
+				{elseif $section eq "menu"}
+					{if !empty($_theme_config.mainmenu_links)}
+						{$_theme_config.sidebar[] = ['type' => 'section', 'value' => $section]}
+					{/if}
+				{elseif $section eq "productbrands"}
+					{if method_exists("shopProductbrandsPlugin","getBrands")}
+						{$_shop_brands = shopProductbrandsPlugin::getBrands()}
+						{if !empty($_shop_brands)}
+							{$_theme_config.sidebar[] = ['type' => 'section', 'value' => $section]}
+						{/if}
+					{/if}
+				{elseif $section eq "last-posts"}
+					{if $wa->blog}
+						{if $theme_settings.shop_sidebars_sections_lastposts_limit > 0}
+							{$limit = $theme_settings.shop_sidebars_sections_lastposts_limit}
+						{else}
+							{$limit = 3}
+						{/if}
+						{$sidebar_posts = $wa->blog->posts($theme_settings.shop_sidebars_sections_lastposts_blog|default:null,$limit)}
+						{if !empty($sidebar_posts)}
+							{$_theme_config.sidebar[] = ['type' => 'section', 'value' => $section]}
+						{/if}
+					{/if}
+				{elseif $section eq "products"}
+					{if $theme_settings.shop_sidebars_sections_products_limit > 0}
+						{$limit = $theme_settings.shop_sidebars_sections_products_limit}
+					{else}
+						{$limit = 4}
+					{/if}
+					{$sidebar_products = $wa->shop->productSet($theme_settings.shop_sidebars_sections_products_set,$limit)}
+					{if !empty($sidebar_products)}
+						{$_theme_config.sidebar[] = ['type' => 'section', 'value' => $section]}
+					{/if}
+				{elseif $section eq "faq"}
+					{$_faq = []}
+					{if !empty($theme_settings.shop_sidebars_sections_faq_1_question)}{$_faq[] = [
+						'question' => $theme_settings.shop_sidebars_sections_faq_1_question,
+						'answer' => $theme_settings.shop_sidebars_sections_faq_1_answer
+					]}{/if}
+					{if !empty($theme_settings.shop_sidebars_sections_faq_2_question)}{$_faq[] = [
+						'question' => $theme_settings.shop_sidebars_sections_faq_2_question,
+						'answer' => $theme_settings.shop_sidebars_sections_faq_2_answer
+					]}{/if}
+					{if !empty($theme_settings.shop_sidebars_sections_faq_3_question)}{$_faq[] = [
+						'question' => $theme_settings.shop_sidebars_sections_faq_3_question,
+						'answer' => $theme_settings.shop_sidebars_sections_faq_3_answer
+					]}{/if}
+					{if !empty($theme_settings.shop_sidebars_sections_faq_4_question)}{$_faq[] = [
+						'question' => $theme_settings.shop_sidebars_sections_faq_4_question,
+						'answer' => $theme_settings.shop_sidebars_sections_faq_4_answer
+					]}{/if}
+					{if !empty($theme_settings.shop_sidebars_sections_faq_5_question)}{$_faq[] = [
+						'question' => $theme_settings.shop_sidebars_sections_faq_5_question,
+						'answer' => $theme_settings.shop_sidebars_sections_faq_5_answer
+					]}{/if}
+					{if !empty($_faq)}
+						{$_theme_config.sidebar[] = ['type' => 'section', 'value' => $section]}
+					{/if}
+				{elseif $section eq "about"}
+					{$_theme_config.sidebar[] = ['type' => 'section', 'value' => $section]}
+				{elseif $section|substr:0:6 eq "block="}
+					{$sidebar_block = $wa->block($section|replace:"block=":"")}
+					{if $sidebar_block}
+						{$_theme_config.sidebar[] = ['type' => 'block', 'value' => $sidebar_block]}
+					{/if}
+				{/if}
+			{/foreach}
+			{if !empty($_theme_config.sidebar)}
+				<div class="col-1-of-5 mt-hide">
+					{foreach $_theme_config.sidebar as $section}
+						{if $section.type eq "section"}
+							{include file="sidebar.`$section.value`.html" inline}
+						{else}
+							<div class="sidebar-section">
+								{include file="string:`$section.value`" inline}
+							</div>
+						{/if}
+					{/foreach}
+				</div>
+			{/if}
+			<div class="col-4-of-5">
+				<!-- plugin hook: 'frontend_homepage' -->
+				{* @event frontend_homepage.%plugin_id% *}
+				{foreach $frontend_homepage as $_}{$_}{/foreach}
+				{$_theme_config_homepage = explode(",",$theme_settings.shop_homepage_sections)}
+				{$_theme_config.homepage = []}
+				{foreach $_theme_config_homepage as $section}
+					{$section = $section|trim}
+					{if $section eq "news"}
+						{$_theme_config.homepage[] = ['type' => 'section', 'value' => "home.`$theme_settings.homepage_news_design`.html"]}
+					{elseif $section eq "subscribe"}
+						{$_theme_config.homepage[] = ['type' => 'section', 'value' => "`$wa_parent_theme_path`/subscribe.html"]}
+					{elseif $section|substr:0:6 eq "block="}
+						{$homepage_block = $wa->block($section|replace:"block=":"")}
+						{if $homepage_block}
+							{$_theme_config.homepage[] = ['type' => 'block', 'value' => $homepage_block]}
+						{/if}
+					{else}
+						{$_theme_config.homepage[] = ['type' => 'section', 'value' => "home.`$section`.html"]}
+					{/if}
+				{/foreach}
+				{foreach $_theme_config.homepage as $section}
+					{if $section.type eq "section"}
+						{include file=$section.value inline}
+					{else}
+						<div class="home-pg__section">
+							{include file="string:`$section.value`" inline}
+						</div>
+					{/if}
+				{/foreach}
+			</div>
+		</div>
+	</div>
+</div>
+{if $wa->user()->isAdmin()}
+	<a class="show-toggle-btn" href="#">
+		<svg class="icon cent-icon" width="18" height="18">
+			<use xlink:href="#icon-info"></use>
+		</svg>
+	</a>
+{/if}
+{/strip}

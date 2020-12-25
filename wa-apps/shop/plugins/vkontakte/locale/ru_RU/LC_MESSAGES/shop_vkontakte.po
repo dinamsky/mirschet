@@ -1,0 +1,126 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: shop/plugins/vkontakte\n"
+"POT-Creation-Date: 2015-02-17 01:36+0300\n"
+"PO-Revision-Date: \n"
+"Last-Translator: snark.pro <covoxx@gmail.com>\n"
+"Language-Team: shop/plugins/vkontakte <covoxx@gmail.com>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=3; plural=((((n%10)==1)&&((n%100)!=11))?(0):(((((n%10)>=2)&&((n%10)<=4))&&(((n%100)<10)||((n%100)>=20)))?(1):2));\n"
+"X-Poedit-SourceCharset: UTF-8\n"
+"X-Poedit-Basepath: .\n"
+"Language: ru_RU\n"
+"X-Generator: Poedit 1.8.7.1\n"
+"X-Poedit-SearchPath-0: .\n"
+"X-Poedit-SearchPath-1: .\n"
+
+#: /wa-apps/shop/plugins/vkontakte/lib/config/settings.php:14
+msgid "Set the vkontakte Application ID"
+msgstr "Задайте номер приложения Вконтакте."
+
+#: /wa-apps/shop/plugins/vkontakte/lib/config/settings.php:20
+msgid "Set number of the VK Group. If group link is http://vk.com/club76633538, then number is 76633538"
+msgstr "Задайте номер группы Вконтакте. Если ссылка на группу выглядит так: http://vk.com/club76633538, то номер 76633538. Этот номер можно увидеть так же и в настройках группы."
+
+#: /wa-apps/shop/plugins/vkontakte/lib/config/settings.php:26
+msgid "Set number of the VK photo album. If album link is https://vk.com/album-76633538_201977946, then number is 201977946"
+msgstr "Задайте номер фотоальбома группы. Если ссылка на альбом выглядит так: https://vk.com/album-76633538_201977946, то номер альбома 201977946"
+
+#: /wa-apps/shop/plugins/vkontakte/lib/config/settings.php:32
+msgid "If checked, then wall post will be signed."
+msgstr "Если отмечено, то записи на стене будут подписаны."
+
+#: /wa-apps/shop/plugins/vkontakte/lib/config/settings.php:13
+msgid "Application ID"
+msgstr "Номер приложения Вконтакте"
+
+#: /wa-apps/shop/plugins/vkontakte/lib/config/settings.php:17
+msgid "Number of the VK Group"
+msgstr "Номер группы Вконтакте"
+
+#: /wa-apps/shop/plugins/vkontakte/lib/config/settings.php:23
+msgid "Number of the VK photo album"
+msgstr "Номер фотоальбома Вконтакте"
+
+#: /wa-apps/shop/plugins/vkontakte/lib/config/settings.php:29
+msgid "Sign the wall post"
+msgstr "Подписывать запись"
+
+#: /wa-apps/shop/plugins/vkontakte/lib/config/plugin.php:4
+msgid "Allows you to send the products to the store's Vkontakte group wall."
+msgstr "Позволяет отправлять информацию о продукте на стену вашей группы Вконтакте."
+
+#: /wa-apps/shop/plugins/vkontakte/lib/config/plugin.php:3
+msgid "Vkontakte"
+msgstr "Вконтакте"
+
+#: /wa-apps/shop/plugins/vkontakte/lib/config/settings.php:36
+msgid "Descryption type"
+msgstr "Тип описания"
+
+#: /wa-apps/shop/plugins/vkontakte/lib/config/settings.php:37
+msgid "Set description type."
+msgstr "Задайте тип описания товара."
+
+#: /wa-apps/shop/plugins/vkontakte/lib/config/settings.php:40
+msgid "Description"
+msgstr "Описание"
+
+#: /wa-apps/shop/plugins/vkontakte/lib/config/settings.php:41
+msgid "Summary"
+msgstr "Короткое описание"
+
+msgid "Maximum execution time"
+msgstr "Максимальное время работы"
+
+msgid "Maximum execution time of PHP-scripts"
+msgstr "Максимальное время работы PHP скрипта"
+
+msgid "The data exchange with third-party servers"
+msgstr "Обмен данными со сторонними серверами"
+
+#: /wa-apps/shop/plugins/vkontakte/templates/controls/feedbackControl.html:6
+msgid "QR code"
+msgstr "QR код"
+
+#: /wa-apps/shop/plugins/vkontakte/templates/controls/feedbackControl.html:10
+msgid "Technical support for this plugin"
+msgstr "Техническая поддержка этого плагина"
+
+#: /wa-apps/shop/plugins/vkontakte/templates/settlements.html:11
+msgid "Check the settings for the settlement of the store."
+msgstr "Проверьте настройки поселений в магазине."
+
+#: /wa-apps/shop/plugins/vkontakte/lib/config/settings.php:33
+msgid "If checked, the recording on the wall will be marked as an advertisement."
+msgstr "Если отмечено, записи на стене будут помечены как реклама."
+
+#: /wa-apps/shop/plugins/vkontakte/lib/config/settings.php:49
+msgid "Sometimes VK refuses to take too long descriptions. This option is introduced in order to be able to cut a description of the size, which receives the VK. Some is 700 characters, some 650 or 600."
+msgstr "Иногда ВК Отклоняет длинные описания. Эта настройка позволяет обрезать описание до размера, который примет ВК. Иногда это 700 символов, иногда 650 или 600."
+
+#: /wa-apps/shop/plugins/vkontakte/lib/config/settings.php:30
+msgid "Sign an entry as an advertisement"
+msgstr "Подписать запись на стене как рекламу"
+
+#: /wa-apps/shop/plugins/vkontakte/lib/config/settings.php:47
+msgid "Description size"
+msgstr "Размер описания"
+
+#: /wa-apps/shop/plugins/vkontakte/lib/config/settings.php:53
+msgid "Settlement"
+msgstr "Поселение"
+
+#: /wa-apps/shop/plugins/vkontakte/lib/config/settings.php:54
+msgid "Select the settlement."
+msgstr "Выберите поселение"
+
+#: /wa-apps/shop/plugins/vkontakte/lib/config/settings.php:58
+msgid "Ask for technical support"
+msgstr "Запросить техническую поддержку"
+
+#: /wa-apps/shop/plugins/vkontakte/lib/config/settings.php:59
+msgid "Click on the link to contact the developer."
+msgstr "Перейдите по ссылке, чтобы связаться с разработчиком."

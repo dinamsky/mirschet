@@ -1,0 +1,75 @@
+.gc_saving
+{
+	display: none;
+	line-height: 16px;
+	font-style: italic;
+	margin-top: 10px;
+	margin-left: 5px;
+}
+
+.gc_saved
+{
+	display: none;
+	line-height: 16px;
+	font-style: italic;
+	margin-top: 10px;
+	margin-left: 5px;
+	font-weight: bold; 
+	font-style: italic;
+}
+
+.gc_saving_preloader
+{
+	background: url('../img/preloader.gif');
+	height: 16px;
+	width: 16px;
+	float: left;
+	margin-right: 10px;
+}
+
+.gc_button
+{
+	line-height: 25px;
+	border: 3px solid #66cc33;
+	border-radius: 3px;
+	text-align: center;
+	cursor: pointer;
+	background: url('../img/button.png');
+	font-weight: bold;
+	width: 100%;
+	height: 31px;
+	box-sizing: border-box;
+}
+
+.gc_yellow_button
+{
+	border: 3px solid #fdda3b !important;
+}
+
+.gc_red_button
+{
+	border: 3px solid #ff472e !important;
+}
+
+.gc_tpl
+{
+	margin-top: 15px;
+	border-bottom: 1px solid gray;
+	padding-bottom: 25px;
+}
+
+.gc_tpl_button
+{
+	margin-top: 10px;
+}
+
+.gc_original
+{
+	display: none;
+}
+
+.CodeMirror
+{
+	border: 1px solid #ccc;
+	padding: 2px;
+}

@@ -1,0 +1,353 @@
+{strip}
+{include file="system.html" scope="parent" inline}
+<!DOCTYPE html>
+<html class="roboto" lang="{if $wa->locale()}{$wa->locale()|lower|mb_substr:0:2}{else}en{/if}">
+<head>
+	<meta charset="utf-8">
+	<title>{$wa->title()|escape}</title>
+	<meta content="designmyshop.ru" name="author">
+	<meta name="keywords" content="{$wa->meta('keywords')|escape}" />
+    <meta name="description" content="{$wa->meta('description')|escape}" />
+	<meta content="width=device-width, initial-scale=1" name="viewport">
+	<meta content="ie=edge" http-equiv="x-ua-compatible">
+	{if !empty($canonical)}<link rel="canonical" href="{$canonical}"/>{/if}
+	<link rel="shortcut icon" href="/favicon.ico"/>
+	{if $wa->blog}
+		{$rss=$wa->blog->rssUrl()}
+		{if $rss}<link rel="alternate" type="application/rss+xml" title="{$wa->accountName()}" href="{$rss}">{/if}
+	{/if}
+	<link rel="stylesheet" media="screen" href="{$wa_real_theme_url}css/fonts.css?v{$wa_theme_version}">
+	<link rel="stylesheet" media="all" href="{$wa_real_theme_url}css/vendor.css?v{$wa_theme_version}">
+	<link rel="stylesheet" media="screen" href="{$wa_url}wa-content/font/ruble/arial/fontface.css?v{$wa->version(true)}" />
+	<link rel="stylesheet" media="all" href="{$wa_theme_url}css/main.css?v{$wa_theme_version}">
+	{$wa->css()}
+	<!--[if lt IE 9]>
+	<script src="http://cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.2/html5shiv.min.js"></script><![endif]-->
+	<!--[if lt IE 10 ]>
+	<p class="chromeframe" style="background-color:yellow;">Вы используете <strong>устаревший</strong> браузер. Пожалуйста <a href="http://browsehappy.com/?locale=ru" style="color: red; font-weight: bold;">Скачайте новый браузер абсолютно бесплатно</a> или <a href="http://www.google.com/chromeframe/?redirect=true">активируй Google Chrome Frame</a>чтобы пользоваться всеми возможностями сайта.</p>
+	<![endif]-->
+	<!-- Custom Browsers Color Start -->
+	<!-- Chrome, Firefox OS and Opera -->
+	<meta name="theme-color" content="#fff">
+	<!-- Windows Phone -->
+	<meta name="msapplication-navbutton-color" content="#fff">
+	<!-- iOS Safari -->
+	<meta name="apple-mobile-web-app-status-bar-style" content="#fff">
+	<!-- Custom Browsers Color End -->
+	<script src="{$wa_static_url}wa-content/js/jquery/jquery-1.11.1.min.js?v{$wa->version(true)}"></script>
+	{$wa->js()}
+	{include file="`$wa_active_theme_path`/head.html" inline}
+	<link rel="stylesheet" media="all" href="{$wa_theme_url}css/themecolors/{$theme_settings.main_color_scheme|replace:'img/themecolors/':''|replace:'.png':''}.css?v{$wa_theme_version}">
+    {$wa->head()}
+	<link rel="stylesheet" media="all" href="{$wa_theme_url}css/user.css?v{$wa_theme_version}">
+</head>
+<body{if $theme_settings.boxed_on} class="boxed"
+		{if !empty($theme_settings.boxed_bg_image)}
+			{if $theme_settings.boxed_bg_image_type eq 'repeat'} style="background:{$theme_settings.boxed_bg_color} url({$wa_theme_url}{$theme_settings.boxed_bg_image}) repeat"
+			{elseif $theme_settings.boxed_bg_image_type eq 'center'} style="background:{$theme_settings.boxed_bg_color} url({$wa_theme_url}{$theme_settings.boxed_bg_image}) no-repeat center top"
+			{elseif $theme_settings.boxed_bg_image_type eq 'cover'} style="background:{$theme_settings.boxed_bg_color} url({$wa_theme_url}{$theme_settings.boxed_bg_image}) no-repeat;background-size:contain;"{/if}
+		{else} style="background:{$theme_settings.boxed_bg_color} url({$wa_theme_url}{$theme_settings.boxed_bg_pattern|replace:'img/boxed/preview/':'img/boxed/'})"{/if}
+	{/if}
+	{if $wa->globals("viewed_product_id")} data-viewed="{$wa->globals('viewed_product_id')}"{/if} data-theme-id="balance">
+	<main id="my-page">
+		{if $theme_settings.alerting_on && !empty($theme_settings.alerting_text) && !waRequest::cookie('balance_hide_alerting',0)}
+			<div class="top-message" style="background-color:{$theme_settings.alerting_background};color:{$theme_settings.alerting_color}">
+				<div class="top-message__inner">
+					{$theme_settings.alerting_text}
+					{if $theme_settings.alerting_show_close}
+						<div class="top-message__close-btn">[`Close`]</div>
+					{/if}
+				</div>
+			</div>
+		{/if}
+		<div class="page-preloader">
+			<div class="inner-loader"></div>
+		</div>
+		<div class="outer-wrapper{if $wa->globals('is_product_page')} item-page{elseif $wa->globals('isOrderPage')} order-page{/if}{if $theme_settings.shop_sticky_panel eq 'bottom' && !$wa->globals('hideUserPanel')} has-bottom-panel{/if}">
+			{if $theme_settings.boxed_on}<div class="boxed-ui-style"></div>{/if}
+			{if !$wa->globals('useCompactHeader')}
+				{include file="header_mobile/`$theme_settings.header_mobile_design`.html" inline}
+				{include file="header/`$theme_settings.header_design`.html" inline}
+			{/if}
+			{include file="`$wa_active_theme_path`/main.html" inline}
+			{include file="footer/`$theme_settings.footer_design`.html" inline}
+			{*
+			<div class="b-popup mfp-hide mfp-with-anim" id="user-popup">
+				<div class="b-popup__inner">
+					<form>
+					<div class="checkout-pg">
+						<div class="checkout-pg__main">
+							<div class="checkout-pg__tabs-outer">
+								<div class="checkout-pg__tabs">
+									<ul class="checkout-pg__tabs-list">
+										<li class="checkout-pg__tabs-item active">
+											<div class="checkout-pg__tabs-text muted u-cen-txt">[`Login`]</div>
+											{*
+											<div class="checkout-pg__tabs-label">
+												<div class="label label_light label_micro" style="background-color:#ff8c52;">USER</div>
+											</div>
+											*}{*
+										</li>
+										<li class="checkout-pg__tabs-item">
+											<div class="checkout-pg__tabs-text muted u-cen-txt">[`Sign up`]</div>
+											{*
+											<div class="checkout-pg__tabs-label">
+												<div class="label label_light label_micro" style="background-color:#02bc2c;">NEW</div>
+											</div>
+											*}{*
+										</li>
+									</ul>
+								</div>
+							</div>
+							<div class="checkout-pg__content">
+								<div class="checkout-pg__tab-content">
+									<div class="checkout-pg__auth-heading u-cen-txt">Форма авторизации </div>
+									<div class="checkout-pg__form checkout-pg__form_auth">
+										<div class="wa-login-form-wrapper">
+											{$wa->loginForm([],[
+												'show_title'          => false,
+												'show_sub_title'      => false,
+												'include_css'         => false,
+												'show_oauth_adapters' => false
+											])}
+										</div>
+										{* SOCIAL ACCOUNTS *}{*
+										{$auth_adapters = $wa->authAdapters(true)}
+										{if $auth_adapters}
+											{$linked_adapters = []}
+											{$other_adapters = []}
+											{foreach $auth_adapters as $a}
+												{if $wa->user("{$a->getId()}_id")}
+													{$linked_adapters[] = $a}
+												{else}
+													{$other_adapters[] = $a}
+												{/if}
+											{/foreach}
+
+											{if $other_adapters}
+												<div class="checkout-pg__social-auth">
+													<div class="checkout-pg__social-text muted">[`Authorize either by entering your contact information, or through one of the websites listed below`]</div>
+													<div class="checkout-pg__social-links">
+														<div class="soc-list">
+															<div class="soc-list__inner">
+																{foreach $other_adapters as $a}
+																	<div class="soc-list__i">
+																		<a class="soc-btn soc-btn_{$_social_svg_styles[$a->getId()].id}" href="{$a->getUrl()}">
+																			{$_social_svg_styles[$a->getId()].icon}
+																		</a>
+																	</div>
+																{/foreach}
+															</div>
+														</div>
+													</div>
+												</div>
+											{/if}
+										{/if}
+									</div>
+								</div>
+								<div class="checkout-pg__tab-content">
+									<div class="auth-form">
+										{$wa->signupForm([],[
+											"show_title"          => false,
+											"include_css"          => false,
+											"show_oauth_adapters" => false
+										])}
+										{* SOCIAL ACCOUNTS *}{*
+										{if $auth_adapters}
+											{if $other_adapters}
+												<div class="auth-form__social">
+													<div class="u-cen-txt">
+														<div class="auth-form__social-title">[`Sign up either by entering your contact information, or through one of the websites listed below`]</div>
+													</div>
+													<div class="auth-form__social-btns">
+														<div class="soc-list">
+															<div class="soc-list__inner">
+																{foreach $other_adapters as $a}
+																	<div class="soc-list__i">
+																		<a class="soc-btn soc-btn_{$_social_svg_styles[$a->getId()].id}" href="{$a->getUrl()}">
+																			{$_social_svg_styles[$a->getId()].icon}
+																		</a>
+																	</div>
+																{/foreach}
+															</div>
+														</div>
+													</div>
+												</div>
+											{/if}
+										{/if}
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+					</form>
+				</div>
+			</div>
+			*}
+			{if $wa->shop && $theme_settings.shop_sticky_panel ne "none" && !$wa->globals('hideUserPanel')}
+				{if $theme_settings.shop_sticky_panel eq "top"}
+					<div class="quick-panel quick-panel_top mt-hide">
+						<div class="quick-panel__inner">
+							<div class="quick-panel__inner-wrapper">
+								<div class="quick-panel__buttons">
+									{if $theme_settings.products_show_compare}
+										<a class="action-btn action-btn_11 has-tooltip has-tooltip_bottom js-compare-link js-compare-status{if $compare|count > 1} not-empty{/if}" data-title="[`Compare`]" href="{if count($compare)>1}{$wa->getUrl('/frontend/compare/', ['id' => implode(',', $compare) ])}{else}javascript:void(0);{/if}">
+											<span class="action-btn__inner">
+												<svg class="icon" width="16" height="16">
+													<use xlink:href="#icon-chart"></use>
+												</svg>
+												<span class="action-btn__text">[`Compare`]</span>
+												<span class="action-btn__qty md"><span class="js-compare-count">{$compare|count|default:0}</span></span>
+											</span>
+											<span class="b-tooltip">[`Compare`]</span>
+										</a>
+									{/if}
+									{if $theme_settings.products_show_wishlist}
+										<a class="action-btn action-btn_11 has-tooltip has-tooltip_bottom js-wishlist-status{if $theme_favorite|count > 0} not-empty{/if}" data-title="[`Favorites`]" href="{$wa->getUrl('/frontend/search/')}?_balance_type=favorites">
+											<span class="action-btn__inner">
+												<svg class="icon" width="16" height="14">
+													<use xlink:href="#icon-heart"></use>
+												</svg>
+												<span class="action-btn__text">[`Favorites`]</span>
+												<span class="action-btn__qty md"><span class="js-wishlist-count">{$theme_favorite|count|default:0}</span></span>
+											</span>
+											<span class="b-tooltip">[`Favorites`]</span>
+										</a>
+									{/if}
+								</div>
+								<div class="quick-panel__cart">
+									<a class="cart-btn cart-btn_13 js-flycart-status{if empty($_topcart_items)} empty{/if}" href="{if method_exists($wa->shop, 'checkout')}{$_cart_url}{else}{$wa->getUrl('shop/frontend/cart')}{/if}">
+										<span class="cart-btn__inner">
+											<span class="action-btn action-btn_13 action-btn_cart">
+												<span class="action-btn__inner">
+													<svg class="icon" width="19" height="18">
+														<use xlink:href="#icon-cart"></use>
+													</svg>
+													<span class="action-btn__qty md js-minicart-count">{$wa->shop->cart->count()}</span>
+												</span>
+											</span>
+											<span class="cart-btn__text">
+												<strong>[`Cart`]</strong>
+												<span class="cart-btn__price-wr">
+													<strong class="js-minicart-total">{wa_currency_html($cart_total, $wa->shop->currency())}</strong>
+												</span>
+											</span>
+										</span>
+									</a>
+								</div>
+							</div>
+						</div>
+					</div>
+				{else if $theme_settings.shop_sticky_panel eq "bottom"}
+					<div class="bottom-panel mb-hide">
+						<div class="bottom-panel__inner">
+							<div class="bottom-panel__btns">
+								{if $theme_settings.products_show_compare}
+									<div class="bottom-panel__btn">
+										<a class="action-btn action-btn_4 js-compare-link js-compare-status{if $compare|count > 1} not-empty{/if}" href="{if count($compare)>1}{$wa->getUrl('/frontend/compare/', ['id' => implode(',', $compare) ])}{else}javascript:void(0);{/if}">
+											<span class="action-btn__inner">
+												<svg class="icon" width="16" height="16">
+													<use xlink:href="#icon-chart"></use>
+												</svg>
+												<span class="action-btn__text tb-hide">[`Compare`]</span>
+												<span class="action-btn__qty md js-compare-count">{$compare|count}</span>
+											</span>
+										</a>
+									</div>
+								{/if}
+								{if $theme_settings.products_show_wishlist}
+									<div class="bottom-panel__btn">
+										<a class="action-btn action-btn_4 js-wishlist-status{if $theme_favorite|count > 0} not-empty{/if}" href="{$wa->getUrl('/frontend/search/')}?_balance_type=favorites">
+											<span class="action-btn__inner">
+												<svg class="icon" width="16" height="14">
+													<use xlink:href="#icon-heart"></use>
+												</svg>
+												<span class="action-btn__text tb-hide">[`Favorites`]</span>
+												<span class="action-btn__qty md js-wishlist-count">{$theme_favorite|count}</span>
+											</span>
+										</a>
+									</div>
+								{/if}
+								<div class="bottom-panel__btn">
+									<a class="action-btn action-btn_4 js-viewed-status{if $theme_viewed|count > 0} not-empty{/if}" href="{$wa->getUrl('/frontend/search/')}?_balance_type=viewed">
+										<span class="action-btn__inner">
+											<svg class="icon" width="16" height="12">
+												<use xlink:href="#icon-eye"></use>
+											</svg>
+											<span class="action-btn__text tb-hide">[`Viewed products`]</span>
+											<span class="action-btn__qty md js-viewed-count">{$theme_viewed|count|default:0}</span>
+										</span>
+									</a>
+								</div>
+							</div>
+							<div class="bottom-panel__cart">
+								<a class="cart-btn cart-btn_13 js-flycart-status{if empty($_topcart_items)} empty{/if}" href="{if method_exists($wa->shop, 'checkout')}{$_cart_url}{else}{$wa->getUrl('shop/frontend/cart')}{/if}">
+									<span class="cart-btn__inner">
+										<span class="action-btn action-btn_13 action-btn_cart">
+											<span class="action-btn__inner">
+												<svg class="icon" width="19" height="18">
+													<use xlink:href="#icon-cart"></use>
+												</svg>
+												<span class="action-btn__qty md js-minicart-count">{$wa->shop->cart->count()}</span>
+											</span>
+										</span>
+										<span class="cart-btn__text">
+											<strong>[`Cart`]</strong>
+											<span class="cart-btn__price-wr">
+												<strong class="js-minicart-total">{wa_currency_html($cart_total, $wa->shop->currency())}</strong>
+											</span>
+										</span>
+									</span>
+								</a>
+							</div>
+						</div>
+					</div>
+				{/if}
+			{/if}
+			{if $theme_settings.show_scrolltop_button}
+				<div class="scroll-to-top">
+					<svg class="icon" width="20" height="16">
+						<use xlink:href="#icon-scroll-arrow"></use>
+					</svg>
+				</div>
+			{/if}
+			{if !empty($theme_settings.address_map)}
+				<div class="b-popup b-popup_item-option mfp-with-anim mfp-hide" id="address-map">
+					<div class="b-popup__inner">
+						<div class="b-popup-it-opt">
+							<div class="b-popup-it-opt__content">{$theme_settings.address_map}</div>
+						</div>
+					</div>
+				</div>
+			{/if}
+			<script src="{$wa_theme_url}js/vendor.js?v{$wa_theme_version}" defer></script>
+			<script src="{$wa_theme_url}js/libs.js?v{$wa_theme_version}" defer></script>
+			<script src="{$wa_static_url}wa-content/js/jquery-plugins/jquery.cookie.js?v{$wa->version(true)}" defer></script>
+			<script src="{$wa_theme_url}js/main.js?v{$wa_theme_version}" defer></script>
+			{include file="`$wa_active_theme_path`/scripts.html" inline}
+			<!--IE10 Flexbox detection polyfill-->
+			<script>
+				(function(doc)
+				{
+					var scripts = doc.getElementsByTagName('script');
+					var script = scripts[scripts.length - 1];
+					var xhr = new XMLHttpRequest();
+					xhr.onload = function()
+					{
+						var div = doc.createElement('div');
+						div.innerHTML = this.responseText;
+						div.style.display = 'none';
+						script.parentNode.insertBefore(div, script);
+					};
+					xhr.open('get', '{$wa_real_theme_url}img/sprite-sym.svg', true);
+					xhr.send();
+				})(document);
+			</script>
+			<!--[if lt IE 10 ]>
+			<p class="chromeframe" style="background-color:yellow;">Вы используете <strong>устаревший</strong> браузер. Пожалуйста <a href="http://browsehappy.com/?locale=ru" style="color: red; font-weight: bold;">Скачайте новый браузер абсолютно бесплатно</a> или <a href="http://www.google.com/chromeframe/?redirect=true">активируй Google Chrome Frame</a>чтобы пользоваться всеми возможностями сайта.</p>
+			<![endif]-->
+		</div>
+	</main>
+</body>
+</html>
+{/strip}

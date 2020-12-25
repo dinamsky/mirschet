@@ -1,0 +1,63 @@
+{strip}
+{if $theme_settings.homepage_categories_mini_view ne "none"}
+	{if !empty($theme_settings.homepage_categories_mini_list)}
+		{$_categories = explode(",",$theme_settings.homepage_categories_mini_list)}
+		<div class="home-pg__section{if $theme_settings.homepage_categories_mini_slider} home-pg__section_subcat-6{else} home-pg__section_subcat-5{/if}{if $theme_settings.homepage_categories_mini_view ne 'always'} {$theme_settings.homepage_categories_mini_view}{/if} pos-rel">
+			<div class="descr-mode pos-abs"><span class="pos-rel">CATEGORIES-MINI</span></div>
+			<div class="home-pg__section-header{if $theme_settings.homepage_categories_mini_slider} home-pg__section-header_link{/if}">
+				{if !empty($theme_settings.homepage_categories_mini_title)}
+					<h3 class="section-title">{$theme_settings.homepage_categories_mini_title}</h3>
+				{/if}
+				{if $theme_settings.homepage_categories_mini_slider}
+					<div class="slider-arrows">
+						<button class="slider-ar slider-ar_square pos-rel default-btn items-slider__nav-left">
+							<svg class="icon cent-icon" width="7" height="11">
+								<use xlink:href="#arrow-left-small"></use>
+							</svg>
+						</button>
+						<button class="slider-ar slider-ar_square pos-rel default-btn items-slider__nav-right">
+							<svg class="icon cent-icon" width="7" height="11">
+								<use xlink:href="#arrow-right-small"></use>
+							</svg>
+						</button>
+					</div>
+				{/if}
+			</div>
+			{if $theme_settings.homepage_categories_mini_slider}<div class="home-subcat-slider swiper-container">{/if}
+				<div class="subcat-wrapper subcat-wrapper_pic{if $theme_settings.homepage_categories_mini_slider} swiper-wrapper{/if}">
+					{foreach $_categories as $c}
+						{$_category = $wa->shop->category($c)}
+						{if $_category}
+							{$_category.count = 0}
+							{if $theme_settings.homepage_categories_mini_count}
+								{$_category.count = $wa->shop->productsCount("category/`$_category.id`")}
+							{/if}
+							{$_category._preview_image = ""}
+							{if isset($_category.params.categories_mini_image) && !empty($_category.params.categories_mini_image)}
+								{$_category._preview_image = $_category.params.categories_mini_image}
+							{elseif method_exists("shopWmimageincatPlugin","getCategoryImage") && shopWmimageincatPlugin::getCategoryImage($_category.id, 'image')}
+								{$_category._preview_image = shopWmimageincatPlugin::getCategoryImage($_category.id, 'image')}
+							{/if}
+							<div class="subcat-wrapper__item subcat-wrapper__item_sec{if $theme_settings.homepage_categories_mini_border} sub-cat-bd{/if}{if $theme_settings.homepage_categories_mini_slider} swiper-slide{/if}">
+								<div class="sub-cat{if $theme_settings.homepage_categories_mini_border} sub-cat_bd{/if} sub-cat_sec">
+									{if !empty($_category._preview_image)}
+										<a class="sub-cat__image" href="{$wa->shop->categoryUrl($_category)}">
+											<img src="data:image/gif;base64,R0lGODlh6gDqAIAAAP///wAAACH5BAEAAAEALAAAAADqAOoAAAL+jI+py+0Po5y02ouz3rz7D4biSJbmiabqyrbuC8fyTNf2jef6zvf+DwwKh8Si8YhMKpfMpvMJjUqn1Kr1is1qt9yu9wsOi8fksvmMTqvX7Lb7DY/L5/S6/Y7P6/f8vv8PGCg4SFhoeIiYqLjI2Oj4CBkpOUlZaXmJmam5ydnp+QkaKjpKWmp6ipqqusra6voKGys7S1tre4ubq7vL2+v7CxwsPExcbHyMnKy8zNzs/AwdLT1NXW19jZ2tvc3d7f0NHi4+Tl5ufo6err7O3u7+Dh8vP09fb3+Pn6+/z9/v/w8woMCBBAsaPIgwocKFDBs6fAgxosSJFCtavIgxo8Y9jRw7evwIMqTIkSRLmjyJMqXKlSxbunwJM6bMmTRr2ryJM6fOnTx7+vwJNKjQoUSLGj2KNKnSpUybOo1UAAA7" data-src="{$_category._preview_image}" class="lazy-img" alt="{$_category.name|escape}">
+										</a>
+									{/if}
+									{if $_category.count > 0}
+										<div class="sub-cat__qty">
+											<div class="sub-cat-qty">{$_category.count}</div>
+										</div>
+									{/if}
+									<a class="sub-cat__title" href="{$wa->shop->categoryUrl($_category)}">{$_category.name|escape}</a>
+								</div>
+							</div>
+						{/if}
+					{/foreach}
+				</div>
+			{if $theme_settings.homepage_categories_mini_slider}</div>{/if}
+		</div>
+	{/if}
+{/if}
+{/strip}

@@ -1,0 +1,110 @@
+{foreach [
+	'css/bsui.css',
+	'css/general.css',
+	'css/settings.css'
+] as $_href}
+	<link rel="stylesheet" href="{$wa_static_url}wa-apps/shop/plugins/lastmodified/{$_href}?v={$version}" />
+{/foreach}
+{foreach [
+	'js/bsui.js',
+	'js/settings.js'
+] as $_src}
+	<script src="{$wa_static_url}wa-apps/shop/plugins/lastmodified/{$_src}?v={$version}"></script>
+{/foreach}
+<div class="bsui-page">
+	<div class="toolbar">
+		<div class="link-box help-btn">
+			<div class="link-box__icon icon-help"></div>
+			<a class="link-box__link">
+				[`Информация`]
+			</a>
+		</div>
+		<button class="clean-hash-btn button blue bsui-ajax" data-action="?plugin=lastmodified&module=settings&action=cleanHash" data-method="post">Сбросить актуальные даты</button>
+	</div>
+	<div class="bsui-page__header">[`Last-Modified`]</div>
+	<div class="bsui-page__content">
+		<form class="settings-form bsui-form bsui-ajax" action="?plugin=lastmodified&module=settings&action=save" method="post">
+			<ul class="bsui-field-group">
+				<li class="bsui-field-group__item bsui-field">
+					<label class="bsui-field__text">[`Статус плагина`]:</label>
+					<div class="bsui-field__control">
+						<div class="bsui-select bsui-select_fixed-width">
+							<select class="bsui-select__control" name="settings[plugin][is_enable]" title="[`Plugin status`]">
+								<option value="0">[`Выключен`]</option>
+								<option value="1" {if $settings['plugin']['is_enable']}selected="selected"{/if}>[`Включен`]</option>
+							</select>
+						</div>
+					</div>
+				</li>
+				<li class="bsui-field-group__item bsui-field">
+					<label class="bsui-field__text">[`Посылать заголовки`]:</label>
+					<div class="bsui-field__control">
+						<div class="bsui-select bsui-select_fixed-width">
+							<select class="bsui-select__control" name="settings[plugin][type]" title="[`Plugin status`]">
+								<option value="lm304">[`Last-Modified и 304 Not Modified`]</option>
+								<option value="lm" {if $settings['plugin']['type'] == 'lm'}selected="selected"{/if}>[`Last-Modififed`]</option>
+							</select>
+							<div class="help-sml-btn icon-help"></div>
+						</div>
+					</div>
+				</li>
+			</ul>
+
+			{include './groups/Home.html'}
+			{include './groups/Category.html'}
+			{include './groups/Product.html'}
+			{include './groups/Page.html'}
+			{include './groups/Brand.html'}
+
+			<div class="bottom-bar">
+				<ul class="bsui-menu bsui-menu_type_horizontal">
+					<li class="bsui-menu__item">
+						<button class="bsui-form__submit button green" type="submit">[`Сохранить`]</button>
+					</li>
+					<li class="bsui-menu__item">
+						<div class="bsui-form__status ajax-status ajax-status_type_success">
+							<i class="icon16 yes"></i>
+							<span class="bsui-ajax-form-status__text">[`Сохранено`]</span>
+						</div>
+						<div class="bsui-form__status ajax-status ajax-status_type_loading">
+							<i class="icon16 loading"></i>
+							<span class="ajax-status__text">[`Загрузка`]</span>
+						</div>
+						<div class="bsui-form__status ajax-status ajax-status_type_error">
+							<i class="icon16 exclamation-red"></i>
+							<span class="bsui-ajax-form-status__text">[`Ошибка`]</span>
+						</div>
+					</li>
+				</ul>
+			</div>
+		</form>
+	</div>
+</div>
+
+<div class="help-block-template">
+	<div class="help-block">
+		{literal}
+			<h2>Полезная информация</h2>
+
+			<h3>Заголовки:</h3>
+			<p><i>Last-Modified</i> – в заголовке отправляется только дата изменения страницы.</p>
+			<p><i>Last-Modified и 304 Not Modified</i> – отправляется дата изменения страницы и если дата позднее, чем запрашиваемая, то страница не будет передаваться.</p>
+
+			<h3>Для кого посылать заголовок:</h3>
+			<p><i>Не посылать</i> - выбранные заголовки не будут посылаться для данного раздела.</p>
+			<p><i>Для всех</i> - выбранные заголовки будут отправляться для всех пользователей сайта и поисковых роботов.</p>
+			<p><i>Для поисковых роботов</i> - выбранные заголовки будут отправляться только для поисковых роботов: Яндекс, Googe, Bing, Baidu.</p>
+
+			<h3>Какую дату посылать:</h3>
+			<p><i>Предыдущий день</i> - посылается дата с предыдущим днём.</p>
+			<p><i>Предыдущий час</i> - посылается дата с предыдущим часов.</p>
+			<p><i>Текущую дату</i> - посылается текущая дата.</p>
+			<p><i>Актуальную дату</i> - посылается дата, которая вычисляется автоматически, она обновляется при изменении настроек категорий и прочего.</p>
+
+			<p><b>ВАЖНО:</b> При включений «Last-Modified и 304 Not Modified» для всех пользователей - будет показываться закэшированная браузером копия. Например, добавив товар в корзину и затем обновив страницу, в блоке с корзиной будет показано 0 товаров, но если перейти в корзину то там будет товар.</p>
+		{/literal}
+	</div>
+</div>
+<div class="help-controls-template">
+	<button type="submit" class="button green">[`Закрыть`]</button>
+</div>

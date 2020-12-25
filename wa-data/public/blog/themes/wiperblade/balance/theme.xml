@@ -1,0 +1,187 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE theme PUBLIC "wa-app-theme" "http://www.webasyst.com/wa-content/xml/wa-app-theme.dtd">
+<theme id="balance" system="0" vendor="1093622" author="Balance team" app="blog" parent_theme_id="site:balance" version="1.1.1">
+    <name locale="en_US">Balance</name>
+    <name locale="ru_RU">Balance</name>
+    <files>
+        <file path="index.html" parent="1"></file>
+		<file path="css/main.css" parent="1"></file>
+		<file path="css/user.css" parent="1"></file>
+		<file path="css/blog.css"></file>
+		<file path="js/main.js" parent="1"></file>
+		<file path="js/blog.js"></file>
+		<file path="js/subscribe.js" parent="1"></file>
+		<file path="login.html" parent="1"></file>
+		<file path="signup.html" parent="1"></file>
+		<file path="forgotpassword.html" parent="1"></file>
+		<file path="my.menu.html" parent="1"></file>
+		<file path="my.profile.html" parent="1"></file>
+		<file path="header_mobile/view-1.html" parent="1"></file>
+		<file path="header_mobile/view-2.html" parent="1"></file>
+		<file path="header_mobile/view-3.html" parent="1"></file>
+		<file path="header_mobile/view-4.html" parent="1"></file>
+		<file path="header/view-1.html" parent="1"></file>
+		<file path="header/view-2.html" parent="1"></file>
+		<file path="header/view-3.html" parent="1"></file>
+		<file path="header/view-4.html" parent="1"></file>
+		<file path="header/view-5.html" parent="1"></file>
+		<file path="header/view-5-2.html" parent="1"></file>
+		<file path="header/view-6.html" parent="1"></file>
+		<file path="header/view-7.html" parent="1"></file>
+		<file path="header/view-8.html" parent="1"></file>
+		<file path="header/view-9.html" parent="1"></file>
+		<file path="header/view-10.html" parent="1"></file>
+		<file path="header/view-11.html" parent="1"></file>
+		<file path="header/view-12.html" parent="1"></file>
+		<file path="header/view-13.html" parent="1"></file>
+		<file path="header/view-14.html" parent="1"></file>
+		<file path="header/view-15.html" parent="1"></file>
+		<file path="header/view-16.html" parent="1"></file>
+		<file path="footer/view-1.html" parent="1"></file>
+		<file path="footer/view-2.html" parent="1"></file>
+		<file path="footer/view-3.html" parent="1"></file>
+		<file path="footer/links.html" parent="1"></file>
+        <file path="head.html">
+            <description locale="en_US">Blog app's &lt;head&gt; instructions</description>
+            <description locale="ru_RU">Блок &lt;head&gt; приложения «Блог»</description>
+        </file>
+        <file path="main.html">
+            <description locale="en_US">Main layout and navigation for the Blog app content</description>
+            <description locale="ru_RU">Основное макет вывода содержимого и навигации в приложении «Блог»</description>
+        </file>
+        <file path="stream.html">
+            <description locale="en_US">Post stream wrapper</description>
+            <description locale="ru_RU">Обертка для страницы вывода списка записей</description>
+        </file>
+        <file path="stream_search.html">
+            <description locale="en_US">Post search (filtering) results, e.g. custom search, by tag, by author</description>
+            <description locale="ru_RU">Результат поиска (фильтрации) записей, например, по тегу или автору</description>
+        </file>
+        <file path="stream_posts.html">
+            <description locale="en_US">Default post list view mode</description>
+            <description locale="ru_RU">Основной вид списка записей блога</description>
+        </file>
+        <file path="post.html">
+            <description locale="en_US">Dedicated post page</description>
+            <description locale="ru_RU">Страница одной записи блога</description>
+        </file>
+        <file path="page.html"></file>
+        <file path="scripts.html"></file>
+        <file path="comments.html">
+            <description locale="en_US">Post comment list</description>
+            <description locale="ru_RU">Комментарии к записи блога</description>
+        </file>
+        <file path="comments.form.html"></file>
+        <file path="comment.html">
+            <description locale="en_US">One comment template</description>
+            <description locale="ru_RU">Вывод одного комментария из списка</description>
+        </file>
+        <file path="my.nav.html">
+            <description locale="en_US">Customer account navigation menu</description>
+            <description locale="ru_RU">Меню навигации в личном кабинете покупателя</description>
+        </file>
+        <file path="error.html"></file>
+        <file path="sidebar.html"></file>
+        <file path="sidebar.calendar.html"></file>
+        <file path="sidebar.blog-pages.html"></file>
+        <file path="sidebar.blog-search.html"></file>
+        <file path="sidebar.blogs.html"></file>
+    </files>
+    <settings>
+		<setting var="blog_basics" control_type="group_divider">
+			<value></value>
+			<name locale="en_US">«Blog» basic settings</name>
+			<name locale="ru_RU">Основные настройки «Блога»</name>
+		</setting>
+			<setting var="init_blog" control_type="paragraph">
+				<value></value>
+				<name locale="ru_RU">
+				<![CDATA[
+				<p class="hint">В теме предусмотрено использование изображений-обложек для записей блога. Сами изображения вы можете установить через плагин <a href="https://www.webasyst.ru/store/plugin/blog/mainpic/" target="_blank">Главная картинка</a> или дополнительные параметры записи.
+				<br /><b>preview=/path/to/image.png</b>
+				<br />заменив "/path/to/image.png" путём к своему файлу изображения</p>
+				]]>
+				</name>
+			</setting>
+			<setting var="blog_show_authors" control_type="checkbox">
+				<value></value>
+				<name locale="ru_RU">Отоброжать авторов записей</name>
+			</setting>
+			<setting var="blog_list_design" control_type="radio">
+				<value>default</value>
+				<name locale="ru_RU">Вид списка записей</name>
+				<options>
+					<option value="thumbs">
+						<name locale="ru_RU">Плитка</name>
+						<description locale="ru_RU">Только заголовок. Записи отображаются в виде небольших карточек/плиток</description>
+					</option>
+					<option value="twocols">
+						<name locale="ru_RU">В две колонки</name>
+						<description locale="ru_RU">HTML-теги и оформление самой статьи убирается, текст урезается до минимального. Записи отображаются в виде небольших карточек/плиток с фоновыми изображениями</description>
+					</option>
+					<option value="default">
+						<name locale="ru_RU">По умолчанию</name>
+						<description locale="ru_RU">Статья отображается целиком "как есть"</description>
+					</option>
+				</options>
+			</setting>
+		<setting var="blog_sidebar" control_type="group_divider">
+			<value></value>
+			<name locale="en_US">Blog's sidebar</name>
+			<name locale="ru_RU">Сайдбар Блога</name>
+		</setting>
+			<setting var="blog_sidebar_content" control_type="group_divider">
+				<value>blog_sidebar/blog_sidebar_content</value>
+				<name locale="en_US">Sidebar content</name>
+				<name locale="ru_RU">Содержимое сайдбара блога</name>
+			</setting>
+				<setting var="blog_sidebar_content_info" control_type="paragraph">
+					<value></value>
+					<name locale="ru_RU"><![CDATA[
+					<p class="hint">Все страницы блога могут иметь левый сайдбар. Вы можете настроить содержимое этого сайдбара так, как это нужно вам путем перечисления через запятую нужных вам секций в поле содержимого сайдбара. Либо оставить поле пустым для отключения сайдбара.
+					<br />
+					<br /><a href="http://balance.designmyshop.ru/wa-data/public/site/balance_settings/blog-sidebar-sections.png" target="_blank">Иллюстрация секций</a>
+					<br />ID доступных секций для определения содержимого и его последовательности в сайдбаре:
+					<br /><b>blogs</b> - список блогов. Можно использовать для разделения записей по категориям.
+					<br /><b>blog-pages</b> - текстовые страницы Блога.
+					<br /><b>blog-search</b> - поиск по записям Блога.
+					<br /><b>calendar</b> - архив записей, структурированный по году/месяцу публикации.
+					<br /><b>block=*</b> - содержимое этой секции вы можете задать сами через функционал "Блоки" приложения "Сайт". Можно использовать для установки баннеров, виджетов, доп. описаний и пр. Внутри блока доступны все те же Smarty-переменные, что и в самом шаблоне.
+					<br />
+					<br />
+					<br /><b>О настройке блоков:</b>
+					<br />Вы можете создать любой блок с любым ID и вписать его в качестве содержимого секции. Например, если вы создали блок с ID "my_block", то для добавления его в сайдбар, нужно будет в поле содержимого сайдбара указать <b>block=my_block</b>.
+					<br />Кол-во пользовательских блоков может быть любым.
+					</p>
+					]]></name>
+				</setting>
+				<setting var="blog_sidebar_content_sections" control_type="text">
+					<value>blogs,blog-pages,calendar,blog-search</value>
+					<name locale="ru_RU">Секции сайдбара</name>
+					<description locale="ru_RU">
+					<![CDATA[
+					Укажите через запятую ID секций, которые вы хотите вывести в левой колонке. Указанная последовательность сохраняется. Оставьте пустым, если хотите скрыть этот сайдбар.
+					<br />Например: <b>blogs,blog-pages,block=custom_block</b> - указанные через запятую ID секций/блоков
+					]]>
+					</description>
+				</setting>
+    </settings>
+    <locales>
+        <locale>
+            <msgid>Add new comment</msgid>
+            <msgstr locale="ru_RU">Добавить новый комментарий</msgstr>
+        </locale>
+        <locale>
+            <msgid>Post reply</msgid>
+            <msgstr locale="ru_RU">Написать ответ</msgstr>
+        </locale>
+        <locale>
+            <msgid>Blog menu</msgid>
+            <msgstr locale="ru_RU">Меню блога</msgstr>
+        </locale>
+		<locale>
+			<msgid>Edit page</msgid>
+			<msgstr locale="ru_RU">Редактировать страницу</msgstr>
+		</locale>
+    </locales>
+</theme>

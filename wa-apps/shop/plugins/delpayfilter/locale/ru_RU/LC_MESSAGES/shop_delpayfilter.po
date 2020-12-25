@@ -1,0 +1,632 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: shop/plugins/delpayfilter\n"
+"POT-Creation-Date: 2016-12-16 19:09+0400\n"
+"PO-Revision-Date: \n"
+"Last-Translator: shop/plugins/delpayfilter\n"
+"Language-Team: shop/plugins/delpayfilter\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=3; plural=((((n%10)==1)&&((n%100)!=11))?(0):(((((n%10)>=2)&&((n%10)<=4))&&(((n%100)<10)||((n%100)>=20)))?(1):2));\n"
+"X-Poedit-SourceCharset: utf-8\n"
+"X-Poedit-Basepath: .\n"
+"Language: ru_RU\n"
+"X-Generator: Poedit 2.0.5\n"
+"X-Poedit-SearchPath-0: .\n"
+"X-Poedit-SearchPath-1: .\n"
+
+msgid "Select product"
+msgstr "Выберите товар"
+
+msgid "close"
+msgstr "закрыть"
+
+msgid "or select the category to find product you need."
+msgstr "или выберите категорию, в которой следует искать товар."
+
+msgid "Name"
+msgstr "Название"
+
+msgid "Price"
+msgstr "Цена"
+
+msgid "More products"
+msgstr "Загрузить еще товары"
+
+msgid "Products not found"
+msgstr "Товары не найдены"
+
+msgid "Select user"
+msgstr "Выберите пользователя"
+
+msgid "All contacts"
+msgstr "Все контакты"
+
+msgid "or select the category to find user you need."
+msgstr "или выберите категорию, в которой следует искать пользователя."
+
+msgid "More users"
+msgstr "Загрузить еще пользователей"
+
+msgid "Users not found"
+msgstr "Пользователи не найдены"
+
+msgid "Start typing user name or email"
+msgstr "Начните печатать имя пользователя или его email"
+
+msgid "Back"
+msgstr "Назад"
+
+msgid "No name filter"
+msgstr "Фильтр без названия"
+
+msgid "Delete filter"
+msgstr "Удалить фильтр"
+
+msgid "delete"
+msgstr "удалить"
+
+msgid "Status"
+msgstr "Статус"
+
+msgid "Disabled"
+msgstr "Выкл"
+
+msgid "Enabled"
+msgstr "Вкл"
+
+msgid "Description"
+msgstr "Описание"
+
+msgid "Conditions"
+msgstr "Условия"
+
+msgid "IF"
+msgstr "ЕСЛИ"
+
+msgid "Wait, please..."
+msgstr "Пожалуйста, подождите..."
+
+msgid "Add condition"
+msgstr "Добавить условие"
+
+msgid "Then hide methods"
+msgstr "Тогда скрыть методы"
+
+msgid "Shipping"
+msgstr "Доставка"
+
+msgid "Payment"
+msgstr "Оплата"
+
+msgid "Add target"
+msgstr "Добавить цель"
+
+msgid "Product"
+msgstr "Товар"
+
+msgid "Category"
+msgstr "Категория"
+
+msgid "Quantity of product from set"
+msgstr "Количество товара из списка"
+
+msgid "Quantity of product from type"
+msgstr "Количество товара с типом товаров"
+
+msgid "Quantity of all products from category"
+msgstr "Количество всех товаров из категории"
+
+msgid "Quantity of all products from category and subcategories"
+msgstr "Количество всех товаров из категории и ее подкатегорий"
+
+msgid "Quantity of all products from set"
+msgstr "Количество всех товаров из списка"
+
+msgid "Quantity of all products from type"
+msgstr "Количество всех товаров с типом товаров"
+
+msgid "Service"
+msgstr "Услуга"
+
+msgid "Select service"
+msgstr "Выберите услугу"
+
+msgid "Select service variant"
+msgstr "Выберите вариант услуги"
+
+msgid "Category and subcategories"
+msgstr "Категория и ее подкатегории"
+
+msgid "Product set"
+msgstr "Список товаров"
+
+msgid "Services"
+msgstr "Услуги"
+
+msgid "Product type"
+msgstr "Тип товаров"
+
+msgid "Product features"
+msgstr "Характеристики товара"
+
+msgid "Cart"
+msgstr "Корзина"
+
+msgid "Total quantity of all products"
+msgstr "Общее количество всех товаров"
+
+msgid "Quantity of product"
+msgstr "Количество товара"
+
+msgid "Quantity of product from category"
+msgstr "Количество товара из категории"
+
+msgid "Quantity of product from category and subcategories"
+msgstr "Количество товара из категории и ее подкатегорий"
+
+msgid "Quantity of products with features"
+msgstr "Количество товаров с характеристиками"
+
+msgid "Quantity of unique items"
+msgstr "Количество уникальных товаров"
+
+msgid "Order price with discount"
+msgstr "Общая стоимость заказа с учетом скидок"
+
+msgid "Total price of all products"
+msgstr "Общая стоимость всех товаров"
+
+msgid "Total price of products from category"
+msgstr "Общая стоимость товаров из категории"
+
+msgid "Total price of products from category and subcategories"
+msgstr "Общая стоимость товаров из категории и ее подкатегорий"
+
+msgid "Total price of all products with features"
+msgstr "Общая стоимость всех товаров с характеристиками"
+
+msgid "Price of any product"
+msgstr "Цена любого товара"
+
+msgid "Total sum of features values"
+msgstr "Сумма значений характеристик товаров"
+
+msgid "Price of each product"
+msgstr "Цена каждого товара"
+
+msgid "User"
+msgstr "Пользователь"
+
+msgid "User category"
+msgstr "Категория пользователя"
+
+msgid "Create datetime"
+msgstr "Дата создания"
+
+msgid "Completed orders"
+msgstr "Выполненные заказы"
+
+msgid "Total sum of all orders"
+msgstr "Общая сумма всех заказов"
+
+msgid "Sum of orders for period.."
+msgstr "Сумма заказов за период.."
+
+msgid "Quantity of all orders"
+msgstr "Количество всех заказов"
+
+msgid "Quantity of orders for period.."
+msgstr "Количество заказов за период.."
+
+msgid "Orders have product"
+msgstr "Заказы содержат товар"
+
+msgid "Orders have product for period.."
+msgstr "Заказы содержат товар за период.."
+
+msgid "Orders have product from category"
+msgstr "Заказы содержат товар из категории"
+
+msgid "Orders have product from category and subcategories"
+msgstr "Заказы содержат товар из категории и ее подкатегорий"
+
+msgid "Orders have product from category for period.."
+msgstr "Заказы содержат товар из категории за период.."
+
+msgid "Orders have product from category and subcategories for period.."
+msgstr "Заказы содержат товар из категории и ее подкатегорий за период.."
+
+msgid "Date and time"
+msgstr "Дата и время"
+
+msgid "Date"
+msgstr "Дата"
+
+msgid "Day of week"
+msgstr "День недели"
+
+msgid "Time"
+msgstr "Время"
+
+msgid "Variables"
+msgstr "Переменные"
+
+msgid "Cookie"
+msgstr "Cookie"
+
+msgid "Session"
+msgstr "Session"
+
+msgid "Storefront"
+msgstr "Витрина"
+
+msgid "Select condition"
+msgstr "Выберите условие"
+
+msgid "Add group of conditions"
+msgstr "Добавить группу условий"
+
+msgid "Select target"
+msgstr "Выберите цель"
+
+msgid "edit"
+msgstr "изменить"
+
+msgid "Save"
+msgstr "Сохранить"
+
+msgid "AND"
+msgstr "И"
+
+msgid "OR"
+msgstr "ИЛИ"
+
+msgid "Leave a review"
+msgstr "Оставить отзыв"
+
+msgid "https://www.webasyst.com/store/plugin/shop/delpayfilter/reviews/"
+msgstr "https://www.webasyst.ru/store/plugin/shop/delpayfilter/reviews/"
+
+msgid "https://www.webasyst.com/store/vendor/969712/"
+msgstr "https://www.webasyst.ru/store/vendor/969712/"
+
+msgid "Other products of developer"
+msgstr "Другие продукты разработчика"
+
+msgid "Delivery and payment filter"
+msgstr "Фильтр доставки и оплаты"
+
+msgid "Loading..."
+msgstr "Идет загрузка..."
+
+msgid "Change status"
+msgstr "Изменить статус"
+
+msgid "Copy filter"
+msgstr "Копировать фильтр"
+
+msgid "Open filter"
+msgstr "Открыть фильтр"
+
+msgid "Delete"
+msgstr "Удалить"
+
+msgid "Delete selected"
+msgstr "Удалить выделенные"
+
+msgid "Description, name"
+msgstr "Описание, название"
+
+msgid "Hide shipping"
+msgstr "Скрыть доставку"
+
+msgid "Hide payment"
+msgstr "Скрыть оплату"
+
+msgid "You don't have any filters"
+msgstr "Не создано ни одного фильтра"
+
+msgid "Create filter"
+msgstr "Создать фильтр"
+
+msgid "equal"
+msgstr "равно"
+
+msgid "not equal"
+msgstr "не равно"
+
+msgid "contains"
+msgstr "содержит"
+
+msgid "not contains"
+msgstr "не содержит"
+
+msgid "begins with"
+msgstr "начинается с"
+
+msgid "No result text"
+msgstr "Результат не найден"
+
+msgid "select product"
+msgstr "выберите товар"
+
+msgid "any product"
+msgstr "любой товар"
+
+msgid "select contact"
+msgstr "выберите пользователя"
+
+msgid "to"
+msgstr "до"
+
+msgid "from category"
+msgstr "из категории"
+
+msgid "from category and subcategories of"
+msgstr "из категории и ее подкатегорий"
+
+msgid "Monday"
+msgstr "Понедельник"
+
+msgid "Tuesday"
+msgstr "Вторник"
+
+msgid "Wednesday"
+msgstr "Среда"
+
+msgid "Thursday"
+msgstr "Четверг"
+
+msgid "Friday"
+msgstr "Пятница"
+
+msgid "Saturday"
+msgstr "Суббота"
+
+msgid "Sunday"
+msgstr "Воскресенье"
+
+msgid "All conditions return true"
+msgstr "Все условия верны"
+
+msgid "Any of condition returns true"
+msgstr "Любое из условий верно"
+
+msgid "HH"
+msgstr "ЧЧ"
+
+msgid "MM"
+msgstr "ММ"
+
+msgid "Select category"
+msgstr "Выберите категорию"
+
+msgid "Select product set"
+msgstr "Выберите список товаров"
+
+msgid "from set"
+msgstr "из списка"
+
+msgid "from type"
+msgstr "с типом товаров"
+
+msgid "Select product type"
+msgstr "Выберите тип товаров"
+
+msgid "Product feature"
+msgstr "Характеристика товара"
+
+msgid "Select product feature"
+msgstr "Выберите характеристику товара"
+
+msgid "Select feature value"
+msgstr "Выберите значение характеристики"
+
+msgid "select category"
+msgstr "выберите категорию"
+
+msgid "Total price of products"
+msgstr "Общая цена всех товаров"
+
+msgid "equals"
+msgstr "равно"
+
+msgid "Select shipping"
+msgstr "Выберите доставку"
+
+msgid "Select payment"
+msgstr "Выберите оплату"
+
+msgid "Select user category"
+msgstr "Выберите категорию пользователя"
+
+msgid "Contact"
+msgstr "Контакт"
+
+msgid "Contact create datetime"
+msgstr "Дата создания контакта"
+
+msgid "Sum of orders for period from"
+msgstr "Сумма заказов за период с"
+
+msgid "Quantity of orders for period from"
+msgstr "Количество заказов за период с"
+
+msgid "for period from"
+msgstr "за период с"
+
+msgid "Select domain"
+msgstr "Выберите домен"
+
+msgid "Select route"
+msgstr "Выберите поселение"
+
+msgid "Select at least 1 filter rule"
+msgstr "Выберите хотя бы один фильтр"
+
+msgid "Do you really want to delete filter rule?"
+msgstr "Вы действительно хотите удалить фильтр?"
+
+msgid "Do you really want to delete condition group?"
+msgstr "Вы действительно хотите удалить группу условий?"
+
+msgid "Something wrong"
+msgstr "Произошла ошибка"
+
+msgid "select"
+msgstr "выберите"
+
+msgid "prev"
+msgstr "пред"
+
+msgid "next"
+msgstr "след"
+
+msgid "No name"
+msgstr "Без названия"
+
+msgid "Filters delivery and payment methods by any criteria"
+msgstr "Фильтрация методов доставки и оплаты по любым критериям"
+
+msgid "Not isset"
+msgstr "Не существует"
+
+msgid "Select country"
+msgstr "Выберите страну"
+
+msgid "Error shipping text"
+msgstr "Текст ошибки для способов доставки"
+
+msgid "Keep field blank, if you want to hide shipping methods"
+msgstr "Оставьте поле пустым, если хотите скрыть способы доставки"
+
+msgid "Error payment text"
+msgstr "Текст ошибки для способов оплаты"
+
+msgid "Keep field blank, if you want to hide payment methods"
+msgstr "Оставьте поле пустым, если хотите скрыть способы оплаты"
+
+msgid "Country and region"
+msgstr "Страна и регион"
+
+msgid "reset selection"
+msgstr "сбросить выбор"
+
+msgid "Contact country and region"
+msgstr "Страна и регион доставки пользователя"
+
+msgid "Select region"
+msgstr "Выберите регион"
+
+msgid "User city"
+msgstr "Город доставки пользователя"
+
+msgid "Status of any order"
+msgstr "Статус любого заказа"
+
+msgid "Select status"
+msgstr "Выберите статус"
+
+msgid "Stock count"
+msgstr "Количество остатков"
+
+msgid "User data"
+msgstr "Данные пользователя"
+
+msgid "Developer Igor Gaponov"
+msgstr "Разработчик Игорь Гапонов"
+
+msgid "each sku is separate"
+msgstr "каждый артикул отдельно"
+
+msgid "summarize skus"
+msgstr "суммировать артикулы"
+
+msgid "virtual and real"
+msgstr "виртуальном и реальном"
+
+msgid "virtual"
+msgstr "виртуальном"
+
+msgid "real"
+msgstr "реальном"
+
+msgid "Product stock count"
+msgstr "Количество остатков товара"
+
+msgid "on "
+msgstr "на"
+
+msgid "all stocks"
+msgstr "всех складах"
+
+msgid "Select data"
+msgstr "Выберите данные"
+
+msgid "any stock"
+msgstr "любом складе"
+
+msgid "each stock"
+msgstr "каждом складе"
+
+msgid "IF user not authorized"
+msgstr "ЕСЛИ пользователь не авторизован"
+
+msgid "in case of a contact with the entered email address, use the data of this contact."
+msgstr "в случае наличия контакта с введенным email адресом, использовать данные этого контакта."
+
+msgid "in case of a contact with the entered phone, use the data of this contact."
+msgstr "в случае наличия контакта с введенным телефоном, использовать данные этого контакта."
+
+msgid "For example, if at the purchase the customer is not authorized, you can check information about the orders, using entered email or the phone as the fields on which the user will be identified."
+msgstr "Например, если во время оформления заказа покупатель не авторизован, вы можете проверить данные о его заказах, используя введенные им email или телефон в качестве полей, по которым будет идентифицирован пользователь."
+
+msgid "Check if user is authorized"
+msgstr "Проверить, авторизован ли пользователь"
+
+msgid "authorized"
+msgstr "авторизован"
+
+msgid "Shipping price"
+msgstr "Стоимость доставки"
+
+msgid "relevant for multi-step checkout"
+msgstr "актуально для пошагового оформления"
+
+msgid "Stock count and product quantity in the order"
+msgstr "Количество остатков и количество товаров в заказе"
+
+msgid "product quantity in the order"
+msgstr "количество товара в заказе"
+
+msgid "Coupon"
+msgstr "Купон"
+
+msgid "Isset active coupon"
+msgstr "Имеется активный купон"
+
+msgid "Tags"
+msgstr "Теги"
+
+msgid "Product has tag"
+msgstr "Товар имеет тег"
+
+msgid "Select tags"
+msgstr "Выберите теги"
+
+msgid "Quantity of all products with tags"
+msgstr "Количество всех товаров с тегами"
+
+msgid "Order price with discount + Shipping price"
+msgstr "Общая стоимость заказа с учетом скидок + Стоимость доставки"
+
+msgid "Order price without discount"
+msgstr "Общая стоимость заказа без скидок"
+
+msgid "Order price without discount + Shipping price"
+msgstr "Общая стоимость заказа без скидок + Стоимость доставки"
+
+msgid "Total discount"
+msgstr "Общая сумма скидок"

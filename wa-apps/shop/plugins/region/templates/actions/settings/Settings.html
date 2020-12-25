@@ -1,0 +1,458 @@
+{$lang = substr($wa->locale(), 0, 2)}
+{if isset($settings.redactor) AND $settings.redactor == 1}
+	<link type="text/css" rel="stylesheet" href="{$wa_url}wa-content/js/redactor/redactor.css">
+	<script src="{$wa_url}wa-content/js/redactor/redactor.min.js"></script>
+{if $lang != 'en'}<script src="{$wa_url}wa-content/js/redactor/{$lang}.js"></script>{/if}
+{literal}
+	<script>
+	$(document).ready(function()
+	{
+		$('#region_form #helper-template-russian , #region_form #helper-template-english, #region_form .regionEditor').redactor();
+	});
+	</script>
+{/literal}
+{/if}
+
+<script type="text/javascript" src="{$wa_url}wa-apps/shop/plugins/region/js/region.backend.js?{$smarty.now}"></script>
+<link href="{$wa_url}wa-apps/shop/plugins/region/css/region.backend.css?{$smarty.now}" type="text/css" rel="stylesheet">
+
+
+<h1>{_wp('Regions on subdomains')}</h1>
+<div id="region_form" class="fields form">
+    <form action="?plugin=region&module=settings&action=save" method="post" id="plugins-settings-form">
+        <p style="font-size:12px;"><b>{literal}{shopRegionPlugin::getHelper()}{/literal}</b> - {_wp('Using this code, you can make a conclusion helper "Regions for subdomains" in the right place of your theme.')}
+		<br><b>{literal}{shopRegionPlugin::getField('region')}{/literal}</b> - {_wp('Use this code to get the name of the region.')}
+		</p>
+        <div class="field" style="margin-bottom:20px;">
+            <div class="name">
+                {_wp('Switch plugin')}
+            </div>
+            <div class="value">
+                <input id="onOff" type="checkbox" name="settings[status]" value="1" {if isset($settings.status) AND $settings.status == 1}checked="checked"{/if}>
+            </div>
+        </div>
+        <div class="field" style="margin-bottom:20px;">
+            <div class="name">
+                {_wp('Autosave settings')}
+            </div>
+            <div class="value">
+                <input id="onOffAutoSave" type="checkbox" name="settings[autoSave]" value="1" {if isset($settings.autoSave) AND $settings.autoSave == 1}checked="checked"{/if}>
+            </div>
+        </div> 
+		<div class="field" style="margin-bottom:20px;">
+            <div class="name">
+                {_wp('Switch WYSIWYG')}
+            </div>
+            <div class="value">
+                <input id="onOffRedactor" type="checkbox" name="settings[redactor]" value="1" {if isset($settings.redactor) AND $settings.redactor == 1}checked="checked"{/if}>
+            </div>
+        </div> 
+        <div class="field" style="margin-bottom:20px;">
+            <div class="name">
+                {_wp('Template &lt;title&gt;')}
+				<span class="hint">#title#, #region#, #phrase#</span>
+            </div>
+            <div class="value">
+                <input type="input" style="width: 97%;" name="settings[title]" onBlur="autoSaveRegionSetting();"  value="{if isset($settings.title)}{$settings.title}{else}#title# - #region#{/if}" />
+            </div>
+        </div> 
+		<div class="field" style="margin-bottom:20px;">
+            <div class="name">
+                {_wp('Template &lt;description&gt;')}
+				<span class="hint">#description#, #region#, #phrase#</span>
+            </div>
+            <div class="value">
+                <input type="input" style="width: 97%;" name="settings[description]" onBlur="autoSaveRegionSetting();"  value="{if isset($settings.description)}{$settings.description}{else}#description# - #region#{/if}" />
+            </div>
+        </div> 
+        <div class="field" style="margin-bottom:0px;">
+            <div class="name">
+                {_wp('Template helper')}<br>
+                <span class="hint">{_wp('HTML (to get the default template to clear the field)')}</span>
+            </div>           
+            <div class="value">
+                <div class="block">
+                    <ul class="tabs one">
+                        <li{if $lang != 'en'} class="selected"{/if}><a href="#templaterussian">{_wp('Russian')}</a></li>
+                        <li{if $lang == 'en'} class="selected"{/if}><a href="#templateenglish">{_wp('English')}</a></li>
+                    </ul>
+                    <div class="tab-content">
+                        <div id="templaterussian" class="element"{if $lang == 'en'}  style="display:none;"{/if}>
+                            <br>
+                            <textarea id="helper-template-russian"  onBlur="autoSaveRegionSetting();" name="template_ru">{$template_ru}</textarea>
+                        </div>
+                        <div id="templateenglish" class="element"{if $lang != 'en'} style="display:none;"{/if}>
+                            <br>
+                            <textarea id="helper-template-english" onBlur="autoSaveRegionSetting();" name="template_en">{$template_en}</textarea>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+		<div class="field" style="margin-bottom:20px;">
+            <div class="name">
+                {_wp('Selection method')}<br>
+                <span class="hint">{_wp('The method of choosing a subdomain by the user.')}</span>
+            </div>
+            <div class="value" style="padding-left:10px;">
+                <select name="settings[type]" onChange="if($(this).val() != 0) $('.typedialog').hide(); else $('.typedialog').show(); autoSaveRegionSetting();">
+                    <option value="0">dialog</option>
+                    <option value="1" {if isset($settings.type) AND $settings.type == 1}selected{/if}>select2</option>
+					<option value="2" {if isset($settings.type) AND $settings.type == 2}selected{/if}>select native</option>
+                </select>
+            </div>
+        </div> 
+        <div class="field typedialog" style="margin-bottom:20px;{if isset($settings.type) AND $settings.type > 0}display:none;{/if}">
+            <div class="name">
+                {_wp('Number of columns')}<br>
+                <span class="hint">{_wp('The number of columns in the dialog select the region.')}</span>
+            </div>
+            <div class="value" style="padding-left:20px;">
+                <select name="settings[column]" onChange="autoSaveRegionSetting();">
+                    <option {if isset($settings.column) AND $settings.column == 1}selected{/if}>1</option>
+                    <option {if isset($settings.column) AND $settings.column == 2}selected{/if}>2</option>
+                    <option {if isset($settings.column) AND $settings.column == 3}selected{/if}>3</option>
+                    <option {if isset($settings.column) AND $settings.column == 4}selected{/if}>4</option>
+                    <option {if isset($settings.column) AND $settings.column == 5}selected{/if}>5</option>
+                </select>
+            </div>
+        </div> 
+        <div class="field typedialog" style="margin-bottom:20px;{if isset($settings.type) AND $settings.type > 0}display:none;{/if}">
+            <div class="name">
+                {_wp('Сolumn width')}<br>
+                <span class="hint">{_wp('The column width in the dialog, select the region.')}</span>
+            </div>
+            <div class="value" style="padding-left:20px;" onChange="autoSaveRegionSetting();">
+                <select name="settings[columnWidth]">
+                    <option {if isset($settings.columnWidth) AND $settings.columnWidth == 100}selected{/if}>100</option>
+                    <option {if isset($settings.columnWidth) AND $settings.columnWidth == 125}selected{/if}>125</option>
+                    <option {if isset($settings.columnWidth) AND $settings.columnWidth == 150}selected{/if}>150</option>
+                    <option {if isset($settings.columnWidth) AND $settings.columnWidth == 175}selected{/if}>175</option>
+                    <option {if isset($settings.columnWidth) AND $settings.columnWidth == 200}selected{/if}>200</option>
+                    <option {if isset($settings.columnWidth) AND $settings.columnWidth == 225}selected{/if}>225</option>
+                    <option {if isset($settings.columnWidth) AND $settings.columnWidth == 250}selected{/if}>250</option>
+                </select>
+            </div>
+        </div> 
+        <div class="field typedialog" style="margin-bottom:20px;{if isset($settings.type) AND $settings.type > 0}display:none;{/if}">
+            <div class="name">
+                {_wp('jQuery UI Themes')}
+                <br>
+                <span class="hint"><a href="https://jqueryui.com/themeroller/" target="blank">http://jqueryui.com/themeroller/</a></span>
+            </div>
+            <div class="value" style="padding-left:20px;">
+                <select name="settings[uitheme]" onChange="autoSaveRegionSetting();">
+                    <option></option>
+                    <option {if isset($settings.uitheme) AND $settings.uitheme == 'black-tie'}selected{/if}>black-tie</option>
+                    <option {if isset($settings.uitheme) AND $settings.uitheme == 'blitzer'}selected{/if}>blitzer</option>
+                    <option {if isset($settings.uitheme) AND $settings.uitheme == 'cupertino'}selected{/if}>cupertino</option>
+                    <option {if isset($settings.uitheme) AND $settings.uitheme == 'dot-luv'}selected{/if}>dot-luv</option>
+                    <option {if isset($settings.uitheme) AND $settings.uitheme == 'eggplant'}selected{/if}>eggplant</option>
+                    <option {if isset($settings.uitheme) AND $settings.uitheme == 'excite-bike'}selected{/if}>excite-bike</option>
+                    <option {if isset($settings.uitheme) AND $settings.uitheme == 'flick'}selected{/if}>flick</option>
+                    <option {if isset($settings.uitheme) AND $settings.uitheme == 'hot-sneaks'}selected{/if}>hot-sneaks</option>
+                    <option {if isset($settings.uitheme) AND $settings.uitheme == 'humanity'}selected{/if}>humanity</option>
+                    <option {if isset($settings.uitheme) AND $settings.uitheme == 'le-frog'}selected{/if}>le-frog</option>
+                    <option {if isset($settings.uitheme) AND $settings.uitheme == 'mint-choc'}selected{/if}>mint-choc</option>
+                    <option {if isset($settings.uitheme) AND $settings.uitheme == 'overcast'}selected{/if}>overcast</option>
+                    <option {if isset($settings.uitheme) AND $settings.uitheme == 'pepper-grinder'}selected{/if}>pepper-grinder</option>
+                    <option {if isset($settings.uitheme) AND $settings.uitheme == 'redmond'}selected{/if}>redmond</option>
+                    <option {if isset($settings.uitheme) AND $settings.uitheme == 'smoothness'}selected{/if}>smoothness</option>
+                    <option {if isset($settings.uitheme) AND $settings.uitheme == 'south-street'}selected{/if}>south-street</option>
+                    <option {if isset($settings.uitheme) AND $settings.uitheme == 'start'}selected{/if}>start</option>
+                    <option {if isset($settings.uitheme) AND $settings.uitheme == 'sunny'}selected{/if}>sunny</option>
+                    <option {if isset($settings.uitheme) AND $settings.uitheme == 'swanky-purse'}selected{/if}>swanky-purse</option>
+                    <option {if isset($settings.uitheme) AND $settings.uitheme == 'trontastic'}selected{/if}>trontastic</option>
+                    <option {if isset($settings.uitheme) AND $settings.uitheme == 'ui-darkness'}selected{/if}>ui-darkness</option>
+                    <option {if isset($settings.uitheme) AND $settings.uitheme == 'ui-lightness'}selected{/if}>ui-lightness</option>
+                    <option {if isset($settings.uitheme) AND $settings.uitheme == 'vader'}selected{/if}>vader</option>
+                </select>
+            </div>
+        </div>
+        <div class="field" style="margin-bottom:0px;">
+            <div class="name">
+                {_wp('Subdomains / Regions')}
+            </div>
+            <div class="value">
+                <div class="block">
+					<ul class="tabs two">
+                        <li{if $lang != 'en'} class="selected"{/if}><a href="#ru">{_wp('Russian')}</a></li>
+                        <li{if $lang == 'en'} class="selected"{/if}><a href="#en">{_wp('English')}</a></li>
+                    </ul>
+                   <ul class="zebra" id="sortable" style="border-top: 1px solid #BBBBBB;">
+                    {foreach from=$regions key=key item=value}  
+                        <li id="region{$value.id}"  style="border: 1px solid #BBBBBB; border-top:0px;">
+                            <table style="width:100%; margin-bottom:0; font-size: 12px;">
+                                <tr>
+                                    <td width="16px" class="portlet" style="cursor:move;"><i class="icon16 sort"></i></td>
+                                    <td style="text-align:center; font-weight:bold;">{_wp('Subdomain')}</td>
+                                    <td class="noten" style="text-align:center; font-weight:bold;">{_wp('Region (ru)')}</td>
+                                    <td class="notru" style="text-align:center; font-weight:bold;">{_wp('Region (en)')}</td>
+							        <td width="32px" style="text-align:right; cursor:pointer;"><i class="icon16 darr" onClick="toogleRegionblock(this, {$value.id});"></i></td>
+                                </tr>
+                                <tr>
+                                    <td></td>
+                                    <td style="padding:5px 13px;"><input class="subdomain" style="width:100%; padding: 3px 5px; min-width: 100px;{if $value.subdomain == 'www'} background:#EEEEEE; border: 1px solid #BBBBBB;{/if}" onBlur="autoSaveRegionSetting();" name="region[{$value.id}][subdomain]" type="text" value="{if $value.subdomain == 'www'}{$root_domain}{else}{$value.subdomain}{/if}" {if $value.subdomain == 'www'}readonly{/if}/>
+                                    {if $value.subdomain == 'www'}
+                                        <input name="region[{$value.id}][subdomain]" type="hidden" value="{$value.subdomain}">
+                                    {/if}
+                                    </td>
+                                    <td class="noten" style="padding:5px 13px;"><input style="width:100%; padding: 3px 5px; min-width: 100px;" name="region[{$value.id}][region_ru]" onBlur="autoSaveRegionSetting();" type="text" value="{$value.region_ru}"/></td>
+                                    <td class="notru" style="padding:5px 13px;"><input style="width:100%; padding: 3px 5px; min-width: 100px;" name="region[{$value.id}][region_en]" onBlur="autoSaveRegionSetting();" type="text" value="{$value.region_en}"/></td>
+                                    <td width="32px" style="text-align:right; cursor:pointer;">{if $value.subdomain != 'www'}<i class="icon16 delete" onClick="removeRegionBlock({$value.id});"></i>{/if}</td>
+                                </tr>
+                                <tr class="codehead codehead{$value.id} ru fieldheader fieldregion" style="display:none;">
+                                    <td></td>
+                                    <td colspan="2" style="text-align:center; font-weight:bold; padding-top:5px;">{_wp('The code in &lt;head&gt;')} (ru)</td>
+                                    <td></td>
+                                </tr>
+								<tr class="codehead codehead{$value.id} en" style="display:none;">
+                                    <td></td>
+                                    <td colspan="2" style="text-align:center; font-weight:bold; padding-top:5px;">{_wp('The code in &lt;head&gt;')} (en)</td>
+                                    <td></td>
+                                </tr>
+                                <tr class="codehead codehead{$value.id} ru" style="display:none;">
+                                    <td></td>
+                                    <td colspan="2" style="padding: 10px 5px 0px 13px;">
+                                        <textarea name="region[{$value.id}][header_ru]" onBlur="autoSaveRegionSetting();" style="width: 100%; resize: none;">{$value.header_ru}</textarea>
+                                    </td>
+                                    <td></td>
+                                </tr>
+								<tr class="codehead codehead{$value.id} en" style="display:none;">
+                                    <td></td>
+                                    <td colspan="2" style="padding: 10px 5px 0px 13px;">
+                                        <textarea name="region[{$value.id}][header_en]" onBlur="autoSaveRegionSetting();" style="width: 100%; resize: none;">{$value.header_en}</textarea>
+                                    </td>
+                                    <td></td>
+                                </tr>
+								
+								{foreach from=$fields key=num item=field}  
+									<tr class="codehead codehead{$value.id} ru field{$field}" style="display:none;">
+										<td></td>
+										<td colspan="2" style="text-align:center; font-weight:bold; padding-top:5px;">{literal}{{/literal}shopRegionPlugin::getField('{$field}'){literal}}{/literal}</td>
+										<td></td>
+									</tr>
+								   <tr class="codehead codehead{$value.id} en field{$field}" style="display:none;">
+										<td></td>
+										<td colspan="2" style="text-align:center; font-weight:bold; padding-top:5px;">{literal}{{/literal}shopRegionPlugin::getField('{$field}'){literal}}{/literal}</td>
+										<td></td>
+									</tr>
+									<tr class="codehead codehead{$value.id} ru field{$field}" style="display:none;">
+										<td></td>
+										<td colspan="2" style="padding: 10px 5px 0px 13px;">
+											<textarea  class="regionEditor" name="region[{$value.id}][{$field}_ru]" onBlur="autoSaveRegionSetting();" style="width: 100%; resize: none;">{$box = "`$field`_ru"}{$value.$box}</textarea>
+										</td>
+										<td width="32px" style="text-align:right; cursor:pointer;"><i class="icon16 no" onClick="deleteField('{$field}');"></i></td>
+									</tr>
+									<tr class="codehead codehead{$value.id} en field{$field}" style="display:none;">
+										<td></td>
+										<td colspan="2" style="padding: 10px 5px 0px 13px;">
+											<textarea  class="regionEditor" name="region[{$value.id}][{$field}_en]" onBlur="autoSaveRegionSetting();" style="width: 100%; resize: none;">{$box = "`$field`_en"}{$value.$box}</textarea>
+										</td>
+										<td width="32px" style="text-align:right; cursor:pointer;"><i class="icon16 no" onClick="deleteField('{$field}');"></i></td>
+									</tr>
+								{/foreach}
+									<tr class="codehead codehead{$value.id} en ru codeheadplus" style="display:none;">
+										<td></td>
+										<td colspan="2" style="padding: 10px 5px 0px 13px;">
+											<center><i class="icon16 plus" onClick="addField();"></i></center>
+										</td>
+									</tr>
+                            </table>
+                        </li>
+                    {/foreach}
+                   </ul>
+                </div>
+            </div>
+        </div> 
+        <div class="field" style="margin-bottom:40px;">
+            <div class="name">
+            </div>
+            <div class="value" style="padding-left:10px;">
+                <a href="javascript:void(0);" onClick="addSubdomain();" class="inline-link" id="wa-page-settings-toggle"><i class="icon16 add"></i><b><i>{_wp('Add subdomain')}</i></b></a>
+            </div>
+        </div>
+        <div class="field" style="margin-bottom:40px;">
+            <div class="name">
+            </div>
+            <div class="value" style="padding-left:10px;">
+                <i class="icon16 exclamation"></i> [`All subdomains will be saved/created as mirrors of the main subdomain/region.`]
+            </div>
+        </div>
+        <div class="field" style=" margin-top:20px; padding-left:20px;">
+            <div class="value submit">
+                <input type="submit" class="button green" onClick="return checkRegionDublicate();" value="{_wp('Save')}" style="outline: none;"> <span id="plugins-settings-form-status"></span>
+            </div>
+        </div>
+    </form>
+	<!---------------------------------->
+    <ul class="templateRegionLi" style="display: none;">
+        <li id="region#id#" style="border: 1px solid #BBBBBB; border-top:0px;">
+            <table style="width:100%; margin-bottom:0; font-size: 12px;">
+                <tr>
+                    <td width="16px" class="portlet" style="cursor:move;"><i class="icon16 sort"></i></td>
+                    <td style="text-align:center; font-weight:bold;">{_wp('Subdomain')}</td>
+                    <td class="noten" style="text-align:center; font-weight:bold;">{_wp('Region (ru)')}</td>
+					<td class="notru" style="text-align:center; font-weight:bold;">{_wp('Region (en)')}</td>
+					<td width="32px" style="text-align:right; cursor:pointer;"><i class="icon16 darr" onClick="toogleRegionblock(this, #id#);"></i></td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td style="padding:5px 13px;"><input  class="subdomain" style="width:100%; padding: 3px 5px; min-width: 100px;" name="region[#id#][subdomain]" type="text" value=""/></td>
+                    <td class="noten"  style="padding:5px 13px;"><input style="width:100%; padding: 3px 5px; min-width: 100px;" name="region[#id#][region_ru]" type="text" value=""/></td>
+                    <td class="notru" style="padding:5px 13px;"><input style="width:100%; padding: 3px 5px; min-width: 100px;" name="region[#id#][region_en]" type="text" value=""/></td>
+					<td width="32px" style="text-align:right; cursor:pointer;"><i class="icon16 delete" onClick="removeRegionBlock(#id#);"></i></td>
+                </tr>
+                <tr class="codehead codehead#id# ru" style="display:none;">
+                    <td></td>
+                    <td colspan="2" style="text-align:center; font-weight:bold; padding-top:5px;">{_wp('The code in &lt;head&gt;')} (ru)</td>
+                    <td></td>
+                </tr>
+				<tr class="codehead codehead#id# en" style="display:none;">
+                    <td></td>
+                    <td colspan="2" style="text-align:center; font-weight:bold; padding-top:5px;">{_wp('The code in &lt;head&gt;')} (en)</td>
+                    <td></td>
+                </tr>
+                <tr class="codehead codehead#id# ru" style="display:none;">
+                    <td></td>
+                    <td colspan="2" style="padding: 10px 5px 0px 13px;">
+                        <textarea name="region[#id#][header_ru]" style="width: 100%; resize: none;"></textarea>
+                    </td>
+                    <td></td>
+                </tr>
+				<tr class="codehead codehead#id# en" style="display:none;">
+                    <td></td>
+                    <td colspan="2" style="padding: 10px 5px 0px 13px;">
+                        <textarea name="region[#id#][header_en]" style="width: 100%; resize: none;"></textarea>
+                    </td>
+                    <td></td>
+                </tr>
+				{foreach from=$fields key=num item=field}  
+					<tr class="codehead codehead#id# ru field{$field}" style="display:none;">
+						<td></td>
+						<td colspan="2" style="text-align:center; font-weight:bold; padding-top:5px;">{literal}{{/literal}shopRegionPlugin::getField('{$field}'){literal}}{/literal}</td>
+						<td></td>
+					</tr>
+				   <tr class="codehead codehead#id# en field{$field}" style="display:none;">
+						<td></td>
+						<td colspan="2" style="text-align:center; font-weight:bold; padding-top:5px;">{literal}{{/literal}shopRegionPlugin::getField('{$field}'){literal}}{/literal}</td>
+						<td></td>
+					</tr>
+					<tr class="codehead codehead#id# ru field{$field}" style="display:none;">
+						<td></td>
+						<td colspan="2" style="padding: 10px 5px 0px 13px;">
+							<textarea  class="regionEditor" name="region[#id#][{$field}_ru]" onBlur="autoSaveRegionSetting();" style="width: 100%; resize: none;"></textarea>
+						</td>
+						<td width="32px" style="text-align:right; cursor:pointer;"><i class="icon16 no" onClick="deleteField('{$field}');"></i></td>
+					</tr>
+					<tr class="codehead codehead#id# en field{$field}" style="display:none;">
+						<td></td>
+						<td colspan="2" style="padding: 10px 5px 0px 13px;">
+							<textarea  class="regionEditor" name="region[#id#][{$field}_en]" onBlur="autoSaveRegionSetting();" style="width: 100%; resize: none;"></textarea>
+						</td>
+						<td width="32px" style="text-align:right; cursor:pointer;"><i class="icon16 no" onClick="deleteField('{$field}');"></i></td>
+					</tr>
+				{/foreach}
+				<tr class="codehead codehead#id# en ru codeheadplus" id="lastcodehead" style="display:none;">
+					<td></td>
+					<td colspan="2" style="padding: 10px 5px 0px 13px;">
+						<center><i class="icon16 plus" onClick="addField();"></i></center>
+					</td>
+				</tr>
+            </table>
+        </li>
+    </ul>
+	<!---------------------------------->
+	<table id="templateNewField" style="display:none;">
+		<tbody>
+			<tr class="codehead codehead#id# ru field#field#" style="display:none;">
+				<td></td>
+				<td colspan="2" style="text-align:center; font-weight:bold; padding-top:5px;">{literal}{{/literal}shopRegionPlugin::getField('#field#'){literal}}{/literal}</td>
+				<td></td>
+			</tr>
+			<tr class="codehead codehead#id# en field#field#" style="display:none;">
+				<td></td>
+				<td colspan="2" style="text-align:center; font-weight:bold; padding-top:5px;">{literal}{{/literal}shopRegionPlugin::getField('#field#'){literal}}{/literal}</td>
+				<td></td>
+			</tr>
+			<tr class="codehead codehead#id# ru field#field#" style="display:none;">
+				<td></td>
+				<td colspan="2" style="padding: 10px 5px 0px 13px;">
+					<textarea  class="regionEditor" name="region[#id#][#field#_ru]" onBlur="autoSaveRegionSetting();" style="width: 100%; resize: none;"></textarea>
+				</td>
+				<td width="32px" style="text-align:right; cursor:pointer;"><i class="icon16 no" onClick="deleteField('#field#');"></i></td>
+			</tr>
+			<tr class="codehead codehead#id# en field#field#" style="display:none;">
+				<td></td>
+				<td colspan="2" style="padding: 10px 5px 0px 13px;">
+					<textarea  class="regionEditor" name="region[#id#][#field#_en]" onBlur="autoSaveRegionSetting();" style="width: 100%; resize: none;"></textarea>
+				</td>
+				<td width="32px" style="text-align:right; cursor:pointer;"><i class="icon16 no" onClick="deleteField('#field#');"></i></td>
+			</tr>
+		</tbody>
+	</table>
+	<!---------------------------------->
+</div>
+
+<script type="text/javascript">
+    $(document).ready(function()
+    {literal}{
+        $('#region_form #onOff, #region_form #onOffAutoSave, #region_form #onOffRedactor').iButton(
+            {
+                labelOn : "{/literal}{_wp('On')}{literal}", 
+                labelOff : "{/literal}{_wp('Off')}{literal}", 
+                resizeHandle: false,
+                resizeContainer: true,
+                change: function($input)
+                {
+                    autoSaveRegionSetting();
+                },
+            });
+		$('.not{/literal}{$lang}{literal}').hide();
+    });
+    function addSubdomain()
+    {
+        $.getJSON('?plugin=region&module=settings&action=add', function (json) {
+            if(json.status == 'ok')
+            {
+                var lihtml = $('.templateRegionLi').html();
+                $('#region_form  ul#sortable').append(lihtml.replace(/#id#/g, json.data.message));
+				{/literal}
+				{if isset($settings.redactor) AND $settings.redactor == 1}
+					$('#region_form .regionEditor' + json.data.message).redactor();
+				{/if}
+				{literal}
+				if($('.two li:first').hasClass('selected'))
+				{
+					$('.notru').hide();
+				}
+				else
+				{
+					$('.noten').hide();
+				}
+            }
+            else
+                alert('{/literal}{_wp('First fill in all the subdomains')}{literal}.');
+        });
+    }
+    function checkRegionDublicate()
+    {
+        var dublicateSubdomain = true;
+        var arrayReg = [];
+        
+        $('#region_form .subdomain').each(function(index) {
+            if(($.inArray($(this).val(), arrayReg) > -1 && $(this).val() != '') || $(this).val() == 'www')
+            {
+                dublicateSubdomain = false;
+            }
+            arrayReg[arrayReg.length] = $(this).val();
+        });
+        
+        if(!dublicateSubdomain)
+        {
+            alert('{/literal}{_wp('Before saving please correct the duplicate subdomains')}{literal}.');
+        }
+        return dublicateSubdomain;
+    }
+    {/literal}
+ </script>

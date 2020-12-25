@@ -1,0 +1,165 @@
+#vkshopSendButton {
+    line-height: 32px;
+    position: relative;
+    top: 8px;
+}
+
+.vkshop_disable {
+    background-image: url("../img/vk-off.png");
+    background-repeat: no-repeat;
+    display: inline-block;
+    height: 32px;
+    text-decoration: none !important;
+    text-indent: -9999px;
+    width: 32px;
+    line-height: 32px;
+    position: relative;
+    top: 8px;
+}
+
+.vkshop_disable-undisabled {
+    background-image: url("../img/vk-on.png");
+    background-repeat: no-repeat;
+    display: inline-block;
+    height: 32px;
+    text-decoration: none !important;
+    text-indent: -9999px;
+    width: 32px;
+    line-height: 32px;
+    position: relative;
+    top: 8px;
+}
+
+.vkshop16_disable {
+    background-image: url("../img/vk-off16.png");
+    background-repeat: no-repeat;
+    display: inline-block;
+    height: 16px;
+    text-decoration: none !important;
+    text-indent: -9999px;
+    width: 16px;
+    margin-left: -20px;
+    margin-right: 5px;
+}
+
+.vkshop16_disable-undisabled {
+    background-image: url("../img/vk-on16.png");
+    background-repeat: no-repeat;
+    display: inline-block;
+    height: 16px;
+    text-decoration: none !important;
+    text-indent: -9999px;
+    width: 16px;
+    margin-left: -20px;
+    margin-right: 5px;
+}
+
+#s-plugin-vkshop-image-list {
+    padding: 0;
+    list-style: none;
+}
+
+#s-plugin-vkshop-image-list li {
+    display: inline-block;
+    margin: 0 1em 0 0;
+}
+
+#s-plugin-vkshop-image-list li a {
+    display: block;
+    border: 1px solid #eaeaea;
+    padding: 3px 5px;
+    background-color: white;
+}
+
+#s-plugin-vkshop-image-list li a:hover {
+    border: 1px solid #c8c8c8;
+    -webkit-box-shadow: 0 0 4px #bbb;
+    -moz-box-shadow: 0 0 4px #bbb;
+    box-shadow: 0 0 4px #bbb;
+}
+
+#s-plugin-vkshop-content {
+    padding: 5px;
+    background-color: #fafafa;
+}
+
+#vkshopContent {
+    width: 100%;
+    position: relative;
+}
+
+#vkshopDialog {
+    display: none;
+}
+
+#s-plugin-vkshop-cropimage-wrapper {
+    float: left;
+    padding: 0;
+    border: 1px solid #eaeaea;
+    width: 340px;
+    min-height: 275px;
+}
+
+#s-plugin-vkshop-cropimage-wrapper img {
+    max-height: 96px;
+    max-width: 96px;
+}
+
+#s-plugin-vkshop-cropimage-description {
+    padding-left: 10px;
+    float: left;
+}
+
+#s-plugin-vkshop-cropimage-description textarea {
+    min-width: 300px;
+    min-height: 250px;
+}
+
+#s-plugin-vkshop-close-form-button {
+    padding: 0;
+    background-color: transparent;
+    display: block;
+    width: 26px;
+    height: 26px;
+    border: none;
+    position: absolute;
+    top: 2px;
+    right: 2px;
+}
+
+#s-plugin-vkshop-close-form-button .icon16 {
+    margin: 0;
+    display: block;
+}
+
+#s-plugin-vkshop-close-form-button:hover {
+    cursor: pointer;
+    border-color: #ff7c33;
+}
+
+#s-plugin-vkshop-close-form-button:hover .icon16.cross-bw {
+    background-position: -192px -16px;
+}
+
+#s-plugin-vkshop-posting-in-process {
+    padding-left: 1em;
+}
+
+#s-plugin-vkshop-posting-in-process .icon16 {
+    margin-top: 0;
+    display: inline-block;
+    vertical-align: text-bottom;
+}
+
+.vkshop_icon {
+    background-image: url("../img/vkshop16.png");
+    background-repeat: no-repeat;
+    display: inline-block;
+    height: 16px;
+    text-decoration: none !important;
+    text-indent: -9999px;
+    width: 16px;
+    margin-left: -20px;
+    margin-right: 5px;
+    line-height: 16px;
+}

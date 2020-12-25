@@ -1,0 +1,9 @@
+<p>
+  {if !empty($next_tag)}
+    <a href="{$next_tag.url}" style="float: right">{$next_tag.name} &rarr;</a>
+  {/if}
+
+  {if !empty($prev_tag)}
+    <a href="{$prev_tag.url}">&larr; {$prev_tag.name}</a>
+  {/if}
+</p>

@@ -1,0 +1,244 @@
+{strip}
+<div class="checkout-pg__main checkout-content" data-step-id="contactinfo">
+	<div class="checkout-pg__tabs-outer">
+		{if $wa->isAuthEnabled() && !$wa->user()->isAuth()}
+			<div class="checkout-pg__tabs">
+				<div class="checkout-pg__tabs">
+					<ul class="checkout-pg__tabs-list">
+						<li class="checkout-pg__tabs-item active">
+							<div class="checkout-pg__tabs-text muted u-cen-txt">[`I’m a new customer`]</div>
+							<div class="checkout-pg__tabs-label">
+								<div class="label label_light label_micro" style="background-color:#02bc2c;">NEW</div>
+							</div>
+						</li>
+						<li class="checkout-pg__tabs-item">
+							<div class="checkout-pg__tabs-text muted u-cen-txt">[`I already have an account`]</div>
+							<div class="checkout-pg__tabs-label">
+								<div class="label label_light label_micro" style="background-color:#ff8c52;">PRO</div>
+							</div>
+						</li>
+					</ul>
+				</div>
+			</div>
+		{/if}
+		<div class="checkout-pg__content">
+			<div class="checkout-pg__tab-content">
+				<form method="post" action="" id="checkout-contact-form">
+					{if $wa->isAuthEnabled()}
+						{if !$wa->user()->isAuth()}
+							{$auth_adapters = $wa->authAdapters(true)}
+							{if $auth_adapters}
+								<div class="checkout-pg__social-auth">
+									<div class="checkout-pg__social-links">
+										<div class="soc-list">
+											<div class="soc-list__inner balance__auth-adapters">
+												{foreach $auth_adapters as $adapter}
+												<div class="soc-list__i">
+													<a href="{$adapter->getUrl()}">
+														<img src="{$adapter->getIcon()}" alt="{$adapter->getName()}" title="{$adapter->getName()}">
+													</a>
+												</div>
+												{/foreach}
+											</div>
+										</div>
+									</div>
+									<div class="checkout-pg__social-text muted">[`Authorize either by entering your contact information, or through one of the websites listed above.`]</div>
+								</div>
+							{/if}
+						{else}
+							<div class="checkout-pg__auth-info">
+								<div class="checkout-auth-info">
+									<div class="checkout-auth-info__image">
+										<img src="{$wa->user()->getPhoto(50)}">
+									</div>
+									<div class="checkout-auth-info__descr">
+										<div class="checkout-auth-info__main">{sprintf("[`You are currently authorized as <strong>%s</strong>. Please verify or update your contact information using the form below. Your existing contact info will be automatically updated.`]", $wa->user('name'))}</div>
+										<div class="checkout-auth-info__sec">[`If you want to place an order on behalf of another customer, <a href="?logout">log out</a> from your current profile and proceed to checkout again.`]</div>
+									</div>
+								</div>
+							</div>
+						{/if}
+					{/if}
+					<div class="checkout-pg__auth-heading u-cen-txt">{$checkout_steps[$checkout_current_step].name|escape}</div>
+					<div class="checkout-pg__form checkout-pg__form_reg wa-form">
+						{$checkout_contact_form->html(null, true, true)}
+						{if $billing_matches_shipping}
+							<div class="wa-field billing-address-fake" style="display:none;">
+								<div class="wa-name">{$checkout_contact_form->fields('address.billing')->getName(null, true)}</div>
+								<div class="wa-value">
+									[`Matches shipping address`] <a href="javascript:void(0)" id="edit-billing-address-link">[`Edit billing address`]</a>
+								</div>
+							</div>
+							<script>(function() { "use strict";
+								if (!$) { return; }
+								var $edit_billing_address_link = $('#edit-billing-address-link');
+								var $billing_address_fake = $edit_billing_address_link.closest('.wa-field');
+								var $billing_address_wrapper = $edit_billing_address_link.closest('.wa-form').find('.wa-field-address-billing');
+								var $shipping_address_wrapper = $edit_billing_address_link.closest('.wa-form').find('.wa-field-address-shipping');
+								if (!$edit_billing_address_link.length || !$billing_address_fake.length || !$billing_address_wrapper.length || !$shipping_address_wrapper.length) {
+									return;
+								}
+
+								$billing_address_fake.insertAfter($billing_address_wrapper)
+									.append('<input type="hidden" name="billing_matches_shipping" value="1">')
+									.show();
+								$billing_address_wrapper.hide();
+
+								$edit_billing_address_link.on('click', function() {
+									$billing_address_wrapper.show();
+									$billing_address_fake.remove();
+
+									// Fill all fields in billing address
+									$shipping_address_wrapper.find(':input[name^="customer[address.shipping]"]').each(function() {
+										var $fld = $(this);
+										if ($fld.is(':radio')) {
+											if ($fld.is(':checked')) {
+												$billing_address_wrapper.find('[name="'+$fld.attr('name').replace('address.shipping', 'address.billing')+'"]').filter(function() {
+													return this.value == $fld.val();
+												}).prop('checked', true);
+											}
+										} else {
+											$billing_address_wrapper.find('[name="'+$fld.attr('name').replace('address.shipping', 'address.billing')+'"]').val($fld.val()).change();
+										}
+									});
+								});
+
+								// Update billing country when user selects shipping country
+								// so that region field is able to reload itself
+								$shipping_address_wrapper.find(':input[name="customer[address.shipping][country]"]').change(function() {
+									$billing_address_wrapper.find(':input[name="customer[address.billing][country]"]').val($(this).val()).change();
+								});
+
+							})();</script>
+						{/if}
+					</div>
+					{if $wa->isAuthEnabled() && !$wa->user()->isAuth()}
+						{$add_affiliate_bonus = round(shopAffiliate::calculateBonus(['items' => $wa->shop->cart->items(), 'total' => $wa->shop->cart->total()]), 2)}
+						<div class="checkout-pg__points">
+							<div class="checkout-pg__points-top">
+								<div class="bonus-container">
+									<div class="bonus-container__head">
+										<div class="bonus-points">
+											<div class="circle-icon-box circle-icon-box_star">
+												<svg class="icon cent-icon" width="31" height="30">
+													<use xlink:href="#icon-star-big"></use>
+												</svg>
+											</div>
+											{if !empty($add_affiliate_bonus)}
+												<div class="points-box">
+													<strong>+{$add_affiliate_bonus}</strong>
+													<span>[`points`]</span>
+												</div>
+											{/if}
+										</div>
+									</div>
+									<div class="bonus-container__body">
+										<div class="bonus-container__text">
+											<label>
+												<input type="checkbox" {if $wa->post('create_user')}checked{/if} id="create-user" name="create_user" value="1">
+												[`Create permanent user account`]
+											</label>
+										</div>
+									</div>
+								</div>
+							</div>
+							<div class="checkout-pg__points-section" id="create-user-div"{if $wa->post('create_user')} style="display:block"{/if}>
+								<div class="checkout-pg__points-inputs">
+									<div class="wa-field wa-field-email">
+										<div class="wa-name">[`Email`]</div>
+										<div class="wa-value">
+											<input {if !empty($errors.email)}class="error"{/if} name="login" type="text" value="{$wa->post('login', $customer->get('email', 'default'))|escape}">
+											{if !empty($errors.email)}<div class="errormsg">{$errors.email}</div>{/if}
+										</div>
+									</div>
+									<div class="wa-field wa-field-password">
+										<div class="wa-name">[`Password`]</div>
+										<div class="wa-value">
+											<input {if !empty($errors.password)}class="error"{/if} name="password" type="password" value="{$wa->post('password')|escape}">
+											{if !empty($errors.password)}<div class="errormsg">{$errors.password}</div>{/if}
+										</div>
+									</div>
+								</div>
+							</div>
+							{if !empty($add_affiliate_bonus)}
+								<div class="checkout-pg__points-section"{if $wa->post('create_user')} style="display:block"{/if}>{sprintf("[`This order will add <strong>+%s bonuses</strong> to  your account, which you will be able to spend on getting additional discounts later.`]", $add_affiliate_bonus)}</div>
+							{/if}
+						</div>
+						<script>
+							$(function () {
+								var e = $('input[name="customer[email]"]');
+								if (e.length) {
+									e.on('keyup', function () {
+									   if ($("#create-user-div").is(':visible')) {
+										   $('#create-user-div input[name="login"]').val($(this).val());
+									   }
+									});
+									$('#create-user-div input[name="login"]').on('keyup', function () {
+										e.val($(this).val());
+									})
+								}
+								$("#create-user").change(function () {
+									if ($(this).is(':checked')) {
+										$("#create-user-div").slideDown(200).find('input').removeAttr('disabled');
+										var l = $(this).closest('form').find('input[name="customer[email]"]');
+										if (l.length && l.val()) {
+											$('#create-user-div input[name="login"]').val(l.val());
+										}
+									} else {
+										$("#create-user-div").slideUp(200).find('input').attr('disabled', 'disabled').val('');
+									}
+								}).change();
+							});
+						</script>
+					{/if}
+					{if !empty($checkout_steps.contactinfo.service_agreement) && !empty($checkout_steps.contactinfo.service_agreement_hint)}
+						<div class="checkout-pg__reg-agree u-cen-txt">
+							<div class="wa-field wa-field-terms-accepted">
+								<div class="wa-value">
+									<label>
+										{if $checkout_steps.contactinfo.service_agreement == 'checkbox'}
+											<input type="hidden" name="service_agreement" value="">
+											<input type="checkbox" name="service_agreement" value="1"{if $wa->post('service_agreement')} checked{/if}>
+										{/if}
+										{$checkout_steps.contactinfo.service_agreement_hint}
+									</label>
+									{if !empty($errors.service_agreement)}
+										<div class="errormsg">{$errors.service_agreement|escape}</div>
+									{/if}
+								</div>
+							</div>
+						</div>
+					{/if}
+					{if waRequest::post('_theme_show_contactinfo_form')}
+						{if !empty($errors.all)}
+							<div class="checkout-pg__reg-error errortxt">{$errors.all}</div>
+						{/if}
+						{if !empty($error)}
+							<div class="checkout-pg__reg-error errortxt">{$error}</div>
+						{/if}
+					{/if}
+					<!-- plugin hook: 'frontend_checkout' -->
+					{* @event frontend_checkout.%plugin_id% *}
+					{foreach $frontend_checkout as $_}{$_}{/foreach}
+					<input type="hidden" name="_theme_show_contactinfo_form" value="1" />
+					<button class="checkout-pg__next-btn btn {$theme_settings.main_buttons_style|replace:'img/themebuttons/':''|replace:'.gif':''} btn_main-1">
+						<div class="hover-anim"></div>
+						<span>[`Next &rarr;`]</span>
+					</button>
+				</form>
+			</div>
+			{if $wa->isAuthEnabled() && !$wa->user()->isAuth()}
+				<div class="checkout-pg__tab-content">
+					<div class="checkout-pg__form checkout-pg__form_auth" id="login-form">
+						{$wa->loginForm($error, [
+							'include_css' => false
+						])}
+					</div>
+				</div>
+			{/if}
+		</div>
+	</div>
+</div>
+{$wa->globals('useCompactHeader',true)}
+{$wa->globals('useCompactFooter',true)}
+{/strip}

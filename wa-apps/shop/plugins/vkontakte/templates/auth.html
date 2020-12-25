@@ -1,0 +1,132 @@
+<script src="//vk.com/js/api/openapi.js" type="text/javascript"></script>
+<div id="vkontakteLoginButton" onclick="vkontakteLogin();"></div>
+
+<script language="javascript">
+
+    window.vkAsyncInit = function() {
+        VK.init({
+            apiId: {$settings.app_id}
+        });
+        VK.UI.button('vkontakteLoginButton');
+    };
+
+    var vkontakteSignedPost = parseInt('{$settings.signed_post}') ? parseInt('{$settings.signed_post}') : 0;
+    var vkontaktePrdPrice = parseInt('{$product.price}');
+    var vkontaktePrdPriceCompiled = vkontaktePrdPrice > 0 ? '({shop_currency($product.price, true)})' : '';
+    var vkontaktePrdMessage = "{$product.name|escape:javascript} " + vkontaktePrdPriceCompiled + '\n ' + {$product.description};
+
+    function vkontakteLogin() {
+        VK.Auth.login(function (response) {
+            if (response.session) {
+                /* Пользователь успешно авторизовался */
+                var vkUserId = response.session.user.id;
+                var vkOwnerId = '-' + '{$settings.group_id}';
+                var mark_as_ads;
+                {if $settings.ads_post}
+                    mark_as_ads = 1;
+                {else}
+                    mark_as_ads = 0;
+                {/if}
+                VK.Api.call(
+                    'photos.getWallUploadServer',
+                    {
+                        group_id:   parseInt('{$settings.group_id}'),
+                        v:          '5.73'
+                    },
+                    function (r) {
+                        $.ajax({
+                            url: '?plugin=vkontakte&action=sendphotos',
+
+                            type: 'POST',
+                            data: 'product_id={$product.id}&upload_url=' + encodeURIComponent(r.response.upload_url),
+                            dataType: 'json'
+                        }).done(function (msg) {
+
+                            if (msg.data && msg.photo != '[]') {
+
+                                var photos = msg.data;
+                                photos.group_id = parseInt('{$settings.group_id}');
+                                photos.v        = '5.73';
+
+                                VK.Api.call(
+                                    'photos.saveWallPhoto',
+                                    photos,
+                                    function (r) {
+                                        if (r.response) {
+                                            var vkUploadedImages = r.response;
+
+                                            var attachments = '';
+
+                                            for (var key in vkUploadedImages) {
+                                                var image = vkUploadedImages[key];
+
+                                                attachments += 'photo' + image.owner_id + '_' + image.id + ',';
+
+                                            }
+                                            attachments = '{$product_url}' + ',' + attachments.replace(/\,$/, '');
+
+                                            VK.Api.call(
+                                                'wall.post',
+                                                {
+                                                    owner_id:       vkOwnerId,
+                                                    from_group:     1,
+                                                    message:        vkontaktePrdMessage,
+                                                    signed:         vkontakteSignedPost,
+                                                    v:              '5.73',
+                                                    mark_as_ads:    mark_as_ads,
+                                                    attachments:    attachments
+                                                },
+                                                function (r) {
+                                                    if (r.response) {
+                                                    }
+                                                }
+                                            );
+
+                                        }
+                                    }
+                                );
+                            }
+                            else {
+                                var attachments = '{$product_url}';
+                                VK.Api.call(
+                                    'wall.post',
+                                    {
+                                        owner_id:   vkOwnerId,
+                                        from_group: 1,
+                                        message:    vkontaktePrdMessage,
+                                        signed:     vkontakteSignedPost,
+                                        v:          '5.73',
+                                        mark_as_ads: mark_as_ads,
+                                        attachments: attachments
+                                    },
+                                    function (r) {
+                                        if (r.response) {
+                                        }
+                                    }
+                                );
+                            }
+                        });
+
+                    });
+
+                VK.Api.call(
+                    'photos.getOwnerPhotoUploadServer',
+                    {
+                        owner_id: vkOwnerId
+                    },
+                    function (r) {
+                        if (r.response) {
+                        }
+                    }
+                );
+                if (response.settings) {
+                    /* Выбранные настройки доступа пользователя, если они были запрошены */
+                }
+            } else {
+                /* Пользователь нажал кнопку Отмена в окне авторизации */
+            }
+        }, 8196);
+    }
+
+
+</script>

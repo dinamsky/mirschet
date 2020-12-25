@@ -1,0 +1,333 @@
+{strip}
+{$_products_list_features_limit = (isset($category) && isset($category.params.products_features_limit) && (!empty($category.params.products_features_limit) || $category.params.products_features_limit eq "0")) ? $category.params.products_features_limit : $theme_settings.products_list_features_limit}
+{if $theme_settings.products_list_features ne "none" && isset($show_features) && $_products_list_features_limit>0}
+	{$features = $wa->shop->features($products)}
+	{$_products_list_features_codes = (isset($category) && !empty($category.params.products_features_codes)) ? $category.params.products_features_codes : $theme_settings.products_list_features_codes}
+	{if !empty($_products_list_features_codes)}{$_products_list_features_codes = explode(",",$_products_list_features_codes)}{/if}
+{/if}
+{if $theme_settings.products_show_wishlist}
+	{$theme_favorite = explode(",",waRequest::cookie('shop_favorite'))}
+{/if}
+{if $theme_settings.products_show_compare}
+	{$compare = explode(",",waRequest::cookie('shop_compare'))}
+{/if}
+		{foreach $products as $p}
+		{$p._selected_features = []}
+		{if !empty($_products_list_features_codes)}
+			{foreach $_products_list_features_codes as $f_code}
+				{if isset($p.features[$f_code])}
+					{if $theme_settings.products_list_features_color_singly && $features[$f_code].type == color}
+						{$p._features_color = $p.features[$f_code]}
+					{else}
+						{$p._selected_features[$f_code] = $p.features[$f_code]}
+					{/if}
+				{/if}
+			{/foreach}
+		{else}
+			{$p._selected_features = $p.features}
+		{/if}
+		{$available = $wa->shop->settings('ignore_stock_count') || $p.count === null || $p.count > 0}
+		{if !empty($p.skus) && !empty($p.skus[$p.sku_id])}
+			{$sku = $p.skus[$p.sku_id]}
+			{if empty($sku.available) && (count($p.skus) === 1)}{$available = false}{/if}
+		{/if}
+		{$pre_order_only = $wa->shop->settings('ignore_stock_count') && $p.count !== null && $p.count <= 0}
+		{$_product_image_src = $wa->shop->productImgUrl($p, "200")}
+		<div class="js-product-list-item item-list-c" itemscope itemtype="http://schema.org/Product">
+			<form class="addtocart" data-title="{$p.name|escape}" data-price="{shop_currency_html($p.price)|escape}" data-oldprice="{if $p.compare_price > 0}{shop_currency_html($p.compare_price)|escape}{/if}" data-image="{$_product_image_src|default:"`$wa_parent_theme_url`img/dummy200.png"}" {if $p.sku_count > 1}data-url="{$p.frontend_url}{if strpos($p.frontend_url, '?')}&{else}?{/if}cart=1"{/if} method="post" action="{$wa->getUrl('/frontendCart/add')}">
+				<div class="item-list-c__inner">
+					<div class="item-list-c__main">
+						<div class="item-list-c__main-inner">
+							<div class="item-list-c__pic-col">
+								{if !empty($p.video_url)}
+									<div class="item-list-c__has-video video-icon has-tooltip" data-title="Есть видеообзор"></div>
+								{/if}
+								<div class="item-list-c__badges">
+									{if $theme_settings.products_show_saving_label && $p.compare_price > $p.price}
+										{$_saving_percent = 0}
+										{$_saving_percent = (($p.compare_price - $p.price)*100)/$p.compare_price}
+										{if $theme_settings.products_show_saving_rounding_type eq 'floor'}
+											{$_saving_percent = $_saving_percent|floor}
+										{elseif $theme_settings.products_show_saving_rounding_type eq 'ceil'}
+											{$_saving_percent = $_saving_percent|ceil}
+										{elseif $theme_settings.products_show_saving_rounding_type eq 'round'}
+											{$_saving_percent = $_saving_percent|round}
+										{/if}
+										{if $_saving_percent >= $theme_settings.products_show_saving_percent_min}
+											<div class="item-list-c__badge-i">
+												<div class="dis-badge">
+													<svg class="icon" width="50" height="50" style="color:#ffe500">
+														<use xlink:href="#bg-quote"></use>
+													</svg>
+													<span style="color: #000;">&minus;{$_saving_percent}%</span>
+												</div>
+											</div>
+										{/if}
+									{/if}
+									{if $p.badge eq "lowprice"}
+										<div class="item-list-c__badge-i">
+											<div class="label label_econom" style="background-color:#FFE500">[`Discount`]</div>
+										</div>
+									{elseif $p.badge eq "new"}
+										<div class="item-list-c__badge-i">
+											<div class="label label_light" style="background-color:#1FE499">[`New`]</div>
+										</div>
+									{elseif $p.badge eq "bestseller"}
+										<div class="item-list-c__badge-i">
+											<div class="label label_light" style="background-color:#FF2AA9">[`Bestseller`]</div>
+										</div>
+									{elseif !empty($p.badge)}
+										<div class="item-list-c__badge-i">
+											<div class="label label_light" style="background-color:#FF2AA9">{$p.badge}</div>
+										</div>
+									{/if}
+								</div>
+								<a class="item-list-c__image-wrapper item-list-c__image-wrapper_remove" href="{$p.frontend_url}">
+									<img src="data:image/gif;base64,R0lGODlh6gDqAIAAAP///wAAACH5BAEAAAEALAAAAADqAOoAAAL+jI+py+0Po5y02ouz3rz7D4biSJbmiabqyrbuC8fyTNf2jef6zvf+DwwKh8Si8YhMKpfMpvMJjUqn1Kr1is1qt9yu9wsOi8fksvmMTqvX7Lb7DY/L5/S6/Y7P6/f8vv8PGCg4SFhoeIiYqLjI2Oj4CBkpOUlZaXmJmam5ydnp+QkaKjpKWmp6ipqqusra6voKGys7S1tre4ubq7vL2+v7CxwsPExcbHyMnKy8zNzs/AwdLT1NXW19jZ2tvc3d7f0NHi4+Tl5ufo6err7O3u7+Dh8vP09fb3+Pn6+/z9/v/w8woMCBBAsaPIgwocKFDBs6fAgxosSJFCtavIgxo8Y9jRw7evwIMqTIkSRLmjyJMqXKlSxbunwJM6bMmTRr2ryJM6fOnTx7+vwJNKjQoUSLGj2KNKnSpUybOo1UAAA7" data-src='{$_product_image_src|default:"`$wa_parent_theme_url`img/dummy200.png"}' alt="{$p.name|escape}" class="js-item__image lazy-img" itemprop="image">
+								</a>
+								{if $theme_settings.products_list_features_color_singly}
+									{if isset($p._features_color) && !empty($p._features_color)}
+										<div class="item-c__colors">
+											<div class="item-color-list">
+												{foreach $p._features_color as $c}
+													<span class="item-color-list__item">
+														<span class="item-color has-tooltip" data-title="{$c->value}">
+															<span class="c-color" style="{$c->style}"></span>
+														</span>
+													</span>
+												{/foreach}
+											</div>
+										</div>
+									{/if}
+								{/if}
+								{if !empty($p.skus) && !empty($p.skus[$p.sku_id])}
+									{$_sku = $p.skus[$p.sku_id]}
+									{if (count($p.skus) === 1) && !empty($_sku.sku)}
+										<div class="item-c__sku grey">[`SKU code`]: {$_sku.sku}</div>
+										<meta itemprop="sku" content="{$_sku.sku}">
+									{/if}
+								{/if}
+								{$_product_schema_image = $wa->shop->productImgUrl($p, '970')}
+								{if $_product_schema_image}
+									<meta itemprop="image" content="{$_product_schema_image}">
+								{/if}
+								{if $theme_settings.products_show_quickview}
+									<div class="item-list-c__act-btn">
+										<a class="list-act-btn btn-quickview" href="{$p.frontend_url}" data-url="{$p.frontend_url}">
+											<svg class="icon" width="16" height="12">
+												<use xlink:href="#icon-eye"></use>
+											</svg>
+											<span>[`Quickview`]</span>
+										</a>
+									</div>
+									{/if}
+							</div>
+							<div class="item-list-c__body-col">
+								<a class="item-list-c__title js-item__title" href="{$p.frontend_url}"><span itemprop="name">{$p.name}</span></a>
+								{if $theme_settings.products_show_reviews}
+									{if $theme_settings.products_show_rating_stars eq "always" || ($theme_settings.products_show_rating_stars eq "nonempty" && $p.rating > 0)}
+										{$_rating = round($p.rating)}
+										<div class="item-rating item-list-c__rating">
+											<div class="item-rating__stars">
+												<div class="stars stars_m">
+													<div class="stars__list">
+														{for $i=1 to 5}
+														<div class="stars__i{if $i <= $_rating} stars__i_checked{/if}">
+															<svg class="icon" width="16" height="15">
+																<use xlink:href="#icon-star"></use>
+															</svg>
+														</div>
+														{/for}
+													</div>
+												</div>
+											</div>
+											<div class="item-rating__revs">
+												<svg class="icon" width="15" height="14">
+													<use xlink:href="#icon-bubble"></use>
+												</svg>
+												<a class="grey" href="{$p.frontend_url}reviews/">{$p.rating_count|default:0}</a>
+											</div>
+										</div>
+									{/if}
+								{/if}
+								{if $p.summary && $theme_settings.products_thumbs_show_summary}
+									<div class="item-list-c__short-descr grey">
+										<span itemprop="description">{$p.summary}</span>
+									</div>
+								{/if}
+								{if $theme_settings.products_list_features eq "yes"}
+									<div class="item-list-chars item-list-c__chars">
+										{if !empty($p.features)}
+											{if !empty($p._selected_features)}
+												<ul class="item-list-chars__list list-reset grey">
+													{$_i = 1}
+													{foreach $p._selected_features as $f_code => $f_value}
+														{if $features[$f_code].type == 'divider'}{continue}{/if}
+														{if $_i > $_products_list_features_limit}{break}{/if}
+														{$_i = $_i +1}
+														<li class="item-list-chars__item">
+															<dl class="cst-reset">
+																<dt>{$features[$f_code].name|escape}:</dt>
+																<dd>
+																	{if is_array($f_value)}
+																		{if $features[$f_code].type == 'color'}
+																			<div class="item-color-list">
+																				{foreach $f_value as $color}
+																					<div class="item-color-list__item">
+																						<div class="item-color has-tooltip" data-title="{$color->value}">
+																							<div class="c-color" style="{$color->style}"></div>
+																							<span class="b-tooltip">{$color->value}</span>
+																						</div>
+																					</div>
+																				{/foreach}
+																			</div>
+																		{else}
+																			{implode(', ', $f_value)}
+																		{/if}
+																	{else}
+																		{$f_value}
+																	{/if}
+																</dd>
+															</dl>
+														</li>
+													{/foreach}
+												</ul>
+											{/if}
+										{/if}
+									</div>
+								{/if}
+								{if $theme_settings.products_show_compare && $theme_settings.products_show_wishlist}
+									<div class="item-list-c__action-btns">
+										{if $theme_settings.products_show_compare}
+											<div class="item-list-c__act-btn">
+												<a class="list-act-btn list-act-btn_comp btn-compare btn-compare-{$p.id}{if in_array($p.id,$compare)} active{/if}" href="#" data-title="[`Add to comparison table`]" data-active="[`Remove from comparison table`]" data-url="{$wa->getUrl('/frontend/compare/', ['id' => implode(',', $compare) ])}" data-product="{$p.id}" data-product_name="{$p.name|escape}" data-product_url="{$p.frontend_url}" data-product_image='{$_product_image_src|default:"`$wa_parent_theme_url`img/dummy200.png"}'>
+													<svg class="icon" width="16" height="16">
+														<use xlink:href="#icon-chart"></use>
+													</svg>
+													<span>{if in_array($p.id,$compare)}[`Remove from comparison table`]{else}[`Add to comparison table`]{/if}</span>
+												</a>
+											</div>
+										{/if}
+										{if $theme_settings.products_show_wishlist}
+											<div class="item-list-c__act-btn">
+												<a class="list-act-btn list-act-btn_fav btn-fav btn-fav-{$p.id}{if in_array($p.id,$theme_favorite)} active{/if}" data-product="{$p.id}" data-title="[`Add to favorites`]" data-active="[`Remove from favorites`]" href="#">
+													<svg class="icon" width="16" height="14">
+														<use xlink:href="#icon-heart-new"></use>
+													</svg>
+													<span>{if in_array($p.id,$theme_favorite)}[`Remove from favorites`]{else}[`Add to favorites`]{/if}</span>
+												</a>
+											</div>
+										{/if}
+									</div>
+								{/if}
+							</div>
+						</div>
+					</div>
+					<div class="item-list-c__side">
+						<div class="item-list-c__price">
+							<div class="price-wrapper price-wrapper_list">
+								{if $p.compare_price > 0}
+									<div class="price-wrapper__top">
+										<div class="price price_old">{shop_currency_html($p.compare_price)}</div>
+										{if $theme_settings.products_show_saving_label && $p.compare_price > $p.price}
+											<div class="label" style="background-color: #ffe500;">&minus;{shop_currency_html(round($p.compare_price - $p.price))}</div>
+										{/if}
+									</div>
+								{/if}
+								<div class="price-wrapper__main">
+									<div class="price price_main">{shop_currency_html($p.price)}</div>
+								</div>
+							</div>
+						</div>
+						<div class="item-list-c__side-actions">
+							<div class="qty">
+								<div class="qty__inner">
+									<button class="qty__btn qty__btn_decr default-btn" type="button">
+										<svg class="icon" width="9" height="9">
+											<use xlink:href="#icon-minus"></use>
+										</svg>
+									</button>
+									<input class="qty__field" type="text" name="quantity" value="1" />
+									<button class="qty__btn qty__btn_incr default-btn" type="button">
+										<svg class="icon" width="9" height="9">
+											<use xlink:href="#icon-plus"></use>
+										</svg>
+									</button>
+								</div>
+							</div>
+							<div class="action-btns-wrapper">
+								{if $theme_settings.products_show_wishlist}
+									<div class="action-btns-wrapper__item">
+										<a class="item-act-btn item-act-btn_fav has-tooltip btn-fav btn-fav-{$p.id}{if in_array($p.id,$theme_favorite)} active{/if}" data-product="{$p.id}" data-title="[`Add to favorites`]" data-active="[`Remove from favorites`]">
+											<svg class="icon" width="15" height="13">
+												<use xlink:href="#icon-heart-new"></use>
+											</svg>
+										</a>
+									</div>
+								{/if}
+								{if $theme_settings.products_show_compare}
+									<div class="action-btns-wrapper__item">
+										<a class="item-act-btn item-act-btn_comp has-tooltip btn-compare btn-compare-{$p.id}{if in_array($p.id,$compare)} active{/if}" data-title="[`Add to comparison table`]" data-active="[`Remove from favorites`]" data-url="{$wa->getUrl('/frontend/compare/', ['id' => implode(',', $compare) ])}" data-product="{$p.id}">
+											<svg class="icon" width="11" height="11">
+												<use xlink:href="#icon-chart"></use>
+											</svg>
+										</a>
+									</div>
+								{/if}
+							</div>
+						</div>
+						<div class="stock-info stock item-list-c__stock-info">
+							{if $available}
+								{if $pre_order_only}
+									<div class="stock-info less-stock">
+										<svg class="icon" width="10" height="7">
+											<use xlink:href="#icon-tick"></use>
+										</svg>
+										<div class="stock-info__text">[`Pre-order only`]</div>
+									</div>
+								{else}
+									<svg class="icon" width="10" height="7">
+										<use xlink:href="#icon-tick"></use>
+									</svg>
+									<div class="stock-info__text">[`In stock`]</div>
+								{/if}
+							{else}
+								<div class="stock-info no-stock">
+									<div class="stock-info__text">[`Out of stock`]</div>
+								</div>
+							{/if}
+						</div>
+						{if !empty($p.skus) && !empty($p.skus[$p.sku_id])}
+							{$_sku = $p.skus[$p.sku_id]}
+							{if (count($p.skus) === 1) && !empty($_sku.sku)}
+								<div class="item-c__sku grey">[`SKU code`]: {$_sku.sku}</div>
+							{/if}
+						{/if}
+						<div class="item-list-c__buttons">
+							<button class="btn btn_main-1 {$theme_settings.main_buttons_style|replace:'img/themebuttons/':''|replace:'.gif':''} item-list-c__cartbtn" type="submit"{if !$available} disabled="disabled"{/if}>
+								<span>[`Add to cart`]</span>
+								<i class="hover-anim"></i>
+							</button>
+							{if method_exists("shopQuickorderPlugin","quickorderForm")}
+								{$_quickbuy_button = shopQuickorderPlugin::quickorderForm($p)}
+								{if !empty($_quickbuy_button)}<div class="btn btn_sec-8 {$theme_settings.main_buttons_style|replace:'img/themebuttons/':''|replace:'.gif':''} item-list-c__oneclick">{$_quickbuy_button}</div>{/if}
+							{/if}
+						</div>
+					</div>
+				</div>
+				<span itemprop="offers" class="offers" itemscope itemtype="http://schema.org/Offer">
+				{if $available}
+					<meta itemprop="price" content="{shop_currency($p.price, null, null, 0)}">
+					<meta itemprop="priceCurrency" content="{$wa->shop->currency()}">
+					<link itemprop="availability" href="http://schema.org/InStock" />
+				{else}
+					<meta itemprop="price" content="{shop_currency($p.price, null, null, 0)}">
+					<meta itemprop="priceCurrency" content="{$wa->shop->currency()}">
+					<link itemprop="availability" href="http://schema.org/OutOfStock" />
+				{/if}
+				</span>
+				<input type="hidden" name="product_id" value="{$p.id}">
+			</form>
+		</div>
+		{/foreach}
+{/strip}

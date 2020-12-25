@@ -1,0 +1,208 @@
+<div class="block not-padded bordered-bottom">
+    <h1>Забор заказов интернет-магазина (консолидация)</h1>
+</div>
+<div class="block not-padded">
+    <form id="s-sdekint-pickup-form" class="fields" method="post" action="?plugin=sdekint&module=courier&action=pickup">
+        <div class="field">
+            <div class="name">Номер акта приема/передачи</div>
+            <div class="value">
+                <input type="text" name="data[order][act_number]" value="{ifempty($data,'order','act_number',time())}" required>
+            </div>
+        </div>
+        <div class="field">
+            <div class="name">Город</div>
+            <div class="value">
+                <select name="data[origin][city][id]" id="s-sdekint-city" style="width: 250px" required>{if ifempty($data, 'order', 'from', null) && is_array($data.order.from)}
+                        <option value="{$data.order.from.id}">{$data.order.from.name}</option>
+                {/if}</select>
+            </div>
+        </div>
+        <div class="field">
+            <div class="name">Полчатель</div>
+            <div class="value no-shift">СДЭК <input type="hidden" name="data[order][recipient][name]" value="СДЭК"></div>
+            <div class="value"><input type="text" name="data[order][recipient][phone]" value="+7 (800) 250-14-05" required></div>
+            <div class="value">
+                <select name="data[order][address][office_code]" id="s-sdekint-office-code" style="width: 250px">{foreach $info.points as $_pnt}
+                        <option value="{$_pnt.code|escape}"{if $info.consolidation && !empty($info.consolidation['pvz_id']) && ($_pnt.code == $info.consolidation['pvz_id'])} selected{/if}>{$_pnt.name|escape}</option>{/foreach}
+                </select>
+            </div>
+        </div>
+        <div class="field">
+            <div class="name">Дата ожидания курьера</div>
+            <div class="value">
+                <input type="text" id="s-sdekint-pickup-date" class="short2x" name="data[call][date]" value="{date('Y-m-d')}" data-min-date="{date('Y-m-d')}">
+            </div>
+            <div class="value">
+                с
+                <input type="text" class="short s-sdekint-timepicker" id="s-sdekint-from-time" data-max-time="15:00" data-min-time="09:00" data-time-format="H:i"  data-step="60" value="09:00" required>
+                по
+                <input type="text" class="short s-sdekint-timepicker" id="s-sdekint-to-time" data-max-time="18:00" data-min-time="12:00" data-time-format="H:i"  data-step="60" value="18:00" required>
+                <br><span class="hint">Минимальный интервал 3 часа</span>
+            </div>
+        </div>
+        <fieldset>
+            <legend>Отправитель</legend>
+            {if $info.senders}
+            <div class="field">
+                <div class="value">
+                    <select name="profile[sender][id]">
+                        <option value=""  data-phone="" data-name="" data-street="" data-house="" data-flat=""> - новый -</option>
+                        {foreach $info.senders as $sender}
+                            <option value="{$sender.id}" data-phone="{$sender.phone|escape}" data-street="{$sender.street}"
+                            data-house="{$sender.house|escape}" data-flat="{$sender.flat|escape}"
+                            data-name="{$sender.name|escape}"
+                            {if $info.default_sender && ($sender.id == $info.default_sender.id)} data-is-default="1" selected{else} data-is-default="0"{/if}>
+                                {$sender.name|escape} ({$sender.street|escape})
+                            </option>
+                        {/foreach}
+                    </select>
+                </div>
+            </div>
+            {else}
+                <input type="hidden" name="profile[sender][id]" value="0">
+            {/if}
+        <div class="field">
+            <div class="name">Ф.И.О. отправителя</div>
+            <div class="required value">
+                <input type="text" name="data[contact][name]" class="long" value="{$data.order.sender.name}" required>
+            </div>
+        </div>
+        <div class="field">
+            <div class="name">Телефон отправителя</div>
+            <div class="value">
+                <input type="text" name="data[contact][phone]" required  value="{$data.order.sender.phone}">
+            </div>
+        </div>
+        <div class="field">
+            <div class="name">Адрес отправителя</div>
+            <div class="required value">
+                <input type="text" name="data[call][send_address][street]" class="long" value="{$data.order.address.street}" placeholder="улица" required>
+            </div>
+            <div class="required value">
+                <input type="text" name="data[call][send_address][house]" class="short" value="{$data.order.address.house}" placeholder="дом" required>
+                <input type="text" name="data[call][send_address][flat]" class="short" value="{$data.order.address.office}" placeholder="офис">
+            </div>
+        </div>
+            <div class="field">
+                <div class="value">
+                    <input type="checkbox" name="profile[sender][action][save]" value="1">
+                    <span class="sender-data-new"{if $info.senders && $info.default_sender} style="display: none;"{/if}>сохранить данные отправителя</span>
+                    <span class="sender-data-existing"{if !$info.senders || !$info.default_sender} style="display: none;"{/if}>обновить данные отправителя</span><br><span class="hint">Чтоб можно было потом выбрать из списка</span>
+                </div>
+                <div class="value">
+                    <input type="checkbox" name="profile[sender][action][set_default]" value="1">
+                    назначить отправителем по умолчанию <br><span class="hint">чтоб при создании накладной данные
+                        этого отправителя подставлялись по умолчанию</span>
+                </div>
+            </div>
+        </fieldset>
+        <div class="field">
+            <div class="name">Номер заказа ИМ</div>
+            <div class="value">
+                <input type="text" name="data[order][number]" required value="{ifempty($data,'order','number',time())}">
+            </div>
+        </div>
+        <div class="field" id="s-sdekint-packages">
+            <div class="name">Упаковка/место <a href="#" @click.prevent="addPackage"><i class="icon10 add"></i></a></div>
+            <div class="clear-left" id="s-sdekint-packages-list"></div>
+        </div>
+        <div class="submit field">
+            <div class="submit value">
+                <button type="submit" class="button green">Отправить</button>
+                или <a href="#">отмена</a>
+            </div>
+        </div>
+        <div class="field errors">
+        </div>
+    </form>
+    <div class="clear-both"></div>
+</div>
+{capture name="jsrender-PackagesFieldTmpl"}{literal}
+    <div class="name">Упаковка/место <a href="#" class="js-action add-package"><i class="icon10 add"></i></a></div>
+    <div class="clear-left" id="s-sdekint-packages-list">
+        {^{for packages}}{^{include tmpl="#PackageTmpl"/}}{{/for}}
+    </div>
+{/literal}{/capture}
+{capture name="jsrender-PackageTmpl"}{literal}
+    <div class="cdek-package">
+        <div class="align-right"><a href="#" class="js-action delete-package" data-link="css-display{:#get('array').data.length>1?'inline':'none'}"><i class="icon16 delete"></i></a></div>
+        <table class="cdek-package-container">
+            <thead>
+            <tr class="package-props">
+                <th>Номер</th>
+                <th>Штрих-код</th>
+                <th>Вес (кг.)</th>
+                <th>Габариты (см.)</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr class="package-props">
+                <td><input type="text" class="short" data-link="number"></td>
+                <td><input type="text" class="short2x" data-link="barcode" placeholder="Если нужно"></td>
+                <td><input type="number" step="0.001" class="short numerical" data-link="weight" placeholder="0.5"></td>
+                <td><input type="number" step="1" class="short numerical" data-link="size.a"> &times;
+                    <input type="number" step="1" class="short numerical" data-link="size.b"> &times;
+                    <input type="number" step="1" class="short numerical" data-link="size.c">
+                </td>
+            </tr>
+            </tbody>
+            <tbody>
+            <tr class="items">
+                <td colspan="4" class="item-container">
+                    <table class="zebra">
+                        <caption style="caption-side: top; text-align: left; font-weight:bold;">Товары в упаковке <a style="display: inline"
+                                    href="#" class="js-action add-package-item"><i class="icon10 add" style="margin: 0"></i></a></caption>
+                        <thead>
+                        <tr>
+                            <th>Артикул</th>
+                            <th>Название</th>
+                            <th>Цена за шт.</th>
+                            <th>С клиента за шт.</th>
+                            <th>Вес 1 шт. (кг.)</th>
+                            <th>Количество</th>
+                            <th></th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        {^{for items}}{^{include tmpl="#PackageItem"/}}{{/for}}
+                        </tbody>
+                    </table>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+{/literal}{/capture}
+{capture name="jsrender-PackageItem"}{literal}
+    <tr>
+        <td><input type="text" class="short" data-link="sku" required></td>
+        <td><input type="text" class="long" data-link="name"></td>
+        <td><input type="number" step="0.01" min="0" class="short numerical" data-link="price" required></td>
+        <td><input type="number" step="0.01" min="0" class="short numerical" data-link="payment" required></td>
+        <td><input type="number" step="0.001" min="0" class="short numerical" data-link="weight" required></td>
+        <td><input type="number" step="1" min="1" class="short numerical" data-link="amount" required></td>
+        <td class="actions">
+            <a href="#" data-link="css-display{:#get('array').data.length>1?'inline':'none'}"
+               class="js-action delete-package-item"><i class="icon16 delete"></i></a>
+        </td>
+    </tr>
+{/literal}{/capture}
+{capture name="jsrender-ErrorsBlock"}{literal}
+    {{if errors.length}}
+    {{if errors.length > 1}}
+    <ul class="errors">
+        {{for errors}}<li>{{>#data}}</li>{{/for}}
+    </ul>
+    {{else}}
+    <p class="error">{{>errors[0]}}</p>
+    {{/if}}
+    {{/if}}
+{/literal}{/capture}
+{if !empty($smarty.capture)}
+    {foreach $smarty.capture as $cn=>$cc}
+        {if substr($cn,0,9)==='jsrender-'}
+<script id="{substr($cn,9)}" type="text/x-jsrender">{$cc}
+</script>
+        {/if}
+    {/foreach}
+{/if}

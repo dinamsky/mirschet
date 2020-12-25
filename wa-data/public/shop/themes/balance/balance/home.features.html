@@ -1,0 +1,108 @@
+{strip}
+{if $theme_settings.shop_homepage_features_view ne "none"}
+	{$_home_features = []}
+	{if !empty($theme_settings.homepage_features_col_1_title) || !empty($theme_settings.homepage_features_col_1_body)}{$_home_features[] = [
+		'icon' => $theme_settings.homepage_features_col_1_icon,
+		'link' => $theme_settings.homepage_features_col_1_link,
+		'title' => $theme_settings.homepage_features_col_1_title,
+		'body' => $theme_settings.homepage_features_col_1_body
+	]}{/if}
+	{if !empty($theme_settings.homepage_features_col_2_title) || !empty($theme_settings.homepage_features_col_2_body)}{$_home_features[] = [
+		'icon' => $theme_settings.homepage_features_col_2_icon,
+		'link' => $theme_settings.homepage_features_col_2_link,
+		'title' => $theme_settings.homepage_features_col_2_title,
+		'body' => $theme_settings.homepage_features_col_2_body
+	]}{/if}
+	{if !empty($theme_settings.homepage_features_col_3_title) || !empty($theme_settings.homepage_features_col_3_body)}{$_home_features[] = [
+		'icon' => $theme_settings.homepage_features_col_3_icon,
+		'link' => $theme_settings.homepage_features_col_3_link,
+		'title' => $theme_settings.homepage_features_col_3_title,
+		'body' => $theme_settings.homepage_features_col_3_body
+	]}{/if}
+	{if $theme_settings.shop_homepage_features && !empty($_home_features)}
+		{if $theme_settings.shop_homepage_features_design eq 1}
+			<div class="home-pg__section home-pg__section_feat{if $theme_settings.shop_homepage_features_view ne 'always'} {$theme_settings.shop_homepage_features_view}{/if}">
+				<div class="home-g pos-rel">
+					<div class="descr-mode pos-abs"><span class="pos-rel">FEATURES</span></div>
+					<div class="home-g__inner">
+						{foreach $_home_features as $f}
+							<div class="home-g__col-1-3">
+								{if !empty($f.link)}<a href="{$f.link}" class="home-feat home-feat_septd">
+								{else}<div class="home-feat home-feat_septd">{/if}
+									<div class="home-feat__inner">
+										{if !empty($f.icon)}
+											<div class="home-feat__icon">
+												<img src="data:image/gif;base64,R0lGODlh6gDqAIAAAP///wAAACH5BAEAAAEALAAAAADqAOoAAAL+jI+py+0Po5y02ouz3rz7D4biSJbmiabqyrbuC8fyTNf2jef6zvf+DwwKh8Si8YhMKpfMpvMJjUqn1Kr1is1qt9yu9wsOi8fksvmMTqvX7Lb7DY/L5/S6/Y7P6/f8vv8PGCg4SFhoeIiYqLjI2Oj4CBkpOUlZaXmJmam5ydnp+QkaKjpKWmp6ipqqusra6voKGys7S1tre4ubq7vL2+v7CxwsPExcbHyMnKy8zNzs/AwdLT1NXW19jZ2tvc3d7f0NHi4+Tl5ufo6err7O3u7+Dh8vP09fb3+Pn6+/z9/v/w8woMCBBAsaPIgwocKFDBs6fAgxosSJFCtavIgxo8Y9jRw7evwIMqTIkSRLmjyJMqXKlSxbunwJM6bMmTRr2ryJM6fOnTx7+vwJNKjQoUSLGj2KNKnSpUybOo1UAAA7" data-src="{$wa_theme_url}{$f.icon}" class="lazy-img" alt>
+											</div>
+										{/if}
+										<div class="home-feat__content">
+											{if !empty($f.title)}<h3 class="home-feat__title bold">{include file="string:`$f.title`" inline}</h3>{/if}
+											{if !empty($f.body)}<div class="home-feat__descr grey">{include file="string:`$f.body|nl2br`" inline}</div>{/if}
+										</div>
+									</div>
+								{if !empty($f.link)}</a>
+								{else}</div>{/if}
+							</div>
+						{/foreach}
+					</div>
+				</div>
+			</div>
+		{elseif $theme_settings.shop_homepage_features_design eq 2}
+			<div class="home-pg__section home-pg__section_feat{if $theme_settings.shop_homepage_features_view ne 'always'} {$theme_settings.shop_homepage_features_view}{/if}">
+				<div class="grouped-feat pos-rel">
+					<div class="descr-mode pos-abs"><span class="pos-rel">FEATURES</span></div>
+					{foreach $_home_features as $f}
+						<div class="grouped-feat__item">
+							{if !empty($f.link)}<a href="{$f.link}" class="home-feat">
+							{else}<div class="home-feat">{/if}
+								<div class="home-feat__inner">
+									{if !empty($f.icon)}
+										<div class="home-feat__icon">
+											<img src="data:image/gif;base64,R0lGODlh6gDqAIAAAP///wAAACH5BAEAAAEALAAAAADqAOoAAAL+jI+py+0Po5y02ouz3rz7D4biSJbmiabqyrbuC8fyTNf2jef6zvf+DwwKh8Si8YhMKpfMpvMJjUqn1Kr1is1qt9yu9wsOi8fksvmMTqvX7Lb7DY/L5/S6/Y7P6/f8vv8PGCg4SFhoeIiYqLjI2Oj4CBkpOUlZaXmJmam5ydnp+QkaKjpKWmp6ipqqusra6voKGys7S1tre4ubq7vL2+v7CxwsPExcbHyMnKy8zNzs/AwdLT1NXW19jZ2tvc3d7f0NHi4+Tl5ufo6err7O3u7+Dh8vP09fb3+Pn6+/z9/v/w8woMCBBAsaPIgwocKFDBs6fAgxosSJFCtavIgxo8Y9jRw7evwIMqTIkSRLmjyJMqXKlSxbunwJM6bMmTRr2ryJM6fOnTx7+vwJNKjQoUSLGj2KNKnSpUybOo1UAAA7" data-src="{$wa_theme_url}{$f.icon}" class="lazy-img" alt>
+										</div>
+									{/if}
+									<div class="home-feat__content">
+										{if !empty($f.title)}<h3 class="home-feat__title bold">{include file="string:`$f.title`" inline}</h3>{/if}
+										{if !empty($f.body)}<div class="home-feat__descr grey">{include file="string:`$f.body|nl2br`" inline}</div>{/if}
+									</div>
+								</div>
+							{if !empty($f.link)}</a>
+							{else}</div>{/if}
+						</div>
+					{/foreach}
+				</div>
+			</div>
+		{elseif $theme_settings.shop_homepage_features_design eq 3}
+			<div class="home-pg__section home-pg__section_feat"{if $theme_settings.shop_homepage_features_view ne 'always'} {$theme_settings.shop_homepage_features_view}{/if}>
+				<div class="home-g pos-rel">
+					<div class="descr-mode pos-abs"><span class="pos-rel">FEATURES</span></div>
+					<div class="home-g__inner">
+						{foreach $_home_features as $f}
+							<div class="home-g__col-1-3">
+								{if !empty($f.link)}<a href="{$f.link}" class="home-feat">
+								{else}<div class="home-feat">{/if}
+									<div class="home-feat__inner">
+										{if !empty($f.icon)}
+											<div class="home-feat__icon-wr">
+												<div class="home-feat__icon-bg"></div>
+												<div class="home-feat__icon cent-icon">
+													<img src="data:image/gif;base64,R0lGODlh6gDqAIAAAP///wAAACH5BAEAAAEALAAAAADqAOoAAAL+jI+py+0Po5y02ouz3rz7D4biSJbmiabqyrbuC8fyTNf2jef6zvf+DwwKh8Si8YhMKpfMpvMJjUqn1Kr1is1qt9yu9wsOi8fksvmMTqvX7Lb7DY/L5/S6/Y7P6/f8vv8PGCg4SFhoeIiYqLjI2Oj4CBkpOUlZaXmJmam5ydnp+QkaKjpKWmp6ipqqusra6voKGys7S1tre4ubq7vL2+v7CxwsPExcbHyMnKy8zNzs/AwdLT1NXW19jZ2tvc3d7f0NHi4+Tl5ufo6err7O3u7+Dh8vP09fb3+Pn6+/z9/v/w8woMCBBAsaPIgwocKFDBs6fAgxosSJFCtavIgxo8Y9jRw7evwIMqTIkSRLmjyJMqXKlSxbunwJM6bMmTRr2ryJM6fOnTx7+vwJNKjQoUSLGj2KNKnSpUybOo1UAAA7" data-src="{$wa_theme_url}{$f.icon}" class="lazy-img" alt>
+												</div>
+											</div>
+										{/if}
+										<div class="home-feat__content">
+											{if !empty($f.title)}<h3 class="home-feat__title bold">{include file="string:`$f.title`" inline}</h3>{/if}
+											{if !empty($f.body)}<div class="home-feat__descr grey">{include file="string:`$f.body|nl2br`" inline}</div>{/if}
+										</div>
+									</div>
+								{if !empty($f.link)}</a>
+								{else}</div>{/if}
+							</div>
+						{/foreach}
+					</div>
+				</div>
+			</div>
+		{/if}
+	{/if}
+{/if}
+{/strip}

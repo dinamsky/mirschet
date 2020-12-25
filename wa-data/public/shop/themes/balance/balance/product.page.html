@@ -1,0 +1,97 @@
+{strip}
+<div class="info-pg info-pg_item-info">
+	{if !empty($breadcrumbs)}
+		<div class="layout-center">
+			<div class="breadcrumbs breadcrumbs_{$theme_settings.breadcrumbs_design}">
+				<ul class="breadcrumbs__list">
+					<li class="breadcrumbs__item">
+						<a class="breadcrumbs__link" href="{$wa_url}">[`Home`]</a>
+					</li>
+					{if $theme_settings.breadcrumbs_design eq "dropdown"}
+						{$_product_category = $wa->shop->category($product.category_id)}
+						{if $_product_category}
+							{$_categories_tree = $wa->shop->categories(0,$_product_category.depth,true)}
+							{if !empty($_categories_tree)}
+								{function breadcrumbs_tree}
+									{foreach $tree as $c}
+										{if $c.left_key <= $_product_category.left_key && $c.right_key >= $_product_category.right_key}
+											<li class="breadcrumbs__item">
+												<a class="breadcrumbs__link" href="{$c.url}">{$c.name}</a>
+												{if count($tree) > 1}
+													<div class="breadcrumbs__btn">
+														<svg class="icon" width="6" height="4">
+															<use xlink:href="#arrow-up-breadcrumb"></use>
+														</svg>
+													</div>
+													<ul class="breadcrumbs__dropdown">
+														{foreach $tree as $sc}
+															{if $sc.id eq $c.id}{continue}{/if}
+															<li class="breadcrumbs__dropdown-i">
+																<a class="breadcrumbs__link" href="{$sc.url}">{$sc.name}</a>
+															</li>
+														{/foreach}
+													</ul>
+												{/if}
+											</li>
+											{breadcrumbs_tree tree=$c.childs}
+										{/if}
+									{/foreach}
+								{/function}
+								{breadcrumbs_tree tree=$_categories_tree}
+							{/if}
+						{/if}
+						<li class="breadcrumbs__item">
+							<a class="breadcrumbs__link" href="{$wa->shop->productUrl($product)}">{$product.name}</a>
+						</li>
+					{else}
+						{foreach $breadcrumbs as $bc}
+							<li class="breadcrumbs__item">
+								<a class="breadcrumbs__link" href="{$bc.url}">{$bc.name}</a>
+							</li>
+						{/foreach}
+					{/if}
+				</ul>
+			</div>
+		</div>
+	{/if}
+	<div class="info-pg__main b-row">
+		<div class="b-row__inner">
+			<div class="info-pg__content col-4-of-5">
+				<div class="info-sec">
+					<h1 class="info-sec__title">{$page.title|escape}</h1>
+					<div class="links-bar layout-center">
+						<div class="links-bar__list">
+							<div class="links-bar__item">
+								<a href="{$wa->shop->productUrl($product)}" class="links-bar__link">[`Overview`]</a>
+							</div>
+							{if $theme_settings.products_show_reviews}
+								<div class="links-bar__item">
+									<a class="links-bar__link" href="{$wa->shop->productUrl($product, 'reviews')}">[`Reviews`] ({$product.rating_count|default:0})</a>
+								</div>
+							{/if}
+							{foreach $product.pages as $p}
+								<div class="links-bar__item{if $page.id == $p.id} active{/if}">
+									{if $page.id == $p.id}
+										<div class="links-bar__link">{$p.name|escape}</div>
+									{else}
+										<a class="links-bar__link" href="{$wa->shop->productUrl($product, 'page', ['page_url' => $p.url])}">{$p.name|escape}</a>
+									{/if}
+								</div>
+							{/foreach}
+						</div>
+					</div>
+					<div class="info-sec__main">
+						{$page.content}
+					</div>
+				</div>
+			</div>
+			<aside class="info-pg__sidebar col-1-of-5">
+				<div id="sticky-shop-item-sticky-wrapper" class="sticky-wrapper">
+					{$_products = $wa->shop->products("id/`$product.id`")}
+					{include file="list-thumbs.html" show_features=false list_only=true hide_description=true wrapper="info-pg__shop-item" item_id="sticky-shop-item" products=$_products inline}
+				</div>
+			</aside>
+		</div>
+	</div>
+</div>
+{/strip}

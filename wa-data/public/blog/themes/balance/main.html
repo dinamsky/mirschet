@@ -1,0 +1,47 @@
+{strip}
+{if !is_array($wa->globals('blog_id'))}
+{$_current_blog = $wa->blog->blog($wa->globals('blog_id'))}
+{$_current_blog_name = $_current_blog.name}
+{/if}
+{if isset($stream_title) && !empty($stream_title)}
+{$_current_blog_name = $stream_title}
+{/if}
+<div class="wrapper{if $theme_settings.header_design eq 'view-10'} in-header-content{/if}">
+	<main>
+		<div class="info-pg">
+			{if !empty($breadcrumbs)}
+				<div class="layout-center">
+					<div class="info-pg__top">
+						<div class="info-pg__bc">
+							<div class="breadcrumbs breadcrumbs_border">
+								<ul class="breadcrumbs__list">
+									<li class="breadcrumbs__item">
+										<a class="breadcrumbs__link" href="{$wa_url}">[`Home`]</a>
+									</li>
+									{foreach $breadcrumbs as $bc}
+										<li class="breadcrumbs__item"><a class="breadcrumbs__link" href="{$bc.url}">{$bc.name|escape}</a></li>
+									{/foreach}
+								</ul>
+							</div>
+						</div>
+						<div class="info-pg__dropdown"></div>
+					</div>
+				</div>
+			{/if}
+			<div class="layout-center">
+				{if $wa->globals('_theme_blog_title')}
+					<h1 class="info-pg__title">{$wa->globals('_theme_blog_title')}</h1>
+				{/if}
+			</div>
+			<div class="info-pg__main b-row">
+				<div class="b-row__inner">
+					{include file="`$wa_active_theme_path`/sidebar.html" inline}
+					<div class="info-pg__content col-4-of-5">
+						{$content}
+					</div>
+				</div>
+			</div>
+		</div>
+	</main>
+</div>
+{/strip}

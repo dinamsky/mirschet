@@ -1,0 +1,1034 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE theme PUBLIC "wa-app-theme" "http://www.webasyst.com/wa-content/xml/wa-app-theme.dtd">
+<theme id="balance" system="0" vendor="1093622" author="Balance Team" app="site" version="1.1.1" edition="1">
+  <name locale="en_US">Balance</name>
+  <name locale="ru_RU">Balance</name>
+  <description locale="en_US">Adaptive design theme for base Webasyst apps</description>
+  <description locale="ru_RU">Семейство адаптивных тем дизайна для базовых приложений Webasyst</description>
+  <support locale="ru_RU">http://help.designmyshop.ru/balance/</support>
+  <files>
+    <file path="index.html" custom="0"/>
+    <file path="css/main.css" custom="0"/>
+    <file path="css/user.css" custom="0"/>
+    <file path="js/main.js" custom="0"/>
+    <file path="js/subscribe.js" custom="0"/>
+    <file path="head.html" custom="0">
+      <description locale="en_US">Site app's &lt;head&gt; instructions</description>
+      <description locale="ru_RU">Блок &lt;head&gt; приложения «Сайт»</description>
+    </file>
+    <file path="header_mobile/view-1.html" custom="0"/>
+    <file path="header_mobile/view-2.html" custom="0"/>
+    <file path="header_mobile/view-3.html" custom="0"/>
+    <file path="header_mobile/view-4.html" custom="0"/>
+    <file path="header/view-1.html" custom="0"/>
+    <file path="header/view-2.html" custom="0"/>
+    <file path="header/view-3.html" custom="0"/>
+    <file path="header/view-4.html" custom="0"/>
+    <file path="header/view-5.html" custom="0"/>
+    <file path="header/view-5-2.html" custom="0"/>
+    <file path="header/view-6.html" custom="0"/>
+    <file path="header/view-7.html" custom="0"/>
+    <file path="header/view-8.html" custom="0"/>
+    <file path="header/view-9.html" custom="0"/>
+    <file path="header/view-10.html" custom="0"/>
+    <file path="header/view-11.html" custom="0"/>
+    <file path="header/view-12.html" custom="0"/>
+    <file path="header/view-13.html" custom="0"/>
+    <file path="header/view-14.html" custom="0"/>
+    <file path="header/view-15.html" custom="0"/>
+    <file path="header/view-16.html" custom="0"/>
+    <file path="footer/view-1.html" custom="0"/>
+    <file path="footer/view-2.html" custom="0"/>
+    <file path="footer/view-3.html" custom="0"/>
+    <file path="footer/links.html" custom="0"/>
+    <file path="subscribe.html" custom="0"/>
+    <file path="main.html" custom="0">
+      <description locale="en_US">Main layout for Site app content</description>
+      <description locale="ru_RU">Основной вывод приложения «Сайт»</description>
+    </file>
+    <file path="page.html" custom="0">
+      <description locale="en_US">Static page content and navigation</description>
+      <description locale="ru_RU">Содержимое открытой страницы и навигация по страницам</description>
+    </file>
+    <file path="login.html" custom="0">
+      <description locale="en_US">Login page</description>
+      <description locale="ru_RU">Страница входа для пользователей</description>
+    </file>
+    <file path="signup.html" custom="0">
+      <description locale="en_US">Sign up page</description>
+      <description locale="ru_RU">Страница регистрации пользователей</description>
+    </file>
+    <file path="scripts.html" custom="0"/>
+    <file path="forgotpassword.html" custom="0">
+      <description locale="en_US">Forgot password page</description>
+      <description locale="ru_RU">Страница сброса пароля</description>
+    </file>
+    <file path="my.profile.html">
+      <description locale="en_US">My profile: contact info editing form</description>
+      <description locale="ru_RU">Личный кабинет: редактирование контактной информации</description>
+    </file>
+    <file path="my.nav.html">
+      <description locale="en_US">My profile navigation</description>
+      <description locale="ru_RU">Навигационное меню внутри личного кабинета</description>
+    </file>
+    <file path="my.menu.html"/>
+    <file path="error.html" custom="0">
+      <description locale="en_US">404 and other errors</description>
+      <description locale="ru_RU">404 и другие ошибки</description>
+    </file>
+  </files>
+  <settings>
+    <setting var="divider_basics" control_type="group_divider">
+      <value/>
+      <name locale="en_US">General theme settings</name>
+      <name locale="ru_RU">Общие настройки темы</name>
+    </setting>
+    <setting var="header_logo" control_type="image">
+      <value>img/logo.png?v1601877113</value>
+      <filename>img/logo.*</filename>
+      <name locale="en_US">Main logo</name>
+      <name locale="ru_RU">Логотип</name>
+    </setting>
+    <setting var="header_logo_mobile" control_type="image">
+      <value>img/logo_mobile.png?v1601877113</value>
+      <filename>img/logo_mobile.*</filename>
+      <name locale="en_US">Mobile logo</name>
+      <name locale="ru_RU">Логотип моб. версии</name>
+      <description locale="ru_RU">Вы можете загрузить другую версию логотипа для мобильной версии, либо оставить поле пустым для использования основной версии.</description>
+    </setting>
+    <setting var="main_color_scheme" control_type="image_select">
+      <value>img/themecolors/color-3.png</value>
+      <name locale="ru_RU">Цветовая гамма сайта</name>
+      <options>
+        <option value="img/themecolors/color-1.png"/>
+        <option value="img/themecolors/color-2.png"/>
+        <option value="img/themecolors/color-3.png"/>
+        <option value="img/themecolors/color-4.png"/>
+        <option value="img/themecolors/color-5.png"/>
+        <option value="img/themecolors/color-6.png"/>
+        <option value="img/themecolors/color-7.png"/>
+        <option value="img/themecolors/color-8.png"/>
+        <option value="img/themecolors/color-9.png"/>
+        <option value="img/themecolors/color-10.png"/>
+        <option value="img/themecolors/color-11.png"/>
+        <option value="img/themecolors/color-12.png"/>
+        <option value="img/themecolors/color-13.png"/>
+        <option value="img/themecolors/color-14.png"/>
+        <option value="img/themecolors/color-15.png"/>
+        <option value="img/themecolors/color-16.png"/>
+        <option value="img/themecolors/color-17.png"/>
+        <option value="img/themecolors/color-18.png"/>
+        <option value="img/themecolors/color-19.png"/>
+        <option value="img/themecolors/color-20.png"/>
+        <option value="img/themecolors/color-21.png"/>
+        <option value="img/themecolors/color-22.png"/>
+        <option value="img/themecolors/color-23.png"/>
+        <option value="img/themecolors/color-24.png"/>
+        <option value="img/themecolors/color-25.png"/>
+        <option value="img/themecolors/color-26.png"/>
+        <option value="img/themecolors/color-27.png"/>
+        <option value="img/themecolors/color-28.png"/>
+        <option value="img/themecolors/color-29.png"/>
+        <option value="img/themecolors/color-30.png"/>
+        <option value="img/themecolors/color-31.png"/>
+        <option value="img/themecolors/color-32.png"/>
+        <option value="img/themecolors/color-33.png"/>
+      </options>
+    </setting>
+    <setting var="main_buttons_style" control_type="image_select">
+      <value>img/themebuttons/btn_shiny.gif</value>
+      <name locale="ru_RU">Анимация кнопок</name>
+      <description locale="ru_RU">Внимание! Эта анимация актуальна только для основных кнопок темы. По техническим причинам многие кнопки будут иметь стандартную анимацию</description>
+      <options>
+        <option value="img/themebuttons/btn_shiny.gif"/>
+        <option value="img/themebuttons/btn_spread.gif"/>
+        <option value="img/themebuttons/btn_default.gif"/>
+      </options>
+    </setting>
+    <setting var="breadcrumbs_design" control_type="select">
+      <value>simple</value>
+      <name locale="ru_RU">Дизайн "хлебных крошек"
+					&lt;p class="hint"&gt;&lt;a href="http://balance.designmyshop.ru/wa-data/public/site/balance_settings/breadcrumbs-sample.png" target="_blank"&gt;пример&lt;/a&gt;&lt;/p&gt;
+				</name>
+      <description locale="ru_RU">Внимание! Вариант "Структурное древо" отображает альтернативные категории магазина на разных уровнях вложенности, если таковые есть в хлебных крошках, и может оказывать дополнительную нагрузку на сервер.</description>
+      <options>
+        <option value="simple">
+          <name locale="ru_RU">Обычный</name>
+        </option>
+        <option value="dropdown">
+          <name locale="ru_RU">Структурное древо</name>
+        </option>
+        <option value="border">
+          <name locale="ru_RU">Кнопочный</name>
+        </option>
+      </options>
+    </setting>
+    <setting var="address_map" control_type="text">
+      <value/>
+      <name locale="ru_RU">Карта проезда</name>
+      <description locale="ru_RU">
+					Smarty + HTML код. Отображает карту во всплывающем окне.
+					&lt;br /&gt;&lt;a href="https://support.webasyst.ru/7643/contacts-page-map/" target="_blank"&gt;Как создать карту?&lt;/a&gt;
+					&lt;br /&gt;Вставьте полученный код карты, либо картинки: &amp;lt;img src="path/to/image.png" alt="" /&amp;gt;
+					&lt;br /&gt;Либо оставьте поле пустым, чтобы скрыть все ссылки на карту
+				
+				</description>
+    </setting>
+    <setting var="show_scrolltop_button" control_type="checkbox">
+      <value>1</value>
+      <name locale="ru_RU">Кнопка "наверх"</name>
+      <description locale="ru_RU">При прокрутке странице вниз появляется кнопка плавного возврата наверх.</description>
+    </setting>
+    <setting var="show_callback_button" control_type="checkbox">
+      <value>1</value>
+      <name locale="ru_RU">Кнопка "Обратный звонок"</name>
+      <description locale="ru_RU">
+					Внимание! Сама по себе кнопка не приводит ни к каким действиям. Для полноценной работы нужно установить один из соответствующих плагинов, который устанавливается через указания селектора. Селектор, который нужно указать в настройках плагина: &lt;strong&gt;.balance_callback&lt;/strong&gt;
+				
+				</description>
+    </setting>
+    <setting var="boxed" control_type="group_divider">
+      <value>divider_basics/boxed</value>
+      <name locale="en_US">Boxed layout</name>
+      <name locale="ru_RU">Boxed-версия</name>
+    </setting>
+    <setting var="boxed_info" control_type="paragraph">
+      <value/>
+      <name locale="ru_RU">
+						&lt;p class="hint"&gt;&lt;a href="http://balance.designmyshop.ru/wa-data/public/site/balance_settings/boxed-design-sample.png"&gt;Иллюстрация&lt;/a&gt;
+						&lt;br /&gt;
+						&lt;br /&gt;При включении Boxed-версии появляется фон, который вы можете настроить ниже по своему предпочтению.&lt;/p&gt;
+					</name>
+    </setting>
+    <setting var="boxed_on" control_type="checkbox">
+      <value/>
+      <name locale="ru_RU">Включить Boxed-версию</name>
+    </setting>
+    <setting var="boxed_bg_color" control_type="color">
+      <value>#cccccc</value>
+      <name locale="ru_RU">Цвет фона</name>
+    </setting>
+    <setting var="boxed_bg_pattern" control_type="image_select">
+      <value>img/boxed/preview/no-pattern.png</value>
+      <name locale="ru_RU">Изображение</name>
+      <description locale="ru_RU">Выберите готовый паттерн изображения, либо загрузите своё ниже</description>
+      <options>
+        <option value="img/boxed/preview/pattern-1.png"/>
+        <option value="img/boxed/preview/pattern-2.png"/>
+        <option value="img/boxed/preview/pattern-3.png"/>
+        <option value="img/boxed/preview/pattern-4.png"/>
+        <option value="img/boxed/preview/pattern-5.png"/>
+        <option value="img/boxed/preview/pattern-6.png"/>
+        <option value="img/boxed/preview/pattern-7.png"/>
+        <option value="img/boxed/preview/pattern-8.png"/>
+        <option value="img/boxed/preview/pattern-9.png"/>
+        <option value="img/boxed/preview/pattern-10.png"/>
+        <option value="img/boxed/preview/pattern-11.png"/>
+        <option value="img/boxed/preview/pattern-12.png"/>
+        <option value="img/boxed/preview/pattern-13.png"/>
+        <option value="img/boxed/preview/pattern-14.png"/>
+        <option value="img/boxed/preview/no-pattern.png"/>
+      </options>
+    </setting>
+    <setting var="boxed_bg_image" control_type="image">
+      <value/>
+      <filename>img/boxed/bg-boxed.*</filename>
+      <name locale="en_US">Custom image</name>
+      <name locale="ru_RU">Собственное изображение</name>
+    </setting>
+    <setting var="boxed_bg_image_type" control_type="select">
+      <value locale="ru_RU">cover</value>
+      <name locale="ru_RU">Позиция изображения</name>
+      <description locale="ru_RU">Актуально только для загруженного вами изображения.</description>
+      <options>
+        <option value="repeat">
+          <name locale="ru_RU">Замостить</name>
+        </option>
+        <option value="center">
+          <name locale="ru_RU">По центру</name>
+        </option>
+        <option value="cover">
+          <name locale="ru_RU">Фиксированно на всю ширину</name>
+        </option>
+      </options>
+    </setting>
+    <setting var="divider_search" control_type="group_divider">
+      <value>divider_basics/divider_search</value>
+      <name locale="en_US">Search options</name>
+      <name locale="ru_RU">Настройки поиска</name>
+    </setting>
+    <setting var="search_app" control_type="select">
+      <value locale="ru_RU">shop</value>
+      <name locale="ru_RU">Приложение обработки поиска</name>
+      <description locale="ru_RU">Выберете приложение, которое будет обрабатывать поисковые запросы. Это может быть поиск по записям в блоге, либо поиск товара в магазине. Отключите поиск, чтобы поисковая строка не отображалась в шапке сайта. Если у вас не установлено ни одно из этих приложений, то поиск будет отключен автоматически.</description>
+      <options>
+        <option value="off">
+          <name locale="ru_RU">отключен</name>
+        </option>
+        <option value="blog">
+          <name locale="ru_RU">Блог</name>
+        </option>
+        <option value="shop">
+          <name locale="ru_RU">Магазин</name>
+        </option>
+      </options>
+    </setting>
+    <setting var="searchautocomplete_on" control_type="checkbox">
+      <value>1</value>
+      <name locale="ru_RU">Включить autocomplete</name>
+      <description locale="ru_RU">
+					Только если обработчиком поиска является магазин!
+					&lt;br /&gt;Отображает результаты в виде подсказки во время ввода поисковой фразы.
+					&lt;br /&gt;Встроенный аналог плагина “Автозаполнение строки поиска”.
+					</description>
+    </setting>
+    <setting var="searchautocomplete_show_photos" control_type="checkbox">
+      <value>1</value>
+      <name locale="ru_RU">Показывать фото в autocomplete-подсказках</name>
+    </setting>
+    <setting var="searchautocomplete_max_results" control_type="text">
+      <value>6</value>
+      <name locale="ru_RU">Максимальное количество autocomplete-результатов</name>
+      <description locale="ru_RU">
+					Рекомендуется ставить ограничение до 10 результатов
+					&lt;br /&gt;Оптимально: 6
+					</description>
+    </setting>
+    <setting var="divider_shop" control_type="group_divider">
+      <value>divider_basics/divider_shop</value>
+      <name locale="en_US">If you have installed "Shop"</name>
+      <name locale="ru_RU">Если установлено приложение «Магазин»</name>
+    </setting>
+    <setting var="shop_allow_change_currency" control_type="checkbox">
+      <value/>
+      <name locale="ru_RU">Разрешить выбор валюты</name>
+    </setting>
+    <setting var="products_show_quickview" control_type="checkbox">
+      <value>1</value>
+      <name locale="ru_RU">Быстрый просмотр</name>
+    </setting>
+    <setting var="products_show_compare" control_type="checkbox">
+      <value>1</value>
+      <name locale="ru_RU">Сравнение товаров</name>
+    </setting>
+    <setting var="products_show_wishlist" control_type="checkbox">
+      <value>1</value>
+      <name locale="ru_RU">Добавление товаров в Избранное</name>
+    </setting>
+    <setting var="shop_sticky_panel" control_type="select">
+      <value>bottom</value>
+      <name locale="ru_RU">
+					Отображать пользовательскую панель при прокрутке
+					&lt;p class="hint"&gt;&lt;a href="http://balance.designmyshop.ru/wa-data/public/site/balance_settings/scoll-panel.png" target="_blank"&gt;Что это?&lt;/a&gt;&lt;/p&gt;
+					
+					</name>
+      <options>
+        <option value="top">
+          <name locale="ru_RU">Сверху</name>
+        </option>
+        <option value="bottom">
+          <name locale="ru_RU">Снизу</name>
+        </option>
+        <option value="none">
+          <name locale="ru_RU">Отключить</name>
+        </option>
+      </options>
+    </setting>
+    <setting var="divider_header" control_type="group_divider">
+      <value/>
+      <name locale="en_US">Site header</name>
+      <name locale="ru_RU">«Шапка» сайта</name>
+    </setting>
+    <setting var="header_design" control_type="select">
+      <value>view-16</value>
+      <name locale="ru_RU">Дизайн шапки
+					&lt;p class="hint"&gt;&lt;a href="http://balance.designmyshop.ru/wa-data/public/site/balance_settings/header-desktop.png" target="_blank"&gt;пример&lt;/a&gt;&lt;/p&gt;
+				</name>
+      <options>
+        <option value="view-1">
+          <name locale="ru_RU">Вариант №1</name>
+          <name locale="en_US">Style #1</name>
+        </option>
+        <option value="view-2">
+          <name locale="ru_RU">Вариант №2</name>
+          <name locale="en_US">Style #2</name>
+        </option>
+        <option value="view-3">
+          <name locale="ru_RU">Вариант №3</name>
+          <name locale="en_US">Style #3</name>
+        </option>
+        <option value="view-4">
+          <name locale="ru_RU">Вариант №4</name>
+          <name locale="en_US">Style #4</name>
+        </option>
+        <option value="view-5">
+          <name locale="ru_RU">Вариант №5</name>
+          <name locale="en_US">Style #5</name>
+        </option>
+        <option value="view-5-2">
+          <name locale="ru_RU">Вариант №5-2</name>
+          <name locale="en_US">Style #5-2</name>
+        </option>
+        <option value="view-6">
+          <name locale="ru_RU">Вариант №6</name>
+          <name locale="en_US">Style #6</name>
+        </option>
+        <option value="view-6-2">
+          <name locale="ru_RU">Вариант №6-2</name>
+          <name locale="en_US">Style #6-2</name>
+        </option>
+        <option value="view-7">
+          <name locale="ru_RU">Вариант №7</name>
+          <name locale="en_US">Style #7</name>
+        </option>
+        <option value="view-8">
+          <name locale="ru_RU">Вариант №8</name>
+          <name locale="en_US">Style #8</name>
+        </option>
+        <option value="view-9">
+          <name locale="ru_RU">Вариант №9</name>
+          <name locale="en_US">Style #9</name>
+        </option>
+        <option value="view-10">
+          <name locale="ru_RU">Вариант №10</name>
+          <name locale="en_US">Style #10</name>
+        </option>
+        <option value="view-11">
+          <name locale="ru_RU">Вариант №11</name>
+          <name locale="en_US">Style #11</name>
+        </option>
+        <option value="view-12">
+          <name locale="ru_RU">Вариант №12</name>
+          <name locale="en_US">Style #12</name>
+        </option>
+        <option value="view-13">
+          <name locale="ru_RU">Вариант №13</name>
+          <name locale="en_US">Style #13</name>
+        </option>
+        <option value="view-14">
+          <name locale="ru_RU">Вариант №14</name>
+          <name locale="en_US">Style #14</name>
+        </option>
+        <option value="view-15">
+          <name locale="ru_RU">Вариант №15</name>
+          <name locale="en_US">Style #15</name>
+        </option>
+        <option value="view-16">
+          <name locale="ru_RU">Вариант №16</name>
+          <name locale="en_US">Style #16</name>
+        </option>
+      </options>
+    </setting>
+    <setting var="header_contacts_phone_1" control_type="text">
+      <value locale="ru_RU">0 000 000-00-00</value>
+      <name locale="ru_RU">Номер телефона #1&lt;p class="hint"&gt;Smarty разрешен&lt;/p&gt;</name>
+    </setting>
+    <setting var="header_contacts_phone_1_text" control_type="text">
+      <value>Наш телефон</value>
+      <name locale="ru_RU">Аннотация к контактному номеру #1&lt;p class="hint"&gt;Smarty разрешен&lt;/p&gt;</name>
+    </setting>
+    <setting var="header_contacts_phone_2" control_type="text">
+      <value/>
+      <name locale="ru_RU">Номер телефона #2&lt;p class="hint"&gt;Smarty разрешен&lt;/p&gt;</name>
+      <description locale="ru_RU">Оставьте это поле пустым, чтобы скрыть информацию о втором номере</description>
+    </setting>
+    <setting var="header_contacts_phone_2_text" control_type="text">
+      <value/>
+      <name locale="ru_RU">Аннотация к контактному номеру #2&lt;p class="hint"&gt;Smarty разрешен&lt;/p&gt;</name>
+    </setting>
+    <setting var="header_contacts_btn_callback" control_type="checkbox">
+      <value>1</value>
+      <name locale="ru_RU">Кнопка "Обратный звонок"</name>
+      <description locale="ru_RU">Управляет лишь отображением кнопки. Для её функциональности нужно установить один из соответствующих плагинов и в качестве селектора указать: &lt;b&gt;.balance_callback&lt;/b&gt;</description>
+    </setting>
+    <setting var="header_contacts_address" control_type="text">
+      <value locale="ru_RU">Москва, Крымский Вал, д. 3, стр. 2, офис 308</value>
+      <name locale="ru_RU">Адрес&lt;p class="hint"&gt;Smarty разрешен&lt;/p&gt;</name>
+      <description locale="ru_RU">Отображается только в варианте шапки №9</description>
+    </setting>
+    <setting var="header_contacts_workhours" control_type="text">
+      <value>Обработка заказов с 10:00 до 20:00 по будням</value>
+      <name locale="ru_RU">График работы&lt;p class="hint"&gt;Smarty разрешен&lt;/p&gt;</name>
+    </setting>
+    <setting var="header_links" control_type="select">
+      <value>site-pages</value>
+      <name locale="ru_RU">Ссылки в верхнем меню
+				
+					&lt;p class="hint"&gt;отсутствуют в некоторых вариантах шапки&lt;/p&gt;
+				</name>
+      <description locale="ru_RU">Ссылки верхнего меню навигации могут определяться либо основной структурой сайта (меню {$wa-&gt;apps()} настраивается в приложении «Сайт» в разделе «Настройки»), либо информационным страницами выбранного приложения</description>
+      <description locale="en_US">Top header menu links will be displayed according to the site core structure (as defined in the Site app &gt; Settings &gt; {$wa-&gt;apps()}) or the list of selected app info pages</description>
+      <options>
+        <option value="wa-apps">
+          <name locale="ru_RU">Приложение «Сайт» &gt; Настройки &gt; {$wa-&gt;apps()}</name>
+          <name locale="en_US">Site app &gt; Settings &gt; {$wa-&gt;apps()}</name>
+        </option>
+        <option value="site-pages">
+          <name locale="ru_RU">Страницы приложения «Сайт»</name>
+          <name locale="en_US">Site app pages</name>
+        </option>
+        <option value="shop-pages">
+          <name locale="ru_RU">Страницы приложения «Магазин»</name>
+          <name locale="en_US">Shop app pages</name>
+        </option>
+        <option value="blog-pages">
+          <name locale="ru_RU">Страницы приложения «Блог»</name>
+          <name locale="en_US">Blog app pages</name>
+        </option>
+        <option value="none">
+          <name locale="ru_RU">Не показывать</name>
+          <name locale="en_US">None</name>
+        </option>
+      </options>
+    </setting>
+    <setting var="divider_mainmenu" control_type="group_divider">
+      <value>divider_header/divider_mainmenu</value>
+      <name locale="en_US">Main menu</name>
+      <name locale="ru_RU">Главное меню</name>
+    </setting>
+    <setting var="divider_mainmenu_info" control_type="paragraph">
+      <value/>
+      <name locale="ru_RU">
+					&lt;p class="hint"&gt;&lt;a href="http://help.designmyshop.ru/balance/460/ustanovka-ikonok-v-glavnom-menyu/" target="_blank"&gt;Инструкция по установке иконок в главном меню&lt;/a&gt;
+					&lt;br /&gt;&lt;a href="http://help.designmyshop.ru/balance/466/ustanovka-tsvetnykh-yarlykov-v-glavnom-menyu/" target="_blank"&gt;Инструкция по установке цветных ярлыков для категорий&lt;/a&gt;&lt;/p&gt;
+					</name>
+    </setting>
+    <setting var="mainmenu_links" control_type="select">
+      <value>shop-categories</value>
+      <name locale="ru_RU">Ссылки в главном меню</name>
+      <name locale="en_US">Header links</name>
+      <description locale="ru_RU">Ссылки верхнего меню навигации могут определяться либо основной структурой сайта (меню {$wa-&gt;apps()} настраивается в приложении «Сайт» в разделе «Настройки»), либо информационным страницами выбранного приложения</description>
+      <description locale="en_US">Top header menu links will be displayed according to the site core structure (as defined in the Site app &gt; Settings &gt; {$wa-&gt;apps()}) or the list of selected app info pages</description>
+      <options>
+        <option value="shop-categories">
+          <name locale="ru_RU">Категории приложения «Магазин» (рекомендуется)</name>
+          <name locale="en_US">Site app &gt; Settings &gt; {$wa-&gt;apps()}</name>
+        </option>
+        <option value="wa-apps">
+          <name locale="ru_RU">Приложение «Сайт» &gt; Настройки &gt; {$wa-&gt;apps()}</name>
+          <name locale="en_US">Site app &gt; Settings &gt; {$wa-&gt;apps()}</name>
+        </option>
+        <option value="site-pages">
+          <name locale="ru_RU">Страницы приложения «Сайт»</name>
+          <name locale="en_US">Site app pages</name>
+        </option>
+        <option value="shop-pages">
+          <name locale="ru_RU">Страницы приложения «Магазин»</name>
+          <name locale="en_US">Shop app pages</name>
+        </option>
+        <option value="blog-pages">
+          <name locale="ru_RU">Страницы приложения «Блог»</name>
+          <name locale="en_US">Blog app pages</name>
+        </option>
+      </options>
+    </setting>
+    <setting var="mainmenu_childs_grid" control_type="select">
+      <value>book</value>
+      <name locale="ru_RU">Дизайн выпадающего меню
+					
+						&lt;p class="hint"&gt;&lt;a href="http://balance.designmyshop.ru/wa-data/public/site/balance_settings/main-menu-types.png" target="_blank"&gt;пример&lt;/a&gt;&lt;/p&gt;
+					</name>
+      <description locale="ru_RU">
+						Вы можете переопределить общую настройку для каждого пункта меню через дополнительные параметры. Для этого в дополнительных параметрах страницы/категории добавьте строку: "childs_grid=&lt;strong&gt;mono&lt;/strong&gt;",
+						&lt;br /&gt;где &lt;strong&gt;mono&lt;/strong&gt; - вид сетки. Доступные варианты: book, mega, mono.
+					
+					</description>
+      <options>
+        <option value="mega">
+          <name locale="ru_RU">Мега-меню (mega)</name>
+          <description locale="ru_RU">При большом количестве подкатегорий они будут выстраиваться друг под другом</description>
+        </option>
+        <option value="book">
+          <name locale="ru_RU">Книжка (book)</name>
+          <description locale="ru_RU">Подпункты выстраиваются линейно</description>
+        </option>
+        <option value="mono">
+          <name locale="ru_RU">Стандартное одноколоночное (mono)</name>
+          <description locale="ru_RU"/>
+        </option>
+      </options>
+    </setting>
+    <setting var="mainmenu_submenu_collapse" control_type="text">
+      <value>5</value>
+      <name locale="ru_RU">Кол-во подкатегорий до сворачивания</name>
+      <description locale="ru_RU">
+						Укажите количество подкатегорий, при превышении которого остальные подкатегории будут скрыты под ссылку “Показать еще”. Либо оставьте поле пустым для отключения данной опции. Актуально только для пунктов последнего уровня вложенности у "мега-меню" и меню "книжкой".
+						&lt;br /&gt;&lt;a href="http://balance.designmyshop.ru/wa-data/public/site/balance_settings/subcategory-hide-count.png" target="_blank"&gt;Посмотреть пример&lt;/a&gt;
+					
+					</description>
+    </setting>
+    <setting var="mainmenu_submenu_mono_viewtype" control_type="select">
+      <value>dropdown</value>
+      <name locale="ru_RU">Вид подкатегорий одноколоночного(mono) подменю</name>
+      <description locale="ru_RU">
+						Актуально только для одноколоночных меню.
+						&lt;br /&gt;Вы можете переопределить общую настройку для каждого пункта меню через дополнительные параметры. Для этого в дополнительных параметрах страницы/категории добавьте строку: "submenu_mono_viewtype=&lt;strong&gt;dropdown&lt;/strong&gt;"
+						&lt;br /&gt;где &lt;strong&gt;dropdown&lt;/strong&gt; - вид сетки. Доступные варианты: dropdown, opened, hidden.
+						&lt;br /&gt;&lt;a href="http://balance.designmyshop.ru/wa-data/public/site/balance_settings/mono-menu-view.png"&gt;Посмотреть пример&lt;/a&gt;
+					
+					</description>
+      <options>
+        <option value="dropdown">
+          <name locale="ru_RU">Выпадающее (dropdown)</name>
+        </option>
+        <option value="opened">
+          <name locale="ru_RU">Открытое (opened)</name>
+        </option>
+        <option value="hidden">
+          <name locale="ru_RU">Не отображать (hidden)</name>
+        </option>
+      </options>
+    </setting>
+    <setting var="divider_header_mobile" control_type="group_divider">
+      <value>divider_header/divider_header_mobile</value>
+      <name locale="en_US">Mobile Header</name>
+      <name locale="ru_RU">Мобильная версия шапки</name>
+    </setting>
+    <setting var="header_mobile_design" control_type="select">
+      <value>view-1</value>
+      <name locale="ru_RU">Дизайн мобильной шапки
+						&lt;p class="hint"&gt;&lt;a href="http://balance.designmyshop.ru/wa-data/public/site/balance_settings/mobile-header-views.png" target="_blank"&gt;пример&lt;/a&gt;&lt;/p&gt;
+					</name>
+      <options>
+        <option value="view-1">
+          <name locale="ru_RU">Вариант №1</name>
+          <name locale="en_US">Style #1</name>
+        </option>
+        <option value="view-2">
+          <name locale="ru_RU">Вариант №2</name>
+          <name locale="en_US">Style #2</name>
+        </option>
+        <option value="view-3">
+          <name locale="ru_RU">Вариант №3</name>
+          <name locale="en_US">Style #3</name>
+        </option>
+        <option value="view-4">
+          <name locale="ru_RU">Вариант №4</name>
+          <name locale="en_US">Style #4</name>
+        </option>
+      </options>
+    </setting>
+    <setting var="header_mobile_catalog" control_type="checkbox">
+      <value>1</value>
+      <name locale="ru_RU">
+					Отображать кнопку главного меню
+					&lt;p class="hint"&gt;&lt;a href="http://balance.designmyshop.ru/wa-data/public/site/balance_settings/mobile-header-catalogue-button.png" target="_blank"&gt;Что это?&lt;/a&gt;&lt;/p&gt;
+					</name>
+      <description locale="ru_RU">
+						&lt;p class="hint"&gt;При необходимости вы можете скрыть отдельную кнопку главного меню. Его содержимое в любом случае будет доступно в общем меню&lt;/p&gt;
+					
+					</description>
+    </setting>
+    <setting var="header_mobile_style" control_type="select">
+      <value>default</value>
+      <name locale="ru_RU">Цветовой стиль шапки</name>
+      <description locale="ru_RU">
+						&lt;p class="hint"&gt;При выборе темного варианта основной цвет выбранной вами цветовой гаммы будет использован для фона.
+						&lt;br /&gt;&lt;a href="http://balance.designmyshop.ru/wa-data/public/site/balance_settings/mobile-header-color-style.png" target="_blank"&gt;Посмотреть пример&lt;/a&gt;&lt;/p&gt;
+					
+					</description>
+      <options>
+        <option value="default">
+          <name locale="ru_RU">Светлый</name>
+        </option>
+        <option value="dark">
+          <name locale="ru_RU">Темный</name>
+        </option>
+      </options>
+    </setting>
+    <setting var="divider_header_socials" control_type="group_divider">
+      <value>divider_header/divider_header_socials</value>
+      <name locale="en_US">Socials in Header</name>
+      <name locale="ru_RU">Социальные сети в шапке</name>
+    </setting>
+    <setting var="header_socials_design" control_type="select">
+      <value>color</value>
+      <name locale="ru_RU">Дизайн кнопок</name>
+      <description locale="ru_RU">
+						&lt;a href="http://balance.designmyshop.ru/wa-data/public/site/balance_settings/social-button-design.png" target="_blank"&gt;Посмотреть пример&lt;/a&gt;
+					
+					</description>
+      <options>
+        <option value="mono">
+          <name locale="ru_RU">Монотонные</name>
+        </option>
+        <option value="color">
+          <name locale="ru_RU">Цветные</name>
+        </option>
+        <option value="icons">
+          <name locale="ru_RU">Иконки</name>
+        </option>
+      </options>
+    </setting>
+    <setting var="header_vk" control_type="text">
+      <value>#</value>
+      <name locale="en_US">VK.com page URL</name>
+      <name locale="ru_RU">Адрес страницы или группы во Вконтакте</name>
+    </setting>
+    <setting var="header_facebook" control_type="text">
+      <value>#</value>
+      <name locale="en_US">Facebook page URL</name>
+      <name locale="ru_RU">Адрес страницы в Фейсбуке</name>
+    </setting>
+    <setting var="header_instagram" control_type="text">
+      <value>#</value>
+      <name locale="en_US">Instagram feed URL</name>
+      <name locale="ru_RU">Адрес в Инстаграме</name>
+    </setting>
+    <setting var="header_youtube" control_type="text">
+      <value>#</value>
+      <name locale="en_US">Youtube channel URL</name>
+      <name locale="ru_RU">Адрес канала YouTube</name>
+    </setting>
+    <setting var="header_telegram" control_type="text">
+      <value>#</value>
+      <name locale="en_US">Telegram channel URL</name>
+      <name locale="ru_RU">Адрес канала в Telegram</name>
+    </setting>
+    <setting var="header_twitter" control_type="text">
+      <value>#</value>
+      <name locale="en_US">Twitter feed URL</name>
+      <name locale="ru_RU">Адрес в Twitter</name>
+    </setting>
+    <setting var="divider_header_alerts" control_type="group_divider">
+      <value>divider_header/divider_header_alerts</value>
+      <name locale="en_US">Alert messages</name>
+      <name locale="ru_RU">Оповещения</name>
+    </setting>
+    <setting var="divider_header_alerts_info" control_type="paragraph">
+      <value/>
+      <name locale="ru_RU">
+					Позволяет выводить важные и заметные сообщения в шапке сайта.
+					&lt;br /&gt;&lt;a href="http://balance.designmyshop.ru/wa-data/public/site/balance_settings/header-message.png" target="_blank"&gt;Пример&lt;/a&gt;
+					</name>
+    </setting>
+    <setting var="alerting_on" control_type="checkbox">
+      <value/>
+      <name locale="ru_RU">Включить</name>
+    </setting>
+    <setting var="alerting_text" control_type="text">
+      <value locale="en_US">We use cookies to personalise content and ads, to provide social media features and to analyse our traffic. We also share information about your use of our site with our social media, advertising and analytics partners</value>
+      <value locale="ru_RU">Наш сайт использует файлы cookie и похожие технологии, чтобы гарантировать максимальное удобство пользователям, предоставляя персонализированную информацию, запоминая предпочтения в области маркетинга и продукции, а также помогая получить правильную информацию.</value>
+      <name locale="ru_RU">Текст сообщения</name>
+    </setting>
+    <setting var="alerting_background" control_type="color">
+      <value>#ff8c52</value>
+      <name locale="ru_RU">Цвет фона</name>
+    </setting>
+    <setting var="alerting_color" control_type="color">
+      <value>#ffffff</value>
+      <name locale="ru_RU">Цвет текста</name>
+    </setting>
+    <setting var="alerting_show_close" control_type="checkbox">
+      <value/>
+      <name locale="ru_RU">Разрешать посетителям скрывать оповещение</name>
+    </setting>
+    <setting var="divider_footer" control_type="group_divider">
+      <value/>
+      <name locale="en_US">Footer</name>
+      <name locale="ru_RU">«Подвал» сайта</name>
+    </setting>
+    <setting var="divider_footer_info" control_type="paragraph">
+      <value/>
+      <name locale="ru_RU">&lt;p class="hint"&gt;Ссылки в подвале являются лишь “заглушкой” и изменяются вручную в шаблоне &lt;b&gt;footer/links.html&lt;/b&gt;&lt;br /&gt;&lt;a href="http://help.designmyshop.ru/balance/455/redaktirovanie-ssylok-v-podvale/" target="_blank"&gt;Подробная инструкция&lt;/a&gt;&lt;/p&gt;</name>
+    </setting>
+    <setting var="footer_design" control_type="select">
+      <value>view-3</value>
+      <name locale="ru_RU">Вариант дизайна
+					&lt;p class="hint"&gt;&lt;a href="http://balance.designmyshop.ru/wa-data/public/site/balance_settings/footer-design.png" target="_blank"&gt;пример&lt;/a&gt;&lt;/p&gt;
+				</name>
+      <options>
+        <option value="view-1">
+          <name locale="ru_RU">Вариант №1</name>
+          <name locale="en_US">Style #1</name>
+        </option>
+        <option value="view-2">
+          <name locale="ru_RU">Вариант №2</name>
+          <name locale="en_US">Style #2</name>
+        </option>
+        <option value="view-3">
+          <name locale="ru_RU">Вариант №3</name>
+          <name locale="en_US">Style #3</name>
+        </option>
+      </options>
+    </setting>
+    <setting var="footer_design_dark" control_type="checkbox">
+      <value/>
+      <name locale="ru_RU">Цветной фон
+					&lt;p class="hint"&gt;&lt;a href="http://balance.designmyshop.ru/wa-data/public/site/balance_settings/footer-design-color.png" target="_blank"&gt;пример&lt;/a&gt;&lt;/p&gt;
+				</name>
+      <description locale="ru_RU">Цвет берется из настроек цветовой гаммы сайта.</description>
+    </setting>
+    <setting var="footer_logo" control_type="image">
+      <value/>
+      <filename>img/logo_footer.*</filename>
+      <name locale="en_US">Footer logo</name>
+      <name locale="ru_RU">Логотип</name>
+      <description locale="ru_RU">Загрузите другой вариант логотипа, если ваш основной контрастирует с фоном подвала Либо оставьте поле пустым для использования основного варианта.</description>
+    </setting>
+    <setting var="footer_about" control_type="text">
+      <value>Интернет магазин автомобильных товаров.&lt;br /&gt;Работаем с 2011 года. Большой ассортимент, отличное качество, приятные цены.</value>
+      <name locale="ru_RU">Описание под логотипом</name>
+    </setting>
+    <setting var="footer_copyright" control_type="text">
+      <value>Москва &amp;copy; {time()|wa_datetime:"Y"}</value>
+      <name locale="ru_RU">Copyright</name>
+      <description locale="ru_RU">
+				Smarty разрешается.
+				&lt;br /&gt;Например, &lt;strong&gt;{time()|wa_datetime:"Y"}&lt;/strong&gt; выведет текущий год
+				</description>
+    </setting>
+    <setting var="footer_walogo" control_type="checkbox">
+      <value/>
+      <name locale="ru_RU">Отображать логотип WebAsyst</name>
+    </setting>
+    <setting var="footer_payments" control_type="checkbox">
+      <value>1</value>
+      <name locale="ru_RU">Способы оплаты в подвале</name>
+      <description locale="ru_RU">Включает отображение логотипов платежных систем в подвале сайта. Отображаются только те способы оплаты, для которых указаны логотипы в &lt;a href='?action=settings#/payment/'&gt;настройках&lt;/a&gt;. Способы оплаты не выведутся, если отсутствует приложение "Магазин".</description>
+    </setting>
+    <setting var="divider_footer_contacts" control_type="group_divider">
+      <value>divider_footer/divider_footer_contacts</value>
+      <name locale="en_US">Contacts</name>
+      <name locale="ru_RU">Контакты</name>
+    </setting>
+    <setting var="footer_contacts_phone1" control_type="text">
+      <value>0 000 000-00-00</value>
+      <name locale="ru_RU">Телефон №1&lt;p class="hint"&gt;Smarty разрешен&lt;/p&gt;</name>
+      <description locale="ru_RU">Оставьте пустым, чтобы скрыть</description>
+    </setting>
+    <setting var="footer_contacts_phone2" control_type="text">
+      <value/>
+      <name locale="ru_RU">Телефон №2&lt;p class="hint"&gt;Smarty разрешен&lt;/p&gt;</name>
+      <description locale="ru_RU">Оставьте пустым, чтобы скрыть</description>
+    </setting>
+    <setting var="footer_contacts_phone_text" control_type="text">
+      <value>Пн, Вт, Чт, Пт&lt;br /&gt;10:00—20:00</value>
+      <name locale="ru_RU">Текст под номерами телефонов&lt;p class="hint"&gt;Smarty разрешен&lt;/p&gt;</name>
+      <description locale="ru_RU">Оставьте пустым, чтобы скрыть</description>
+    </setting>
+    <setting var="footer_contacts_address" control_type="text">
+      <value>Москва, Крымский Вал, д. 3, стр. 2, офис 308</value>
+      <name locale="ru_RU">Адрес&lt;p class="hint"&gt;Smarty разрешен&lt;/p&gt;</name>
+      <description locale="ru_RU">Оставьте пустым, чтобы скрыть</description>
+    </setting>
+    <setting var="footer_contacts_email" control_type="text">
+      <value>info@auto-protection.ru</value>
+      <name locale="ru_RU">E-mail&lt;p class="hint"&gt;Smarty разрешен&lt;/p&gt;</name>
+      <description locale="ru_RU">Оставьте пустым, чтобы скрыть</description>
+    </setting>
+    <setting var="divider_footer_socials" control_type="group_divider">
+      <value>divider_footer/divider_footer_socials</value>
+      <name locale="en_US">Socials</name>
+      <name locale="ru_RU">Социальные сети</name>
+    </setting>
+    <setting var="vk" control_type="text">
+      <value>#</value>
+      <name locale="en_US">VK.com page URL</name>
+      <name locale="ru_RU">Адрес страницы или группы во Вконтакте</name>
+    </setting>
+    <setting var="facebook" control_type="text">
+      <value>#</value>
+      <name locale="en_US">Facebook page URL</name>
+      <name locale="ru_RU">Адрес страницы в Фейсбуке</name>
+    </setting>
+    <setting var="instagram" control_type="text">
+      <value>#</value>
+      <name locale="en_US">Instagram feed URL</name>
+      <name locale="ru_RU">Адрес в Инстаграме</name>
+    </setting>
+    <setting var="youtube" control_type="text">
+      <value>#</value>
+      <name locale="en_US">Youtube channel URL</name>
+      <name locale="ru_RU">Адрес канала YouTube</name>
+    </setting>
+    <setting var="telegram" control_type="text">
+      <value>#</value>
+      <name locale="en_US">Telegram channel URL</name>
+      <name locale="ru_RU">Адрес канала в Telegram</name>
+    </setting>
+    <setting var="twitter" control_type="text">
+      <value>#</value>
+      <name locale="en_US">Twitter feed URL</name>
+      <name locale="ru_RU">Адрес в Twitter</name>
+    </setting>
+  </settings>
+  <locales>
+    <locale>
+      <msgid>Home</msgid>
+      <msgstr locale="ru_RU">Главная</msgstr>
+    </locale>
+    <locale>
+      <msgid>http://www.shop-script.com/</msgid>
+      <msgstr locale="ru_RU">http://www.shop-script.ru/</msgstr>
+    </locale>
+    <locale>
+      <msgid>We are using Webasyst</msgid>
+      <msgstr locale="ru_RU">Мы используем Webasyst</msgstr>
+    </locale>
+    <locale>
+      <msgid>Follow us</msgid>
+      <msgstr locale="ru_RU">Мы в сети</msgstr>
+    </locale>
+    <locale>
+      <msgid>Company</msgid>
+      <msgstr locale="ru_RU">Компания</msgstr>
+    </locale>
+    <locale>
+      <msgid>About us</msgid>
+      <msgstr locale="ru_RU">О нас</msgstr>
+    </locale>
+    <locale>
+      <msgid>Blog</msgid>
+      <msgstr locale="ru_RU">Блог</msgstr>
+    </locale>
+    <locale>
+      <msgid>Customer Testimonials</msgid>
+      <msgstr locale="ru_RU">Отзывы клиентов</msgstr>
+    </locale>
+    <locale>
+      <msgid>News</msgid>
+      <msgstr locale="ru_RU">Новости</msgstr>
+    </locale>
+    <locale>
+      <msgid>Contacts</msgid>
+      <msgstr locale="ru_RU">Контакты</msgstr>
+    </locale>
+    <locale>
+      <msgid>Information</msgid>
+      <msgstr locale="ru_RU">Информация</msgstr>
+    </locale>
+    <locale>
+      <msgid>How to make an order</msgid>
+      <msgstr locale="ru_RU">Как сделать заказ</msgstr>
+    </locale>
+    <locale>
+      <msgid>Shipping rates</msgid>
+      <msgstr locale="ru_RU">Условия доставки</msgstr>
+    </locale>
+    <locale>
+      <msgid>Returns and replacements</msgid>
+      <msgstr locale="ru_RU">Обмен и возврат</msgstr>
+    </locale>
+    <locale>
+      <msgid>Terms of service</msgid>
+      <msgstr locale="ru_RU">Условия использования</msgstr>
+    </locale>
+    <locale>
+      <msgid>How to get a discount</msgid>
+      <msgstr locale="ru_RU">Как получить скидку</msgstr>
+    </locale>
+    <locale>
+      <msgid>Currency</msgid>
+      <msgstr locale="ru_RU">Валюта</msgstr>
+    </locale>
+    <locale>
+      <msgid>Total</msgid>
+      <msgstr locale="ru_RU">Итого</msgstr>
+    </locale>
+    <locale>
+      <msgid>Navigation</msgid>
+      <msgstr locale="ru_RU">Навигация</msgstr>
+    </locale>
+    <locale>
+      <msgid>Personal area</msgid>
+      <msgstr locale="ru_RU">Личный кабинет</msgstr>
+    </locale>
+    <locale>
+      <msgid>remove</msgid>
+      <msgstr locale="ru_RU">удалить</msgstr>
+    </locale>
+    <locale>
+      <msgid>Working hours</msgid>
+      <msgstr locale="ru_RU">Режим работы</msgstr>
+    </locale>
+    <locale>
+      <msgid>Choose a category</msgid>
+      <msgstr locale="ru_RU">Выберите категорию</msgstr>
+    </locale>
+    <locale>
+      <msgid>Show all results</msgid>
+      <msgstr locale="ru_RU">Посмотреть все результаты</msgstr>
+    </locale>
+    <locale>
+      <msgid>Compare</msgid>
+      <msgstr locale="ru_RU">Сравнение</msgstr>
+    </locale>
+    <locale>
+      <msgid>Favorites</msgid>
+      <msgstr locale="ru_RU">Избранное</msgstr>
+    </locale>
+    <locale>
+      <msgid>Viewed products</msgid>
+      <msgstr locale="ru_RU">Просмотренные товары</msgstr>
+    </locale>
+    <locale>
+      <msgid>Callback</msgid>
+      <msgstr locale="ru_RU">Обратный звонок</msgstr>
+    </locale>
+    <locale>
+      <msgid>Catalog</msgid>
+      <msgstr locale="ru_RU">Каталог товаров</msgstr>
+    </locale>
+    <locale>
+      <msgid>Navigation</msgid>
+      <msgstr locale="ru_RU">Навигация</msgstr>
+    </locale>
+    <locale>
+      <msgid>Products in cart</msgid>
+      <msgstr locale="ru_RU">Товары в корзине</msgstr>
+    </locale>
+    <locale>
+      <msgid>saving</msgid>
+      <msgstr locale="ru_RU">экономия</msgstr>
+    </locale>
+    <locale>
+      <msgid>Authorize either by entering your contact information, or through one of the listed websites</msgid>
+      <msgstr locale="ru_RU">Авторизуйтесь, указав свои контактные данные, или воспользовавшись перечисленными сервисами</msgstr>
+    </locale>
+    <locale>
+      <msgid>Authorize either by entering your contact information, or through one of the websites listed below</msgid>
+      <msgstr locale="ru_RU">Авторизуйтесь, указав свои контактные данные, или воспользовавшись перечисленными ниже сервисами</msgstr>
+    </locale>
+    <locale>
+      <msgid>Sign up either by entering your contact information, or through one of the websites listed below</msgid>
+      <msgstr locale="ru_RU">Зарегистрируйтесь, указав свои контактные данные, или воспользовавшись перечисленными ниже сервисами</msgstr>
+    </locale>
+    <locale>
+      <msgid>Do not miss a thing: The latest news, discounts and promotions</msgid>
+      <msgstr locale="ru_RU">Узнавайте первым о новых акциях и скидках</msgstr>
+    </locale>
+    <locale>
+      <msgid>Subscribe me!</msgid>
+      <msgstr locale="ru_RU">Получать крутую рассылку</msgstr>
+    </locale>
+    <locale>
+      <msgid>scroll to top</msgid>
+      <msgstr locale="ru_RU">наверх</msgstr>
+    </locale>
+    <locale>
+      <msgid>Location map</msgid>
+      <msgstr locale="ru_RU">Карта проезда</msgstr>
+    </locale>
+    <locale>
+      <msgid>Payment methods</msgid>
+      <msgstr locale="ru_RU">Способы оплаты</msgstr>
+    </locale>
+    <locale>
+      <msgid>View all products</msgid>
+      <msgstr locale="ru_RU">Посмотреть все товары</msgstr>
+    </locale>
+    <locale>
+      <msgid>show more</msgid>
+      <msgstr locale="ru_RU">показать еще</msgstr>
+    </locale>
+    <locale>
+      <msgid>hide</msgid>
+      <msgstr locale="ru_RU">свернуть</msgstr>
+    </locale>
+    <locale>
+      <msgid>Visit us</msgid>
+      <msgstr locale="ru_RU">Наш адрес</msgstr>
+    </locale>
+  </locales>
+</theme>

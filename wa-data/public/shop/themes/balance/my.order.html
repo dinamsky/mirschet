@@ -1,0 +1,265 @@
+{strip}
+{if !empty($pin_required)}
+	<div class="sign-pg">
+		<div class="layout-center">
+			<div class="u-cen-txt">
+				<h1 class="sign-pg__title">[`Order`] {$encoded_order_id}</h1>
+			</div>
+			<div class="sign-pg__content">
+				<div class="form-ui-wr form-ui-wr_m-pad">
+					<div class="form-ui-wr__inner">
+						<div class="auth-form">
+							<form class="auth-form__form" action="" method="post">
+								<section class="wa-signup-form-fields">
+									<div class="wa-field wa-field-email">
+										<div class="wa-name">[`Please enter a 4-digit PIN that you received with your order receipt by email.`]</div>
+										<div class="wa-value">
+											<input type="text" name="pin" value=""{if $wrong_pin} class="error"{/if}>
+											{if $wrong_pin}
+												<div class="errormsg">test</div>
+											{/if}
+										</div>
+									</div>
+									<div class="wa-buttons-wrapper">
+										<input type="submit" value="[`View order`]">
+									</div>
+								</section>
+							</form>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+{else}
+	<div class="account-pg">
+		<div class="layout-center">
+			<h2 class="account-pg__title">[`Order`] {$order.id_str}</h2>
+		</div>
+		<div class="account-pg__main b-row">
+			<div class="b-row__inner">
+				{include file="`$wa_parent_theme_path`/my.menu.html" inline}
+				<div class="account-pg__content col-4-of-5">
+					<div class="acc-ord-info">
+						<ul class="acc-ord-info__list">
+							<li class="acc-ord-info__item">
+								<div class="order-info">
+									<ul class="order-info__list">
+										<li class="order-info__item order-info__item_heading">
+											<svg class="icon" width="28" height="20">
+												<use xlink:href="#icon-check"></use>
+											</svg>
+											<strong>[`Order status`]</strong>
+										</li>
+										<li class="order-info__item">
+											<div class="stat-icon" style="{$order.state->getStyle(1)}"></div>
+											<span>{$order.state->getName()}</span>
+										</li>
+										{if !empty($order.params.tracking_number)}
+										<li class="order-info__item">
+											<div class="order-info__track-text">[`Shipment tracking number`]: </div>
+											<div class="order-info__track-num">{$order.params.tracking_number}</div>
+											<a class="order-info__copy-track" href="#">[`copy`]</a>
+										</li>
+										{/if}
+										{if !empty($tracking) && $order.state->getId() != 'completed'}
+											<li class="order-info__item">
+												<div class="plugin">
+													{$tracking}
+												</div>
+											</li>
+										{/if}
+									</ul>
+								</div>
+							</li>
+							<li class="acc-ord-info__item">
+								<div class="order-info">
+									<ul class="order-info__list">
+										<li class="order-info__item order-info__item_heading">
+											<svg class="icon" width="28" height="28">
+												<use xlink:href="#icon-cal"></use>
+											</svg>
+											<strong>[`Date created`]</strong>
+										</li>
+										<li class="order-info__item">{$order.create_datetime|wa_date:'humandatetime'}</li>
+									</ul>
+								</div>
+							</li>
+							<li class="acc-ord-info__item">
+								<div class="order-info">
+									<ul class="order-info__list">
+										<li class="order-info__item order-info__item_heading">
+											<svg class="icon" width="20" height="23">
+												<use xlink:href="#icon-user"></use>
+											</svg>
+											<strong>[`Customer`]</strong>
+										</li>
+										<li class="order-info__item">{$contact.name|escape}</li>
+										{if $shipping_address}
+											<li class="order-info__item">{$shipping_address}</li>
+										{/if}
+									</ul>
+								</div>
+							</li>
+							{if $billing_address}
+								<li class="acc-ord-info__item">
+									<div class="order-info">
+										<ul class="order-info__list">
+											<li class="order-info__item order-info__item_heading">
+												<svg class="icon" width="20" height="23">
+													<use xlink:href="#icon-user"></use>
+												</svg>
+												<strong>[`Bill to`]</strong>
+											</li>
+											<li class="order-info__item">{$billing_address}</li>
+										</ul>
+									</div>
+								</li>
+							{/if}
+							{if $order.shipping_name}
+								<li class="acc-ord-info__item">
+									<div class="order-info">
+										<ul class="order-info__list">
+											<li class="order-info__item order-info__item_heading">
+												<svg class="icon" width="20" height="23">
+													<use xlink:href="#icon-user"></use>
+												</svg>
+												<strong>[`Shipping`]</strong>
+											</li>
+											<li class="order-info__item">{$order.shipping_name}</li>
+											{if !empty($order.params.tracking_number)}
+												<li class="order-info__item">
+													<div class="order-info__track-text">[`Shipment tracking number`]:</div>
+													<div class="order-info__track-num">{$order.params.tracking_number}</div>
+													<a class="order-info__copy-track" href="#">[`copy`]</a>
+												</li>
+												{if !empty($tracking) && $order.state->getId() != 'completed'}
+													<li class="order-info__item">
+														<div class="plugin">
+															{$tracking}
+														</div>
+													</li>
+												{/if}
+											{/if}
+										</ul>
+									</div>
+								</li>
+							{/if}
+							{if $order.payment_name}
+								<li class="acc-ord-info__item">
+									<div class="order-info">
+										<ul class="order-info__list">
+											<li class="order-info__item order-info__item_heading">
+												<svg class="icon" width="30" height="27">
+													<use xlink:href="#icon-wallet"></use>
+												</svg>
+												<strong>[`Payment`]</strong>
+											</li>
+											<li class="order-info__item">{$order.payment_name}</li>
+											{if !empty($payment)}
+												<li class="order-info__item order-info__item_form">
+													<div class="form-ui-wr form-ui-wr_s-pad form-ui-wr_qiwi">
+														<div class="form-ui-wr__inner">
+															{$payment}
+														</div>
+													</div>
+												</li>
+											{/if}
+										</ul>
+									</div>
+								</li>
+							{/if}
+						</ul>
+					</div>
+					{if !empty($order.items)}
+						<h2 class="account-pg__title account-pg__title_m">[`Ordered products`]</h2>
+						<div class="acc-ord-details">
+							<div class="acc-ord-details__row acc-ord-details__row_header">
+								<div class="acc-ord-details__name acc-ord-details__name_head">[`Product`]</div>
+								<div class="acc-ord-details__total acc-ord-details__total_head">[`Total`]</div>
+								<div class="acc-ord-details__qty acc-ord-details__qty_head">[`Quantity`]</div>
+							</div>
+							{foreach $order.items as $item}
+								{$item.product = $wa->shop->product($item.product_id)}
+								{$_product_image_src = $wa->shop->productImgUrl($item.product, "96x96")}
+								{if !$_product_image_src}
+									{$_product_image_src = "`$wa_parent_theme_url`img/dummy200.png"}
+								{/if}
+								{$_product_url = false}
+								{if $item.product}
+									{$_product_url = $wa->shop->productUrl($item.product)}
+								{/if}
+								{if $item.type != 'service'}
+									<div class="acc-ord-details__row">
+										<div class="acc-ord-details__image">
+											{if $_product_url}
+												<a href="{$_product_url}"><img src="{$_product_image_src}"></a>
+											{else}
+												<img src="{$_product_image_src}">
+											{/if}
+										</div>
+										<div class="acc-ord-details__content">
+											<div class="acc-ord-details__inner-row">
+												<div class="acc-ord-details__name">
+													{if $_product_url}
+														<a href="{$_product_url}">{$item.name|escape}</a>
+													{else}
+														<span>{$item.name|escape}</span>
+													{/if}
+													{if $item.type == 'product' && !empty($item.download_link)}<br /><a href="{$item.download_link}">[`Download`]</a>{/if}
+												</div>
+												<div class="acc-ord-details__qty-total">
+													<div class="acc-ord-details__qty">{$item.quantity} x {wa_currency($item.price, $order.currency)}</div>
+													<div class="acc-ord-details__total"><span>=</span> {wa_currency($item.price * $item.quantity, $order.currency)}</div>
+												</div>
+											</div>
+											{foreach $order.items as $_service_item}
+												{if $_service_item@iteration <= $item@iteration}{continue}{/if}
+												{if $_service_item.type == 'service'}
+													<div class="acc-ord-details__inner-row acc-ord-details__inner-row_options">
+														<div class="acc-ord-details__name">+ {$_service_item.name|escape}</div>
+														<div class="acc-ord-details__qty-total">
+															<div class="acc-ord-details__qty">{$_service_item.quantity} x {wa_currency($_service_item.price, $order.currency)}</div>
+															<div class="acc-ord-details__total"><span>=</span> {wa_currency($_service_item.price * $_service_item.quantity, $order.currency)}</div>
+														</div>
+													</div>
+												{/if}
+												{if $_service_item.type != 'service'}{break}{/if}
+											{/foreach}
+										</div>
+									</div>
+								{/if}
+							{/foreach}
+							<div class="acc-ord-details__row acc-ord-details__row_footer">
+								<div><span>[`Subtotal`]</span></div>
+								<div><span>{wa_currency($subtotal, $order.currency)}</span></div>
+							</div>
+							<div class="acc-ord-details__row acc-ord-details__row_footer">
+								<div><span>[`Discount`]</span></div>
+								<div><span>&minus; {wa_currency($order.discount, $order.currency)}</span></div>
+							</div>
+							<div class="acc-ord-details__row acc-ord-details__row_footer">
+								<div><span>[`Shipping`]</span>{if !empty($order.params.shipping_name)} - <b>{$order.params.shipping_name}</b>{/if}</div>
+								<div><span>{wa_currency($order.shipping, $order.currency)}</span></div>
+							</div>
+							{if $order.tax > 0}
+								<div class="acc-ord-details__row acc-ord-details__row_footer">
+									<div><span>[`Tax`]</span></div>
+									<div><span>{wa_currency($order.tax, $order.currency)}</span></div>
+								</div>
+							{/if}
+							<div class="acc-ord-details__row acc-ord-details__row_footer">
+								<div><strong>[`Total`]</strong></div>
+								<div><strong>{wa_currency($order.total, $order.currency)}</strong></div>
+							</div>
+						</div>
+					{/if}
+					<!-- plugin hook: 'frontend_my_order' -->
+					{* @event frontend_my_order.%plugin_id% *}
+					{foreach $frontend_my_order as $_}{$_}{/foreach}
+				</div>
+			</div>
+		</div>
+	</div>
+{/if}
+{/strip}

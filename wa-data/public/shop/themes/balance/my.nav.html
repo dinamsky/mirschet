@@ -1,0 +1,21 @@
+<li class="info-sdb__item shop{if $my_nav_selected == 'orders'} active{/if}">
+    <a href="{$wa->getUrl('/frontend/myOrders')}">[`My orders`]</a>
+</li>
+
+{if shopAffiliate::isEnabled()}
+    <li class="info-sdb__item shop{if $my_nav_selected == 'affiliate'} active{/if}">
+        <a href="{$wa->getUrl('/frontend/myAffiliate')}">[`Affiliate program`]</a>
+    </li>
+{/if}
+
+{if $my_app == $wa->app()}
+    <li class="info-sdb__item shop{if $my_nav_selected == 'profile'} active{/if}">
+        <a href="{$wa->getUrl('/frontend/myProfile')}">[s`My profile`]</a>
+    </li>
+{/if}
+
+<!-- plugin hook: 'frontend_my_nav' -->
+{* @event frontend_my_nav.%plugin_id% *}
+{foreach $frontend_my_nav as $_plugin => $_}
+<li class="info-sdb__item shop{if waRequest::param('plugin') == str_replace('-plugin', '', $_plugin)} active{/if}">{$_}</li>
+{/foreach}

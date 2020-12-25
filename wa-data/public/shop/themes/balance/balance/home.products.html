@@ -1,0 +1,116 @@
+{strip}
+{if $theme_settings.shop_homepage_products_view ne "none"}
+	{if isset($products) && !empty($products)}
+		{if !isset($title)}
+			{$title = _w('See also')}
+		{/if}
+		{$_home_productsets = [
+			[
+				"name" => $title,
+				"products" => $products
+			]
+		]}
+	{else}
+		{$_home_productsets = [
+			[
+				"name" => $theme_settings.shop_homepage_products_list_1_title|default:$theme_settings.shop_homepage_products_list_1_id,
+				"products" => $wa->shop->productSet($theme_settings.shop_homepage_products_list_1_id)
+			],
+			[
+				"name" => $theme_settings.shop_homepage_products_list_2_title|default:$theme_settings.shop_homepage_products_list_2_id,
+				"products" => $wa->shop->productSet($theme_settings.shop_homepage_products_list_2_id)
+			],
+			[
+				"name" => $theme_settings.shop_homepage_products_list_3_title|default:$theme_settings.shop_homepage_products_list_3_id,
+				"products" => $wa->shop->productSet($theme_settings.shop_homepage_products_list_3_id)
+			],
+			[
+				"name" => $theme_settings.shop_homepage_products_list_4_title|default:$theme_settings.shop_homepage_products_list_4_id,
+				"products" => $wa->shop->productSet($theme_settings.shop_homepage_products_list_4_id)
+			],
+			[
+				"name" => $theme_settings.shop_homepage_products_list_5_title|default:$theme_settings.shop_homepage_products_list_5_id,
+				"products" => $wa->shop->productSet($theme_settings.shop_homepage_products_list_5_id)
+			]
+		]}
+	{/if}
+	{foreach $_home_productsets as $list}
+		{if !empty($list.products)}
+			{$_home_products[] = $list}
+		{/if}
+	{/foreach}
+	{if !empty($_home_products)}
+		{if $theme_settings.shop_homepage_products_use_tabs}
+			<div class="home-pg__section home-pg__section_tabbed-sliders{if $theme_settings.shop_homepage_products_view ne 'always'} {$theme_settings.shop_homepage_products_view}{/if}">
+				<div class="home-tab-sliders pos-rel">
+					<div class="descr-mode pos-abs"><span class="pos-rel">PRODUCTS</span></div>
+					<div class="home-tab-sliders__menu">
+						{foreach $_home_products as $list}
+							<div class="section-title{if $list@first} active{/if}">{$list.name|escape}</div>
+						{/foreach}
+					</div>
+					<div class="home-tab-sliders__content">
+						{foreach $_home_products as $list}
+							<div class="home-tab-sliders__content-item{if $list@first} active{/if}">
+								<div class="items-slider">
+									<div class="slider-arrows">
+										<button class="slider-ar slider-ar_square pos-rel default-btn items-slider__nav-left">
+											<svg class="icon cent-icon" width="7" height="11">
+												<use xlink:href="#arrow-left-small"></use>
+											</svg>
+										</button>
+										<button class="slider-ar slider-ar_square pos-rel default-btn items-slider__nav-right">
+											<svg class="icon cent-icon" width="7" height="11">
+												<use xlink:href="#arrow-right-small"></use>
+											</svg>
+										</button>
+									</div>
+									<div class="items-slider__body swiper-container{if !$theme_settings.products_border} nobd{/if}">
+										<div class="items-slider__wrapper swiper-wrapper">
+											{include file="list-thumbs.html" hide_quickbuy=true list_only=true show_features=false hide_description=true wrapper="items-slider__item swiper-slide item-c-mob-`$theme_settings.products_list_mobile_view`" products=$list.products}
+										</div>
+									</div>
+								</div>
+							</div>
+						{/foreach}
+					</div>
+				</div>
+			</div>
+		{else}
+			{foreach $_home_products as $list}
+				<div class="home-pg__section home-pg__section_tabbed-sliders{if $theme_settings.shop_homepage_products_view ne 'always'} {$theme_settings.shop_homepage_products_view}{/if}">
+					<div class="home-tab-sliders pos-rel">
+						<div class="descr-mode pos-abs"><span class="pos-rel">PRODUCTS</span></div>
+						<div class="home-tab-sliders__menu">
+							<div class="section-title active">{$list.name|escape}</div>
+						</div>
+						<div class="home-tab-sliders__content">
+							<div class="home-tab-sliders__content-item active">
+								<div class="items-slider">
+									<div class="slider-arrows">
+										<button class="slider-ar slider-ar_square pos-rel default-btn items-slider__nav-left">
+											<svg class="icon cent-icon" width="7" height="11">
+												<use xlink:href="#arrow-left-small"></use>
+											</svg>
+										</button>
+										<button class="slider-ar slider-ar_square pos-rel default-btn items-slider__nav-right">
+											<svg class="icon cent-icon" width="7" height="11">
+												<use xlink:href="#arrow-right-small"></use>
+											</svg>
+										</button>
+									</div>
+									<div class="items-slider__body swiper-container{if !$theme_settings.products_border} nobd{/if}">
+										<div class="items-slider__wrapper swiper-wrapper">
+											{include file="list-thumbs.html" hide_quickbuy=true list_only=true show_features=false hide_description=true wrapper="items-slider__item swiper-slide item-c-mob-`$theme_settings.products_list_mobile_view`" products=$list.products}
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			{/foreach}
+		{/if}
+	{/if}
+{/if}
+{/strip}

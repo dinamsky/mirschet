@@ -1,0 +1,51 @@
+<hr />
+{if empty($errors)}
+    <div class="field">
+        <div class="name">
+            [`VK Shop`]
+        </div>
+        <div class="value">
+        </div>
+    </div>
+
+    {if !empty($groups)}
+        {foreach $groups as $group_id => $group}
+            <div class="field">
+                <div class="name">
+                    {$group.group_name|escape}
+                </div>
+                <div class="value">
+                    {if !empty($group.albums)}
+                        <select name="vkshop[{$group_id}]">
+                            <option value="0">[`Select the default album`]</option>
+                            {foreach $group.albums as $album}
+                                <option value="{$album.album_id}" {if !empty($album.category_id)}selected{/if}>{$album.name|escape}</option>
+                            {/foreach}
+                        </select>
+                    {/if}
+                </div>
+            </div>
+        {/foreach}
+        <div class="field">
+            <div class="name">
+                [`Hint`]
+            </div>
+            <div class="value">
+                [`Determine the appropriateness of the category and album of VK for the automatic unloading of goods for each connected group.`]
+            </div>
+        </div>
+    {/if}
+
+{else}
+    <div class="field">
+        <div class="name">
+            [`VK Shop`]
+        </div>
+        <div class="value">
+            {foreach $errors as $error}
+                <span style="color: red;">{$error}</span><br />
+            {/foreach}
+        </div>
+    </div>
+{/if}
+<hr />

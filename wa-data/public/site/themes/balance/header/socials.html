@@ -1,0 +1,181 @@
+{strip}
+{if $theme_settings.header_socials_design eq "icons"}
+	<div class="soc-list soc-list_icon-only">
+		<div class="soc-list__inner">
+			{if !empty($theme_settings.header_vk)}
+				<div class="soc-list__i">
+					<a class="soc-btn soc-btn_vk" href="{$theme_settings.header_vk}" target="_blank">
+						<svg class="icon cent-icon" width="20" height="11">
+							<use xlink:href="#icon-vk"></use>
+						</svg>
+					</a>
+				</div>
+			{/if}
+			{if !empty($theme_settings.header_facebook)}
+				<div class="soc-list__i">
+					<a class="soc-btn soc-btn_fb" href="{$theme_settings.header_facebook}" target="_blank">
+						<svg class="icon cent-icon" width="8" height="16">
+							<use xlink:href="#icon-fb"></use>
+						</svg>
+					</a>
+				</div>
+			{/if}
+			{if !empty($theme_settings.header_instagram)}
+				<div class="soc-list__i">
+					<a class="soc-btn soc-btn_ins" href="{$theme_settings.header_instagram}" target="_blank">
+						<svg class="icon cent-icon" width="16" height="18">
+							<use xlink:href="#icon-instagram-monochrome"></use>
+						</svg>
+					</a>
+				</div>
+			{/if}
+			{if !empty($theme_settings.header_youtube)}
+				<div class="soc-list__i">
+					<a class="soc-btn soc-btn_ytb" href="{$theme_settings.header_youtube}" target="_blank">
+						<svg class="icon cent-icon" width="30" height="21">
+							<use xlink:href="#icon-yt-monochrome"></use>
+						</svg>
+					</a>
+				</div>
+			{/if}
+			{if !empty($theme_settings.header_telegram)}
+				<div class="soc-list__i">
+					<a class="soc-btn soc-btn_tlg" href="{$theme_settings.header_telegram}" target="_blank">
+						<svg class="icon cent-icon" width="16" height="13">
+							<use xlink:href="#icon-telegram"></use>
+						</svg>
+					</a>
+				</div>
+			{/if}
+			{if !empty($theme_settings.header_twitter)}
+				<div class="soc-list__i">
+					<a class="soc-btn soc-btn_tw" href="{$theme_settings.header_twitter}" target="_blank">
+						<svg class="icon cent-icon" width="16" height="13">
+							<use xlink:href="#icon-tw"></use>
+						</svg>
+					</a>
+				</div>
+			{/if}
+		</div>
+	</div>
+{elseif $theme_settings.header_socials_design eq "color"}
+	<div class="soc-list">
+		<div class="soc-list__inner">
+			{if !empty($theme_settings.header_vk)}
+				<div class="soc-list__i">
+					<a class="soc-btn soc-btn_vk" href="{$theme_settings.header_vk}" target="_blank">
+						<svg class="icon cent-icon" width="13" height="7">
+							<use xlink:href="#icon-vk"></use>
+						</svg>
+					</a>
+				</div>
+			{/if}
+			{if !empty($theme_settings.header_facebook)}
+				<div class="soc-list__i">
+					<a class="soc-btn soc-btn_fb" href="{$theme_settings.header_facebook}" target="_blank">
+						<svg class="icon cent-icon" width="6" height="13">
+							<use xlink:href="#icon-fb"></use>
+						</svg>
+					</a>
+				</div>
+			{/if}
+			{if !empty($theme_settings.header_instagram)}
+				<div class="soc-list__i">
+					<a class="soc-btn soc-btn_ins" href="{$theme_settings.header_instagram}" target="_blank">
+						<img class="cent-icon" src="{$wa_theme_url}img/icon-instagram-color.svg" alt="" width="16" height="17">
+						<svg class="icon cent-icon" width="13" height="13">
+							<use xlink:href="#icon-instagram-monochrome"></use>
+						</svg>
+					</a>
+				</div>
+			{/if}
+			{if !empty($theme_settings.header_youtube)}
+				<div class="soc-list__i">
+					<a class="soc-btn soc-btn_ytb" href="{$theme_settings.header_youtube}" target="_blank">
+						<svg class="icon cent-icon" width="34" height="24">
+							<use xlink:href="#icon-yt-monochrome"></use>
+						</svg>
+					</a>
+				</div>
+			{/if}
+			{if !empty($theme_settings.header_telegram)}
+				<div class="soc-list__i">
+					<a class="soc-btn soc-btn_tlg" href="{$theme_settings.header_telegram}" target="_blank">
+						<svg class="icon cent-icon" width="13" height="12">
+							<use xlink:href="#icon-telegram"></use>
+						</svg>
+					</a>
+				</div>
+			{/if}
+			{if !empty($theme_settings.header_twitter)}
+				<div class="soc-list__i">
+					<a class="soc-btn soc-btn_tw" href="{$theme_settings.header_twitter}" target="_blank">
+						<svg class="icon cent-icon" width="14" height="10">
+							<use xlink:href="#icon-tw"></use>
+						</svg>
+					</a>
+				</div>
+			{/if}
+		</div>
+	</div>
+{elseif $theme_settings.header_socials_design eq "mono"}
+	<div class="soc-list soc-list_monotones">
+		<div class="soc-list__inner">
+			{if !empty($theme_settings.header_vk)}
+				<div class="soc-list__i">
+					<a class="soc-btn soc-btn_vk" href="{$theme_settings.header_vk}" target="_blank">
+						<svg class="icon cent-icon" width="13" height="7">
+							<use xlink:href="#icon-vk"></use>
+						</svg>
+					</a>
+				</div>
+			{/if}
+			{if !empty($theme_settings.header_facebook)}
+				<div class="soc-list__i">
+					<a class="soc-btn soc-btn_fb" href="{$theme_settings.header_facebook}" target="_blank">
+						<svg class="icon cent-icon" width="6" height="13">
+							<use xlink:href="#icon-fb"></use>
+						</svg>
+					</a>
+				</div>
+			{/if}
+			{if !empty($theme_settings.header_instagram)}
+				<div class="soc-list__i">
+					<a class="soc-btn soc-btn_ins" href="{$theme_settings.header_instagram}" target="_blank">
+						<svg class="icon cent-icon" width="13" height="13">
+							<use xlink:href="#icon-instagram-monochrome"></use>
+						</svg>
+					</a>
+				</div>
+			{/if}
+			{if !empty($theme_settings.header_youtube)}
+				<div class="soc-list__i">
+					<a class="soc-btn soc-btn_ytb" href="{$theme_settings.header_youtube}" target="_blank">
+						<svg class="icon cent-icon" width="34" height="24">
+							<use xlink:href="#icon-yt-monochrome"></use>
+						</svg>
+					</a>
+				</div>
+			{/if}
+			{if !empty($theme_settings.header_telegram)}
+				<div class="soc-list__i">
+					<a class="soc-btn soc-btn_tlg" href="{$theme_settings.header_telegram}" target="_blank">
+						<svg class="icon cent-icon" width="13" height="12">
+							<use xlink:href="#icon-telegram"></use>
+						</svg>
+					</a>
+				</div>
+			{/if}
+			{if !empty($theme_settings.header_twitter)}
+				<div class="soc-list__i">
+					<a class="soc-btn soc-btn_tw" href="{$theme_settings.header_twitter}" target="_blank">
+						<svg class="icon cent-icon" width="14" height="10">
+							<use xlink:href="#icon-tw"></use>
+						</svg>
+					</a>
+				</div>
+			{/if}
+		</div>
+	</div>
+{/if}
+{/strip}

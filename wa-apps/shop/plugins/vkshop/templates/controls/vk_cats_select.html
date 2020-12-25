@@ -1,0 +1,9 @@
+<select name="{$control_name}[category_id]">
+    {foreach $vk_cats as $group_key => $group}
+        <optgroup label="{$group_key}">
+            {foreach $group as $key => $cat}
+                <option value="{$key}" {if isset($settings.category_id) && $settings.category_id == $key}selected{/if}>{$cat}</option>
+            {/foreach}
+        </optgroup>
+    {/foreach}
+</select>

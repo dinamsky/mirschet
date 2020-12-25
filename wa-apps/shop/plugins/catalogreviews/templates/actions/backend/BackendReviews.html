@@ -1,0 +1,18 @@
+<script src="{shopCatalogreviewsWaHelper::getStaticUrl('js/vendor/codemirror/mode/smarty.js')}"></script>
+<script src="{shopCatalogreviewsWaHelper::getStaticUrl('js/vendor/codemirror/mode/smartymixed.js')}"></script>
+
+<div id="shop-catalogreviews-reviews-mount-root"></div>
+
+<script src="{shopCatalogreviewsWaHelper::getStaticUrl('assets/backend_reviews_page.bundle.js')}?v={shopCatalogreviewsWaHelper::getAssetVersion()}"></script>
+<link rel="stylesheet" href="{shopCatalogreviewsWaHelper::getStaticUrl('assets/backend_reviews_page.bundle.css')}?v={shopCatalogreviewsWaHelper::getAssetVersion()}">
+
+<script>
+	window.shop_catalogreviews_resource_base_url = {shopCatalogreviewsWaHelper::getStaticUrl('assets/')|json_encode};
+
+	var state = {$state|json_encode};
+	var mount_root_id = 'shop-catalogreviews-reviews-mount-root';
+
+	jQuery(function ($) {
+		window.catalogreviews_backend_reviews_controller.init(state, mount_root_id);
+	});
+</script>

@@ -1,0 +1,23 @@
+
+2020-11-24 15:28:57 109.252.117.215
+Unable to instantiate widget app_id=webasyst widget=currencyquotes for user contact_id=1 (does not exist or no access to app)
+
+2020-12-17 06:40:39 77.222.102.24
+oplata-i-dostavka/
+Uncaught exception SmartyException:
+Unable to load template file 'header_mobile/.html' in 'file:index.html' (0)
+#0 /var/www/u1240732/data/www/mirschetok.ru/wa-system/vendors/smarty3/sysplugins/smarty_internal_template.php(286): Smarty_Internal_TemplateBase->fetch(NULL, NULL, NULL, NULL, false, false, true)
+#1 /var/www/u1240732/data/www/mirschetok.ru/wa-cache/d88886/apps/shop/templates/compiled/shop_ru_RU/e0/34/30/e03430756807651b08f07f50ad845ca11ae35826.file.index.html.php(94): Smarty_Internal_Template->getSubTemplate('header_mobile/....', NULL, 'shop_ru_RU', NULL, NULL, Array, 0)
+#2 /var/www/u1240732/data/www/mirschetok.ru/wa-system/vendors/smarty3/sysplugins/smarty_internal_templatebase.php(186): content_5fdad33797a8b9_82302387(Object(Smarty_Internal_Template))
+#3 /var/www/u1240732/data/www/mirschetok.ru/wa-system/view/waSmarty3View.class.php(144): Smarty_Internal_TemplateBase->fetch('file:index.html', NULL)
+#4 /var/www/u1240732/data/www/mirschetok.ru/wa-system/layout/waLayout.class.php(152): waSmarty3View->fetch('file:index.html')
+#5 /var/www/u1240732/data/www/mirschetok.ru/wa-system/controller/waViewController.class.php(104): waLayout->display()
+#6 /var/www/u1240732/data/www/mirschetok.ru/wa-system/controller/waViewController.class.php(47): waViewController->display()
+#7 /var/www/u1240732/data/www/mirschetok.ru/wa-system/controller/waFrontController.class.php(263): waViewController->run(NULL)
+#8 /var/www/u1240732/data/www/mirschetok.ru/wa-system/controller/waFrontController.class.php(190): waFrontController->runController(Object(shopFrontendProductController), NULL)
+#9 /var/www/u1240732/data/www/mirschetok.ru/wa-system/controller/waFrontController.class.php(84): waFrontController->execute(NULL, 'frontend', 'product')
+#10 /var/www/u1240732/data/www/mirschetok.ru/wa-system/controller/waDispatch.class.php(358): waFrontController->dispatch()
+#11 /var/www/u1240732/data/www/mirschetok.ru/wa-system/controller/waDispatch.class.php(34): waDispatch->dispatchFrontend('oplata-i-dostav...')
+#12 /var/www/u1240732/data/www/mirschetok.ru/wa-system/waSystem.class.php(603): waDispatch->dispatch()
+#13 /var/www/u1240732/data/www/mirschetok.ru/index.php(7): waSystem->dispatch()
+#14 {main}

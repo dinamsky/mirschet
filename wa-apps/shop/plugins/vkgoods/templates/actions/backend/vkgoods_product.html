@@ -1,0 +1,29 @@
+<div>
+	<hr style="border-style: groove;border-width: 5px 0 0;"/>
+	<h4>ВК: Товары</h4>
+	<p class="hint"> Количество публикаций: {$vkprod['count']|escape}<br>
+	
+	{if $vkprod['count'] > 0 }
+	{if $vkprod['actual'] == false}
+	Есть <b>неактуальные</b> публикации
+	{else}
+	Все публикации актуальны
+	{/if}
+	{/if}
+	</p>
+	<hr />
+	
+	<input pid="{$pid}" id="vkg-add" type="button" class="button vkgoods" value="Опубликовать">
+	{if $vkprod['count'] > 0}
+	{if $vkprod['actual'] == false}
+		<input pid="{$pid}" id="vkg-upd" type="button" class="button vkgoods" value="Обновить">
+	{else}
+		<input pid="{$pid}" id="vkg-upd" type="button" class="button vkgoods" value="Обновлено" disabled="disabled">
+	{/if}
+	{if $vkprod['count'] > 0}
+		<input pid="{$pid|escape}" id="vkg-del" type="button" class="button vkgoods" value="Удалить">
+	{/if}
+	{/if}
+	<hr style="border-style: groove;border-width: 5px 0 0;"/>
+</div>
+<script src="{$wa_app_static_url}plugins/vkgoods/js/vkgoods_prd.js" type="text/javascript"></script>

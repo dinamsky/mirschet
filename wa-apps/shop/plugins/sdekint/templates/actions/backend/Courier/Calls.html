@@ -1,0 +1,49 @@
+<div class="block not-padded bordered-bottom">
+    <h1>Вызовы курьера</h1>
+</div>
+<div class="block not-padded">
+    <section class="block not-padded">
+        <table class="bordered light couriercalls__list">
+            <thead>
+            <tr>
+                <th class="min-width"></th>
+                <th>Код или номер накладной</th>
+                <th>Дата и время ожидания</th>
+                <th>Адрес прибытия курьера</th>
+                <th>Отправитель</th>
+                <th>Дата оформления</th>
+                <th></th>
+            </tr>
+            </thead>
+            <tbody>
+            {foreach $calls as $c}
+                <tr data-dispatch-number="{$c.dispatch_number}" data-code="{$c.code}" class="couriercalls__data-row"
+                    {if $c.dispatch_number}data-order-no="{$c.order_no}" data-number-ttn="{$c.number_ttn}"{/if}>
+                    <td class="min-width">{if $c.code || $c.dispatch_number}<i
+                            class="icon16 s-sdekint {if $c.code}runner{else}truck{/if}"></i>{/if}</td>
+                    <td>{if $c.code || $c.dispatch_number}{if $c.code}{$c.code}{else}<a
+                            href="?plugin=sdekint&module=printform&number={$c.dispatch_number}"
+                            target="_blank">{$c.dispatch_number}
+                            <i class="icon16 new-window"></i>
+                            </a>{/if}{else}???{/if}</td>
+                    <td class="align-center">{$c.call_date} {$c.time_beg}&ndash;{$c.time_end}</td>
+                    <td>{$c.address_string}</td>
+                    <td>{$c.sender}</td>
+                    <td class="align-center smaller">{$c.sent}</td>
+                    <td>
+                        <ul class="menu-h with-icons">
+                            {if $c.dispatch_number}
+                                <li><a href="#" class="nowrap js-action" data-action="delete"
+                                       data-js-confirm="Удалить накладную {$c.dispatch_number}?" title="Удалить"><i
+                                            class="icon16 delete"></i></a></li>{/if}
+                        </ul>
+                    </td>
+                </tr>
+            {/foreach}
+            </tbody>
+        </table>
+    </section>
+    <div class="pagination">
+        {$pagination}
+    </div>
+</div>

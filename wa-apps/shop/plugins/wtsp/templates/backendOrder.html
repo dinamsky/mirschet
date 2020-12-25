@@ -1,0 +1,232 @@
+<div class="wtsp-content" id="wtsp-content" style="display: none;">
+    <h2>Написать в WhatsApp</h2>
+    <form id="wtsp-whatsapp-form" action="#" method="post">
+        <div class="fields form width100px">
+            <div class="field">
+                <div class="name">Телефон</div>
+                <div class="value no-shift">
+                    <label>
+                        <input class="transport" type="text" name="phone" value="{$phone}">
+                    </label>
+
+                </div>
+            </div>
+            <div class="field">
+                <div class="name">Начать чат в</div>
+                <div class="value no-shift">
+                    <select id="transport-email" name="sender">
+                        <option value="web">web</option>
+                        <option value="mob">приложение</option>
+                    </select>
+                </div>
+            </div>
+            <div class="field">
+                <div class="name">Смена номера телефона с 8 на 7</div>
+                <div class="value no-shift">
+                    <input type="checkbox" title="Смена номера телефона с 8 на 7" class="checkbox wtsp-toggle-status" value="1"   {if $wtsp_plugin == 1}checked{/if}>
+                </div>
+            </div>
+        </div>
+        <textarea name="text" placeholder="Сообщение"></textarea>
+
+        <div>
+            <span>
+                <input class="button green" type="submit" value="Написать в Whatsapp" title="Написать в Whatsapp"> или <a class="cancel inline-link" href="#"><b><i>отмена</i></b></a>
+            </span>
+            <div class="float-right block">
+                <a href="javascript:void(0);" id="wtsp-message-template"  data-order_id="{$order_id}"><i class="icon16 settings"></i>Шаблоны сообщений</a>
+            </div>
+        </div>
+        <div>
+            <br><br>
+            <a href="javascript:void(0);" id="wtsp-message-save" class="inline-link">
+                <i class="icon16 add"></i><b><i>Добавить комментарий</i></b>
+            </a>
+        </div>
+        <input type="hidden" name="id" value="{$order_id}">
+        <input type="hidden" name="action_id" value="comment">
+    </form>
+</div>
+{*viber start*}
+<div class="wtsp-viber-content" id="wtsp-content" style="display: none;">
+    <h2>Написать в Viber</h2>
+    <form id="wtsp-viber-form" action="#" method="post">
+        <div class="fields form width100px">
+            <div class="field">
+                <div class="name">Телефон</div>
+                <div class="value no-shift">
+                    <label>
+                        <input class="transport" type="text" name="phone" value="{$phone}">
+                    </label>
+
+                </div>
+            </div>
+            <div class="field">
+                <div class="name">Начать чат в</div>
+                <div class="value no-shift">
+                    <select id="transport-email" name="sender">
+                        <option value="web">c десктопа</option>
+                        <option value="mob">с мобильного</option>
+                    </select>
+                </div>
+            </div>
+            <div class="field">
+                <div class="name">Действия</div>
+                <div class="value no-shift">
+                    <select id="transport-actions" name="senactions">
+                        <option value="web">начать чат</option>
+                        <option value="mob">отправить сообщение</option>
+                    </select>
+                </div>
+            </div>
+            <div class="field">
+                <div class="name">Смена номера телефона с 8 на 7</div>
+                <div class="value no-shift">
+                    <input type="checkbox" title="Смена номера телефона с 8 на 7" class="checkbox wtsp-toggle-status" value="1"   {if $wtsp_plugin == 1}checked{/if}>
+                </div>
+            </div>
+        </div>
+        <textarea name="text" placeholder="Сообщение"></textarea>
+        <div>
+            <span>
+                <input class="button green" type="submit" value="Написать в Viber" title="Написать в Viber"> или <a class="cancel inline-link" href="#"><b><i>отмена</i></b></a>
+            </span>
+            <div class="float-right block">
+                <a href="javascript:void(0);" id="wtsp-message-template"  data-order_id="{$order_id}"><i class="icon16 settings"></i>Шаблоны сообщений</a>
+            </div>
+        </div>
+        <div>
+            <br><br>
+            <a href="javascript:void(0);" id="wtsp-message-save" class="inline-link">
+                <i class="icon16 add"></i><b><i>Добавить комментарий</i></b>
+            </a>
+        </div>
+        <input type="hidden" name="id" value="{$order_id}">
+        <input type="hidden" name="action_id" value="comment">
+    </form>
+</div>
+{*viber end*}
+{*telegram start*}
+<div class="wtsp-telegram-content" id="wtsp-content" style="display: none;">
+    <h2>Написать в Telegram</h2>
+    <form id="wtsp-telegram-form" action="#" method="post">
+        <div class="fields form width100px">
+            <div class="field">
+                <div class="name">Логин</div>
+                <div class="value no-shift">
+                    <label>
+                        <input class="transport" type="text" name="phone" value="">
+                    </label>
+
+                </div>
+            </div>
+            <div class="field">
+                <div class="name">Действия</div>
+                <div class="value no-shift">
+                    <select id="transport-actions" name="senactions">
+                        <option value="web">начать чат</option>
+                        <option value="mob">отправить сообщение</option>
+                    </select>
+                </div>
+            </div>
+        </div>
+        <textarea name="text" placeholder="Сообщение"></textarea>
+        <div>
+            <span>
+                <input class="button green" type="submit" value="Написать в Telegram" title="Написать в Telegram"> или <a class="cancel inline-link" href="#"><b><i>отмена</i></b></a>
+            </span>
+            <div class="float-right block">
+                <a href="javascript:void(0);" id="wtsp-message-template"  data-order_id="{$order_id}"><i class="icon16 settings"></i>Шаблоны сообщений</a>
+            </div>
+        </div>
+        <div>
+            <br><br>
+            <a href="javascript:void(0);" id="wtsp-message-save" class="inline-link">
+                <i class="icon16 add"></i><b><i>Добавить комментарий</i></b>
+            </a>
+        </div>
+        <input type="hidden" name="id" value="{$order_id}">
+        <input type="hidden" name="action_id" value="comment">
+    </form>
+</div>
+{*telegram end*}
+{*Skype start*}
+<div class="wtsp-skype-content" id="wtsp-content" style="display: none;">
+    <h2>Написать в Skype</h2>
+    <form id="wtsp-skype-form" action="#" method="post">
+        <div class="fields form width100px">
+            <div class="field">
+                <div class="name">Логин</div>
+                <div class="value no-shift">
+                    <label>
+                        <input class="transport" type="text" name="phone" value="">
+                    </label>
+
+                </div>
+            </div>
+            <div class="field">
+                <div class="name">Действия</div>
+                <div class="value no-shift">
+                    <select id="transport-actions" name="senactions">
+                        <option value="web">начать чат</option>
+                        <option value="mob">отправить сообщение</option>
+                    </select>
+                </div>
+            </div>
+        </div>
+        <textarea name="text" placeholder="Сообщение"></textarea>
+        <div>
+            <span>
+                <input class="button green" type="submit" value="Написать в Skype" title="Написать в Skype"> или <a class="cancel inline-link" href="#"><b><i>отмена</i></b></a>
+            </span>
+            <div class="float-right block">
+                <a href="javascript:void(0);" id="wtsp-message-template"  data-order_id="{$order_id}"><i class="icon16 settings"></i>Шаблоны сообщений</a>
+            </div>
+        </div>
+        <div>
+            <br><br>
+            <a href="javascript:void(0);" id="wtsp-message-save" class="inline-link">
+                <i class="icon16 add"></i><b><i>Добавить комментарий</i></b>
+            </a>
+        </div>
+        <input type="hidden" name="id" value="{$order_id}">
+        <input type="hidden" name="action_id" value="comment">
+    </form>
+</div>
+{*Skype end*}
+<script>
+function phone_number_change(enabled){
+    var divform = $("#wtsp-content form");
+    var phone = "{$phone}";
+    phone = phone.toString();
+
+    if(phone == "") return;
+
+    if(enabled && phone[0] == 8 && phone.length > 8) {
+        phone =  "7" + phone.slice(1);
+        divform.find('input[name="phone"]').val(phone);
+
+    } else {
+        divform.find('input[name="phone"]').val(phone);
+    }
+
+}
+phone_number_change({$wtsp_plugin});
+$('.wtsp-toggle-status').iButton( { labelOn : "", labelOff : "", className: 'mini' } ).change(function() {
+    var self = $(this);
+    var enabled = self.is(':checked');
+
+    var d = new Date();
+    d.setTime(d.getTime() + (30 * 24 * 60 * 60 * 1000));
+    date = "expires="+d.toUTCString();
+
+    if (enabled) {
+        phone_number_change(1);
+        enabled = 1;
+        document.cookie = "wtsp_plugin=1; " + date + " ; path=/";
+    } else {
+        phone_number_change(0);
+        document.cookie = "wtsp_plugin=; " + date + " ; path=/";
+    }
+});
+</script>

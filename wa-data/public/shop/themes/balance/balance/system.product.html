@@ -1,0 +1,78 @@
+{strip}
+{$_theme_config.brief_features = []}
+{if $theme_settings.shop_productpage_brief_features_limit < 0}{$theme_settings.shop_productpage_brief_features_limit = 0}{/if}
+{if $theme_settings.shop_productpage_brief_features_on}
+	{$_brief_features_count = 0}
+	{foreach $product.features as $f_code => $f_value}
+		{if $_brief_features_count >= $theme_settings.shop_productpage_brief_features_limit}{break}{/if}
+		{if $features[$f_code].type ne 'divider'}
+			{$_theme_config.brief_features[$f_code] = $f_value}
+			{$_brief_features_count = $_brief_features_count + 1}
+		{/if}
+	{/foreach}
+{/if}
+{$_is_dialog = ($wa->get('cart') || waRequest::isXMLHttpRequest())}
+{function name=in_stock n=0 low=5 critical=2}
+	{if $n > $low or $n === null}
+		<div class="stock-info stock">
+			<svg class="icon" width="10" height="7">
+				<use xlink:href="#icon-tick"></use>
+			</svg>
+			<div class="stock-info__text">[`In stock`]</div>
+		</div>
+	{elseif $n > $critical}
+		<div class="stock-info less-stock">
+			<svg class="icon" width="10" height="7">
+				<use xlink:href="#icon-tick"></use>
+			</svg>
+			<div class="stock-info__text">{_w("Only a few items left")}</div>
+		</div>
+	{elseif $n > 0 && $n != 1}
+		<div class="stock-info less-stock">
+			<svg class="icon" width="10" height="7">
+				<use xlink:href="#icon-tick"></use>
+			</svg>
+			<div class="stock-info__text">{_w("Only %d left in stock", "Only %d left in stock", $n)}</div>
+		</div>
+	{elseif $n == 1}
+		<div class="stock-info single-stock">
+			<div class="stock-info__text">{_w("Only %d left in stock", "Only %d left in stock", $n)}</div>
+		</div>
+	{else}
+		<div class="stock-info no-stock">
+			<div class="stock-info__text">{if $wa->shop->settings('ignore_stock_count')}[`Pre-order only`]{else}[`Out of stock`]{/if}</div>
+		</div>
+	{/if}
+{/function}
+{if $theme_settings.products_show_wishlist}
+	{$theme_favorite = explode(",",waRequest::cookie('shop_favorite'))}
+{/if}
+{if $theme_settings.products_show_compare}
+	{$compare = explode(",",waRequest::cookie('shop_compare'))}
+{/if}
+{$_infoblocks = []}
+{if !empty($theme_settings.shop_productpage_info_features_1_title) || !empty($theme_settings.shop_productpage_info_features_1_body)}{$_infoblocks[] = [
+	'icon' => $theme_settings.shop_productpage_info_features_1_icon,
+	'link' => $theme_settings.shop_productpage_info_features_1_link,
+	'title' => $theme_settings.shop_productpage_info_features_1_title,
+	'body' => $theme_settings.shop_productpage_info_features_1_body
+]}{/if}
+{if !empty($theme_settings.shop_productpage_info_features_2_title) || !empty($theme_settings.shop_productpage_info_features_2_body)}{$_infoblocks[] = [
+	'icon' => $theme_settings.shop_productpage_info_features_2_icon,
+	'link' => $theme_settings.shop_productpage_info_features_2_link,
+	'title' => $theme_settings.shop_productpage_info_features_2_title,
+	'body' => $theme_settings.shop_productpage_info_features_2_body
+]}{/if}
+{if !empty($theme_settings.shop_productpage_info_features_3_title) || !empty($theme_settings.shop_productpage_info_features_3_body)}{$_infoblocks[] = [
+	'icon' => $theme_settings.shop_productpage_info_features_3_icon,
+	'link' => $theme_settings.shop_productpage_info_features_3_link,
+	'title' => $theme_settings.shop_productpage_info_features_3_title,
+	'body' => $theme_settings.shop_productpage_info_features_3_body
+]}{/if}
+{if !empty($theme_settings.shop_productpage_info_features_4_title) || !empty($theme_settings.shop_productpage_info_features_4_body)}{$_infoblocks[] = [
+	'icon' => $theme_settings.shop_productpage_info_features_4_icon,
+	'link' => $theme_settings.shop_productpage_info_features_4_link,
+	'title' => $theme_settings.shop_productpage_info_features_4_title,
+	'body' => $theme_settings.shop_productpage_info_features_4_body
+]}{/if}
+{/strip}

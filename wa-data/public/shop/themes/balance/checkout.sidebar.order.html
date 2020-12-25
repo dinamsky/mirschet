@@ -1,0 +1,48 @@
+{strip}
+{$_cart_items = $wa->shop->cart->items()}
+{if $_cart_items}
+	{$cart_total = $wa->shop->cart->total()}
+	<div class="check-brief">
+		<div class="check-brief__mobile-top">
+			<div class="check-brief__mobile-top-txt grey font-10">[`Subtotal`]:</div>
+			<div class="check-brief__mobile-top-sum font-12">{shop_currency($cart_total, true)}</div>
+		</div>
+		<div class="check-brief__main">
+			<div class="check-brief__content font-13">
+				<h4 class="check-brief__title bold u-cen-txt">[`Ordered products`]</h4>
+				<ol class="check-brief__list">
+					{foreach $_cart_items as $item}
+						<li class="check-brief__item">
+							<div class="check-brief__item-name">{$item.product.name|escape}</div>
+							<ul class="check-brief__options-list">
+								<li class="check-brief__item-opt">
+									<div class="check-brief__item-opt-dt grey">{$item.quantity} x {shop_currency($item.price, true)}</div>
+								</li>
+								{if isset($item.services)}
+									{foreach $item.services as $service}
+										<li class="check-brief__item-opt">
+											<div class="check-brief__item-opt-dd">+ {$service.name|escape}</div>
+											{if $service.price > 0}
+												<div class="check-brief__item-opt-dt grey">{shop_currency($service.price, true)}</div>
+											{/if}
+										</li>
+									{/foreach}
+								{/if}
+							</ul>
+						</li>
+					{/foreach}
+					{if $cart_total > 0}
+						<li class="check-brief__item check-brief__item_total font-16 single-line">
+							<div class="check-brief__total-text">[`Subtotal`]</div>
+							<div class="check-brief__total-sum bold js-cart-total">{shop_currency($cart_total, true)}</div>
+						</li>
+					{/if}
+				</ol>
+			</div>
+			<a class="check-brief__mobile-hide u-cen-txt" href="#">
+				<span>[`hide details`]</span>
+			</a>
+		</div>
+	</div>
+{/if}
+{/strip}

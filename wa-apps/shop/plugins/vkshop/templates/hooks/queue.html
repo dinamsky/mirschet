@@ -1,0 +1,78 @@
+<div style="border: 1px solid #ccc; padding-left: 3px;">
+    <li>
+        <a href="?action=importexport#/vkshop/">
+            <i class="vkshop16_disable-undisabled"></i>
+            [`VK Shop`]
+        </a>
+    </li>
+    <li>
+        <a href="javascript:void(0);" onclick="$.Vkshop.disable();">
+            <i class="icon16 lock"></i>
+            [`Disable products`]
+        </a>
+    </li>
+    <li>
+        <a href="javascript:void(0);" onclick="$.Vkshop.undisable();">
+            <i class="icon16 lock-unlocked"></i>
+            [`Undisable products`]
+        </a>
+    </li>
+    {*
+    <li>
+        <i class="icon16 folders" style="line-height: 16px; margin-top: 5px;"></i>
+        {if !empty($groups)}
+            <select id="vkshop-group-selector" style="width: 150px; height: 16px; line-height: 16px; font-size: 12px;">
+                {foreach $groups as $group}
+                    <option value="{$group.id}">
+                        {$group.name}
+                    </option>
+                {/foreach}
+            </select>
+        {else}
+            <span style="color: red;">[`No groups defined in the plugin settings`]</span>
+        {/if}
+    </li>
+    *}
+    <li>
+        <a href="javascript:void(0);" onclick="$.Vkshop.queue();">
+            <i class="icon16 plus"></i>
+            [`Add to VK Shop queue`]
+        </a>
+    </li>
+    <li>
+        <a href="javascript:void(0);" onclick="$.Vkshop.clearqueue();">
+            <i class="icon16 broom-bw"></i>
+            [`Clear VK Shop queue`]
+        </a>
+    </li>
+    <li>
+        <i class="icon16 no"></i>
+        [`Disabled`] - <span id="vkshop-disabled">{$disabled}</span>
+    </li>
+    <li>
+        <i class="icon16 sync"></i>
+        [`Queued`] - <span id="vkshop-queued">{$queued}</span>
+    </li>
+</div>
+<script type="text/javascript">
+    $(function () {
+        if (!$("link#s-plugin-vkshop-stylesheet").length)
+            $('<link href="{$wa_app_static_url}plugins/vkshop/css/vkshop.css?_=' + Date.now() + '" rel="stylesheet" id="s-plugin-vkshop-stylesheet">')
+                    .appendTo("head");
+        $.when(
+                $.Deferred(function (deferred) {
+                    if ($.Vkshop) deferred.resolve();
+                    else {
+                        $.shop.trace('Loading vkshop.js', []);
+                        $.getScript('{$wa_app_static_url}plugins/vkshop/js/vkshop.{if !$wa->debug()}min.{/if}js', deferred.resolve)
+                    }
+                })
+        ).done(function () {
+            $.wa.locale = $.extend(true, $.wa.locale, {
+                "Please select at least one product": '[`Please select at least one product`]',
+                "No groups defined in the plugin settings": '[`No groups defined in the plugin settings`]'
+            });
+            $.shop.trace('$.Vkshop initialized', []);
+        });
+    });
+</script>

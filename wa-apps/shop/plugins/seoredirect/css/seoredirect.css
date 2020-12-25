@@ -1,0 +1,125 @@
+.button {
+  cursor: pointer;
+}
+.seoredirect-plugin-header {
+  margin-bottom: 1.2em;
+}
+.seoredirect-display-hover .seoredirect-display-hover-control {
+  display: none;
+}
+.seoredirect-display-hover:hover .seoredirect-display-hover-control {
+  display: inline-block;
+}
+.seoredirect-strikethrough {
+  text-decoration: line-through;
+}
+.seoredirect-search-block {
+  padding: 2px 10px !important;
+}
+.seoredirect-search-input {
+  width: 100%;
+  padding: 5px;
+  border-top: 1px;
+  border-left: 0px;
+  border-right: 0px;
+  outline: none;
+}
+.seoredirect-form-block {
+  display: table;
+}
+.seoredirect-form-block .field {
+  display: table-row;
+}
+.seoredirect-form-block .field .name {
+  display: table-cell;
+  white-space: nowrap;
+  width: auto;
+  vertical-align: top;
+  padding: 10px 20px 5px 5px;
+}
+.seoredirect-form-block .field .value {
+  display: table-cell;
+  vertical-align: top;
+  padding: 5px;
+}
+.seoredirect-form-wrapper {
+  display: table-cell;
+  float: none;
+}
+.seoredirect-code-wrapper {
+  display: table-cell;
+  padding-left: 40px;
+}
+.seoredirect-code {
+  background: #f7f7f7;
+  padding: 18px 25px 5px;
+  border-radius: 5px;
+  min-width: 160px;
+  box-shadow: 0 3px 5px rgba(0, 0, 0, 0.1);
+  border: 1px solid #efefef;
+}
+@media (min-width: 1250px) {
+}
+@media (max-width: 1250px) {
+}
+.seoredirect-code-input {
+  padding: 1px;
+  color: #777777;
+  display: inline-block;
+  background: #eeeeee;
+  border: 1px solid #eeeeee;
+  border-radius: 3px;
+}
+.seoredirect-code p {
+  padding: 1px;
+}
+.seoredirect-code code {
+  font-size: 12px;
+  width: 100%;
+  color: #6b6b6b;
+}
+.seoredirect-code-subheader {
+  font-size: 13px;
+  white-space: nowrap;
+  margin-bottom: 5px;
+  display: block;
+  color: black;
+}
+.seoredirect-regexp-examples-link .icon16 {
+  margin-right: 5px;
+  vertical-align: text-top;
+}
+#seoredirect-settings table td,
+#seoredirect-settings table th {
+  white-space: nowrap;
+}
+#seoredirect-settings summary {
+  margin: 5px;
+  cursor: pointer;
+  padding: 5px;
+}
+#seoredirect-settings .clickable {
+  cursor: pointer;
+}
+#seoredirect-settings .custom-link {
+  color: #03c;
+}
+#seoredirect-settings .custom-link:hover {
+  color: red;
+}
+#seoredirect-settings span.button {
+  padding: 5px 15px 6px;
+}
+#seoredirect-settings div.block {
+  padding-left: 0;
+  padding-right: 0;
+}
+#seoredirect-settings h3 {
+  margin-bottom: 1.2em;
+}
+#seoredirect-settings table th {
+  color: black;
+}
+#seoredirect-settings table th a {
+  color: black;
+}

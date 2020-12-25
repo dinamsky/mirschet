@@ -1,0 +1,48 @@
+{strip}
+{$_theme_config_sidebar = explode(",",$theme_settings.blog_sidebar_content_sections)}
+{$_theme_config.sidebar = []}
+{foreach $_theme_config_sidebar as $section}
+	{if $section eq "blogs"}
+		{$_blogs_list = $wa->blog->blogs()}
+		{if !empty($_blogs_list)}
+			{$_theme_config.sidebar[] = ['type' => 'section', 'value' => $section]}
+		{/if}
+	{elseif $section eq "blog-pages"}
+		{$_blogs_pages = $wa->blog->pages()}
+		{if !empty($_blogs_pages)}
+			{$_theme_config.sidebar[] = ['type' => 'section', 'value' => $section]}
+		{/if}
+	{elseif $section eq "calendar"}
+		{$timeline = $wa->blog->timeline()}
+		{if !empty($timeline)}
+			{$_theme_config.sidebar[] = ['type' => 'section', 'value' => $section]}
+		{/if}
+	{elseif $section eq "blog-search"}
+		{$_theme_config.sidebar[] = ['type' => 'section', 'value' => $section]}
+	{/if}
+{/foreach}
+{if !empty($_theme_config.sidebar) && $wa->globals('bodyClass') ne 'account-page'}
+	<aside class="info-pg__sidebar col-1-of-5">
+		<div class="info-sdb">
+			{foreach $_theme_config.sidebar as $section}
+				{if $section.type eq "section"}
+					{include file="`$wa_active_theme_path`/sidebar.`$section.value`.html" inline}
+				{else}
+					<div class="info-sdb__wr">
+						{include file="string:`$section.value`" inline}
+					</div>
+				{/if}
+			{/foreach}
+			<!-- PLUGINS -->
+			{* @event (frontend_action_default|frontend_action_post|frontend_action_page|frontend_action_error).%plugin_id%.sidebar *}
+			{foreach $frontend_action as $plugin => $output}
+			  {if !empty($output.sidebar)}
+				  <div class="info-sdb__wr {$plugin}">
+					  {$output.sidebar}
+				  </div>
+			  {/if}
+			{/foreach}
+		</div>
+	</aside>
+{/if}
+{/strip}

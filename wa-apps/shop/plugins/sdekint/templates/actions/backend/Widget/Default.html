@@ -1,0 +1,73 @@
+<div class="block not-padded bordered-bottom">
+    <h1>Управление виджетами</h1>
+</div>
+<div class="block not-padded">
+    <div class="sidebar right200px">
+        <ul class="menu-v with-icons">
+            <li><a href="#widgetEdit"><i class="icon16 add"></i>Добавить конфигурацию</a></li>
+        </ul>
+    </div>
+    <div class="content right200px">
+        <div class="block not-padded right-padded">
+            <div id="widget_list">
+                {if $data}
+                <table class="light">
+                    <tr>
+                        <th class="min-width">ID#</th>
+                        <th>Наименование</th>
+                        <th>Тип</th>
+                        <th>Расчетный плагин</th>
+                        <th class="min-width"></th>
+                    </tr>
+                {foreach $data as $c}
+                    <tr data-id="{$c.id}">
+                        <td>{$c.id}</td>
+                        <td>{$c.name|escape}</td>
+                        <td>{if $c.type === 'legacy'}Виджет с сайта СДЭК{/if}</td>
+                        <td>{strip}
+                            {if !isset($c['settings']) || !isset($c.settings['method']) || !is_array($c.settings['method'])}
+                                <i>Неверный или удаленный метод</i>
+                                {else}
+                                {$c.settings.method.name} ({$c.settings.method.id})
+                            {/if}
+                            {/strip}</td>
+                        <td>
+                            <a href="#widgetEdit/{$c.id}" title="Редактировать"><i class="icon16 edit"></i></a>
+                            <a href="#" data-js-action="delete" title="Удалить"><i class="icon16 delete"></i></a>
+                        </td>
+                    </tr>
+                {/foreach}
+                </table>
+                <div class="pagination">{$pagination}</div>
+                {/if}
+            </div>
+        </div>
+    </div>
+</div>
+{capture name="js-template-DeleteWidgetConfigDialog"}
+    <div class="sdekint-dialog-wrapper is-full-screen" id="sdekint-widgetconfig-dialog">
+        <div class="sdekint-dialog-background"></div>
+        <div class="sdekint-dialog-block is-animated alert-dialog compact-header" style="min-width: 450px; min-height: 200px">
+            <header class="sdekint-dialog-header">
+                <h3>Подтверждение удаления</h3>
+            </header>
+            <div class="sdekint-dialog-content" style="overflow: auto; border: none">
+                <div class="block double-padded">
+                    {literal}<p class="bold red align-center">{{>message}}</p>{/literal}
+                </div>
+            </div>
+            <footer class="sdekint-dialog-footer" style="box-sizing: border-box;position: absolute; bottom: 0; padding: 12px; margin: 0; border-top: 1px solid #f3f3f3; width: 100%; text-align: right">
+                <div class="sdekint-actions nowrap">
+                    <button type="button" class="red submit button sdekint-button">[`Delete`]</button>
+                    <button type="button" class="button js-close-dialog sdekint-button">[`Cancel`]</button>
+                </div>
+            </footer>
+        </div>
+    </div>
+{/capture}
+{foreach $smarty.capture as $name => $template}{if strpos($name, 'js-template')==0}
+    <script id="{substr($name, 12)}" type="text/x-jsrender">
+        {$template}
+    </script>
+{/if}
+{/foreach}

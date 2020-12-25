@@ -1,0 +1,135 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: shop/plugins/region\n"
+"POT-Creation-Date: 2015-06-01 00:00+0400\n"
+"PO-Revision-Date: \n"
+"Last-Translator: shop/plugins/region\n"
+"Language-Team: shop/plugins/region\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=3; plural=((((n%10)==1)&&((n%100)!=11))?(0):(((((n%10)>=2)&&((n%10)<=4))&&(((n%100)<10)||((n"
+"%100)>=20)))?(1):2));\n"
+"X-Poedit-SourceCharset: utf-8\n"
+"X-Poedit-Basepath: .\n"
+"X-Generator: Poedit 1.8.6\n"
+"Language: ru_RU\n"
+"X-Poedit-SearchPath-0: .\n"
+"X-Poedit-SearchPath-1: .\n"
+
+msgid "Regions on subdomains"
+msgstr "Регионы на поддоменах"
+
+msgid "Divide areas into separate subdomains."
+msgstr "Позволяет разнести разные города на поддомены"
+
+msgid "Using this code, you can make a conclusion helper \"Regions for subdomains\" in the right place of your theme."
+msgstr "Используя этот код Вы можете осуществить вывод хелпера \"Регионы на поддоменах\" в нужном месте вашей темы оформления."
+
+msgid "Use this code on your page \"Contacts\"."
+msgstr "Используйте этот код на странице \"Контакты\"."
+
+msgid "Use this code on your page \"Shipping\"."
+msgstr "Используйте этот код на странице \"Доставка\"."
+
+msgid "Switch plugin"
+msgstr "Статус плагина"
+
+msgid "Save"
+msgstr "Сохранить"
+
+msgid "Saved"
+msgstr "Сохранено"
+
+msgid "On"
+msgstr "Включен"
+
+msgid "Off"
+msgstr "Выключен"
+
+msgid "Access error! You cannot save the template. Check write permissions in the folder "
+msgstr "Ошибка доступа! Не удаётся сохранить шаблон. Проверьте права на запись в папку "
+
+msgid "HTML (to get the default template to clear the field)"
+msgstr "HTML (для получения шаблона по умолчанию очистите поле)"
+
+msgid "Template helper"
+msgstr "Шаблон хелпера"
+
+msgid "Russian"
+msgstr "Русский"
+
+msgid "English"
+msgstr "Английский"
+
+msgid "Region (ru)"
+msgstr "Регион (ru)"
+
+msgid "Region (en)"
+msgstr "Регион (en)"
+
+msgid "Subdomain"
+msgstr "Поддомен"
+
+msgid "The code in &lt;head&gt;"
+msgstr "Код в &lt;head&gt;"
+
+msgid "Subdomains / Regions"
+msgstr "Поддомены / Регионы"
+
+msgid "Your city"
+msgstr "Ваш город"
+
+msgid "Number of columns"
+msgstr "Количество столбов"
+
+msgid "The number of columns in the dialog select the region."
+msgstr "Количество столбцов в диалоге выбора региона."
+
+msgid "Сolumn width"
+msgstr "Ширина столбца"
+
+msgid "The column width in the dialog, select the region."
+msgstr "Ширина столбца в диалоге выбора региона"
+
+msgid "jQuery UI Themes"
+msgstr "Темы jQuery UI"
+
+msgid "Add subdomain"
+msgstr "Добавить поддомен"
+
+msgid "Autosave settings"
+msgstr "Автосохранение настроек"
+
+msgid "Template &lt;title&gt;"
+msgstr "Шаблон &lt;title&gt;"
+
+msgid "First fill in all the subdomains"
+msgstr "Сначала заполните все поддомены"
+
+msgid "Before saving please correct the duplicate subdomains"
+msgstr "Перед сохранением исправьте дубликаты поддоменов"
+
+msgid "Template &lt;description&gt;"
+msgstr "Шаблон &lt;description&gt;"
+
+msgid "Use this code to get the name of the region."
+msgstr "Используйте этот код, чтобы получить название региона/города"
+
+msgid "Use this code to get the value of phrase."
+msgstr "Используйте этот код, чтобы получить значение поля Фраза, для текущего региона"
+
+msgid "Switch WYSIWYG"
+msgstr "Включить визуальный редактор"
+
+msgid "Selection method"
+msgstr "Способ выбора"
+
+msgid "The method of choosing a subdomain by the user."
+msgstr "Способ выбор поддомена/региона пользователем"
+
+msgid "Deprecated"
+msgstr "Устаревшие функции"
+
+msgid "All subdomains will be saved/created as mirrors of the main subdomain/region."
+msgstr "Все поддомены, будут сохранены/созданы как зеркала основного поддомена/региона."

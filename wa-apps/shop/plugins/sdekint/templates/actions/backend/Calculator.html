@@ -1,0 +1,133 @@
+<div class="block not-padded bordered-bottom">
+    <h1>Калькулятор доставки</h1>
+</div>
+<div class="block double-padded">
+    <div class="row">
+        <div class="block one-half" style="min-height: 300px">
+            <form class="wa-form" style="min-height: 300px" id="s-sdekint-calculator-form">
+                <div class="field">
+                    <div class="name">Откуда</div>
+                    {$from = []}
+                    {if $sender_city && $sender_city.id}
+                        {$from = shopSdekintPlugin::helper()->cdekCityByCode($sender_city.id)}
+                    {/if}
+                    <div class="value">
+                        <select id="s-sdekint-country-from" style="width: 200px">
+                            {if $from && $from.Country}
+                                <option value="{$from.Country.iso3letter}">{$from.Country.name}</option>{/if}
+                        </select>
+                        <select id="s-sdekint-city-from" class="long" style="width: 250px">{if $from && $from.short_full}
+                                <option value="{$from.code}">{$from.short_full}</option>
+                        {/if}</select>
+                    </div>
+                </div>
+                <div class="field">
+                    <div class="name">Куда</div>
+                    <div class="value">
+                        <select id="s-sdekint-country-to" style="width: 200px" name=""></select>
+                        <select id="s-sdekint-city-to" class="long" style="width: 250px"></select>
+                    </div>
+                </div>
+                <div class="field">
+                    <div class="name">Вес (кг.)</div>
+                    <div class="value"><input type="number" step="0.01" class="short numerical" placeholder="0.5"
+                                              min="0" name="weight"></div>
+                </div>
+                <div class="field">
+                    <div class="name">Габариты (см.)</div>
+                    <div class="value">
+                        <input type="number" step="1" min="1" class="short numerical" name="sizeX" placeholder="5"> &times;
+                        <input type="number" step="1" min="1" class="short numerical" name="sizeY" placeholder="5"> &times;
+                        <input type="number" step="1" min="1" class="short numerical" name="sizeZ" placeholder="5">
+                    </div>
+                </div>
+                <div class="field submit">
+                    <div class="submit value">
+                        <button type="submit" class="green button">Рассчитать</button>
+                        <span class="js-messages"></span>
+                    </div>
+                </div>
+            </form>
+        </div>
+        <div class="block one-half" id="calc-result">
+            <div class="block" id="city-to-info"></div>
+            <div id="s-sdekint-tariffs-container" class="block" style="padding-top:0"></div>
+        </div>
+        <div class="clear-both"></div>
+    </div>
+</div>
+<div class="clear"></div>
+<script id="CityToTemplate" type="text/x-jsrender">{literal}
+    {{if city}}
+        <h2>{{>~humanize(city)}}</h2>
+        {{if city.pod_max === 0}}
+        <p class="warning"><i class="icon16 exclamation"></i>В выбранном городе нет доставки с наложенным платежом. Только оплаченные заказы!</p>
+        {{else city.pod_max > 0}}
+            <p class="warning"><i class="icon16 exclamation"></i>В выбранном городе ограничен прием наложенного платежа.
+                Максимальная сумма получаемая с получателя {{:~monetary(city.pod_max)}}!</p>
+        {{/if}}
+    {{/if}}
+{/literal}</script>
+<script id="CalcResult" type="text/x-jsrender">{literal}
+    <table id="s-sdekint-tariff-list">
+        <caption>Доступные тарифы</caption>
+            <thead>
+            <tr>
+                <th>Тариф, режим доставки</th>
+                <th>Срок, дней</th>
+                <th>Стоимость</th>
+            </tr>
+            </thead>
+    {{for tariffs}}
+    <tr>
+        <td><b>{{>name}}</b>, <i>{{:~humanizeDelivery(from)}}&ndash;{{:~humanizeDelivery(to)}}</i></td>
+        <td class="align-center">{{:~daysOfDelivery(deliveryPeriodMin, deliveryPeriodMax)}}</td>
+        <td class="monetary">{{:~monetary(priceByCurrency)}}</td>
+    </tr>
+    {{/for}}
+    </table>
+    {{if hasPoints}}
+        <a href="javascript:void(0)" class="sdekint-point-map-btn"><i class="icon16 map"></i>Пункты выдачи на карте</a>
+    {{/if}}
+{/literal}</script>
+<script id="CalcErrorsTemplate" type="text/x-jsrender">{literal}
+    <div class="block error">
+        {{if errors.length > 1}}
+        <ul>
+            {{for errors}}<li>{{>#data[0]}}</li>
+            {{/for}}
+        </ul>
+        {{else errors.length === 1}}
+        {{/if}}
+    </div>
+{/literal}</script>
+<script type="text/x-jsrender" id="MapDialogTemplate">{literal}
+    <div class="sdekint-dialog-wrapper is-full-screen sdekint-map-dialog" id="sdekint-map-dialog">
+        <div class="sdekint-dialog-background"></div>
+        <div class="sdekint-dialog-block is-animated gray-header compact-header">
+            <header class="sdekint-dialog-header" style="box-sizing:border-box; height:24px">
+                <h3>Пункты выдачи заказов</h3>
+                <span class="sdekint-dialog-close-button"><a href="#">&times;</a></span>
+            </header>
+            <div class="sdekint-dialog-content" style="padding:0; height: 100%; box-sizing:border-box">
+                <div class="block double-padded" style="height: 100%;box-sizing:border-box">
+                    <div class="sdekint-loading128"></div>
+                </div>
+            </div>
+            {{!--<footer class="sdekint-dialog-footer">
+                <div class="sdekint-actions">
+                    <div class="sdekint-table-layout">
+                        <div class="sdekint-column"></div>
+                        <div class="sdekint-column right">
+                            <button type="button" class="button js-close-dialog sdekint-button">[`Cancel`]</button>
+                        </div>
+                    </div>
+                </div>
+            </footer>--}}
+        </div>
+    </div>
+{/literal}
+</script>
+<script type="text/x-jsrender" id="BalloonContent">{literal}
+    <p>{{>full_address}}{{if note && note.length}}<br>{{>note}}{{/if}}{{if phone && phone.length}}<br>{{>phone}}{{/if}}{{if work_time && work_time.length}}<br>{{>work_time}}{{/if}}</p>
+{/literal}</script>

@@ -1,0 +1,70 @@
+{strip}
+{if $theme_settings.homepage_colorslider_categories_view ne "none"}
+	{$_categories = explode(",",$theme_settings.homepage_colorslider_categories_list)}
+	{if is_array($_categories)}
+		{* You can just change default colors below *}
+		{$_color_slider_bgs = explode(",",$theme_settings.homepage_colorslider_categories_colors)}
+		{$_color_slider_colors = explode(",",$theme_settings.homepage_colorslider_categories_text_colors)}
+		{$_bg_slider_index = 0}
+		{$_color_slider_index = 0}
+		{if !empty($_categories)}
+			{foreach $_categories as $c}
+				{$_category = $wa->shop->category($c)}
+				{if $_category}
+					{if isset($_category.params.homepage_colorslider_products) && !empty($_category.params.homepage_colorslider_products)}
+						{$_category._products = $wa->shop->products("id/`$_category.params.homepage_colorslider_products`")}
+					{else}
+						{if $theme_settings.homepage_colorslider_limit > 0}
+							{$_category._products = $wa->shop->products("category/`$c`",null,$theme_settings.homepage_colorslider_limit)}
+						{else}
+							{$_category._products = $wa->shop->products("category/`$c`",null,8)}
+						{/if}
+					{/if}
+					{if !empty($_category._products)}
+						<div class="home-pg__section home-pg__section_promo-cats{if $theme_settings.homepage_colorslider_categories_view ne 'always'} {$theme_settings.homepage_colorslider_categories_view}{/if} pos-rel">
+							<div class="descr-mode pos-abs"><span class="pos-rel">COLOR-SLIDER</span></div>
+							<div class="home-promo-catgs" style="background-color:{$_color_slider_bgs[$_bg_slider_index]};">
+								<div class="home-promo-catgs__inner">
+									<div class="home-promo-catgs__header">
+										<div class="home-promo-catgs__title-wrapper">
+											<a class="home-promo-catgs__title single-line bold" href="{$wa->shop->categoryUrl($_category)}"{if $_color_slider_colors[$_color_slider_index]} style="color:{$_color_slider_colors[$_color_slider_index]};"{/if}>{$_category.name|escape}</a>
+											<div class="slider-arrows slider-arrows_transpt slider-arrows_promo-cat">
+												<button class="slider-ar slider-ar_square pos-rel default-btn items-slider__nav-left">
+													<svg class="icon cent-icon" width="7" height="11">
+														<use xlink:href="#arrow-left-small"></use>
+													</svg>
+												</button>
+												<button class="slider-ar slider-ar_square pos-rel default-btn items-slider__nav-right">
+													<svg class="icon cent-icon" width="7" height="11">
+														<use xlink:href="#arrow-right-small"></use>
+													</svg>
+												</button>
+											</div>
+										</div>
+										{if $theme_settings.homepage_colorslider_description && $_category.description}
+											<div class="home-promo-catgs__descr"{if $_color_slider_colors[$_color_slider_index]} style="color:{$_color_slider_colors[$_color_slider_index]};"{/if}>{$_category.description}</div>
+										{/if}
+									</div>
+									<div class="home-promo-catgs__sl-wr swiper-container{if !$theme_settings.products_border} nobd{/if}" data-slides-per-group="1">
+										<div class="swiper-wrapper">
+											{include file="list-thumbs.html" hide_bd_class=true hide_quickbuy=true show_features=false list_only=true hide_description=true wrapper="home-promo-catgs__item item-c-mob-compact swiper-slide" products=$_category._products inline}
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+						{$_color_slider_index = $_color_slider_index+1}
+						{if !isset($_color_slider_colors[$_color_slider_index])}
+							{$_color_slider_index = 0}
+						{/if}
+						{$_bg_slider_index = $_bg_slider_index+1}
+						{if !isset($_color_slider_bgs[$_bg_slider_index])}
+							{$_bg_slider_index = 0}
+						{/if}
+					{/if}
+				{/if}
+			{/foreach}
+		{/if}
+	{/if}
+{/if}
+{/strip}

@@ -1,0 +1,229 @@
+{if !empty($deleted)}{else}<div class="s-coupon s-coupon-margin">
+    {if !shopDiscounts::isEnabled('coupons')}
+        <div class="block double-padded red bold">
+            <i class="icon10 exclamation"></i>
+            {sprintf('[`Discounts by coupons are turned off. Enable discounts in your <a href="%s">store settings</a>.`]', '?action=settings#/discounts/coupons/')}
+        </div>
+    {/if}
+
+    <div class="block double-padded s-coupon-border">
+
+        {if $formatted_value}
+            <div class="float-right s-coupon-value">{$formatted_value}</div>
+        {/if}
+
+        <h1>
+            {$gen.comment|escape}
+        </h1>
+        {if $gen.id}
+        <div class="hint">
+        <p>[`You can use this generator anywhere:`]<br>
+        [`In SMARTY (site templates, emails, etc.):`] <strong class="highlighted"><code>{ldelim}if $wa->shop{rdelim}{ldelim}shopCouponPlugin::gen({$gen.id})|escape{rdelim}{ldelim}/if{rdelim}</code></strong><br>
+        [`In PHP (applications, plugins, helpers):`] <strong class="highlighted"><code>wa('shop')->getPlugin('coupon')->gen({$gen.id});</code></strong></p>
+        <p><strong>[`Notice`]</strong> [`a new code will be created each time you call any of helper above.`]</p>
+        </div>
+        {/if}
+
+        <form action="?plugin=coupon&module=settings&action=editor&id={$gen.id}" id="gen-editor-form">
+            <div class="fields form">
+                <div class="field">
+                    <div class="name">
+                        [`Generator name`]
+                    </div>
+                    <div class="value">
+                        <input name="gen[comment]" value="{ifset($gen.comment)|escape}" class="long">
+                        <p class="hint">[`Optional name for your convenience. Will never be shown to customers.`]</p>
+                    </div>
+                </div>
+                <div class="field">
+                    <div class="name">
+                        [`Coupon type`]
+                    </div>
+                    <div class="value no-shift">
+                        <select name="gen[type]">
+                            {foreach $types as $type_id => $type_name}
+                                <option value="{$type_id|escape}"{if $type_id == $gen.type} selected{/if}>{$type_name|escape}</option>
+                            {/foreach}
+                        </select>
+                    </div>
+                    <div class="value bold" id="value-input-wrapper">
+                        <input type="text" class="numerical short bold" placeholder="0" name="gen[value]" value="{$gen.value|escape}">
+                        <span>%</span>
+                    </div>
+                    <div class="value" id="free-shipping-message">
+                        <p class="small">[`Discount will be calculated automatically to match the order shipping cost.`]</p>
+                    </div>
+                </div>
+                <div class="field">
+                    <div class="name">
+                        [`Max number of usage`]
+                    </div>
+                    <div class="value">
+                        <input type="number" placeholder="&#8734;" class="short" name="gen[limit]" value="{$gen.limit|escape}">
+                        <p class="hint">[`Enter the maximum number of times of <b>ONE COUPON</b> can be used. Leave empty for no limits.`]</p>
+                    </div>
+                </div>
+                <div class="field">
+                    <div class="name">
+                        [`Expire hours`]
+                    </div>
+                    <div class="value">
+                        <input type="number" class="short" name="gen[expire_hours]" value="{$gen.expire_hours|escape}">
+                        <p class="hint">[`Hours from coupon creation until it expires. Leave empty for no expiration date.`]</p>
+                    </div>
+                </div>
+
+                <div class="field">
+                    <div class="name">
+                        [`Prefix`]
+                    </div>
+                    <div class="value">
+                        <input type="text" name="gen[prefix]" value="{$gen.prefix|escape}" placeholder="[`PROMO-`]">
+                        <p class="hint">[`The prefix appears before generated random code`]</p>
+                    </div>
+                </div>
+                <div class="field">
+                    <div class="name">
+                        [`Length`]
+                    </div>
+                    <div class="value">
+                        <input type="number" min="3" name="gen[length]" value="{$gen.length|escape}" class="short" max="32">
+                        <p class="hint">[`Random part length. Minimum 3 chars.`]</p>
+                    </div>
+                </div>
+
+                <div class="field">
+                    <div class="name">
+                        [`Character Set`]
+                    </div>
+                    <div class="value">
+                        <label><input type="checkbox" value="1" name="gen[num]"{if !empty($gen.num)} checked{/if}> [`numbers`]</label>
+                    </div>
+                    <div class="value">
+                        <label><input type="checkbox" value="1" name="gen[latin_lowercase]"{if !empty($gen.latin_lowercase)} checked{/if}> [`lowercase latin`]</label>
+                    </div>
+                    <div class="value">
+                        <label><input type="checkbox" value="1" name="gen[latin_uppercase]"{if !empty($gen.latin_uppercase)} checked{/if}> [`uppercase latin`]</label>
+                    </div>
+                    <div class="value">
+                        <label><input type="checkbox" value="1" name="gen[cyr_lowercase]"{if !empty($gen.cyr_lowercase)} checked{/if}> [`lowercase cyrillic`]</label>
+                    </div>
+                    <div class="value">
+                        <label><input type="checkbox" value="1" name="gen[cyr_uppercase]"{if !empty($gen.cyr_uppercase)} checked{/if}> [`uppercase cyrillic`]</label>
+                    </div>
+                    <div class="value">
+                        <label><input type="checkbox" value="1" name="gen[other]"{if !empty($gen.other)} checked{/if}> [`other`] (!@#$%^*())</label>
+                    </div>
+                    <div class="value">
+                        <p class="hint">[`Character set will be used to generate random part of the code.`]</p>
+                    </div>
+                </div>
+                <div class="field">
+                    <div class="value submit">
+                        {if $gen.id}
+                            <div class="block float-right">
+                                <a href="javascript:void(0)" class="no-underline" id="delete-coupon-link"><i class="icon16 delete"></i>[`Delete this generator`]</a>
+                            </div>
+                        {/if}
+
+                        <input type="submit" class="button green" value="[`Save`]">
+                    </div>
+                </div>
+            </div>
+        </form>
+        <div class="clear-left"></div>
+    </div>
+</div>
+
+<script>$(function() { "use strict";
+    var form = $('#gen-editor-form');
+
+    {if $gen.id}
+        // Deletion link
+        $('#delete-coupon-link').click(function() {
+            var code = $('[name="gen[comment]"]').val();
+            if (!confirm("[`This will permanently delete discount coupon generator %s. Are you sure?`]".replace('%s', code))) {
+                return;
+            }
+            $.post(form.attr('action'), { 'delete': 1 });
+            $('#wa-plugins-content .sidebar li.selected').remove();
+            form.parents('.s-coupon-border').text("[`Coupon generator %s has been deleted.`]".replace('%s', code)).parent().siblings().remove();
+        });
+    {/if}
+
+    // When user types in code input, change the <h1> on the fly
+    form.find('[name="gen[comment]"]').keyup(function() {
+        form.siblings('h1').text($(this).val());
+    });
+
+    // When user changes type, change how value input looks
+    $('select[name="gen[type]"]').change(function() {
+        var select = $(this);
+        var type = select.val();
+        if (type == '$FS') {
+            $('#value-input-wrapper').hide();
+            $('#free-shipping-message').show();
+        } else {
+            var wr = $('#value-input-wrapper').show();
+            $('#free-shipping-message').hide();
+            if (type == '%') {
+                wr.children('span').text('%');
+            } else {
+                var t = $.trim(select.children('[value="'+type+'"]').text());
+                wr.children('span').text(t.substr(0, t.length-3));
+            }
+        }
+    }).change();
+
+    // Form validation
+    var isValid = function() {
+        form.find('.errormsg').remove();
+        form.find('.error').removeClass('error');
+
+        var valid = true;
+
+        var discount_value = 0;
+        var discount_input = $('[name="gen[value]"]');
+        if ($('[name="gen[type]"]').val() === '%') {
+            discount_value = parseInt(discount_input.val(), 10);
+            if (isNaN(discount_value) || discount_value < 0 || discount_value > 100) {
+                valid = false;
+                discount_input.addClass('error').nextAll().after($('<em class="errormsg"></em>').text("[`Must be a value from 0 to 100`]"));
+            }
+        }
+
+        return valid;
+    };
+
+    // Form submission
+    form.submit(function() {
+        var submit = form.find(':submit');
+        if (submit.attr('disabled')) {
+            return false;
+        }
+        if (!isValid()) {
+            return false;
+        }
+
+        submit.attr('disabled', true);
+        $.post(form.attr('action'), form.serialize(), function(r) {
+            $('#wa-plugins-content .content').html(r);
+        });
+        return false;
+    });
+});</script>
+{if $is_new}
+<script>
+$(function(){
+    $('#wa-plugins-content .s-coupon-list>li:eq(0)').after('' +
+    '<li>' +
+    '<a href="javascript:void(0)" class="gray" data-coupon-id="{$gen.id|escape}">'+
+    '<i class="icon16 ss coupon"></i>{$gen.comment|escape}'+
+    '</a>'+
+    '</li>');
+})
+</script>
+{/if}
+{/if}
+
+

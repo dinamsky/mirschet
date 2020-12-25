@@ -1,0 +1,34 @@
+<div class="block double-padded">
+    <form>
+        <input type="hidden" name="data[id]" value="{$data.id}">
+
+        <div class="fields form">
+            <div class="field">
+                <div class="name">Текущий статус заказа в магазине</div>
+                <div class="value"><select id="s-plugin-sdekint-rule-current-store-state-select"
+                                           name="data[shop_state]">
+                        {html_options options=$wf_state_list selected=$data.shop_state}
+                    </select></div>
+            </div>
+            <div class="field">
+                <div class="name">Текущий статус заказа в СДЭК</div>
+                <div class="value">
+                    <select id="s-plugin-sdekint-rule-current-sdek-state-select" name="data[sdek_state]">
+                        {html_options options=$sdek_states_list selected=$data.sdek_state}
+                    </select>
+                </div>
+            </div>
+            <div class="field">
+                <div class="name">Выполнить действие с заказом</div>
+                <div class="value">
+                    <select id="s-plugin-sdekint-rule-action-select" {if !$data.id || empty($wf_actions)}disabled {/if}name="data[wf_action]">
+                        {if $data.id && !empty($wf_actions)}{html_options options=$wf_actions selected=$data.wf_action}{/if}
+                    </select>
+                    <span class="loading" style="display: none"><i class="icon16 loading"></i></span>
+                    <span class="message" style="display: none"></span>
+                </div>
+            </div>
+        </div>
+    </form>
+    <div class="clear-both"></div>
+</div>

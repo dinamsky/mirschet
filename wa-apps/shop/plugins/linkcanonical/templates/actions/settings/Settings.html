@@ -1,0 +1,231 @@
+<link href="{$css}" rel="stylesheet">
+<script src="{$js}"></script>
+
+<div class="plugin-settings bsui-page">
+	<div class="linkcanonical-overlay" style="display: none"></div>
+
+    <h1>[`Link canonical`]</h1>
+
+    <div class="bsui-page__content">
+        <form class="plugin-form settings-form bsui-form bsui-ajax" action="?plugin=linkcanonical&module=settings&action=save" method="post">
+	        {$wa->csrf()}
+            <ul class="bsui-field-group">
+                <li class="bsui-field-group__item bsui-field">
+                    <label class="bsui-field__text">[`Enabling or disabling the plugin`]:</label>
+                    <div class="bsui-field__control">
+                        <div class="bsui-select">
+                            <select class="bsui-select__control" name="settings[*enable]" title="[`Plugin status`]">
+                                <option value="0">[`Disable`]</option>
+                                <option value="1"{if $settings['*enable']|default:false} selected{/if}>[`Enable`]</option>
+                            </select>
+                        </div>
+                    </div>
+                </li>
+	            {if count($storefronts|default:array()) > 1}
+                <li class="bsui-field-group__item bsui-field">
+                    <label class="bsui-field__text">[`Choosing storefront`]:</label>
+                    <div class="bsui-field__control">
+                        <div class="bsui-select">
+                            <select class="bsui-select__control" name="settings[storefront]" title="" id="storefronts">
+                                <option value="*">[`General`]</option>
+                                {foreach $storefronts|default:array() as $store_front => $is_setting}
+                                    <option value="{$store_front}"{if $store_front == $storefront|default:"*"} selected{/if}{if $is_setting} class="lc-green" {/if}>{$store_front}</option>
+                                {/foreach}
+                            </select>
+                        </div>
+                    </div>
+                </li>
+	            {else}
+		            <input type="hidden" name="settings[storefront]" value="*">
+	            {/if}
+                <li class="bsui-field-group__item bsui-field">
+                    <span class="bsui-field__text">[`Use a tag to all pages with the get-settings`]:</span>
+                    <div class="bsui-field__control">
+                        <span class="bsui-checkbox__box">
+                            <input type="hidden" name="settings[{$storefront}get]" value="0">
+                            <input class="bsui-checkbox__control" type="checkbox" name="settings[{$storefront}get]" value="1" title=""{if $settings[$storefront|cat:get]|default:false} checked{/if}>
+                        </span>
+                    </div>
+                </li>
+                <li class="bsui-field-group__item bsui-field">
+                    <label class="bsui-field__text">[`Don't use the tag, if present in the url get-settings`]:</label>
+                    <div class="bsui-field__control">
+                        <div class="bsui-input-text">
+                            <input id="setting_route" class="bsui-input-text__control" type="text" name="settings[{$storefront}get_words]" value="{$settings[$storefront|cat:get_words]|default:''}" placeholder="page, color,..."/>
+                        </div>
+                    </div>
+                </li>
+                <li class="bsui-field-group__item bsui-field">
+                    <span class="bsui-field__text">[`Use the tag to the canonical page`]:</span>
+                    <div class="bsui-field__control">
+                        <span class="bsui-checkbox__box">
+                            <input type="hidden" name="settings[{$storefront}canonical_page]" value="0">
+                            <input class="bsui-checkbox__control" type="checkbox" name="settings[{$storefront}canonical_page]" value="1" title=""{if $settings[$storefront|cat:canonical_page]|default:false} checked{/if}>
+                        </span>
+                    </div>
+                </li>
+                <li class="bsui-field-group__item bsui-field">
+                    <span class="bsui-field__text">[`Don't use the tag on pages of pagination`]:</span>
+                    <div class="bsui-field__control">
+                        <span class="bsui-checkbox__box">
+                            <input type="hidden" name="settings[{$storefront}canonical_pagination_not]" value="0">
+                            <input class="bsui-checkbox__control" type="checkbox" name="settings[{$storefront}canonical_pagination_not]" value="1" title=""{if $settings[$storefront|cat:canonical_pagination_not]|default:false} checked{/if}>
+                        </span>
+                    </div>
+                </li>
+                <li class="bsui-field-group__item bsui-field">
+                    <span class="bsui-field__text">[`Use tags link rel="prev", link rel="next"`]:</span>
+                    <div class="bsui-field__control">
+                        <span class="bsui-checkbox__box">
+                            <input type="hidden" name="settings[{$storefront}seo_pagination]" value="0">
+                            <input class="bsui-checkbox__control" type="checkbox" name="settings[{$storefront}seo_pagination]" value="1" title=""{if $settings[$storefront|cat:seo_pagination]|default:false} checked{/if}>
+                        </span>
+                    </div>
+                </li>
+                <li class="bsui-field-group__item bsui-field">
+                    <span class="bsui-field__text">[`Canonical to lower case`]:</span>
+                    <div class="bsui-field__control">
+                        <span class="bsui-checkbox__box">
+                            <input type="hidden" name="settings[{$storefront}to_lowercase]" value="0">
+                            <input class="bsui-checkbox__control" type="checkbox" name="settings[{$storefront}to_lowercase]" value="1" title=""{if $settings[$storefront|cat:to_lowercase]|default:true} checked{/if}>
+                        </span>
+                    </div>
+                </li>
+            </ul>
+
+            <div class="bsui-page__sub-header">[`Categories`]:</div>
+            <ul class="bsui-field-group">
+                <li class="bsui-field-group__item bsui-field">
+                    <span class="bsui-field__text">[`Don't use the tag to the page pagination on category page`]:</span>
+                    <div class="bsui-field__control">
+                        <span class="bsui-checkbox__box">
+                            <input type="hidden" name="settings[{$storefront}category_pagination]" value="0">
+                            <input class="bsui-checkbox__control" type="checkbox" name="settings[{$storefront}category_pagination]" value="1" title=""{if $settings[$storefront|cat:category_pagination]|default:false} checked{/if}>
+                        </span>
+                    </div>
+                </li>
+                <li class="bsui-field-group__item bsui-field">
+                    <span class="bsui-field__text">[`Don't use a tag to filter pages on the category page`]:</span>
+                    <div class="bsui-field__control">
+                        <span class="bsui-checkbox__box">
+                            <input type="hidden" name="settings[{$storefront}category_filter]" value="0">
+                            <input class="bsui-checkbox__control" type="checkbox" name="settings[{$storefront}category_filter]" value="1" title=""{if $settings[$storefront|cat:category_filter]|default:false} checked{/if}>
+                        </span>
+                    </div>
+                </li>
+                <li class="bsui-field-group__item bsui-field">
+                    <span class="bsui-field__text">[`Don't use a tag to sort pages into categories page`]:</span>
+                    <div class="bsui-field__control">
+                        <span class="bsui-checkbox__box">
+                            <input type="hidden" name="settings[{$storefront}category_sort]" value="0">
+                            <input class="bsui-checkbox__control" type="checkbox" name="settings[{$storefront}category_sort]" value="1" title=""{if $settings[$storefront|cat:category_sort]|default:false} checked{/if}>
+                        </span>
+                    </div>
+                </li>
+            </ul>
+
+            <div class="bsui-page__sub-header">[`SEO-filter`]:</div>
+            <ul class="bsui-field-group">
+                <li class="bsui-field-group__item bsui-field">
+                    <span class="bsui-field__text">[`Don't use the tag to the page pagination on SEO-filter page`]:</span>
+                    <div class="bsui-field__control">
+                        <span class="bsui-checkbox__box">
+                            <input type="hidden" name="settings[{$storefront}filter_pagination]" value="0">
+                            <input class="bsui-checkbox__control" type="checkbox" name="settings[{$storefront}filter_pagination]" value="1" title=""{if $settings[$storefront|cat:filter_pagination]|default:false} checked{/if}>
+                        </span>
+                    </div>
+                </li>
+            </ul>
+
+            <div class="bsui-page__sub-header">[`Products`]:</div>
+            <ul class="bsui-field-group">
+                <li class="bsui-field-group__item bsui-field">
+                    <span class="bsui-field__text">[`Use a tag on the reviews page`]:</span>
+                    <div class="bsui-field__control">
+                        <span class="bsui-checkbox__box">
+                            <input type="hidden" name="settings[{$storefront}product_review]" value="0">
+                            <input class="bsui-checkbox__control" type="checkbox" name="settings[{$storefront}product_review]" value="1" title=""{if $settings[$storefront|cat:product_review]|default:false} checked{/if}>
+                        </span>
+                    </div>
+                </li>
+	            <li class="bsui-field-group__item bsui-field">
+		            <span class="bsui-field__text">[`Use a tag on the reviews page (only if there is no reviews)`]:</span>
+		            <div class="bsui-field__control">
+			            <span class="bsui-checkbox__box">
+				            <input type="hidden" name="settings[{$storefront}product_review_if_no_reviews_only]" value="0">
+				            <input class="bsui-checkbox__control" type="checkbox" name="settings[{$storefront}product_review_if_no_reviews_only]" value="1" title=""{if $settings[$storefront|cat:product_review_if_no_reviews_only]|default:false} checked{/if}>
+			            </span>
+		            </div>
+	            </li>
+                <li class="bsui-field-group__item bsui-field">
+                    <span class="bsui-field__text">[`Use a tag from all sub-product in the commodity itself`]:</span>
+                    <div class="bsui-field__control">
+                        <span class="bsui-checkbox__box">
+                            <input type="hidden" name="settings[{$storefront}product_pages]" value="0">
+                            <input class="bsui-checkbox__control" type="checkbox" name="settings[{$storefront}product_pages]" value="1" title=""{if $settings[$storefront|cat:product_pages]|default:false} checked{/if}>
+                        </span>
+                    </div>
+                </li>
+            </ul>
+
+            <div class="bsui-page__sub-header">[`Brands`]:</div>
+            <ul class="bsui-field-group">
+                <li class="bsui-field-group__item bsui-field">
+                    <span class="bsui-field__text">[`Don't use the tag to the pagination of pages on the brand page`]:</span>
+                    <div class="bsui-field__control">
+                        <span class="bsui-checkbox__box">
+                            <input type="hidden" name="settings[{$storefront}brand_pagination]" value="0">
+                            <input class="bsui-checkbox__control" type="checkbox" name="settings[{$storefront}brand_pagination]" value="1" title=""{if $settings[$storefront|cat:brand_pagination]|default:false} checked{/if}>
+                        </span>
+                    </div>
+                </li>
+                <li class="bsui-field-group__item bsui-field">
+                    <span class="bsui-field__text">[`Don't use the tag to the pagination of pages to page brands subcategories`]:</span>
+                    <div class="bsui-field__control">
+                        <span class="bsui-checkbox__box">
+                            <input type="hidden" name="settings[{$storefront}brand_category_pagination]" value="0">
+                            <input class="bsui-checkbox__control" type="checkbox" name="settings[{$storefront}brand_category_pagination]" value="1" title=""{if $settings[$storefront|cat:brand_category_pagination]|default:false} checked{/if}>
+                        </span>
+                    </div>
+                </li>
+            </ul>
+
+            <div class="bsui-page__sub-header">[`Поиск PRO`]:</div>
+            <ul class="bsui-field-group">
+                <li class="bsui-field-group__item bsui-field">
+                    <span class="bsui-field__text">[`Не проставлять тег на страницах плагина`]:</span>
+                    <div class="bsui-field__control">
+                        <span class="bsui-checkbox__box">
+                            <input type="hidden" name="settings[{$storefront}searchpro_no_canonical_on_search_page]" value="0">
+                            <input class="bsui-checkbox__control" type="checkbox" name="settings[{$storefront}searchpro_no_canonical_on_search_page]" value="1" title=""{if $settings[$storefront|cat:searchpro_no_canonical_on_search_page]|default:false} checked{/if}>
+                        </span>
+                    </div>
+                </li>
+            </ul>
+
+            <div class="bottom-bar">
+                <ul class="plugin-menu plugin-menu_type_horizontal">
+                    <li class="plugin-menu__item">
+                        <button class="plugin-form__submit button green" type="submit">[`Save`]</button>
+                    </li>
+                    <li class="plugin-menu__item">
+                        <div class="plugin-form__status ajax-status_type_success" style="display: none">
+                            <i class="icon16 yes"></i>
+                            <span class="plugin-ajax-form-status__text">[`Saved`]</span>
+                        </div>
+                        <div class="plugin-form__status ajax-status ajax-status_type_loading">
+                            <i class="icon16 loading"></i>
+                            <span class="ajax-status__text">[`Saving`]</span>
+                        </div>
+                        <div class="plugin-form__status ajax-status ajax-status_type_error">
+                            <i class="icon16 exclamation-red"></i>
+                            <span class="plugin-ajax-form-status__text">[`Error`]</span>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+
+            <input type="hidden" name="is_submit" value="1">
+        </form>
+    </div>
+</div>

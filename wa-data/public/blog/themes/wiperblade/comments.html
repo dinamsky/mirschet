@@ -1,0 +1,38 @@
+{strip}
+<div class="comments-sec">
+	<div class="comments-sec__header">
+		<div class="comments-sec__count" id="b-comments-count-str">{_w('%d comment','%d comments',$post.comment_count)}</div>
+		<div class="comments-sec__btn-el">
+			<a class="btn btn_default btn_main-2 comments__btn-showform" href="#">[`Add comment`]</a>
+		</div>
+	</div>
+	{$current_user_id=$wa->userId()}
+	{include file="comments.form.html" inline}
+	<div id="b-comments-list" itemscope itemtype="http://schema.org/UserComments">
+		<a name="comments"></a>
+		{$depth=-1}
+		{foreach $post.comments as $comment}
+			{if $comment.depth < $depth}
+				{$loop=$depth-$comment.depth}
+				{section name="end-comment" loop=$loop}
+					</div>
+				{/section}
+				{$depth=$comment.depth}
+			{/if}
+			{if $comment.depth == $depth}
+				</div>
+				<div class="comment{if $comment.user.id} is-admin{/if}{if $comment.depth > 0 && $comment.depth < 10} is-reply{/if}" data-id={$comment.id}>
+			{/if}
+			{if $comment.depth > $depth}
+				<div class="comment{if $comment.user.id} is-admin{/if}{if $comment.depth > 0 && $comment.depth < 10} is-reply{/if}" data-id={$comment.id}>
+				{$depth=$comment.depth}
+			{/if}
+			{include file="comment.html" inline}
+		{/foreach}
+		{section name="end-comment" loop=$depth }
+			</div>
+		{/section}
+	</div>
+</div>
+<script src="{$wa_theme_url}js/comments.js?v{$wa_theme_version}" defer></script>
+{/strip}

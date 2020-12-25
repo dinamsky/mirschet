@@ -1,0 +1,37 @@
+{strip}
+{if !empty($_shop_tags)}
+	<div class="catalog-pg__side-sect mt-hide">
+		<div class="sidebar-section pos-rel">
+			<div class="descr-mode pos-abs"><span class="pos-rel">TAGS</span></div>
+			<div class="sidebar-section__title section-title section-title_mini">{$theme_settings.shop_sidebars_sections_tags_title|default:"[`Tags`]"}</div>
+			<div class="body">
+				{if $theme_settings.shop_sidebars_sections_tags_limit > 0}
+					{$limit = $theme_settings.shop_sidebars_sections_tags_limit}
+				{else}
+					{$limit = 12}
+				{/if}
+				<div class="tags has-toggle" data-show-qty="{$limit}">
+					<ul class="tags__list">
+						{foreach $_shop_tags as $tag}
+							<li class="tags__item show-more-item">
+								<a class="tags__l btn {$theme_settings.main_buttons_style|replace:'img/themebuttons/':''|replace:'.gif':''} btn_sec-5" href="{$wa->getUrl('shop/frontend/tag',['tag'=>$tag.uri_name])}">
+									<div class="hover-anim"></div>
+									{$tag.name|escape}
+								</a>
+							</li>
+						{/foreach}
+					</ul>
+					<a class="tags__btn btn {$theme_settings.main_buttons_style|replace:'img/themebuttons/':''|replace:'.gif':''} btn_sec-6 btn-toggle" data-show="[`show more`]" data-hide="[`hide`]" href="#">
+						<div class="hover-anim"></div>
+						<span>[`show more`]</span>
+						<svg class="icon" width="7" height="4">
+							<use xlink:href="#arrow-down-breadcrumb"></use>
+						</svg>
+						<div class="hover-anim"></div>
+					</a>
+				</div>
+			</div>
+		</div>
+	</div>
+{/if}
+{/strip}

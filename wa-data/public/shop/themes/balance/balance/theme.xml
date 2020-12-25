@@ -1,0 +1,3024 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE theme PUBLIC "wa-app-theme" "http://www.webasyst.com/wa-content/xml/wa-app-theme.dtd">
+<theme id="balance" author="Balance team" vendor="1093622" system="0" parent_theme_id="site:balance" app="shop" version="1.1.1" edition="10">
+  <name locale="en_US">Balance</name>
+  <name locale="ru_RU">Balance</name>
+  <files>
+    <file path="index.html" parent="1"/>
+    <file path="css/main.css" parent="1"/>
+    <file path="css/user.css" parent="1"/>
+    <file path="css/shop.css"/>
+    <file path="css/order.css"/>
+    <file path="js/cart.js"/>
+    <file path="js/main.js" parent="1"/>
+    <file path="js/order.js"/>
+    <file path="js/product.js"/>
+    <file path="js/reviews.js"/>
+    <file path="js/shop.js"/>
+    <file path="js/subscribe.js" parent="1"/>
+    <file path="login.html" parent="1"/>
+    <file path="signup.html" parent="1"/>
+    <file path="forgotpassword.html" parent="1"/>
+    <file path="error.html" parent="1"/>
+    <file path="my.menu.html" parent="1"/>
+    <file path="my.profile.html" parent="1"/>
+    <file path="head.html"/>
+    <file path="scripts.html" custom="0"/>
+    <file path="header_mobile/view-1.html" parent="1"/>
+    <file path="header_mobile/view-2.html" parent="1"/>
+    <file path="header_mobile/view-3.html" parent="1"/>
+    <file path="header_mobile/view-4.html" parent="1"/>
+    <file path="header/view-1.html" parent="1"/>
+    <file path="header/view-2.html" parent="1"/>
+    <file path="header/view-3.html" parent="1"/>
+    <file path="header/view-4.html" parent="1"/>
+    <file path="header/view-5.html" parent="1"/>
+    <file path="header/view-5-2.html" parent="1"/>
+    <file path="header/view-6.html" parent="1"/>
+    <file path="header/view-7.html" parent="1"/>
+    <file path="header/view-8.html" parent="1"/>
+    <file path="header/view-9.html" parent="1"/>
+    <file path="header/view-10.html" parent="1"/>
+    <file path="header/view-11.html" parent="1"/>
+    <file path="header/view-12.html" parent="1"/>
+    <file path="header/view-13.html" parent="1"/>
+    <file path="header/view-14.html" parent="1"/>
+    <file path="header/view-15.html" parent="1"/>
+    <file path="header/view-16.html" parent="1"/>
+    <file path="footer/view-1.html" parent="1"/>
+    <file path="footer/view-2.html" parent="1"/>
+    <file path="footer/view-3.html" parent="1"/>
+    <file path="footer/links.html" parent="1"/>
+    <file path="subscribe.html" parent="1"/>
+    <file path="main.html">
+      <description locale="en_US">Main storefront layout and navigation</description>
+      <description locale="ru_RU">Основное макет вывода содержимого в интернет-магазине</description>
+    </file>
+    <file path="category.html">
+      <description locale="en_US">Wrapper for a category page</description>
+      <description locale="ru_RU">Обертка для страницы категории</description>
+    </file>
+    <file path="category.sorting.html"/>
+    <file path="category.subcategories.html"/>
+    <file path="list-thumbs.html"/>
+    <file path="list-compact.html"/>
+    <file path="list-expanded.html"/>
+    <file path="product.html">
+      <description locale="en_US">Dedicated product page</description>
+      <description locale="ru_RU">Шаблон основной страницы товара</description>
+    </file>
+    <file path="product.cart.html">
+      <description locale="en_US">Product add to cart block</description>
+      <description locale="ru_RU">Блок добавления товара в корзину</description>
+    </file>
+    <file path="product.list-micro.html"/>
+    <file path="product.list-mini.html"/>
+    <file path="product.list-thumbs.html"/>
+    <file path="product.features.html"/>
+    <file path="product.page.html">
+      <description locale="en_US">Product static subpage content</description>
+      <description locale="ru_RU">Информационная подстраница товара</description>
+    </file>
+    <file path="review.html">
+      <description locale="en_US">A single product review template</description>
+      <description locale="ru_RU">Шаблон вывода одного отзыва о товаре</description>
+    </file>
+    <file path="reviews.html">
+      <description locale="en_US">Product review list</description>
+      <description locale="ru_RU">Список отзывов о товаре</description>
+    </file>
+    <file path="reviews.form.html"/>
+    <file path="compare.html">
+      <description locale="en_US">Product comparison</description>
+      <description locale="ru_RU">Сравнение товаров</description>
+    </file>
+    <file path="cart.html">
+      <description locale="en_US">Shopping cart page</description>
+      <description locale="ru_RU">Страница с товарами корзины</description>
+    </file>
+    <file path="checkout.html">
+      <description locale="en_US">Checkout core wrapper</description>
+      <description locale="ru_RU">Единый шаблон страниц оформления заказа</description>
+    </file>
+    <file path="checkout.header.html"/>
+    <file path="checkout.sidebar.about.html"/>
+    <file path="checkout.sidebar.order.html"/>
+    <file path="checkout.shipping.html">
+      <description locale="en_US">Checkout: shipping option selection</description>
+      <description locale="ru_RU">Оформление заказа: выбор способа доставки</description>
+    </file>
+    <file path="checkout.payment.html">
+      <description locale="en_US">Checkout: payment option selection</description>
+      <description locale="ru_RU">Оформление заказа: выбор способа доставки</description>
+    </file>
+    <file path="checkout.contactinfo.html">
+      <description locale="en_US">Checkout: customer contact information form</description>
+      <description locale="ru_RU">Оформление заказа: выбор способа доставки</description>
+    </file>
+    <file path="checkout.confirmation.html">
+      <description locale="en_US">Checkout: order confirmation</description>
+      <description locale="ru_RU">Оформление заказа: выбор способа доставки</description>
+    </file>
+    <file path="checkout.success.html">
+      <description locale="en_US">Checkout: thank you page</description>
+      <description locale="ru_RU">Оформление заказа: выбор способа доставки</description>
+    </file>
+    <file path="checkout.error.html">
+      <description locale="en_US">Checkout: error page</description>
+      <description locale="ru_RU">Оформление заказа: выбор способа доставки</description>
+    </file>
+    <file path="my.nav.html">
+      <description locale="en_US">Customer account navigation menu</description>
+      <description locale="ru_RU">Меню навигации в личном кабинете покупателя</description>
+    </file>
+    <file path="my.affiliate.html">
+      <description locale="en_US">Customer account interface: affiliate program</description>
+      <description locale="ru_RU">Личный кабинет покупателя: партнерская программа</description>
+    </file>
+    <file path="my.orders.html">
+      <description locale="en_US">Customer account interface: order list</description>
+      <description locale="ru_RU">Личный кабинет покупателя: список заказов</description>
+    </file>
+    <file path="my.order.html">
+      <description locale="en_US">Customer account interface: single order information</description>
+      <description locale="ru_RU">Личный кабинет покупателя: информация о заказе</description>
+    </file>
+    <file path="order.html"/>
+    <file path="home.html">
+      <description locale="en_US">Storefront homepage</description>
+      <description locale="ru_RU">Главная витрина магазина</description>
+    </file>
+    <file path="home.banner-1.html"/>
+    <file path="home.banner-2.html"/>
+    <file path="home.banner-3.html"/>
+    <file path="home.banner-4.html"/>
+    <file path="home.categories-gallery.html"/>
+    <file path="home.categories-mini.html"/>
+    <file path="home.categories-thumbs.html"/>
+    <file path="home.category-banner.html"/>
+    <file path="home.category-products.html"/>
+    <file path="home.color-slider.html"/>
+    <file path="home.features.html"/>
+    <file path="home.last-reviews.html"/>
+    <file path="home.news-1.html"/>
+    <file path="home.news-2.html"/>
+    <file path="home.product-banner.html"/>
+    <file path="home.productbrands.html"/>
+    <file path="home.products.html"/>
+    <file path="home.promo-categories.html"/>
+    <file path="home.promo.html"/>
+    <file path="home.slider.html"/>
+    <file path="home.viewed.html"/>
+    <file path="sidebar.about.html"/>
+    <file path="sidebar.categories.html"/>
+    <file path="sidebar.faq.html"/>
+    <file path="sidebar.filters.html"/>
+    <file path="sidebar.menu.html"/>
+    <file path="sidebar.news.html"/>
+    <file path="sidebar.productbrands.html"/>
+    <file path="sidebar.products.html"/>
+    <file path="sidebar.tags.html"/>
+    <file path="sidebar.viewed.html"/>
+    <file path="search.html">
+      <description locale="en_US">Wrapper for product search (filtering) results, e.g. by name, tag, or manufacturer</description>
+      <description locale="ru_RU">Обертка для страницы поиска (фильтрации) товаров, например, по тегу, ключевому слову или производителю</description>
+    </file>
+    <file path="page.html">
+      <description locale="en_US">Static page content</description>
+      <description locale="ru_RU">Содержимое информационной страницы</description>
+    </file>
+  </files>
+  <settings>
+    <setting var="shop_catalog" control_type="group_divider">
+      <value/>
+      <name locale="en_US">Catalog and products</name>
+      <name locale="ru_RU">Каталог и товары</name>
+    </setting>
+    <setting var="shop_catalog_basics" control_type="group_divider">
+      <value>shop_catalog/shop_catalog_basics</value>
+      <name locale="en_US"/>
+      <name locale="ru_RU"/>
+    </setting>
+    <setting var="store_price_range" control_type="text">
+      <value>$</value>
+      <name locale="en_US">Store price range(for schema.org)</name>
+      <name locale="ru_RU">Ценовой диапазон магазина</name>
+      <description locale="en_US">for schema.org</description>
+      <description locale="ru_RU">для schema.org</description>
+    </setting>
+    <setting var="products_show_reviews" control_type="checkbox">
+      <value>1</value>
+      <name locale="ru_RU">Отображать отзывы</name>
+      <description locale="ru_RU">При отключении убирается со всех страниц магазина отображение рейтинга, ссылки на отзывы и возможность их написания</description>
+    </setting>
+    <setting var="products_show_rating_stars" control_type="select">
+      <value>nonempty</value>
+      <name locale="ru_RU">Отображать звезды рейтинга в каталоге</name>
+      <options>
+        <option value="nonempty">
+          <name locale="ru_RU">Только при наличии отзывов</name>
+        </option>
+        <option value="always">
+          <name locale="ru_RU">Всегда</name>
+        </option>
+        <option value="none">
+          <name locale="ru_RU">Скрыть</name>
+        </option>
+      </options>
+    </setting>
+    <setting var="products_added_popup_design" control_type="select">
+      <value>top</value>
+      <name locale="ru_RU">Визуализация добавленного товара</name>
+      <options>
+        <option value="center">
+          <name locale="ru_RU">Окно по центру</name>
+        </option>
+        <option value="top">
+          <name locale="ru_RU">Фиксированная панель сверху</name>
+        </option>
+      </options>
+    </setting>
+    <setting var="shop_catalog_grid" control_type="group_divider">
+      <value>shop_catalog/shop_catalog_grid</value>
+      <name locale="en_US">Structure</name>
+      <name locale="ru_RU">Структура страниц каталога</name>
+    </setting>
+    <setting var="shop_catalog_grid_info" control_type="paragraph">
+      <value/>
+      <name locale="ru_RU">
+					&lt;p class="hint"&gt;Помимо списка товаров страница каталога может иметь 2 сайдбара. Вы можете настроить содержимое этих сайдбаров так, как это нужно вам. Путем перечисления через запятую нужных вам секций в поле содержимого сайдбара. Либо оставить поле пустым для отключения сайдбара.
+					&lt;br /&gt;
+					&lt;br /&gt;&lt;a href="http://balance.designmyshop.ru/wa-data/public/site/balance_settings/sidebar-blocks.png" target="_blank"&gt;Наглядная иллюстрация секций&lt;/a&gt;
+					&lt;br /&gt;ID доступных секций для определения содержимого и его последовательности в сайдбарах:
+					&lt;br /&gt;&lt;b&gt;filters&lt;/b&gt; - фильтр товаров. Будет отображаться только если у текущей категории имеются фильтры.
+					&lt;br /&gt;&lt;b&gt;categories&lt;/b&gt; - секция со списком категорий первого уровня. Может служить в кач-ве дополнительной навигации.
+					&lt;br /&gt;&lt;b&gt;news&lt;/b&gt; - последние записи в блоге.
+					&lt;br /&gt;&lt;b&gt;about&lt;/b&gt; - информация и контакты.
+					&lt;br /&gt;&lt;b&gt;faq&lt;/b&gt; - вопросы и ответы.
+					&lt;br /&gt;&lt;b&gt;tags&lt;/b&gt; - теги магазина.
+					&lt;br /&gt;&lt;b&gt;productbrands&lt;/b&gt; - список брендов. Доступен только при наличии плагина "&lt;a href="https://www.webasyst.ru/store/plugin/shop/productbrands/" target="_blank"&gt;Бренды с картинками и описаниями&lt;/a&gt;".
+					&lt;br /&gt;&lt;b&gt;viewed&lt;/b&gt; - список просмотренных пользователем товаров.
+					&lt;br /&gt;&lt;b&gt;block=*&lt;/b&gt; - содержимое этой секции вы можете задать сами через функционал "Блоки" приложения "Сайт". Можно использовать для установки баннеров, виджетов, доп. описаний и пр. Внутри блока доступны все те же Smarty-переменные, что и в самом шаблоне.
+					&lt;br /&gt;
+					&lt;br /&gt;
+					&lt;br /&gt;&lt;b&gt;&lt;u&gt;Важно знать!&lt;/u&gt;&lt;/b&gt;
+					&lt;br /&gt;Если в кач-ве содержимого сайдбара указан, например, только фильтр товаров, а у текущей категории нет доступных фильтров, то сайдбар отображаться не будет. Это правило актуально для всех секций.
+					&lt;br /&gt;Настройки самих секций находятся в отдельном разделе настроек темы - "Сайдбары"
+					&lt;br /&gt;
+					&lt;br /&gt;&lt;b&gt;О настройке блоков:&lt;/b&gt;
+					&lt;br /&gt;Вы можете создать любой блок с любым ID и вписать его в качестве содержимого секции. Например, если вы создали блок с ID "my_block", то для добавления его в сайдбар, нужно будет в поле содержимого сайдбара указать &lt;b&gt;block=my_block&lt;/b&gt;.
+					&lt;br /&gt;Кол-во пользовательских блоков может быть любым.
+					&lt;/p&gt;
+					</name>
+    </setting>
+    <setting var="shop_catalog_grid_leftbar" control_type="text">
+      <value>filters</value>
+      <name locale="ru_RU">Содержимое левого сайдбара</name>
+      <description locale="ru_RU">
+					Укажите через запятую ID секций, которые вы хотите вывести в левой колонке. Указанная последовательность сохраняется. Оставьте пустым, если хотите скрыть этот сайдбар.
+					&lt;br /&gt;Указанный список можно переопределить для каждой категории через её доп. параметры строкой:
+					&lt;br /&gt;&lt;u&gt;balance_catalog_leftbar=filters,categories,block=&lt;b&gt;*&lt;/b&gt;&lt;/u&gt;
+					&lt;br /&gt;где &lt;b&gt;filters,categories,block=*&lt;/b&gt; - указанные через запятую ID секций/блоков
+					
+					</description>
+    </setting>
+    <setting var="shop_catalog_grid_rightbar" control_type="text">
+      <value/>
+      <name locale="ru_RU">Содержимое правого сайдбара</name>
+      <description locale="ru_RU">
+					Укажите через запятую ID секций, которые вы хотите вывести в правой колонке. Указанная последовательность сохраняется. Оставьте пустым, если хотите скрыть этот сайдбар.
+					&lt;br /&gt;Указанный список можно переопределить для каждой категории через её доп. параметры строкой:
+					&lt;br /&gt;&lt;u&gt;balance_catalog_rightbar=filters,categories,block=&lt;b&gt;*&lt;/b&gt;&lt;/u&gt;
+					&lt;br /&gt;где &lt;b&gt;filters,categories,block=*&lt;/b&gt; - указанные через запятую ID секций/блоков
+					
+					</description>
+    </setting>
+    <setting var="products_subcategories_view" control_type="select">
+      <value>miniblocks</value>
+      <name locale="ru_RU">Вид списка подкатегорий
+					
+					&lt;p class="hint"&gt;&lt;a href="http://balance.designmyshop.ru/wa-data/public/site/balance_settings/subcat-design-view.png" target="_blank"&gt;Посмотреть варианты&lt;/a&gt;&lt;/p&gt;
+					
+					</name>
+      <description locale="ru_RU">
+					Для варианта "Блочный" можно установить изображение подкатегории. Сделать это можно двумя способами:
+					&lt;br /&gt;1. Через плагин "Иконка, изображение и баннер категории". В качестве картинки категории будет использоваться "Изображение"
+					&lt;br /&gt;2. Через "Дополнительные параметры". Для этого при редактировании категории в соответствующем поле добавьте строку:
+					&lt;br /&gt;&lt;strong&gt;image=/path/to/image.png&lt;/strong&gt;
+					&lt;br /&gt;где “/path/to/image.png” - путь к изображению, которое вы можете загрузить в "Файл-менеджере" приложения "Сайт".
+					&lt;br /&gt;
+					&lt;br /&gt;&lt;strong&gt;Внимание!&lt;/strong&gt; Вы можете переопределить эту настройку для каждой категории через "Дополнительные параметры".
+					&lt;br /&gt;Для этого в настройках категории в соответствующем поле добавьте строку:
+					&lt;br /&gt;&lt;strong&gt;subcategories_view=buttons&lt;/strong&gt;
+					&lt;br /&gt;где "buttons" - вид отображения. Доступные значения:
+					&lt;br /&gt;list - Список
+					&lt;br /&gt;buttons - Кнопочный
+					&lt;br /&gt;blocks - Блочный
+					&lt;br /&gt;miniblocks - Миниблочный
+					&lt;br /&gt;miniblocks-slider - Миниблочный слайдер
+					
+					</description>
+      <options>
+        <option value="list">
+          <name locale="ru_RU">Список</name>
+        </option>
+        <option value="buttons">
+          <name locale="ru_RU">Кнопочный</name>
+        </option>
+        <option value="blocks">
+          <name locale="ru_RU">Блочный</name>
+        </option>
+        <option value="miniblocks">
+          <name locale="ru_RU">Миниблочный</name>
+        </option>
+        <option value="miniblocks-slider">
+          <name locale="ru_RU">Миниблочный слайдер</name>
+        </option>
+        <option value="none">
+          <name locale="ru_RU">отключить</name>
+        </option>
+      </options>
+    </setting>
+    <setting var="products_description_location" control_type="select">
+      <value>bottom</value>
+      <name locale="ru_RU">Описание категории</name>
+      <options>
+        <option value="top">
+          <name locale="ru_RU">Перед списком товаров</name>
+        </option>
+        <option value="bottom">
+          <name locale="ru_RU">После списка товаров</name>
+        </option>
+        <option value="hide">
+          <name locale="ru_RU">Скрыть полностью</name>
+        </option>
+      </options>
+    </setting>
+    <setting var="shop_catalog_mode" control_type="group_divider">
+      <value>shop_catalog/shop_catalog_mode</value>
+      <name locale="en_US">Product display mode</name>
+      <name locale="ru_RU">Режим отображения товаров</name>
+    </setting>
+    <setting var="shop_catalog_mode_info" control_type="paragraph">
+      <value/>
+      <name locale="ru_RU">
+					&lt;p class="hint"&gt;Товары имеют 3 режима отображения: плитка, подробно или компактно. Вы можете выбрать режим отображения по умолчанию и разрешить или запретить его менять.
+					&lt;br /&gt;&lt;a href="http://balance.designmyshop.ru/wa-data/public/site/balance_settings/catalogue-item-view.png" target="_blank"&gt;Посмотреть пример&lt;/a&gt;&lt;/p&gt;
+					</name>
+    </setting>
+    <setting var="products_mode_default" control_type="select">
+      <value>thumbs</value>
+      <name locale="ru_RU">Режим отображения по умолчанию</name>
+      <options>
+        <option value="thumbs">
+          <name locale="ru_RU">Плиточный</name>
+        </option>
+        <option value="expanded">
+          <name locale="ru_RU">Подробный</name>
+        </option>
+        <option value="compact">
+          <name locale="ru_RU">Список</name>
+        </option>
+      </options>
+    </setting>
+    <setting var="products_mode_userchange_thumbs" control_type="checkbox">
+      <value/>
+      <name locale="ru_RU"/>
+      <description locale="en_US">User can change mode to thumbs</description>
+      <description locale="ru_RU">Пользователь может сменить режим на "Плиточный"</description>
+    </setting>
+    <setting var="products_mode_userchange_expanded" control_type="checkbox">
+      <value/>
+      <name locale="ru_RU"/>
+      <description locale="en_US">User can change mode to expanded</description>
+      <description locale="ru_RU">Пользователь может сменить режим на "Подробный"</description>
+    </setting>
+    <setting var="products_mode_userchange_compact" control_type="checkbox">
+      <value/>
+      <name locale="ru_RU"/>
+      <description locale="en_US">User can change mode to compact</description>
+      <description locale="ru_RU">Пользователь может сменить режим на "Компактный"</description>
+    </setting>
+    <setting var="shop_catalog_saving" control_type="group_divider">
+      <value>shop_catalog/shop_catalog_saving</value>
+      <name locale="en_US">Saving information</name>
+      <name locale="ru_RU">Информация об экономии</name>
+    </setting>
+    <setting var="shop_catalog_saving_info" control_type="paragraph">
+      <value/>
+      <name locale="ru_RU">
+					&lt;p class="hint"&gt;Позволяет визуально выделять товары с зачеркнутой ценой. &lt;a href="http://balance.designmyshop.ru/wa-data/public/site/balance_settings/discount-label.png" target="_blank"&gt;Пример&lt;/a&gt;
+					&lt;br /&gt;Скидка может отображаться в процентах или валюте. При выборе отображения скидки в процентах необходимо настроить желаемый алгоритм расчёта отображаемой скидки&lt;/p&gt;
+					</name>
+    </setting>
+    <setting var="products_show_saving_label" control_type="checkbox">
+      <value>1</value>
+      <name locale="ru_RU">Отображать ярлык у фото товара</name>
+      <description locale="ru_RU">У фотографии товаров будет добавлен круглый ярлык с процентным значением скидки. Будет размещен над другими ярлыками, если они есть.</description>
+    </setting>
+    <setting var="shop_productpage_saving" control_type="select">
+      <value>full</value>
+      <name locale="ru_RU">Отображение экономии на странице товара</name>
+      <description locale="ru_RU">Алгоритм расчета для процентного значения скидки задается в разделе «Каталог и товары» &gt; «Информация об экономии»</description>
+      <options>
+        <option value="full">
+          <name locale="ru_RU">Процент и валюта</name>
+        </option>
+        <option value="percent">
+          <name locale="ru_RU">Только процент</name>
+        </option>
+        <option value="currency">
+          <name locale="ru_RU">Только валюта</name>
+        </option>
+        <option value="none">
+          <name locale="ru_RU">Скрыть</name>
+        </option>
+      </options>
+    </setting>
+    <setting var="products_show_saving_rounding_type" control_type="radio">
+      <value>floor</value>
+      <name locale="ru_RU">Алгоритм расчета отображаемого процента экономии</name>
+      <options>
+        <option value="floor">
+          <name locale="ru_RU">к меньшему целому значению</name>
+          <description locale="ru_RU">Считать 1,99% как 1%</description>
+        </option>
+        <option value="ceil">
+          <name locale="ru_RU">к большему целому значению</name>
+          <description locale="ru_RU">Считать 1,01% как 2%</description>
+        </option>
+        <option value="round">
+          <name locale="ru_RU">математически к ближайшему</name>
+          <description locale="ru_RU">Считать 1,51% и 1,50% как 2%, а 1,49% как 1%</description>
+        </option>
+      </options>
+    </setting>
+    <setting var="products_show_saving_percent_min" control_type="text">
+      <value>5</value>
+      <name locale="ru_RU">Минимальный процент экономии для отображения</name>
+      <description locale="ru_RU">
+					Если в процентном соотношении экономия составит менее указанного числа, то надпись отображаться не будет
+					&lt;br /&gt;Доступные значения: от 0 до 99
+					
+					</description>
+    </setting>
+    <setting var="products_show_saving_currency_min" control_type="text">
+      <value>0</value>
+      <name locale="ru_RU">Минимальная сумма экономии для отображения</name>
+      <description locale="ru_RU">
+					Если сумма скидки будет составлять менее указанного числа, то надпись отображаться не будет
+					
+					</description>
+    </setting>
+    <setting var="shop_catalog_products" control_type="group_divider">
+      <value>shop_catalog/shop_catalog_products</value>
+      <name locale="en_US">Product cards</name>
+      <name locale="ru_RU">Карточки товаров</name>
+    </setting>
+    <setting var="products_list_view" control_type="select">
+      <value>1</value>
+      <name locale="ru_RU">Дизайн плиточного вида
+					
+					&lt;p class="hint"&gt;&lt;a href="http://balance.designmyshop.ru/wa-data/public/site/balance_settings/item-card-views.png" target="_blank"&gt;Посмотреть иллюстрацию&lt;/a&gt;&lt;/p&gt;
+					
+					</name>
+      <description locale="ru_RU">Кнопка "Купить в 1 клик" будет отображаться только при наличии соответствующего плагина(quickorder)</description>
+      <options>
+        <option value="1">
+          <name locale="ru_RU">Вариант 1</name>
+        </option>
+        <option value="2">
+          <name locale="ru_RU">Вариант 2</name>
+        </option>
+        <option value="3">
+          <name locale="ru_RU">Вариант 3</name>
+        </option>
+        <option value="4">
+          <name locale="ru_RU">Вариант 4</name>
+        </option>
+        <option value="5">
+          <name locale="ru_RU">Вариант 5</name>
+        </option>
+        <option value="6">
+          <name locale="ru_RU">Вариант 6</name>
+        </option>
+        <option value="7">
+          <name locale="ru_RU">Вариант 7</name>
+        </option>
+      </options>
+    </setting>
+    <setting var="products_list_mobile_view" control_type="select">
+      <value>compact</value>
+      <name locale="ru_RU">Вид в мобильной версии
+						&lt;p class="hint"&gt;&lt;a href="http://balance.designmyshop.ru/wa-data/public/site/balance_settings/mobile-card-views.png" target="_blank"&gt;пример&lt;/a&gt;&lt;/p&gt;
+					</name>
+      <description locale="ru_RU">Кнопка "Купить в 1 клик" будет отображаться только при наличии соответствующего плагина(quickorder)</description>
+      <options>
+        <option value="full">
+          <name locale="ru_RU">По одному товару в ряду</name>
+        </option>
+        <option value="compact">
+          <name locale="ru_RU">По два товара в ряду</name>
+        </option>
+      </options>
+    </setting>
+    <setting var="products_border" control_type="checkbox">
+      <value>1</value>
+      <name locale="ru_RU">Обрамить карточки рамкой
+					
+					&lt;p class="hint"&gt;&lt;a href="http://balance.designmyshop.ru/wa-data/public/site/balance_settings/item-card-border.png" target="_blank"&gt;Пример&lt;/a&gt;&lt;/p&gt;
+					
+					</name>
+      <description locale="ru_RU">Актуально только для плиточного режима отображения товаров</description>
+    </setting>
+    <setting var="products_thumbs_show_summary" control_type="checkbox">
+      <value>1</value>
+      <name locale="ru_RU">Отображать краткое описание в плиточном виде
+					
+					&lt;p class="hint"&gt;&lt;a href="http://balance.designmyshop.ru/wa-data/public/site/balance_settings/item-card-short-description.png" target="_blank"&gt;Что это?&lt;/a&gt;&lt;/p&gt;
+					
+					</name>
+    </setting>
+    <setting var="products_equal_height" control_type="checkbox">
+      <value>1</value>
+      <name locale="ru_RU">Выравнивать высоты содержимого в плиточном виде
+					&lt;p class="hint"&gt;&lt;b&gt;[BETA-версия]&lt;/b&gt;
+					&lt;br /&gt;&lt;a href="http://balance.designmyshop.ru/wa-data/public/site/balance_settings/item-equal-height.png" target="_blank"&gt;Пример&lt;/a&gt;&lt;/p&gt;
+					</name>
+      <description locale="ru_RU">Позволяет отображать одинаковые составляющие информации о продукте на одном уровне, что упрощает восприятие. Но образует пустоты, если размер этих составляющих сильно разнится.</description>
+    </setting>
+    <setting var="products_equal_height_pname" control_type="select">
+      <value>3</value>
+      <name locale="ru_RU">Максимальное кол-во отображаемых строк названия товара</name>
+      <description locale="ru_RU">Если название товара занимает больше выбранного кол-ва строк, остальная его часть будет скрыта.</description>
+      <options>
+        <option value="0">
+          <name locale="ru_RU">Не ограничивать</name>
+        </option>
+        <option value="2">
+          <name locale="ru_RU">2 строки</name>
+        </option>
+        <option value="3">
+          <name locale="ru_RU">3 строки</name>
+        </option>
+        <option value="4">
+          <name locale="ru_RU">4 строки</name>
+        </option>
+      </options>
+    </setting>
+    <setting var="products_list_features" control_type="select">
+      <value>yes</value>
+      <name locale="ru_RU">Отображать характеристики товаров
+					
+					&lt;p class="hint"&gt;&lt;a href="http://balance.designmyshop.ru/wa-data/public/site/balance_settings/item-card-technocal-info.png" target="_blank"&gt;Что это?&lt;/a&gt;&lt;/p&gt;
+					
+					</name>
+      <options>
+        <option value="yes">
+          <name locale="ru_RU">Отображать всегда</name>
+        </option>
+        <option value="expanded_view_only">
+          <name locale="ru_RU">Только в подробном виде</name>
+        </option>
+        <option value="none">
+          <name locale="ru_RU">Не отображать</name>
+        </option>
+      </options>
+    </setting>
+    <setting var="products_list_features_limit" control_type="text">
+      <value>5</value>
+      <name locale="ru_RU">Ограничить максимальное кол-во выводимых характеристик</name>
+      <description locale="ru_RU">
+					Укажите лимит отображаемых характеристик товаров в каталоге, либо оставьте поле пустым, если ограничения не требуются.
+					&lt;br /&gt;Вы можете переопределить данное значение для каждой категории. Для этого в поле "Дополнительные параметры" добавьте строку:
+					&lt;br /&gt;&lt;strong&gt;products_features_limit=10&lt;/strong&gt;
+					&lt;br /&gt;где "&lt;strong&gt;10&lt;/strong&gt;" - желаемый лимит
+					
+					</description>
+    </setting>
+    <setting var="products_list_features_codes" control_type="text">
+      <value/>
+      <name locale="ru_RU">Отображаемые характеристики</name>
+      <description locale="ru_RU">
+					Через запятую укажите ID характеристик, которые вы хотели бы отображать. Последовательность сохраняется.
+					&lt;br /&gt;Если оставить это поле пустым, отображаться будут все характеристики товара.
+					&lt;br /&gt;Вы можете переопределить данное значение для каждой категории. Для этого в поле "Дополнительные параметры" добавьте строку:
+					&lt;br /&gt;&lt;strong&gt;products_features_codes=&lt;u&gt;brand,color,size&lt;/u&gt;&lt;/strong&gt;
+					&lt;br /&gt;где "&lt;strong&gt;&lt;u&gt;brand,color,size&lt;/u&gt;&lt;/strong&gt;" - список ID характеристик
+					&lt;br /&gt;&lt;br /&gt;&lt;a href="http://help.designmyshop.ru/balance/459/kak-uznat-id-kharakteristiki/" target="_blank"&gt;Как узнать ID характеристики?&lt;/a&gt;
+					
+					</description>
+    </setting>
+    <setting var="products_list_features_color_singly" control_type="checkbox">
+      <value>1</value>
+      <name locale="ru_RU">Отображать цвет под фото
+					&lt;p class="hint"&gt;&lt;a href="http://balance.designmyshop.ru/wa-data/public/site/balance_settings/color-in-item-card.png" target="_blank"&gt;Пример&lt;/a&gt;&lt;/p&gt;
+					</name>
+      <description locale="ru_RU">
+					Если среди выводимых характеристик есть цвет, то при включении этой опции иконки с цветом будут отображаться под фото отдельно от таблицы характеристик. При этом ограничение на максимальное кол-во выводимых характеристик не будет учитывать этот цвет. Если среди выводимых характеристик несколько разных цветов, выводиться будет первый в системе.
+					</description>
+    </setting>
+    <setting var="shop_catalog_filters" control_type="group_divider">
+      <value>shop_catalog/shop_catalog_filters</value>
+      <name locale="en_US">Filters</name>
+      <name locale="ru_RU">Фильтры</name>
+    </setting>
+    <setting var="filters_collapse" control_type="text">
+      <value>7</value>
+      <name locale="ru_RU">Сворачивать характеристики в фильтре</name>
+      <description locale="ru_RU">
+					Укажите количество характеристик, при превышении которого остальные будут скрыты под ссылку “Показать еще”. Либо оставьте поле пустым для отключения данной опции.
+					&lt;br /&gt;&lt;a href="http://balance.designmyshop.ru/wa-data/public/site/balance_settings/filter-hide-item.png" target="_blank"&gt;Пример&lt;/a&gt;
+					
+					</description>
+    </setting>
+    <setting var="filters_design" control_type="select">
+      <value>backgrounded</value>
+      <name locale="ru_RU">Дизайн фильтра в каталоге
+					
+					&lt;p class="hint"&gt;&lt;a href="http://balance.designmyshop.ru/wa-data/public/site/balance_settings/filter-design.png" target="_blank"&gt;Что это?&lt;/a&gt;&lt;/p&gt;
+					
+					</name>
+      <options>
+        <option value="free">
+          <name locale="ru_RU">Белый фон без рамки</name>
+        </option>
+        <option value="bordered">
+          <name locale="ru_RU">Белый фон с рамкой</name>
+        </option>
+        <option value="backgrounded">
+          <name locale="ru_RU">Светло-серый фон с рамкой</name>
+        </option>
+      </options>
+    </setting>
+    <setting var="shop_homepage" control_type="group_divider">
+      <value/>
+      <name locale="en_US">Homepage</name>
+      <name locale="ru_RU">Главная страница</name>
+    </setting>
+    <setting var="shop_homepage_sections_main" control_type="group_divider">
+      <value>shop_homepage/shop_homepage_sections_main</value>
+      <name locale="en_US">Homepage content</name>
+      <name locale="ru_RU">Содержимое главной страницы</name>
+    </setting>
+    <setting var="shop_homepage_info" control_type="paragraph">
+      <value/>
+      <name locale="ru_RU">
+					&lt;p class="hint"&gt;Главная страница, как и сайдбары, является составным конструктором и полностью состоит из готовых секций. Вы сами определяете какие секции и в каком порядке отображать на главной странице вашего магазина.
+					&lt;br /&gt;
+					&lt;br /&gt;Список секций для определения содержимого и его последовательности:
+					&lt;br /&gt;&lt;b&gt;&lt;a href="http://balance.designmyshop.ru/wa-data/public/site/balance_settings/index-slider.png" target="_blank"&gt;slider&lt;/a&gt;&lt;/b&gt; - слайдер изображений. До 5 слайдов плюс до 2 баннеров(опционально)
+					&lt;br /&gt;&lt;b&gt;&lt;a href="http://balance.designmyshop.ru/wa-data/public/site/balance_settings/index-promo.png" target="_blank"&gt;promo&lt;/a&gt;&lt;/b&gt; - Приложение «Магазин» &gt; Товары &gt; Промо.
+					&lt;br /&gt;&lt;b&gt;&lt;a href="http://balance.designmyshop.ru/wa-data/public/site/balance_settings/index-features.png" target="_blank"&gt;features&lt;/a&gt;&lt;/b&gt; - Колоночный блок преимуществ с иконками.
+					&lt;br /&gt;&lt;b&gt;&lt;a href="http://balance.designmyshop.ru/wa-data/public/site/balance_settings/index-categories-thumbs.png" target="_blank"&gt;categories-thumbs&lt;/a&gt;&lt;/b&gt; - Карточки категорий с изображением категории и списком подкатегорий.
+					&lt;br /&gt;&lt;b&gt;&lt;a href="http://balance.designmyshop.ru/wa-data/public/site/balance_settings/index-categories-thumbs-1.png" target="_blank"&gt;categories-mini&lt;/a&gt;&lt;/b&gt; - Менее подробный вариант предыдущей секции. С возможностью включения "карусели".
+					&lt;br /&gt;&lt;b&gt;&lt;a href="http://balance.designmyshop.ru/wa-data/public/site/balance_settings/index-categories-gallery.png" target="_blank"&gt;categories-gallery&lt;/a&gt;&lt;/b&gt; - Плиточный вид категорий с фоновыми изображениями категорий.
+					&lt;br /&gt;&lt;b&gt;&lt;a href="http://balance.designmyshop.ru/wa-data/public/site/balance_settings/index-category-banner.png" target="_blank"&gt;category-banner&lt;/a&gt;&lt;/b&gt; - Список товаров категории с возможностью установки большого баннера.
+					&lt;br /&gt;&lt;b&gt;&lt;a href="http://balance.designmyshop.ru/wa-data/public/site/balance_settings/index-promo-categories.png" target="_blank"&gt;promo-categories&lt;/a&gt;&lt;/b&gt; - Разноцветная крупная плитка со списком категорий, подкатегорий и изображением.
+					&lt;br /&gt;&lt;b&gt;&lt;a href="http://balance.designmyshop.ru/wa-data/public/site/balance_settings/index-banner-1-2-3.png" target="_blank"&gt;banner-1&lt;/a&gt;&lt;/b&gt; - Один большой баннер на всю ширину страницы.
+					&lt;br /&gt;&lt;b&gt;&lt;a href="http://balance.designmyshop.ru/wa-data/public/site/balance_settings/index-banner-1-2-3.png" target="_blank"&gt;banner-2&lt;/a&gt;&lt;/b&gt; - Ряд из двух равных по ширине баннеров.
+					&lt;br /&gt;&lt;b&gt;&lt;a href="http://balance.designmyshop.ru/wa-data/public/site/balance_settings/index-banner-1-2-3.png" target="_blank"&gt;banner-3&lt;/a&gt;&lt;/b&gt; - Ряд из трех равных по ширине баннеров.
+					&lt;br /&gt;&lt;b&gt;&lt;a href="http://balance.designmyshop.ru/wa-data/public/site/balance_settings/index-banner-4.png" target="_blank"&gt;banner-4&lt;/a&gt;&lt;/b&gt; - Коллаж из четырех баннеров.
+					&lt;br /&gt;&lt;b&gt;&lt;a href="http://balance.designmyshop.ru/wa-data/public/site/balance_settings/index-banner-item.png" target="_blank"&gt;product-banner&lt;/a&gt;&lt;/b&gt; - Секция одного товара с фоновым изображением на всю ширину.
+					&lt;br /&gt;&lt;b&gt;&lt;a href="http://balance.designmyshop.ru/wa-data/public/site/balance_settings/index-products-block.png" target="_blank"&gt;products&lt;/a&gt;&lt;/b&gt; - Приложение «Магазин» &gt; Товары &gt; Меню “СПИСКИ”. До пяти списков товаров.
+					&lt;br /&gt;&lt;b&gt;&lt;a href="http://balance.designmyshop.ru/wa-data/public/site/balance_settings/index-category-products.png" target="_blank"&gt;category-products&lt;/a&gt;&lt;/b&gt; - Вариант оформления категорий с цветным "уголком" и слайдером.
+					&lt;br /&gt;&lt;b&gt;&lt;a href="http://balance.designmyshop.ru/wa-data/public/site/balance_settings/index-color-slider.png" target="_blank"&gt;color-slider&lt;/a&gt;&lt;/b&gt; - Вариант оформления промо категорий с цветным фоном и слайдером.
+					&lt;br /&gt;&lt;b&gt;&lt;a href="http://balance.designmyshop.ru/wa-data/public/site/balance_settings/index-viewed.png" target="_blank"&gt;viewed&lt;/a&gt;&lt;/b&gt; - Список товаров, которые просматривал пользователь.
+					&lt;br /&gt;&lt;b&gt;&lt;a href="http://balance.designmyshop.ru/wa-data/public/site/balance_settings/index-productbrands.png" target="_blank"&gt;productbrands&lt;/a&gt;&lt;/b&gt; - Логотипы брендов. Для этого блока должен быть установлен плагин “&lt;a href="https://www.webasyst.ru/store/plugin/shop/productbrands/" target="_blank"&gt;Бренды с картинками и описаниями&lt;/a&gt;”.
+					&lt;br /&gt;&lt;b&gt;&lt;a href="http://balance.designmyshop.ru/wa-data/public/site/balance_settings/index-reviews.png" target="_blank"&gt;last-reviews&lt;/a&gt;&lt;/b&gt; - Вывод последних отзывов о товарах.
+					&lt;br /&gt;&lt;b&gt;&lt;a href="http://balance.designmyshop.ru/wa-data/public/site/balance_settings/index-news.png" target="_blank"&gt;news&lt;/a&gt;&lt;/b&gt; - Вывод последних записей блога.
+					&lt;br /&gt;&lt;b&gt;&lt;a href="http://balance.designmyshop.ru/wa-data/public/site/balance_settings/index-subscribe.png" target="_blank"&gt;subscribe&lt;/a&gt;&lt;/b&gt; - Подписка на рассылки. Доступна только при наличии приложения "&lt;a href="https://www.webasyst.ru/store/app/mailer/" target="_blank"&gt;Рассылки&lt;/a&gt;".
+					&lt;br /&gt;&lt;b&gt;block=*&lt;/b&gt; - содержимое этой секции вы создаете сами через функционал "Блоки" приложения "Сайт". Можно использовать для установки баннеров, виджетов, доп. описаний и пр. Внутри блока доступны все те же Smarty-переменные, что и в самом шаблоне.
+					&lt;br /&gt;
+					&lt;br /&gt;
+					&lt;br /&gt;&lt;b&gt;О настройке блоков:&lt;/b&gt;
+					&lt;br /&gt;Вы можете создать любой блок с любым ID и вписать его в качестве содержимого секции. Например, если вы создали блок с ID "my_block", то для добавления его в сайдбар, нужно будет в поле содержимого сайдбара указать &lt;b&gt;block=my_block&lt;/b&gt;.
+					&lt;br /&gt;Кол-во пользовательских блоков может быть любым.
+					&lt;/p&gt;
+					</name>
+    </setting>
+    <setting var="shop_homepage_sections" control_type="text">
+      <value>slider,features,categories-gallery,products,promo-categories,categories-thumbs,categories-mini,category-banner,category-products,product-banner,promo,banner-1,banner-2,banner-3,banner-4,color-slider,productbrands,last-reviews,news,viewed,subscribe</value>
+      <name locale="ru_RU">Секции главной страницы</name>
+      <description locale="ru_RU">
+					Укажите через запятую ID секций, которые вы хотите вывести на главной странице. Указанная последовательность сохраняется.
+					&lt;br /&gt;Пример: &lt;b&gt;slider,promo,features,products,block=any_block,news&lt;/b&gt;
+					
+					</description>
+    </setting>
+    <setting var="shop_homepage_sections_sidebar" control_type="group_divider">
+      <value>shop_homepage/shop_homepage_sections_sidebar</value>
+      <name locale="en_US">Sidebar content</name>
+      <name locale="ru_RU">Настройки сайдбара главной страницы</name>
+    </setting>
+    <setting var="shop_catalog_sidebar_info" control_type="paragraph">
+      <value/>
+      <name locale="ru_RU">
+					&lt;p class="hint"&gt;Также главная страница может иметь левый сайдбар. Вы можете настроить содержимое этого сайдбара так, как это нужно вам путем перечисления через запятую нужных вам секций в поле содержимого сайдбара. Либо оставить поле пустым для отключения сайдбара.
+					&lt;br /&gt;
+					&lt;br /&gt;ID доступных секций для определения содержимого и его последовательности в сайдбаре:
+					&lt;br /&gt;&lt;b&gt;menu&lt;/b&gt; - секция со списком категорий первого уровня. Может служить в кач-ве дополнительной навигации.
+					&lt;br /&gt;&lt;b&gt;news&lt;/b&gt; - последние записи в блоге.
+					&lt;br /&gt;&lt;b&gt;about&lt;/b&gt; - информация и контакты.
+					&lt;br /&gt;&lt;b&gt;productbrands&lt;/b&gt; - список брендов. Доступен только при наличии плагина "&lt;a href="https://www.webasyst.ru/store/plugin/shop/productbrands/" target="_blank"&gt;Бренды с картинками и описаниями&lt;/a&gt;".
+					&lt;br /&gt;&lt;b&gt;tags&lt;/b&gt; - теги магазина.
+					&lt;br /&gt;&lt;b&gt;faq&lt;/b&gt; - вопросы и ответы.
+					&lt;br /&gt;&lt;b&gt;products&lt;/b&gt; - приложение «Магазин» &gt; Товары &gt; Меню “СПИСКИ”.
+					&lt;br /&gt;&lt;b&gt;viewed&lt;/b&gt; - список просмотренных пользователем товаров.
+					&lt;br /&gt;&lt;b&gt;block=*&lt;/b&gt; - содержимое этой секции вы можете задать сами через функционал "Блоки" приложения "Сайт". Можно использовать для установки баннеров, виджетов, доп. описаний и пр. Внутри блока доступны все те же Smarty-переменные, что и в самом шаблоне.
+					&lt;br /&gt;
+					&lt;br /&gt;
+					&lt;br /&gt;Настройки самих секций находятся в отдельном разделе настроек темы - "Сайдбары"
+					&lt;br /&gt;
+					&lt;br /&gt;&lt;b&gt;О настройке блоков:&lt;/b&gt;
+					&lt;br /&gt;Вы можете создать любой блок с любым ID и вписать его в качестве содержимого секции. Например, если вы создали блок с ID "my_block", то для добавления его в сайдбар, нужно будет в поле содержимого сайдбара указать &lt;b&gt;block=my_block&lt;/b&gt;.
+					&lt;br /&gt;Кол-во пользовательских блоков может быть любым.
+					&lt;/p&gt;
+					</name>
+    </setting>
+    <setting var="shop_sidebars_home_sections" control_type="text">
+      <value>menu,products,productbrands,news,tags,faq,about,viewed</value>
+      <name locale="ru_RU">Секции сайдбара</name>
+      <description locale="ru_RU">
+					Укажите через запятую ID секций, которые вы хотите вывести в левой колонке. Указанная последовательность сохраняется. Оставьте пустым, если хотите скрыть этот сайдбар.
+					&lt;br /&gt;Например: &lt;b&gt;menu,tags,viewed,block=custom_block&lt;/b&gt; - указанные через запятую ID секций/блоков
+					
+					</description>
+    </setting>
+    <setting var="shop_homepage_features" control_type="group_divider">
+      <value>shop_homepage/shop_homepage_features</value>
+      <name locale="en_US">“FEATURES” section</name>
+      <name locale="ru_RU">Секция “FEATURES”</name>
+    </setting>
+    <setting var="shop_homepage_features_info" control_type="paragraph">
+      <value/>
+      <name locale="ru_RU">
+					&lt;p class="hint"&gt;&lt;a href="http://balance.designmyshop.ru/wa-data/public/site/balance_settings/index-features.png" target="_blank"&gt;Иллюстрация секции&lt;/a&gt;
+					</name>
+    </setting>
+    <setting var="shop_homepage_features_view" control_type="select">
+      <value>always</value>
+      <name locale="ru_RU">Видимость секции</name>
+      <options>
+        <option value="always">
+          <name locale="ru_RU">Всегда</name>
+        </option>
+        <option value="mb-hide">
+          <name locale="ru_RU">Cкрыть в мобильной версии</name>
+        </option>
+        <option value="td-hide">
+          <name locale="ru_RU">Отображать только в мобильной версии</name>
+        </option>
+        <option value="none">
+          <name locale="ru_RU">Отключить полностью</name>
+        </option>
+      </options>
+    </setting>
+    <setting var="shop_homepage_features_design" control_type="select">
+      <value>1</value>
+      <name locale="ru_RU">Дизайн секции</name>
+      <options>
+        <option value="1">
+          <name locale="ru_RU">Вариант №1</name>
+        </option>
+        <option value="2">
+          <name locale="ru_RU">Вариант №2</name>
+        </option>
+        <option value="3">
+          <name locale="ru_RU">Вариант №3</name>
+        </option>
+      </options>
+    </setting>
+    <setting var="shop_homepage_features_col_1" control_type="group_divider">
+      <value>shop_homepage/shop_homepage_features/shop_homepage_features_col_1</value>
+      <name locale="en_US">Column #1</name>
+      <name locale="ru_RU">Колонка №1</name>
+    </setting>
+    <setting var="homepage_features_col_1_icon" control_type="image">
+      <value>img/features/icon-1.png</value>
+      <filename>img/features/icon-1.*</filename>
+      <name locale="ru_RU">Иконка</name>
+    </setting>
+    <setting var="homepage_features_col_1_link" control_type="text">
+      <value/>
+      <name locale="ru_RU">Ссылка</name>
+      <description locale="ru_RU">опционально</description>
+    </setting>
+    <setting var="homepage_features_col_1_title" control_type="text">
+      <value>Лучшие предложения</value>
+      <name locale="ru_RU">Заголовок</name>
+      <description locale="ru_RU">Smarty разрешен</description>
+    </setting>
+    <setting var="homepage_features_col_1_body" control_type="text">
+      <value>Хотите отправить красивый подарок? Мы сделаем всё за вас!</value>
+      <name locale="ru_RU">Описание</name>
+      <description locale="ru_RU">Smarty разрешен</description>
+    </setting>
+    <setting var="shop_homepage_features_col_2" control_type="group_divider">
+      <value>shop_homepage/shop_homepage_features/shop_homepage_features_col_2</value>
+      <name locale="en_US">Column #2</name>
+      <name locale="ru_RU">Колонка №2</name>
+    </setting>
+    <setting var="homepage_features_col_2_icon" control_type="image">
+      <value>img/features/icon-2.png</value>
+      <filename>img/features/icon-2.*</filename>
+      <name locale="ru_RU">Иконка</name>
+    </setting>
+    <setting var="homepage_features_col_2_link" control_type="text">
+      <value/>
+      <name locale="ru_RU">Ссылка</name>
+      <description locale="ru_RU">опционально</description>
+    </setting>
+    <setting var="homepage_features_col_2_title" control_type="text">
+      <value>Бесплатная доставка</value>
+      <name locale="ru_RU">Заголовок</name>
+      <description locale="ru_RU">Smarty разрешен</description>
+    </setting>
+    <setting var="homepage_features_col_2_body" control_type="text">
+      <value>Мы отправляем вашу покупку в курьерскую службу в день заказа</value>
+      <name locale="ru_RU">Описание</name>
+      <description locale="ru_RU">Smarty разрешен</description>
+    </setting>
+    <setting var="shop_homepage_features_col_3" control_type="group_divider">
+      <value>shop_homepage/shop_homepage_features/shop_homepage_features_col_3</value>
+      <name locale="en_US">Column #3</name>
+      <name locale="ru_RU">Колонка №3</name>
+    </setting>
+    <setting var="homepage_features_col_3_icon" control_type="image">
+      <value>img/features/icon-3.png</value>
+      <filename>img/features/icon-3.*</filename>
+      <name locale="ru_RU">Иконка</name>
+    </setting>
+    <setting var="homepage_features_col_3_link" control_type="text">
+      <value/>
+      <name locale="ru_RU">Ссылка</name>
+      <description locale="ru_RU">опционально</description>
+    </setting>
+    <setting var="homepage_features_col_3_title" control_type="text">
+      <value>Гарантия и качество</value>
+      <name locale="ru_RU">Заголовок</name>
+      <description locale="ru_RU">Smarty разрешен</description>
+    </setting>
+    <setting var="homepage_features_col_3_body" control_type="text">
+      <value>Гарантированная замена некачественного товара в течение 10 дней</value>
+      <name locale="ru_RU">Описание</name>
+      <description locale="ru_RU">Smarty разрешен</description>
+    </setting>
+    <setting var="shop_homepage_news" control_type="group_divider">
+      <value>shop_homepage/shop_homepage_news</value>
+      <name locale="en_US">“NEWS” section</name>
+      <name locale="ru_RU">Секция “NEWS”</name>
+    </setting>
+    <setting var="homepage_news" control_type="paragraph">
+      <value/>
+      <name locale="ru_RU">
+					&lt;p class="hint"&gt;&lt;a href="http://balance.designmyshop.ru/wa-data/public/site/balance_settings/index-news.png" target="_blank"&gt;Иллюстрация секции&lt;/a&gt;
+					&lt;br /&gt;&lt;br /&gt;Если установлено приложение “Блог”
+					&lt;br /&gt;&lt;a href="http://help.designmyshop.ru/balance/461/ustanovka-izobrazheniy-dlya-zapisey-bloga/" target="_blank"&gt;Инструкция по установке изображений для записей блога&lt;/a&gt;
+					</name>
+    </setting>
+    <setting var="homepage_news_view" control_type="select">
+      <value>always</value>
+      <name locale="ru_RU">Видимость секции</name>
+      <options>
+        <option value="always">
+          <name locale="ru_RU">Всегда</name>
+        </option>
+        <option value="mb-hide">
+          <name locale="ru_RU">Cкрыть в мобильной версии</name>
+        </option>
+        <option value="td-hide">
+          <name locale="ru_RU">Отображать только в мобильной версии</name>
+        </option>
+        <option value="none">
+          <name locale="ru_RU">Отключить полностью</name>
+        </option>
+      </options>
+    </setting>
+    <setting var="homepage_news_design" control_type="radio">
+      <value>news-2</value>
+      <name locale="ru_RU">Дизайн секции</name>
+      <options>
+        <option value="news-1">
+          <name locale="ru_RU">Вариант #1</name>
+          <description locale="ru_RU">Отображается до 5 последних записей. Только заголовок и дата.</description>
+        </option>
+        <option value="news-2">
+          <name locale="ru_RU">Вариант #2</name>
+          <description locale="ru_RU">Две последние записи блога. Заголовок, дата и краткое описание.</description>
+        </option>
+      </options>
+    </setting>
+    <setting var="homepage_news_blog_id" control_type="text">
+      <value/>
+      <name locale="ru_RU">ID блога</name>
+      <description locale="ru_RU">
+					Укажите ID, если хотите, чтобы в список попадали только записи из одного определенного блога. Либо оставьте поле пустым.
+					&lt;br /&gt;&lt;a href="http://help.designmyshop.ru/balance/458/kak-uznat-id-bloga/" target="_blank"&gt;Как узнать ID блога?&lt;/a&gt;
+					
+					</description>
+    </setting>
+    <setting var="homepage_promo_categories" control_type="group_divider">
+      <value>shop_homepage/homepage_promo_categories</value>
+      <name locale="en_US">“PROMO-CATEGORIES” section</name>
+      <name locale="ru_RU">Секция “PROMO-CATEGORIES”</name>
+    </setting>
+    <setting var="homepage_promo_categories_info" control_type="paragraph">
+      <value/>
+      <name locale="ru_RU">
+					&lt;p class="hint"&gt;&lt;a href="http://balance.designmyshop.ru/wa-data/public/site/balance_settings/index-promo-categories.png" target="_blank"&gt;Иллюстрация секции&lt;/a&gt;
+					&lt;br /&gt;
+					&lt;br /&gt;Отображается до 10 подкатегорий. Если подкатегорий будет больше, оставшиеся будут скрыты и появится ссылка "Все категории". Сами категории и фоновые цвета указываются в настройках ниже. Изображение же можно установить несколькими путями:
+					&lt;br /&gt;1. Через плагин &lt;a href="https://www.webasyst.ru/store/plugin/shop/wmimageincat/" target="_blank"&gt;Иконка, изображение и баннер для категории&lt;/a&gt;. Использоваться будет "Изображение".
+					&lt;br /&gt;2. Через дополнительные параметры категории. Для этого добавьте в соответствующем поле строку:
+					&lt;br /&gt;&lt;b&gt;promo_categories_image=/path/to/image.png&lt;/b&gt;
+					&lt;br /&gt;где "/path/to/image.png" - путь к изображению. Само изображение можно загрузить через "Файл-менеджер" приложения "Сайт".
+					&lt;br /&gt;
+					&lt;br /&gt;Если изображение будет установлено сразу двумя способами, приоритет будет иметь изображение из доп. параметров.&lt;/p&gt;
+					</name>
+    </setting>
+    <setting var="homepage_promo_categories_view" control_type="select">
+      <value>always</value>
+      <name locale="ru_RU">Видимость секции</name>
+      <options>
+        <option value="always">
+          <name locale="ru_RU">Всегда</name>
+        </option>
+        <option value="mb-hide">
+          <name locale="ru_RU">Cкрыть в мобильной версии</name>
+        </option>
+        <option value="td-hide">
+          <name locale="ru_RU">Отображать только в мобильной версии</name>
+        </option>
+        <option value="none">
+          <name locale="ru_RU">Отключить полностью</name>
+        </option>
+      </options>
+    </setting>
+    <setting var="homepage_promo_categories_list" control_type="text">
+      <value/>
+      <name locale="ru_RU">Список категорий</name>
+      <description locale="ru_RU">
+					Перечислите через запятую ID категорий, которые будет отображены в этом блоке.
+					&lt;br /&gt;&lt;a href="http://help.designmyshop.ru/balance/457/kak-uznat-id-kategorii/" target="_blank"&gt;Как узнать ID категории?&lt;/a&gt;
+					
+					</description>
+    </setting>
+    <setting var="homepage_promo_categories_colors" control_type="text">
+      <value>#E7F8FF,#DED8D4,#FFE3D5,#F3F3F3</value>
+      <name locale="ru_RU">Фоновые цвета</name>
+      <description locale="ru_RU">
+					Перечислите через запятую HEX-коды цветов в нужной вам последовательности. Если кол-во категорий будет больше указанного кол-ва цветов, они начнут повторяться.
+					&lt;br /&gt;Например: #E7F8FF,#DED8D4,#FFE3D5,#F3F3F3
+					&lt;br /&gt;Для подбора и определения HEX-кода цвета, можете воспользоваться сервисом &lt;a href="https://colorpicker.me/" target="_blank"&gt;colorpicker.me&lt;/a&gt;
+					
+					</description>
+    </setting>
+    <setting var="homepage_categories_thumbs" control_type="group_divider">
+      <value>shop_homepage/homepage_categories_thumbs</value>
+      <name locale="en_US">“CATEGORIES-THUMBS” section</name>
+      <name locale="ru_RU">Секция “CATEGORIES-THUMBS”</name>
+    </setting>
+    <setting var="homepage_categories_thumbs_info" control_type="paragraph">
+      <value/>
+      <name locale="ru_RU">
+					&lt;p class="hint"&gt;&lt;a href="http://balance.designmyshop.ru/wa-data/public/site/balance_settings/index-categories-thumbs.png" target="_blank"&gt;Иллюстрация секции&lt;/a&gt;
+					&lt;br /&gt;
+					&lt;br /&gt;Вы можете установить изображение несколькими путями:
+					&lt;br /&gt;1. Через плагин &lt;a href="https://www.webasyst.ru/store/plugin/shop/wmimageincat/" target="_blank"&gt;Иконка, изображение и баннер для категории&lt;/a&gt;. Использоваться будет "Изображение".
+					&lt;br /&gt;2. Через дополнительные параметры категории. Для этого добавьте в соответствующем поле строку:
+					&lt;br /&gt;&lt;b&gt;categories_thumbs_image=/path/to/image.png&lt;/b&gt;
+					&lt;br /&gt;где "/path/to/image.png" - путь к изображению. Само изображение можно загрузить через "Файл-менеджер" приложения "Сайт".
+					&lt;br /&gt;
+					&lt;br /&gt;Если изображение будет установлено сразу двумя способами, приоритет будет иметь изображение из доп. параметров.&lt;/p&gt;
+					</name>
+    </setting>
+    <setting var="homepage_categories_thumbs_view" control_type="select">
+      <value>always</value>
+      <name locale="ru_RU">Видимость секции</name>
+      <options>
+        <option value="always">
+          <name locale="ru_RU">Всегда</name>
+        </option>
+        <option value="mb-hide">
+          <name locale="ru_RU">Cкрыть в мобильной версии</name>
+        </option>
+        <option value="td-hide">
+          <name locale="ru_RU">Отображать только в мобильной версии</name>
+        </option>
+        <option value="none">
+          <name locale="ru_RU">Отключить полностью</name>
+        </option>
+      </options>
+    </setting>
+    <setting var="homepage_categories_thumbs_list" control_type="text">
+      <value/>
+      <name locale="ru_RU">Список категорий</name>
+      <description locale="ru_RU">
+					Перечислите через запятую ID категорий, которые будет отображены в этом блоке.
+					&lt;br /&gt;&lt;a href="http://help.designmyshop.ru/balance/457/kak-uznat-id-kategorii/" target="_blank"&gt;Как узнать ID категории?&lt;/a&gt;
+					
+					</description>
+    </setting>
+    <setting var="homepage_categories_thumbs_title" control_type="text">
+      <value locale="ru_RU">Популярные категории</value>
+      <value locale="en_US">Popular categories</value>
+      <name locale="ru_RU">Заголовок секции</name>
+    </setting>
+    <setting var="homepage_categories_thumbs_border" control_type="checkbox">
+      <value>1</value>
+      <name locale="ru_RU">Выделить плитку рамкой</name>
+    </setting>
+    <setting var="homepage_categories_thumbs_count" control_type="checkbox">
+      <value>1</value>
+      <name locale="ru_RU">Отображать кол-во товаров</name>
+    </setting>
+    <setting var="homepage_categories_thumbs_subcategories" control_type="checkbox">
+      <value>1</value>
+      <name locale="ru_RU">
+					Отображать подкатегории
+					&lt;br /&gt;&lt;span class="hint"&gt;если есть&lt;/span&gt;
+					</name>
+    </setting>
+    <setting var="homepage_categories_mini" control_type="group_divider">
+      <value>shop_homepage/homepage_categories_mini</value>
+      <name locale="en_US">“CATEGORIES-MINI” section</name>
+      <name locale="ru_RU">Секция “CATEGORIES-MINI”</name>
+    </setting>
+    <setting var="homepage_categories_mini_info" control_type="paragraph">
+      <value/>
+      <name locale="ru_RU">
+					&lt;p class="hint"&gt;&lt;a href="http://balance.designmyshop.ru/wa-data/public/site/balance_settings/index-categories-thumbs-1.png" target="_blank"&gt;Иллюстрация секции&lt;/a&gt;
+					&lt;br /&gt;
+					&lt;br /&gt;Вы можете установить изображение несколькими путями:
+					&lt;br /&gt;1. Через плагин &lt;a href="https://www.webasyst.ru/store/plugin/shop/wmimageincat/" target="_blank"&gt;Иконка, изображение и баннер для категории&lt;/a&gt;. Использоваться будет "Изображение".
+					&lt;br /&gt;2. Через дополнительные параметры категории. Для этого добавьте в соответствующем поле строку:
+					&lt;br /&gt;&lt;b&gt;categories_mini_image=/path/to/image.png&lt;/b&gt;
+					&lt;br /&gt;где "/path/to/image.png" - путь к изображению. Само изображение можно загрузить через "Файл-менеджер" приложения "Сайт".
+					&lt;br /&gt;
+					&lt;br /&gt;Если изображение будет установлено сразу двумя способами, приоритет будет иметь изображение из доп. параметров.&lt;/p&gt;
+					</name>
+    </setting>
+    <setting var="homepage_categories_mini_view" control_type="select">
+      <value>always</value>
+      <name locale="ru_RU">Видимость секции</name>
+      <options>
+        <option value="always">
+          <name locale="ru_RU">Всегда</name>
+        </option>
+        <option value="mb-hide">
+          <name locale="ru_RU">Cкрыть в мобильной версии</name>
+        </option>
+        <option value="td-hide">
+          <name locale="ru_RU">Отображать только в мобильной версии</name>
+        </option>
+        <option value="none">
+          <name locale="ru_RU">Отключить полностью</name>
+        </option>
+      </options>
+    </setting>
+    <setting var="homepage_categories_mini_list" control_type="text">
+      <value/>
+      <name locale="ru_RU">Список категорий</name>
+      <description locale="ru_RU">
+					Перечислите через запятую ID категорий, которые будет отображены в этом блоке.
+					&lt;br /&gt;&lt;a href="http://help.designmyshop.ru/balance/457/kak-uznat-id-kategorii/" target="_blank"&gt;Как узнать ID категории?&lt;/a&gt;
+					
+					</description>
+    </setting>
+    <setting var="homepage_categories_mini_title" control_type="text">
+      <value locale="ru_RU">Популярные категории</value>
+      <value locale="en_US">Popular categories</value>
+      <name locale="ru_RU">Заголовок секции</name>
+    </setting>
+    <setting var="homepage_categories_mini_border" control_type="checkbox">
+      <value>1</value>
+      <name locale="ru_RU">Выделить рамкой</name>
+    </setting>
+    <setting var="homepage_categories_mini_count" control_type="checkbox">
+      <value>1</value>
+      <name locale="ru_RU">Отображать кол-во товаров</name>
+    </setting>
+    <setting var="homepage_categories_mini_slider" control_type="checkbox">
+      <value>1</value>
+      <name locale="ru_RU">Использовать слайдер-прокрутку</name>
+    </setting>
+    <setting var="homepage_categories_gallery" control_type="group_divider">
+      <value>shop_homepage/homepage_categories_gallery</value>
+      <name locale="en_US">“CATEGORIES-GALLERY” section</name>
+      <name locale="ru_RU">Секция “CATEGORIES-GALLERY”</name>
+    </setting>
+    <setting var="homepage_categories_gallery_info" control_type="paragraph">
+      <value/>
+      <name locale="ru_RU">
+					&lt;p class="hint"&gt;&lt;a href="http://balance.designmyshop.ru/wa-data/public/site/balance_settings/index-categories-gallery.png" target="_blank"&gt;Иллюстрация секции&lt;/a&gt;
+					&lt;br /&gt;
+					&lt;br /&gt;Вы можете установить изображение несколькими путями:
+					&lt;br /&gt;1. Через плагин &lt;a href="https://www.webasyst.ru/store/plugin/shop/wmimageincat/" target="_blank"&gt;Иконка, изображение и баннер для категории&lt;/a&gt;. Использоваться будет "Изображение".
+					&lt;br /&gt;2. Через дополнительные параметры категории. Для этого добавьте в соответствующем поле строку:
+					&lt;br /&gt;&lt;b&gt;categories_gallery_image=/path/to/image.png&lt;/b&gt;
+					&lt;br /&gt;где "/path/to/image.png" - путь к изображению. Само изображение можно загрузить через "Файл-менеджер" приложения "Сайт".
+					&lt;br /&gt;
+					&lt;br /&gt;Если изображение будет установлено сразу двумя способами, приоритет будет иметь изображение из доп. параметров.&lt;/p&gt;
+					</name>
+    </setting>
+    <setting var="homepage_categories_gallery_view" control_type="select">
+      <value>always</value>
+      <name locale="ru_RU">Видимость секции</name>
+      <options>
+        <option value="always">
+          <name locale="ru_RU">Всегда</name>
+        </option>
+        <option value="mb-hide">
+          <name locale="ru_RU">Cкрыть в мобильной версии</name>
+        </option>
+        <option value="td-hide">
+          <name locale="ru_RU">Отображать только в мобильной версии</name>
+        </option>
+        <option value="none">
+          <name locale="ru_RU">Отключить полностью</name>
+        </option>
+      </options>
+    </setting>
+    <setting var="homepage_categories_gallery_list" control_type="text">
+      <value/>
+      <name locale="ru_RU">Список категорий</name>
+      <description locale="ru_RU">
+					Перечислите через запятую ID категорий, которые будет отображены в этом блоке.
+					&lt;br /&gt;&lt;a href="http://help.designmyshop.ru/balance/457/kak-uznat-id-kategorii/" target="_blank"&gt;Как узнать ID категории?&lt;/a&gt;
+					
+					</description>
+    </setting>
+    <setting var="homepage_categories_gallery_title" control_type="text">
+      <value locale="ru_RU">Популярные категории</value>
+      <value locale="en_US">Popular categories</value>
+      <name locale="ru_RU">Заголовок секции</name>
+    </setting>
+    <setting var="homepage_categories_gallery_count" control_type="checkbox">
+      <value>1</value>
+      <name locale="ru_RU">Отображать кол-во товаров</name>
+    </setting>
+    <setting var="shop_homepage_products" control_type="group_divider">
+      <value>shop_homepage/shop_homepage_products</value>
+      <name locale="en_US">“PRODUCTS” section</name>
+      <name locale="ru_RU">Секция “PRODUCTS”</name>
+    </setting>
+    <setting var="shop_homepage_products_info" control_type="paragraph">
+      <value/>
+      <name locale="ru_RU">
+					&lt;p class="hint"&gt;&lt;a href="http://balance.designmyshop.ru/wa-data/public/site/balance_settings/index-products-block.png" target="_blank"&gt;Иллюстрация секции&lt;/a&gt;
+					&lt;br /&gt;
+					&lt;br /&gt;Сначала создайте нужные списки в приложении «Магазин» &gt; Товары &gt; Меню “СПИСКИ”. Затем укажите ниже ID этих списков и заголовки к ним.&lt;/p&gt;
+					</name>
+    </setting>
+    <setting var="shop_homepage_products_view" control_type="select">
+      <value>always</value>
+      <name locale="ru_RU">Видимость секции</name>
+      <options>
+        <option value="always">
+          <name locale="ru_RU">Всегда</name>
+        </option>
+        <option value="mb-hide">
+          <name locale="ru_RU">Cкрыть в мобильной версии</name>
+        </option>
+        <option value="td-hide">
+          <name locale="ru_RU">Отображать только в мобильной версии</name>
+        </option>
+        <option value="none">
+          <name locale="ru_RU">Отключить полностью</name>
+        </option>
+      </options>
+    </setting>
+    <setting var="shop_homepage_products_use_tabs" control_type="checkbox">
+      <value/>
+      <name locale="ru_RU">Сгруппировать списки в виде вкладок</name>
+    </setting>
+    <setting var="shop_homepage_products_list_1" control_type="group_divider">
+      <value>shop_homepage/shop_homepage_products/shop_homepage_products_list_1</value>
+      <name locale="en_US">Products set №1</name>
+      <name locale="ru_RU">Список №1</name>
+    </setting>
+    <setting var="shop_homepage_products_list_1_id" control_type="text">
+      <value>bestsellers</value>
+      <name locale="ru_RU">ID списка</name>
+    </setting>
+    <setting var="shop_homepage_products_list_1_title" control_type="text">
+      <value>Хиты продаж</value>
+      <name locale="ru_RU">Заголовок</name>
+    </setting>
+    <setting var="shop_homepage_products_list_2" control_type="group_divider">
+      <value>shop_homepage/shop_homepage_products/shop_homepage_products_list_2</value>
+      <name locale="en_US">Products set №2</name>
+      <name locale="ru_RU">Список №2</name>
+    </setting>
+    <setting var="shop_homepage_products_list_2_id" control_type="text">
+      <value>promo</value>
+      <name locale="ru_RU">ID списка</name>
+    </setting>
+    <setting var="shop_homepage_products_list_2_title" control_type="text">
+      <value>Новинки</value>
+      <name locale="ru_RU">Заголовок</name>
+    </setting>
+    <setting var="shop_homepage_products_list_3" control_type="group_divider">
+      <value>shop_homepage/shop_homepage_products/shop_homepage_products_list_3</value>
+      <name locale="en_US">Products set №3</name>
+      <name locale="ru_RU">Список №3</name>
+    </setting>
+    <setting var="shop_homepage_products_list_3_id" control_type="text">
+      <value/>
+      <name locale="ru_RU">ID списка</name>
+    </setting>
+    <setting var="shop_homepage_products_list_3_title" control_type="text">
+      <value/>
+      <name locale="ru_RU">Заголовок</name>
+    </setting>
+    <setting var="shop_homepage_products_list_4" control_type="group_divider">
+      <value>shop_homepage/shop_homepage_products/shop_homepage_products_list_4</value>
+      <name locale="en_US">Products set №4</name>
+      <name locale="ru_RU">Список №4</name>
+    </setting>
+    <setting var="shop_homepage_products_list_4_id" control_type="text">
+      <value/>
+      <name locale="ru_RU">ID списка</name>
+    </setting>
+    <setting var="shop_homepage_products_list_4_title" control_type="text">
+      <value/>
+      <name locale="ru_RU">Заголовок</name>
+    </setting>
+    <setting var="shop_homepage_products_list_5" control_type="group_divider">
+      <value>shop_homepage/shop_homepage_products/shop_homepage_products_list_5</value>
+      <name locale="en_US">Products set №5</name>
+      <name locale="ru_RU">Список №5</name>
+    </setting>
+    <setting var="shop_homepage_products_list_5_id" control_type="text">
+      <value/>
+      <name locale="ru_RU">ID списка</name>
+    </setting>
+    <setting var="shop_homepage_products_list_5_title" control_type="text">
+      <value/>
+      <name locale="ru_RU">Заголовок</name>
+    </setting>
+    <setting var="homepage_colorslider_categories" control_type="group_divider">
+      <value>shop_homepage/homepage_colorslider_categories</value>
+      <name locale="en_US">“COLOR-SLIDER” section</name>
+      <name locale="ru_RU">Секция “COLOR-SLIDER”</name>
+    </setting>
+    <setting var="homepage_colorslider_categories_info" control_type="paragraph">
+      <value/>
+      <name locale="ru_RU">
+					&lt;p class="hint"&gt;&lt;a href="http://balance.designmyshop.ru/wa-data/public/site/balance_settings/index-color-slider.png" target="_blank"&gt;Иллюстрация секции&lt;/a&gt;
+					&lt;br /&gt;
+					&lt;br /&gt;По умолчанию отображается 8 случайных товаров. Этот лимит вы можете изменить ниже. Также вы можете указать конкретный список товаров для категории через доп. параметры категории. Для этого добавьте строку:
+					&lt;br /&gt;&lt;b&gt;homepage_colorslider_products=96,97,99&lt;/b&gt;
+					&lt;br /&gt;где &lt;u&gt;96,97,99&lt;/u&gt; - ID товаров через запятую
+					&lt;br /&gt;
+					&lt;br /&gt;&lt;a href="http://help.designmyshop.ru/balance/456/kak-uznat-id-tovara/" target="_blank"&gt;Как узнать ID товара?&lt;/a&gt;&lt;/p&gt;
+					</name>
+    </setting>
+    <setting var="homepage_colorslider_categories_view" control_type="select">
+      <value>always</value>
+      <name locale="ru_RU">Видимость секции</name>
+      <options>
+        <option value="always">
+          <name locale="ru_RU">Всегда</name>
+        </option>
+        <option value="mb-hide">
+          <name locale="ru_RU">Cкрыть в мобильной версии</name>
+        </option>
+        <option value="td-hide">
+          <name locale="ru_RU">Отображать только в мобильной версии</name>
+        </option>
+        <option value="none">
+          <name locale="ru_RU">Отключить полностью</name>
+        </option>
+      </options>
+    </setting>
+    <setting var="homepage_colorslider_categories_list" control_type="text">
+      <value/>
+      <name locale="ru_RU">Список категорий</name>
+      <description locale="ru_RU">
+					Перечислите через запятую ID категорий, которые будет отображены в этом блоке.
+					&lt;br /&gt;&lt;a href="http://help.designmyshop.ru/balance/457/kak-uznat-id-kategorii/" target="_blank"&gt;Как узнать ID категории?&lt;/a&gt;
+					
+					</description>
+    </setting>
+    <setting var="homepage_colorslider_limit" control_type="text">
+      <value/>
+      <name locale="ru_RU">Лимит товаров</name>
+      <description locale="ru_RU">
+					Не рекомендуется указывать слишком большое кол-во, т.к. это может негативно повлиять на скорость работы главной страницы. Если поле будет пустым, то будет установлен лимит по умолчанию - 8 товаров
+					
+					</description>
+    </setting>
+    <setting var="homepage_colorslider_description" control_type="checkbox">
+      <value>1</value>
+      <name locale="ru_RU">Отображать описание категории</name>
+    </setting>
+    <setting var="homepage_colorslider_categories_colors" control_type="text">
+      <value>#5D69FF,#FF4C4C,#29DA99,#FFB54C</value>
+      <name locale="ru_RU">Фоновые цвета</name>
+      <description locale="ru_RU">
+					Перечислите через запятую HEX-коды цветов в нужной вам последовательности. Если кол-во категорий будет больше указанного кол-ва цветов, они начнут повторяться.
+					&lt;br /&gt;Например: #5D69FF,#FF4C4C,#29DA99,#FFB54C
+					&lt;br /&gt;Для подбора и определения HEX-кода цвета, можете воспользоваться сервисом &lt;a href="https://colorpicker.me/" target="_blank"&gt;colorpicker.me&lt;/a&gt;
+					
+					</description>
+    </setting>
+    <setting var="homepage_colorslider_categories_text_colors" control_type="text">
+      <value/>
+      <name locale="ru_RU">Цвета текста</name>
+      <description locale="ru_RU">
+					Перечислите через запятую HEX-коды цветов в нужной вам последовательности. Если кол-во категорий будет больше указанного кол-ва цветов, они начнут повторяться с первого значения.
+					&lt;br /&gt;Для подбора и определения HEX-кода цвета, можете воспользоваться сервисом &lt;a href="https://colorpicker.me/" target="_blank"&gt;colorpicker.me&lt;/a&gt;
+					
+					</description>
+    </setting>
+    <setting var="homepage_category_products" control_type="group_divider">
+      <value>shop_homepage/homepage_category_products</value>
+      <name locale="en_US">“CATEGORY-PRODUCTS” section</name>
+      <name locale="ru_RU">Секция “CATEGORY-PRODUCTS”</name>
+    </setting>
+    <setting var="homepage_category_products_info" control_type="paragraph">
+      <value/>
+      <name locale="ru_RU">
+					&lt;p class="hint"&gt;&lt;a href="http://balance.designmyshop.ru/wa-data/public/site/balance_settings/index-category-products.png" target="_blank"&gt;Иллюстрация секции&lt;/a&gt;
+					&lt;br /&gt;
+					&lt;br /&gt;По умолчанию отображается 8 случайных товаров. Этот лимит вы можете изменить ниже. Также вы можете указать конкретный список товаров для категории через доп. параметры категории. Для этого добавьте строку:
+					&lt;br /&gt;&lt;b&gt;homepage_category_products=96,97,99&lt;/b&gt;
+					&lt;br /&gt;где &lt;u&gt;96,97,99&lt;/u&gt; - ID товаров через запятую
+					&lt;br /&gt;
+					&lt;br /&gt;&lt;a href="http://help.designmyshop.ru/balance/456/kak-uznat-id-tovara/" target="_blank"&gt;Как узнать ID товара?&lt;/a&gt;
+					&lt;br /&gt;
+					&lt;br /&gt;
+					&lt;br /&gt;Вы также можете установить изображение для этой секции. Сделать это можно двумя способами:
+					&lt;br /&gt;1. Через плагин &lt;a href="https://www.webasyst.ru/store/plugin/shop/wmimageincat/" target="_blank"&gt;Иконка, изображение и баннер для категории&lt;/a&gt;. Использоваться будет "Изображение".
+					&lt;br /&gt;2. Через дополнительные параметры категории. Для этого добавьте в соответствующем поле строку:
+					&lt;br /&gt;&lt;b&gt;category_products_image=/path/to/image.png&lt;/b&gt;
+					&lt;br /&gt;где "/path/to/image.png" - путь к изображению. Само изображение можно загрузить через "Файл-менеджер" приложения "Сайт".
+					&lt;br /&gt;Если изображение будет установлено сразу двумя способами, приоритет будет иметь изображение из доп. параметров. Если вы не хотите использовать изображение в этой секции, но оно уже загружено через плагин, просто добавьте строку из примера выше с пустым значением. Пример: &lt;u&gt;category_products_image=&lt;/u&gt;&lt;/p&gt;
+					</name>
+    </setting>
+    <setting var="homepage_category_products_view" control_type="select">
+      <value>always</value>
+      <name locale="ru_RU">Видимость секции</name>
+      <options>
+        <option value="always">
+          <name locale="ru_RU">Всегда</name>
+        </option>
+        <option value="mb-hide">
+          <name locale="ru_RU">Cкрыть в мобильной версии</name>
+        </option>
+        <option value="td-hide">
+          <name locale="ru_RU">Отображать только в мобильной версии</name>
+        </option>
+        <option value="none">
+          <name locale="ru_RU">Отключить полностью</name>
+        </option>
+      </options>
+    </setting>
+    <setting var="homepage_category_products_list" control_type="text">
+      <value/>
+      <name locale="ru_RU">Список категорий</name>
+      <description locale="ru_RU">
+					Перечислите через запятую ID категорий, которые будет отображены в этом блоке.
+					&lt;br /&gt;&lt;a href="http://help.designmyshop.ru/balance/457/kak-uznat-id-kategorii/" target="_blank"&gt;Как узнать ID категории?&lt;/a&gt;
+					
+					</description>
+    </setting>
+    <setting var="homepage_category_products_limit" control_type="text">
+      <value/>
+      <name locale="ru_RU">Лимит товаров</name>
+      <description locale="ru_RU">
+					Не рекомендуется указывать слишком большое кол-во, т.к. это может негативно повлиять на скорость работы главной страницы. Если поле будет пустым, то будет установлен лимит по умолчанию - 8 товаров
+					
+					</description>
+    </setting>
+    <setting var="homepage_category_products_subcategories" control_type="checkbox">
+      <value>1</value>
+      <name locale="ru_RU">Отображать подкатегории</name>
+    </setting>
+    <setting var="homepage_category_products_colors" control_type="text">
+      <value>#5D69FF,#FF4C4C,#29DA99,#FFB54C</value>
+      <name locale="ru_RU">Фоновые цвета</name>
+      <description locale="ru_RU">
+					Перечислите через запятую HEX-коды цветов в нужной вам последовательности. Если кол-во категорий будет больше указанного кол-ва цветов, они начнут повторяться.
+					&lt;br /&gt;Например: #5D69FF,#FF4C4C,#29DA99,#FFB54C
+					&lt;br /&gt;Для подбора и определения HEX-кода цвета, можете воспользоваться сервисом &lt;a href="https://colorpicker.me/" target="_blank"&gt;colorpicker.me&lt;/a&gt;
+					
+					</description>
+    </setting>
+    <setting var="shop_homepage_banner_item" control_type="group_divider">
+      <value>shop_homepage/shop_homepage_banner_item</value>
+      <name locale="en_US">“PRODUCT-BANNER” section</name>
+      <name locale="ru_RU">Секция “PRODUCT-BANNER”</name>
+    </setting>
+    <setting var="shop_homepage_banner_item_info" control_type="paragraph">
+      <value/>
+      <name locale="ru_RU">
+					&lt;p class="hint"&gt;&lt;a href="http://balance.designmyshop.ru/wa-data/public/site/balance_settings/index-banner-item.png" target="_blank"&gt;Иллюстрация секции&lt;/a&gt;
+					&lt;br /&gt;
+					&lt;br /&gt;Рекомендуется использовать только для desktop варианта.&lt;/p&gt;
+					</name>
+    </setting>
+    <setting var="shop_homepage_banner_item_view" control_type="select">
+      <value>always</value>
+      <name locale="ru_RU">Видимость секции</name>
+      <options>
+        <option value="always">
+          <name locale="ru_RU">Всегда</name>
+        </option>
+        <option value="mb-hide">
+          <name locale="ru_RU">Cкрыть в мобильной версии</name>
+        </option>
+        <option value="td-hide">
+          <name locale="ru_RU">Отображать только в мобильной версии</name>
+        </option>
+        <option value="none">
+          <name locale="ru_RU">Отключить полностью</name>
+        </option>
+      </options>
+    </setting>
+    <setting var="shop_homepage_banner_item_product" control_type="text">
+      <value/>
+      <name locale="ru_RU">ID продукта</name>
+      <description locale="ru_RU">
+					&lt;a href="http://help.designmyshop.ru/balance/456/kak-uznat-id-tovara/" target="_blank"&gt;Как узнать ID товара?&lt;/a&gt;
+					
+					</description>
+    </setting>
+    <setting var="shop_homepage_banner_item_bg" control_type="image">
+      <value>img/banneritem/background.jpg</value>
+      <filename>img/banneritem/background.*</filename>
+      <name locale="ru_RU">Изображение</name>
+      <description locale="ru_RU">
+						Рекомендуемая ширина изображения:
+						&lt;br /&gt;С сайдбаром: 1026рх
+						&lt;br /&gt;Без сайдбара: 1290рх
+					</description>
+    </setting>
+    <setting var="homepage_category_banner" control_type="group_divider">
+      <value>shop_homepage/homepage_category_banner</value>
+      <name locale="en_US">“CATEGORY-BANNER” section</name>
+      <name locale="ru_RU">Секция “CATEGORY-BANNER”</name>
+    </setting>
+    <setting var="homepage_category_banner_info" control_type="paragraph">
+      <value/>
+      <name locale="ru_RU">
+						&lt;p class="hint"&gt;&lt;a href="http://balance.designmyshop.ru/wa-data/public/site/balance_settings/index-category-banner.png" target="_blank"&gt;Иллюстрация секции&lt;/a&gt;
+						&lt;br /&gt;
+						&lt;br /&gt;Рекомендуется использовать только для desktop варианта.&lt;/p&gt;
+					</name>
+    </setting>
+    <setting var="homepage_category_banner_view" control_type="select">
+      <value>always</value>
+      <name locale="ru_RU">Видимость секции</name>
+      <options>
+        <option value="always">
+          <name locale="ru_RU">Всегда</name>
+        </option>
+        <option value="mb-hide">
+          <name locale="ru_RU">Cкрыть в мобильной версии</name>
+        </option>
+        <option value="td-hide">
+          <name locale="ru_RU">Отображать только в мобильной версии</name>
+        </option>
+        <option value="none">
+          <name locale="ru_RU">Отключить полностью</name>
+        </option>
+      </options>
+    </setting>
+    <setting var="homepage_category_banner_category_id" control_type="text">
+      <value/>
+      <name locale="ru_RU">ID категории</name>
+      <description locale="ru_RU">
+					&lt;br /&gt;&lt;a href="http://help.designmyshop.ru/balance/457/kak-uznat-id-kategorii/" target="_blank"&gt;Как узнать ID категории?&lt;/a&gt;
+					
+					</description>
+    </setting>
+    <setting var="homepage_category_banner_products" control_type="text">
+      <value/>
+      <name locale="ru_RU">Список товаров</name>
+      <description locale="ru_RU">
+					Вы можете указать конкретный список товаров, перечисляя через запятую их ID. Если оставить это поле пустым, то будут выбраны 4 случайных товара.
+					&lt;br /&gt;&lt;a href="http://help.designmyshop.ru/balance/456/kak-uznat-id-tovara/" target="_blank"&gt;Как узнать ID товара?&lt;/a&gt;
+					
+					</description>
+    </setting>
+    <setting var="homepage_category_banner_title" control_type="text">
+      <value>Акция недели!</value>
+      <name locale="ru_RU">Заголовок секции</name>
+      <description locale="ru_RU">
+					Если оставить поле пустым, заголовком будет служить название категории.
+					
+					</description>
+    </setting>
+    <setting var="homepage_category_banner_img" control_type="image">
+      <value>img/categorybanner/background.jpg</value>
+      <filename>img/categorybanner/background.*</filename>
+      <name locale="ru_RU">Изображение</name>
+      <description locale="ru_RU">Рекомендуемая ширина изображения: 498рх</description>
+    </setting>
+    <setting var="shop_homepage_slider" control_type="group_divider">
+      <value>shop_homepage/shop_homepage_slider</value>
+      <name locale="en_US">“SLIDER” section</name>
+      <name locale="ru_RU">Секция “SLIDER”</name>
+    </setting>
+    <setting var="shop_homepage_slider_info" control_type="paragraph">
+      <value/>
+      <name locale="ru_RU">
+					&lt;p class="hint"&gt;&lt;a href="http://balance.designmyshop.ru/wa-data/public/site/balance_settings/index-slider.png" target="_blank"&gt;Иллюстрация секции&lt;/a&gt;
+					&lt;br /&gt;
+					&lt;br /&gt;Ширина изображений для слайдов:
+					&lt;br /&gt;С сайдбаром: 762рх или 1026рх при отсутствии баннеров
+					&lt;br /&gt;Без сайдбара: 1026рх или 1290рх при отсутствии баннеров
+					&lt;br /&gt;
+					&lt;br /&gt;Ширина баннеров - 234рх.&lt;/p&gt;
+					</name>
+    </setting>
+    <setting var="shop_homepage_slider_view" control_type="select">
+      <value>always</value>
+      <name locale="ru_RU">Видимость секции</name>
+      <options>
+        <option value="always">
+          <name locale="ru_RU">Всегда</name>
+        </option>
+        <option value="mb-hide">
+          <name locale="ru_RU">Cкрыть в мобильной версии</name>
+        </option>
+        <option value="td-hide">
+          <name locale="ru_RU">Отображать только в мобильной версии</name>
+        </option>
+        <option value="none">
+          <name locale="ru_RU">Отключить полностью</name>
+        </option>
+      </options>
+    </setting>
+    <setting var="shop_homepage_slider_autodelay" control_type="text">
+      <value>0</value>
+      <name locale="ru_RU">Автопролистывание</name>
+      <description locale="ru_RU">Указывается в секундах. Укажите "0", чтобы отключить</description>
+    </setting>
+    <setting var="shop_homepage_slider_slides" control_type="group_divider">
+      <value>shop_homepage/shop_homepage_slider/shop_homepage_slider_slides</value>
+      <name locale="en_US">Main slides</name>
+      <name locale="ru_RU">Основной слайдер</name>
+    </setting>
+    <setting var="shop_homepage_slider_1" control_type="group_divider">
+      <value>shop_homepage/shop_homepage_slider/shop_homepage_slider_slides/shop_homepage_slider_1</value>
+      <name locale="en_US">Slide #1</name>
+      <name locale="ru_RU">Слайд №1</name>
+    </setting>
+    <setting var="homepage_slider_slide_1_image" control_type="image">
+      <value>img/slider/slide_1.jpg?v1601891497</value>
+      <filename>img/slider/slide_1.*</filename>
+      <name locale="ru_RU">Изображение</name>
+    </setting>
+    <setting var="homepage_slider_slide_1_link" control_type="text">
+      <value/>
+      <name locale="ru_RU">Ссылка</name>
+    </setting>
+    <setting var="shop_homepage_slider_2" control_type="group_divider">
+      <value>shop_homepage/shop_homepage_slider/shop_homepage_slider_slides/shop_homepage_slider_2</value>
+      <name locale="en_US">Slide #2</name>
+      <name locale="ru_RU">Слайд №2</name>
+    </setting>
+    <setting var="homepage_slider_slide_2_image" control_type="image">
+      <value>img/slider/slide_2.jpg?v1601891567</value>
+      <filename>img/slider/slide_2.*</filename>
+      <name locale="ru_RU">Изображение</name>
+    </setting>
+    <setting var="homepage_slider_slide_2_link" control_type="text">
+      <value/>
+      <name locale="ru_RU">Ссылка</name>
+    </setting>
+    <setting var="shop_homepage_slider_3" control_type="group_divider">
+      <value>shop_homepage/shop_homepage_slider/shop_homepage_slider_slides/shop_homepage_slider_3</value>
+      <name locale="en_US">Slide #3</name>
+      <name locale="ru_RU">Слайд №3</name>
+    </setting>
+    <setting var="homepage_slider_slide_3_image" control_type="image">
+      <value/>
+      <filename>img/slider/slide_3.*</filename>
+      <name locale="ru_RU">Изображение</name>
+    </setting>
+    <setting var="homepage_slider_slide_3_link" control_type="text">
+      <value/>
+      <name locale="ru_RU">Ссылка</name>
+    </setting>
+    <setting var="shop_homepage_slider_4" control_type="group_divider">
+      <value>shop_homepage/shop_homepage_slider/shop_homepage_slider_slides/shop_homepage_slider_4</value>
+      <name locale="en_US">Slide #4</name>
+      <name locale="ru_RU">Слайд №4</name>
+    </setting>
+    <setting var="homepage_slider_slide_4_image" control_type="image">
+      <value/>
+      <filename>img/slider/slide_4.*</filename>
+      <name locale="ru_RU">Изображение</name>
+    </setting>
+    <setting var="homepage_slider_slide_4_link" control_type="text">
+      <value/>
+      <name locale="ru_RU">Ссылка</name>
+    </setting>
+    <setting var="shop_homepage_slider_5" control_type="group_divider">
+      <value>shop_homepage/shop_homepage_slider/shop_homepage_slider_slides/shop_homepage_slider_5</value>
+      <name locale="en_US">Slide #5</name>
+      <name locale="ru_RU">Слайд №5</name>
+    </setting>
+    <setting var="homepage_slider_slide_5_image" control_type="image">
+      <value/>
+      <filename>img/slider/slide_5.*</filename>
+      <name locale="ru_RU">Изображение</name>
+    </setting>
+    <setting var="homepage_slider_slide_5_link" control_type="text">
+      <value/>
+      <name locale="ru_RU">Ссылка</name>
+    </setting>
+    <setting var="shop_homepage_slider_banners" control_type="group_divider">
+      <value>shop_homepage/shop_homepage_slider/shop_homepage_slider_banners</value>
+      <name locale="en_US">Banners</name>
+      <name locale="ru_RU">Баннеры</name>
+    </setting>
+    <setting var="shop_homepage_slider_banners_info" control_type="paragraph">
+      <value/>
+      <name locale="ru_RU">
+						&lt;p class="hint"&gt;При отсутствии баннеров слайдер займет всю ширину страницы&lt;/p&gt;
+						</name>
+    </setting>
+    <setting var="shop_homepage_slider_banners_1" control_type="group_divider">
+      <value>shop_homepage/shop_homepage_slider/shop_homepage_slider_banners/shop_homepage_slider_banners_1</value>
+      <name locale="en_US">Banner #1</name>
+      <name locale="ru_RU">Баннер №1</name>
+    </setting>
+    <setting var="shop_homepage_slider_banners_1_image" control_type="image">
+      <value>img/slider/banner_1.png</value>
+      <filename>img/slider/banner_1.*</filename>
+      <name locale="ru_RU">Изображение</name>
+    </setting>
+    <setting var="shop_homepage_slider_banners_1_link" control_type="text">
+      <value/>
+      <name locale="ru_RU">Ссылка</name>
+    </setting>
+    <setting var="shop_homepage_slider_banners_2" control_type="group_divider">
+      <value>shop_homepage/shop_homepage_slider/shop_homepage_slider_banners/shop_homepage_slider_banners_2</value>
+      <name locale="en_US">Banner #2</name>
+      <name locale="ru_RU">Баннер №2</name>
+    </setting>
+    <setting var="shop_homepage_slider_banners_2_image" control_type="image">
+      <value>img/slider/banner_2.jpg?v1601891830</value>
+      <filename>img/slider/banner_2.*</filename>
+      <name locale="ru_RU">Изображение</name>
+    </setting>
+    <setting var="shop_homepage_slider_banners_2_link" control_type="text">
+      <value/>
+      <name locale="ru_RU">Ссылка</name>
+    </setting>
+    <setting var="shop_homepage_banner_1" control_type="group_divider">
+      <value>shop_homepage/shop_homepage_banner_1</value>
+      <name locale="en_US">“BANNER-1” section</name>
+      <name locale="ru_RU">Секция “BANNER-1”</name>
+    </setting>
+    <setting var="shop_homepage_banner_1_info" control_type="paragraph">
+      <value/>
+      <name locale="ru_RU">
+					&lt;p class="hint"&gt;&lt;a href="http://balance.designmyshop.ru/wa-data/public/site/balance_settings/index-banner-1-2-3.png" target="_blank"&gt;Иллюстрация секции&lt;/a&gt;
+					&lt;br /&gt;
+					&lt;br /&gt;Рекомендуемая ширина изображения:
+					&lt;br /&gt;Без сайдбара - 1290рх
+					&lt;br /&gt;С сайдбаром - 1026рх&lt;/p&gt;
+					</name>
+    </setting>
+    <setting var="shop_homepage_banner_1_view" control_type="select">
+      <value>always</value>
+      <name locale="ru_RU">Видимость секции</name>
+      <options>
+        <option value="always">
+          <name locale="ru_RU">Всегда</name>
+        </option>
+        <option value="mb-hide">
+          <name locale="ru_RU">Cкрыть в мобильной версии</name>
+        </option>
+        <option value="td-hide">
+          <name locale="ru_RU">Отображать только в мобильной версии</name>
+        </option>
+        <option value="none">
+          <name locale="ru_RU">Отключить полностью</name>
+        </option>
+      </options>
+    </setting>
+    <setting var="shop_homepage_banner_1_img" control_type="image">
+      <value>img/banners/banner-1_1.jpg?v1601891896</value>
+      <filename>img/banners/banner-1_1.*</filename>
+      <name locale="ru_RU">Изображение</name>
+    </setting>
+    <setting var="shop_homepage_banner_1_link" control_type="text">
+      <value>#</value>
+      <name locale="ru_RU">Ссылка</name>
+    </setting>
+    <setting var="shop_homepage_banner_2" control_type="group_divider">
+      <value>shop_homepage/shop_homepage_banner_2</value>
+      <name locale="en_US">“BANNER-2” section</name>
+      <name locale="ru_RU">Секция “BANNER-2”</name>
+    </setting>
+    <setting var="shop_homepage_banner_2_info" control_type="paragraph">
+      <value/>
+      <name locale="ru_RU">
+					&lt;p class="hint"&gt;&lt;a href="http://balance.designmyshop.ru/wa-data/public/site/balance_settings/index-banner-1-2-3.png" target="_blank"&gt;Иллюстрация секции&lt;/a&gt;
+					&lt;br /&gt;
+					&lt;br /&gt;Рекомендуемая ширина каждого изображения:
+					&lt;br /&gt;Без сайдбара - 630рх
+					&lt;br /&gt;С сайдбаром - 498рх&lt;/p&gt;
+					</name>
+    </setting>
+    <setting var="shop_homepage_banner_2_view" control_type="select">
+      <value>none</value>
+      <name locale="ru_RU">Видимость секции</name>
+      <options>
+        <option value="always">
+          <name locale="ru_RU">Всегда</name>
+        </option>
+        <option value="mb-hide">
+          <name locale="ru_RU">Cкрыть в мобильной версии</name>
+        </option>
+        <option value="td-hide">
+          <name locale="ru_RU">Отображать только в мобильной версии</name>
+        </option>
+        <option value="none">
+          <name locale="ru_RU">Отключить полностью</name>
+        </option>
+      </options>
+    </setting>
+    <setting var="shop_homepage_banner_2_1" control_type="group_divider">
+      <value>shop_homepage/shop_homepage_banner_2/shop_homepage_banner_2_1</value>
+      <name locale="en_US">Image #1</name>
+      <name locale="ru_RU">Изображение №1</name>
+    </setting>
+    <setting var="shop_homepage_banner_2_img_1" control_type="image">
+      <value/>
+      <filename>img/banners/banner-2_1.*</filename>
+      <name locale="ru_RU">Изображение</name>
+    </setting>
+    <setting var="shop_homepage_banner_2_link_1" control_type="text">
+      <value/>
+      <name locale="ru_RU">Ссылка</name>
+    </setting>
+    <setting var="shop_homepage_banner_2_2" control_type="group_divider">
+      <value>shop_homepage/shop_homepage_banner_2/shop_homepage_banner_2_2</value>
+      <name locale="en_US">Image #2</name>
+      <name locale="ru_RU">Изображение №2</name>
+    </setting>
+    <setting var="shop_homepage_banner_2_img_2" control_type="image">
+      <value/>
+      <filename>img/banners/banner-2_2.*</filename>
+      <name locale="ru_RU">Изображение</name>
+    </setting>
+    <setting var="shop_homepage_banner_2_link_2" control_type="text">
+      <value/>
+      <name locale="ru_RU">Ссылка</name>
+    </setting>
+    <setting var="shop_homepage_banner_3" control_type="group_divider">
+      <value>shop_homepage/shop_homepage_banner_3</value>
+      <name locale="en_US">“BANNER-3” section</name>
+      <name locale="ru_RU">Секция “BANNER-3”</name>
+    </setting>
+    <setting var="shop_homepage_banner_3_info" control_type="paragraph">
+      <value/>
+      <name locale="ru_RU">
+					&lt;p class="hint"&gt;&lt;a href="http://balance.designmyshop.ru/wa-data/public/site/balance_settings/index-banner-1-2-3.png" target="_blank"&gt;Иллюстрация секции&lt;/a&gt;
+					&lt;br /&gt;
+					&lt;br /&gt;Рекомендуемая ширина каждого изображения:
+					&lt;br /&gt;Без сайдбара - 410рх
+					&lt;br /&gt;С сайдбаром - 322рх&lt;/p&gt;
+					</name>
+    </setting>
+    <setting var="shop_homepage_banner_3_view" control_type="select">
+      <value>none</value>
+      <name locale="ru_RU">Видимость секции</name>
+      <options>
+        <option value="always">
+          <name locale="ru_RU">Всегда</name>
+        </option>
+        <option value="mb-hide">
+          <name locale="ru_RU">Cкрыть в мобильной версии</name>
+        </option>
+        <option value="td-hide">
+          <name locale="ru_RU">Отображать только в мобильной версии</name>
+        </option>
+        <option value="none">
+          <name locale="ru_RU">Отключить полностью</name>
+        </option>
+      </options>
+    </setting>
+    <setting var="shop_homepage_banner_3_1" control_type="group_divider">
+      <value>shop_homepage/shop_homepage_banner_3/shop_homepage_banner_3_1</value>
+      <name locale="en_US">Image #1</name>
+      <name locale="ru_RU">Изображение №1</name>
+    </setting>
+    <setting var="shop_homepage_banner_3_img_1" control_type="image">
+      <value>img/banners/banner-3_1.png</value>
+      <filename>img/banners/banner-3_1.*</filename>
+      <name locale="ru_RU">Изображение</name>
+    </setting>
+    <setting var="shop_homepage_banner_3_link_1" control_type="text">
+      <value/>
+      <name locale="ru_RU">Ссылка</name>
+    </setting>
+    <setting var="shop_homepage_banner_3_2" control_type="group_divider">
+      <value>shop_homepage/shop_homepage_banner_3/shop_homepage_banner_3_2</value>
+      <name locale="en_US">Image #2</name>
+      <name locale="ru_RU">Изображение №2</name>
+    </setting>
+    <setting var="shop_homepage_banner_3_img_2" control_type="image">
+      <value>img/banners/banner-3_2.png</value>
+      <filename>img/banners/banner-3_2.*</filename>
+      <name locale="ru_RU">Изображение</name>
+    </setting>
+    <setting var="shop_homepage_banner_3_link_2" control_type="text">
+      <value/>
+      <name locale="ru_RU">Ссылка</name>
+    </setting>
+    <setting var="shop_homepage_banner_3_3" control_type="group_divider">
+      <value>shop_homepage/shop_homepage_banner_3/shop_homepage_banner_3_3</value>
+      <name locale="en_US">Image #3</name>
+      <name locale="ru_RU">Изображение №3</name>
+    </setting>
+    <setting var="shop_homepage_banner_3_img_3" control_type="image">
+      <value>img/banners/banner-3_3.png</value>
+      <filename>img/banners/banner-3_3.*</filename>
+      <name locale="ru_RU">Изображение</name>
+    </setting>
+    <setting var="shop_homepage_banner_3_link_3" control_type="text">
+      <value/>
+      <name locale="ru_RU">Ссылка</name>
+    </setting>
+    <setting var="shop_homepage_banner_4" control_type="group_divider">
+      <value>shop_homepage/shop_homepage_banner_4</value>
+      <name locale="en_US">“BANNER-4” section</name>
+      <name locale="ru_RU">Секция “BANNER-4”</name>
+    </setting>
+    <setting var="shop_homepage_banner_4_info" control_type="paragraph">
+      <value/>
+      <name locale="ru_RU">
+					&lt;p class="hint"&gt;&lt;a href="http://balance.designmyshop.ru/wa-data/public/site/balance_settings/index-banner-4.png" target="_blank"&gt;Иллюстрация секции&lt;/a&gt;
+					&lt;br /&gt;&lt;a href="http://balance.designmyshop.ru/wa-data/public/site/balance_settings/index-banner-4.png" target="_blank"&gt;Рекомендуемая ширина изображений&lt;/a&gt;&lt;/p&gt;
+					</name>
+    </setting>
+    <setting var="shop_homepage_banner_4_view" control_type="select">
+      <value>always</value>
+      <name locale="ru_RU">Видимость секции</name>
+      <options>
+        <option value="always">
+          <name locale="ru_RU">Всегда</name>
+        </option>
+        <option value="mb-hide">
+          <name locale="ru_RU">Cкрыть в мобильной версии</name>
+        </option>
+        <option value="td-hide">
+          <name locale="ru_RU">Отображать только в мобильной версии</name>
+        </option>
+        <option value="none">
+          <name locale="ru_RU">Отключить полностью</name>
+        </option>
+      </options>
+    </setting>
+    <setting var="shop_homepage_banner_4_1" control_type="group_divider">
+      <value>shop_homepage/shop_homepage_banner_4/shop_homepage_banner_4_1</value>
+      <name locale="en_US">Image #1</name>
+      <name locale="ru_RU">Изображение №1</name>
+    </setting>
+    <setting var="shop_homepage_banner_4_img_1" control_type="image">
+      <value>img/banners/banner-4_1.jpg?v1601892202</value>
+      <filename>img/banners/banner-4_1.*</filename>
+      <name locale="ru_RU">Изображение</name>
+    </setting>
+    <setting var="shop_homepage_banner_4_link_1" control_type="text">
+      <value/>
+      <name locale="ru_RU">Ссылка</name>
+    </setting>
+    <setting var="shop_homepage_banner_4_2" control_type="group_divider">
+      <value>shop_homepage/shop_homepage_banner_4/shop_homepage_banner_4_2</value>
+      <name locale="en_US">Image #2</name>
+      <name locale="ru_RU">Изображение №2</name>
+    </setting>
+    <setting var="shop_homepage_banner_4_img_2" control_type="image">
+      <value>img/banners/banner-4_2.jpg?v1601892263</value>
+      <filename>img/banners/banner-4_2.*</filename>
+      <name locale="ru_RU">Изображение</name>
+    </setting>
+    <setting var="shop_homepage_banner_4_link_2" control_type="text">
+      <value/>
+      <name locale="ru_RU">Ссылка</name>
+    </setting>
+    <setting var="shop_homepage_banner_4_3" control_type="group_divider">
+      <value>shop_homepage/shop_homepage_banner_4/shop_homepage_banner_4_3</value>
+      <name locale="en_US">Image #3</name>
+      <name locale="ru_RU">Изображение №3</name>
+    </setting>
+    <setting var="shop_homepage_banner_4_img_3" control_type="image">
+      <value>img/banners/banner-4_3.jpg?v1601892338</value>
+      <filename>img/banners/banner-4_3.*</filename>
+      <name locale="ru_RU">Изображение</name>
+    </setting>
+    <setting var="shop_homepage_banner_4_link_3" control_type="text">
+      <value/>
+      <name locale="ru_RU">Ссылка</name>
+    </setting>
+    <setting var="shop_homepage_banner_4_4" control_type="group_divider">
+      <value>shop_homepage/shop_homepage_banner_4/shop_homepage_banner_4_4</value>
+      <name locale="en_US">Image #4</name>
+      <name locale="ru_RU">Изображение №4</name>
+    </setting>
+    <setting var="shop_homepage_banner_4_img_4" control_type="image">
+      <value>img/banners/banner-4_4.jpg?v1601892356</value>
+      <filename>img/banners/banner-4_4.*</filename>
+      <name locale="ru_RU">Изображение</name>
+    </setting>
+    <setting var="shop_homepage_banner_4_link_4" control_type="text">
+      <value/>
+      <name locale="ru_RU">Ссылка</name>
+    </setting>
+    <setting var="shop_homepage_reviews" control_type="group_divider">
+      <value>shop_homepage/shop_homepage_reviews</value>
+      <name locale="en_US">“REVIEWS” section</name>
+      <name locale="ru_RU">Секция “REVIEWS”</name>
+    </setting>
+    <setting var="shop_homepage_reviews_info" control_type="paragraph">
+      <value/>
+      <name locale="ru_RU">
+					&lt;p class="hint"&gt;&lt;a href="http://balance.designmyshop.ru/wa-data/public/site/balance_settings/index-reviews.png" target="_blank"&gt;Иллюстрация секции&lt;/a&gt;&lt;/p&gt;
+					</name>
+    </setting>
+    <setting var="shop_homepage_reviews_view" control_type="select">
+      <value>always</value>
+      <name locale="ru_RU">Видимость секции</name>
+      <options>
+        <option value="always">
+          <name locale="ru_RU">Всегда</name>
+        </option>
+        <option value="mb-hide">
+          <name locale="ru_RU">Cкрыть в мобильной версии</name>
+        </option>
+        <option value="td-hide">
+          <name locale="ru_RU">Отображать только в мобильной версии</name>
+        </option>
+        <option value="none">
+          <name locale="ru_RU">Отключить полностью</name>
+        </option>
+      </options>
+    </setting>
+    <setting var="shop_homepage_reviews_limit" control_type="text">
+      <value>3</value>
+      <name locale="ru_RU">Кол-во отображаемых отзывов</name>
+    </setting>
+    <setting var="shop_homepage_reviews_design" control_type="select">
+      <value>equation</value>
+      <name locale="ru_RU">Дизайн секции</name>
+      <options>
+        <option value="default">
+          <name locale="ru_RU">Обычный</name>
+        </option>
+        <option value="equation">
+          <name locale="ru_RU">С равными высотами</name>
+        </option>
+        <option value="slider">
+          <name locale="ru_RU">В виде слайдера</name>
+        </option>
+      </options>
+    </setting>
+    <setting var="shop_homepage_promo" control_type="group_divider">
+      <value>shop_homepage/shop_homepage_promo</value>
+      <name locale="en_US">“PROMO” section</name>
+      <name locale="ru_RU">Секция “PROMO”</name>
+    </setting>
+    <setting var="shop_homepage_promo_info" control_type="paragraph">
+      <value/>
+      <name locale="ru_RU">
+					&lt;p class="hint"&gt;&lt;a href="http://balance.designmyshop.ru/wa-data/public/site/balance_settings/index-promo.png" target="_blank"&gt;Иллюстрация секции&lt;/a&gt;&lt;/p&gt;
+					</name>
+    </setting>
+    <setting var="shop_homepage_promo_view" control_type="select">
+      <value>always</value>
+      <name locale="ru_RU">Видимость секции</name>
+      <options>
+        <option value="always">
+          <name locale="ru_RU">Всегда</name>
+        </option>
+        <option value="mb-hide">
+          <name locale="ru_RU">Cкрыть в мобильной версии</name>
+        </option>
+        <option value="td-hide">
+          <name locale="ru_RU">Отображать только в мобильной версии</name>
+        </option>
+        <option value="none">
+          <name locale="ru_RU">Отключить полностью</name>
+        </option>
+      </options>
+    </setting>
+    <setting var="shop_homepage_productbrands" control_type="group_divider">
+      <value>shop_homepage/shop_homepage_productbrands</value>
+      <name locale="en_US">“PRODUCTBRANDS” section</name>
+      <name locale="ru_RU">Секция “PRODUCTBRANDS”</name>
+    </setting>
+    <setting var="shop_homepage_productbrands_info" control_type="paragraph">
+      <value/>
+      <name locale="ru_RU">
+					&lt;p class="hint"&gt;&lt;a href="http://balance.designmyshop.ru/wa-data/public/site/balance_settings/index-productbrands.png" target="_blank"&gt;Иллюстрация секции&lt;/a&gt;&lt;/p&gt;
+					</name>
+    </setting>
+    <setting var="shop_homepage_productbrands_view" control_type="select">
+      <value>always</value>
+      <name locale="ru_RU">Видимость секции</name>
+      <options>
+        <option value="always">
+          <name locale="ru_RU">Всегда</name>
+        </option>
+        <option value="mb-hide">
+          <name locale="ru_RU">Cкрыть в мобильной версии</name>
+        </option>
+        <option value="td-hide">
+          <name locale="ru_RU">Отображать только в мобильной версии</name>
+        </option>
+        <option value="none">
+          <name locale="ru_RU">Отключить полностью</name>
+        </option>
+      </options>
+    </setting>
+    <setting var="shop_homepage_viewed" control_type="group_divider">
+      <value>shop_homepage/shop_homepage_viewed</value>
+      <name locale="en_US">“VIEWED” section</name>
+      <name locale="ru_RU">Секция “VIEWED”</name>
+    </setting>
+    <setting var="shop_homepage_viewed_info" control_type="paragraph">
+      <value/>
+      <name locale="ru_RU">
+					&lt;p class="hint"&gt;&lt;a href="http://balance.designmyshop.ru/wa-data/public/site/balance_settings/index-viewed.png" target="_blank"&gt;Иллюстрация секции&lt;/a&gt;&lt;/p&gt;
+					</name>
+    </setting>
+    <setting var="shop_homepage_viewed_view" control_type="select">
+      <value>always</value>
+      <name locale="ru_RU">Видимость секции</name>
+      <options>
+        <option value="always">
+          <name locale="ru_RU">Всегда</name>
+        </option>
+        <option value="mb-hide">
+          <name locale="ru_RU">Cкрыть в мобильной версии</name>
+        </option>
+        <option value="td-hide">
+          <name locale="ru_RU">Отображать только в мобильной версии</name>
+        </option>
+        <option value="none">
+          <name locale="ru_RU">Отключить полностью</name>
+        </option>
+      </options>
+    </setting>
+    <setting var="shop_productpage" control_type="group_divider">
+      <value/>
+      <name locale="en_US">Product page</name>
+      <name locale="ru_RU">Страница товара</name>
+    </setting>
+    <setting var="shop_productpage_basics" control_type="group_divider">
+      <value>shop_productpage/shop_productpage_basics</value>
+      <name locale="en_US"/>
+      <name locale="ru_RU"/>
+    </setting>
+    <setting var="shop_productpage_view" control_type="select">
+      <value>2</value>
+      <name locale="ru_RU">Структура страницы
+					
+					&lt;a href="http://balance.designmyshop.ru/wa-data/public/site/balance_settings/item-page-design.png" target="_blank"&gt;Пример&lt;/a&gt;
+					
+					</name>
+      <options>
+        <option value="1">
+          <name locale="ru_RU">Вариант 1</name>
+        </option>
+        <option value="2">
+          <name locale="ru_RU">Вариант 2</name>
+        </option>
+        <option value="3">
+          <name locale="ru_RU">Вариант 3</name>
+        </option>
+      </options>
+    </setting>
+    <setting var="shop_productpage_brand" control_type="select">
+      <value>name</value>
+      <name locale="ru_RU">Отображать бренд</name>
+      <description locale="ru_RU">Только если установлен плагин “Бренды с картинками и описаниями” (productbrands)</description>
+      <options>
+        <option value="full">
+          <name locale="ru_RU">Название с логотипом</name>
+        </option>
+        <option value="name">
+          <name locale="ru_RU">Только название</name>
+        </option>
+        <option value="none">
+          <name locale="ru_RU">Скрыть</name>
+        </option>
+      </options>
+    </setting>
+    <setting var="shop_productpage_show_summary" control_type="checkbox">
+      <value>1</value>
+      <name locale="ru_RU">Показывать краткое описание</name>
+    </setting>
+    <setting var="shop_productpage_categories" control_type="select">
+      <value>links</value>
+      <name locale="ru_RU">Отображать список других категорий товара</name>
+      <options>
+        <option value="links">
+          <name locale="ru_RU">В виде ссылок</name>
+        </option>
+        <option value="buttons">
+          <name locale="ru_RU">В виде кнопок</name>
+        </option>
+        <option value="none">
+          <name locale="ru_RU">Скрыть</name>
+        </option>
+      </options>
+    </setting>
+    <setting var="shop_productpage_tags" control_type="select">
+      <value>buttons</value>
+      <name locale="ru_RU">Отображать тэги товара</name>
+      <options>
+        <option value="links">
+          <name locale="ru_RU">В виде ссылок</name>
+        </option>
+        <option value="buttons">
+          <name locale="ru_RU">В виде кнопок</name>
+        </option>
+        <option value="none">
+          <name locale="ru_RU">Скрыть</name>
+        </option>
+      </options>
+    </setting>
+    <setting var="shop_productpage_selectable_features_control" control_type="radio">
+      <value>select</value>
+      <name locale="ru_RU">Выбор характеристик</name>
+      <name locale="en_US">Selectable features</name>
+      <options>
+        <option value="inline">
+          <name locale="ru_RU">Показывать все значения крупно в ряд</name>
+          <name locale="en_US">Display all values inline</name>
+          <description locale="ru_RU">Для товаров в режиме продажи «Выбор характеристик» значения характеристик будут показаны одной строкой друг за другом. Рекомендуется, если названия значений относительно короткие и по ним однозначно можно определить, о какой характеристике товара идет речь, например, XL, 16 GB, 13”.</description>
+          <description locale="en_US">For products which are sold in selectable features mode, all feature values will be displayed inline. Great if feature value names are self-explanatory and explicit in context of a product, e.g. XL, 16 GB, 13”.</description>
+        </option>
+        <option value="select">
+          <name locale="ru_RU">Выбор из списка &amp;lt;select&amp;gt;</name>
+          <name locale="en_US">&amp;lt;select&amp;gt; HTML control</name>
+          <description locale="ru_RU">Для товаров в режиме продажи «Выбор характеристик» значения характеристик будут предложены на выбор с помощью стандартного выбора &amp;lt;select&amp;gt;. Рекомендуется, если названия значений характеристик содержат более одного-двух слов или по значениям нельзя однозначно понять, о какой характеристике товара идет речь, например, «до 10 часов», «не предусмотрено».</description>
+          <description locale="en_US">For products which are sold in selectable features mode, feature values will be displayed using a &amp;lt;select&amp;gt; HTML control. Recommended if value names are either too long or ambiguous in context of a product, e.g. “up to 10 hours”, “yes”.</description>
+        </option>
+      </options>
+    </setting>
+    <setting var="shop_productpage_quantity" control_type="checkbox">
+      <value>1</value>
+      <name locale="ru_RU">Отображать поле выбора кол-ва</name>
+    </setting>
+    <setting var="shop_productpage_affiliate" control_type="checkbox">
+      <value>1</value>
+      <name locale="ru_RU">Отображать баллы партнерской программы
+					&lt;a href="http://balance.designmyshop.ru/wa-data/public/site/balance_settings/item-page-score.png" target="_blank"&gt;Что это?&lt;/a&gt;
+					</name>
+    </setting>
+    <setting var="shop_productpage_affiliate_text" control_type="text">
+      <value locale="ru_RU">За каждые {$wa-&gt;shop-&gt;settings('affiliate_credit_rate')} руб. вы получаете 1 бонусный балл, который равен {$wa-&gt;shop-&gt;settings('affiliate_usage_rate')} руб. скидки при следующем заказе. Вплоть до {$wa-&gt;shop-&gt;settings('affiliate_usage_percent')}% скидки.&lt;br /&gt;&lt;br /&gt;Сумма баллов на этой странице указывается без учета возможных итоговых скидок!</value>
+      <name locale="ru_RU">Текст подсказки у баллов партнерской программы
+					&lt;p class="hint"&gt;Smarty разрешен&lt;/p&gt;
+					</name>
+    </setting>
+    <setting var="shop_productpage_phone" control_type="text">
+      <value>+0 (000) 000-00-00</value>
+      <name locale="ru_RU">Номер телефона для заказа&lt;p class="hint"&gt;HTML + Smarty&lt;/p&gt;</name>
+      <description locale="ru_RU">
+					&lt;a href="http://balance.designmyshop.ru/wa-data/public/site/balance_settings/item-page-phone.png" target="_blank"&gt;Пример&lt;/a&gt;
+					&lt;br /&gt;Оставьте пустым, чтобы скрыть
+					
+					</description>
+    </setting>
+    <setting var="shop_productpage_merge_description_tabs" control_type="checkbox">
+      <value>1</value>
+      <name locale="ru_RU">Объединить описание и характеристики в одну вкладку</name>
+    </setting>
+    <setting var="shop_productpage_share_buttons" control_type="text">
+      <value>vkontakte,facebook,odnoklassniki,moimir,bookmark</value>
+      <name locale="ru_RU">Кнопки “Поделиться”</name>
+      <description locale="ru_RU">
+					Укажите через запятую соц. сети, в которых можно будет поделиться страницей. Либо оставьте поле пустым, чтобы отключить данную возможность.
+					&lt;br /&gt;Доступные значения:
+					&lt;br /&gt;&lt;strong&gt;vkontakte&lt;/strong&gt; - ВКонтакте
+					&lt;br /&gt;&lt;strong&gt;facebook&lt;/strong&gt; - Facebook
+					&lt;br /&gt;&lt;strong&gt;odnoklassniki&lt;/strong&gt; - Одноклассники
+					&lt;br /&gt;&lt;strong&gt;moimir&lt;/strong&gt; - “Мой мир” @Mail.Ru
+					&lt;br /&gt;&lt;strong&gt;twitter&lt;/strong&gt; - Twitter
+					&lt;br /&gt;&lt;strong&gt;bobrdobr&lt;/strong&gt; - BobrDobr
+					&lt;br /&gt;&lt;strong&gt;yazakladki&lt;/strong&gt; - Яндекс.Закладки
+					&lt;br /&gt;&lt;strong&gt;bookmark&lt;/strong&gt; - Добавить в закладки браузера
+					&lt;br /&gt;&lt;strong&gt;email&lt;/strong&gt; - Отправить на Email
+					
+					</description>
+    </setting>
+    <setting var="shop_productpage_related" control_type="group_divider">
+      <value>shop_productpage/shop_productpage_related</value>
+      <name locale="en_US">Related products</name>
+      <name locale="ru_RU">Перекрестные продажи</name>
+    </setting>
+    <setting var="shop_productpage_related_info" control_type="paragraph">
+      <value/>
+      <name locale="ru_RU">
+					&lt;p class="hint"&gt;Вы можете настроить вид списка рекомендуемых товаров. При выборе варианта "Стандартный" карточки будут выглядеть так же, как и в каталоге при выборе плиточного режима.
+					&lt;br /&gt;&lt;a href="http://balance.designmyshop.ru/wa-data/public/site/balance_settings/cross-selling-design.png" target="_blank"&gt;Пример&lt;/a&gt;&lt;/p&gt;
+					
+					</name>
+    </setting>
+    <setting var="shop_productpage_related_crossselling" control_type="select">
+      <value>product.list-micro</value>
+      <name locale="ru_RU">Вид списка товаров перекрестных продаж (Cross-selling)</name>
+      <options>
+        <option value="product.list-thumbs">
+          <name locale="ru_RU">Стандартный</name>
+        </option>
+        <option value="product.list-mini">
+          <name locale="ru_RU">Минимальный</name>
+        </option>
+        <option value="product.list-micro">
+          <name locale="ru_RU">Микро</name>
+        </option>
+      </options>
+    </setting>
+    <setting var="shop_productpage_related_upselling" control_type="select">
+      <value>product.list-thumbs</value>
+      <name locale="ru_RU">Вид списка альтернативных товаров (Upselling)</name>
+      <options>
+        <option value="product.list-thumbs">
+          <name locale="ru_RU">Стандартный</name>
+        </option>
+        <option value="product.list-mini">
+          <name locale="ru_RU">Минимальный</name>
+        </option>
+        <option value="product.list-micro">
+          <name locale="ru_RU">Микро</name>
+        </option>
+      </options>
+    </setting>
+    <setting var="shop_productpage_brief_features" control_type="group_divider">
+      <value>shop_productpage/shop_productpage_brief_features</value>
+      <name locale="en_US">Brief features</name>
+      <name locale="ru_RU">Краткий список характеристик</name>
+    </setting>
+    <setting var="shop_productpage_brief_features_info" control_type="paragraph">
+      <value/>
+      <name locale="ru_RU">
+					Отображается только в первом варианте компоновки страницы товара
+					&lt;br /&gt;&lt;a href="http://balance.designmyshop.ru/wa-data/public/site/balance_settings/item-page-short-technical-info.png" target="_blank"&gt;Пример&lt;/a&gt;
+					
+					</name>
+    </setting>
+    <setting var="shop_productpage_brief_features_on" control_type="checkbox">
+      <value>1</value>
+      <name locale="ru_RU">Включить</name>
+    </setting>
+    <setting var="shop_productpage_brief_features_limit" control_type="text">
+      <value>7</value>
+      <name locale="ru_RU">Максимальное количество характеристик</name>
+    </setting>
+    <setting var="shop_productpage_infoblocks" control_type="group_divider">
+      <value>shop_productpage/shop_productpage_infoblocks</value>
+      <name locale="en_US">Infoblocks</name>
+      <name locale="ru_RU">Инфоблоки</name>
+    </setting>
+    <setting var="shop_productpage_info_features" control_type="paragraph">
+      <value/>
+      <name locale="ru_RU">
+					&lt;a href="http://balance.designmyshop.ru/wa-data/public/site/balance_settings/item-page-infoblocks.png" target="_blank"&gt;Пример&lt;/a&gt;
+					&lt;br /&gt;Оставьте пустым заголовок и описание блока, чтобы отключить его
+					
+					</name>
+    </setting>
+    <setting var="shop_productpage_info_features_on" control_type="checkbox">
+      <value>1</value>
+      <name locale="ru_RU">Включить</name>
+    </setting>
+    <setting var="shop_productpage_info_features_position" control_type="select">
+      <value>pos1</value>
+      <name locale="ru_RU">Расположение</name>
+      <options>
+        <option value="pos1">
+          <name locale="ru_RU">После основного блока представления товара</name>
+        </option>
+        <option value="pos2">
+          <name locale="ru_RU">В конце страницы</name>
+        </option>
+        <option value="pos3">
+          <name locale="ru_RU">В пракой колонке(только если выбран 3-й вариант дизайна страницы)</name>
+        </option>
+      </options>
+    </setting>
+    <setting var="shop_productpage_infoblocks_block_1" control_type="group_divider">
+      <value>shop_productpage/shop_productpage_infoblocks/shop_productpage_infoblocks_block_1</value>
+      <name locale="en_US">Block #1</name>
+      <name locale="ru_RU">Блок №1</name>
+    </setting>
+    <setting var="shop_productpage_info_features_1_icon" control_type="image">
+      <value>img/productfeatures/icon-1.svg</value>
+      <filename>img/productfeatures/icon-1.*</filename>
+      <name locale="ru_RU">Иконка</name>
+    </setting>
+    <setting var="shop_productpage_info_features_1_link" control_type="text">
+      <value/>
+      <name locale="ru_RU">Ссылка</name>
+      <description locale="ru_RU">опционально</description>
+    </setting>
+    <setting var="shop_productpage_info_features_1_title" control_type="text">
+      <value>Упакуем ваш заказ красиво</value>
+      <name locale="ru_RU">Заголовок</name>
+    </setting>
+    <setting var="shop_productpage_info_features_1_body" control_type="text">
+      <value>Хотите отправить красивый подарок? Мы сделаем все за вас!</value>
+      <name locale="ru_RU">Описание</name>
+    </setting>
+    <setting var="shop_productpage_infoblocks_block_2" control_type="group_divider">
+      <value>shop_productpage/shop_productpage_infoblocks/shop_productpage_infoblocks_block_2</value>
+      <name locale="en_US">Block #2</name>
+      <name locale="ru_RU">Блок №2</name>
+    </setting>
+    <setting var="shop_productpage_info_features_2_icon" control_type="image">
+      <value>img/productfeatures/icon-2.svg</value>
+      <filename>img/productfeatures/icon-2.*</filename>
+      <name locale="ru_RU">Иконка</name>
+    </setting>
+    <setting var="shop_productpage_info_features_2_link" control_type="text">
+      <value>#</value>
+      <name locale="ru_RU">Ссылка</name>
+      <description locale="ru_RU">опционально</description>
+    </setting>
+    <setting var="shop_productpage_info_features_2_title" control_type="text">
+      <value>Бесплатная доставка</value>
+      <name locale="ru_RU">Заголовок</name>
+    </setting>
+    <setting var="shop_productpage_info_features_2_body" control_type="text">
+      <value>Мы отправляем вашу покупку в курьерскую службу в день заказа</value>
+      <name locale="ru_RU">Описание</name>
+    </setting>
+    <setting var="shop_productpage_infoblocks_block_3" control_type="group_divider">
+      <value>shop_productpage/shop_productpage_infoblocks/shop_productpage_infoblocks_block_3</value>
+      <name locale="en_US">Block #3</name>
+      <name locale="ru_RU">Блок №3</name>
+    </setting>
+    <setting var="shop_productpage_info_features_3_icon" control_type="image">
+      <value>img/productfeatures/icon-3.svg</value>
+      <filename>img/productfeatures/icon-3.*</filename>
+      <name locale="ru_RU">Иконка</name>
+    </setting>
+    <setting var="shop_productpage_info_features_3_link" control_type="text">
+      <value/>
+      <name locale="ru_RU">Ссылка</name>
+      <description locale="ru_RU">опционально</description>
+    </setting>
+    <setting var="shop_productpage_info_features_3_title" control_type="text">
+      <value>Гарантия и качество</value>
+      <name locale="ru_RU">Заголовок</name>
+    </setting>
+    <setting var="shop_productpage_info_features_3_body" control_type="text">
+      <value>Гарантированный возврат товара течение 10 дней</value>
+      <name locale="ru_RU">Описание</name>
+    </setting>
+    <setting var="shop_productpage_infoblocks_block_4" control_type="group_divider">
+      <value>shop_productpage/shop_productpage_infoblocks/shop_productpage_infoblocks_block_4</value>
+      <name locale="en_US">Block #4</name>
+      <name locale="ru_RU">Блок №4</name>
+    </setting>
+    <setting var="shop_productpage_info_features_4_icon" control_type="image">
+      <value>img/productfeatures/icon-4.svg</value>
+      <filename>img/productfeatures/icon-4.*</filename>
+      <name locale="ru_RU">Иконка</name>
+    </setting>
+    <setting var="shop_productpage_info_features_4_link" control_type="text">
+      <value/>
+      <name locale="ru_RU">Ссылка</name>
+      <description locale="ru_RU">опционально</description>
+    </setting>
+    <setting var="shop_productpage_info_features_4_title" control_type="text">
+      <value>Удобная оплата</value>
+      <name locale="ru_RU">Заголовок</name>
+    </setting>
+    <setting var="shop_productpage_info_features_4_body" control_type="text">
+      <value>Оплатите покупку онлайн или наличными курьеру</value>
+      <name locale="ru_RU">Описание</name>
+    </setting>
+    <setting var="shop_checkout" control_type="group_divider">
+      <value/>
+      <name locale="en_US">Checkout</name>
+      <name locale="ru_RU">Оформление заказа</name>
+    </setting>
+    <setting var="shop_checkout_steps" control_type="group_divider">
+      <value>shop_checkout/shop_checkout_steps</value>
+      <name locale="en_US">Old checkout</name>
+      <name locale="ru_RU">Пошаговое оформление заказа</name>
+    </setting>
+    <setting var="shop_cart_crossselling" control_type="select">
+      <value>many</value>
+      <name locale="ru_RU">Рекомендуемые товары в корзине</name>
+      <name locale="en_US">Cross-selling products on shopping cart page</name>
+      <description locale="ru_RU">Необходимо настроить перекрестные продажи в настройках самого магазина</description>
+      <options>
+        <option value="single">
+          <name locale="ru_RU">Единый список рекомендуемых товаров на основе всего содержимого корзины</name>
+          <name locale="en_US">Common recommended product list based on entire cart contents</name>
+        </option>
+        <option value="many">
+          <name locale="ru_RU">Отдельные списки рекомендуемых товаров отдельно для каждого товара</name>
+          <name locale="en_US">Separate recommended product lists for each item</name>
+        </option>
+        <option value="none">
+          <name locale="ru_RU">Отключить</name>
+          <name locale="en_US">Turn it off</name>
+        </option>
+      </options>
+    </setting>
+    <setting var="shop_checkout_steps_phone" control_type="text">
+      <value>+0 (000) 000-00-00</value>
+      <name locale="ru_RU">Телефон для связи&lt;p class="hint"&gt;Smarty разрешен&lt;/p&gt;</name>
+    </setting>
+    <setting var="shop_checkout_steps_email" control_type="text">
+      <value>info@auto-protection.ru</value>
+      <name locale="ru_RU">Контактный E-Mail&lt;p class="hint"&gt;Smarty разрешен&lt;/p&gt;</name>
+    </setting>
+    <setting var="shop_checkout_steps_info_title" control_type="text">
+      <value/>
+      <name locale="ru_RU">Информационный блок: заголовок</name>
+    </setting>
+    <setting var="shop_checkout_steps_info_text" control_type="text">
+      <value>Если у вас возникли вопросы или проблемы при оформление заказа, обратитесь по указанным ниже контактам.</value>
+      <name locale="ru_RU">Информационный блок: текст&lt;p class="hint"&gt;Smarty разрешен&lt;/p&gt;</name>
+    </setting>
+    <setting var="shop_checkout_steps_success_text" control_type="text">
+      <value>Обработка заказов: Понедельник-Пятница с 9.00 до 18.00 по МСК. Суббота и Восресение выходные.</value>
+      <name locale="ru_RU">Текст успешного оформления&lt;p class="hint"&gt;Smarty разрешен&lt;/p&gt;</name>
+    </setting>
+    <setting var="shop_sidebars" control_type="group_divider">
+      <value/>
+      <name locale="en_US">Sidebar`s sections</name>
+      <name locale="ru_RU">Секции сайдбаров</name>
+    </setting>
+    <setting var="shop_sidebars_sections_products" control_type="group_divider">
+      <value>shop_sidebars/shop_sidebars_sections_products</value>
+      <name locale="en_US">“PRODUCTS” section</name>
+      <name locale="ru_RU">Секция “PRODUCTS”</name>
+    </setting>
+    <setting var="shop_sidebars_sections_products_info" control_type="paragraph">
+      <value/>
+      <name locale="ru_RU">
+						&lt;p class="hint"&gt;&lt;a href="http://balance.designmyshop.ru/wa-data/public/site/balance_settings/sidebar-blocks.png" target="_blank"&gt;Иллюстрация секции&lt;/a&gt;&lt;/p&gt;
+						</name>
+    </setting>
+    <setting var="shop_sidebars_sections_products_title" control_type="text">
+      <value locale="en_US">Bestsellers</value>
+      <value locale="ru_RU">Хиты продаж</value>
+      <name locale="ru_RU">Заголовок секции</name>
+    </setting>
+    <setting var="shop_sidebars_sections_products_set" control_type="text">
+      <value locale="ru_RU">bestsellers</value>
+      <name locale="ru_RU">ID списка</name>
+    </setting>
+    <setting var="shop_sidebars_sections_products_limit" control_type="text">
+      <value locale="ru_RU">4</value>
+      <name locale="ru_RU">Лимит товаров</name>
+    </setting>
+    <setting var="shop_sidebars_sections_tags" control_type="group_divider">
+      <value>shop_sidebars/shop_sidebars_sections_tags</value>
+      <name locale="en_US">“TAGS” section</name>
+      <name locale="ru_RU">Секция “TAGS”</name>
+    </setting>
+    <setting var="shop_sidebars_sections_tags_info" control_type="paragraph">
+      <value/>
+      <name locale="ru_RU">
+						&lt;p class="hint"&gt;&lt;a href="http://balance.designmyshop.ru/wa-data/public/site/balance_settings/sidebar-blocks.png" target="_blank"&gt;Иллюстрация секции&lt;/a&gt;&lt;/p&gt;
+						</name>
+    </setting>
+    <setting var="shop_sidebars_sections_tags_title" control_type="text">
+      <value locale="en_US">Tags</value>
+      <value locale="ru_RU">Теги</value>
+      <name locale="ru_RU">Заголовок секции</name>
+    </setting>
+    <setting var="shop_sidebars_sections_tags_limit" control_type="text">
+      <value locale="ru_RU">12</value>
+      <name locale="ru_RU">Лимит отображаеммых тегов</name>
+    </setting>
+    <setting var="shop_sidebars_sections_tags_limit_max" control_type="text">
+      <value locale="ru_RU">20</value>
+      <name locale="ru_RU">Максимум тегов</name>
+    </setting>
+    <setting var="shop_sidebars_sections_brands" control_type="group_divider">
+      <value>shop_sidebars/shop_sidebars_sections_brands</value>
+      <name locale="en_US">“PRODUCTBRANDS” section</name>
+      <name locale="ru_RU">Секция “PRODUCTBRANDS”</name>
+    </setting>
+    <setting var="shop_sidebars_sections_brands_info" control_type="paragraph">
+      <value/>
+      <name locale="ru_RU">
+						&lt;p class="hint"&gt;&lt;a href="http://balance.designmyshop.ru/wa-data/public/site/balance_settings/sidebar-blocks.png" target="_blank"&gt;Иллюстрация секции&lt;/a&gt;&lt;/p&gt;
+						</name>
+    </setting>
+    <setting var="shop_sidebars_sections_brands_title" control_type="text">
+      <value locale="en_US">Popular brands</value>
+      <value locale="ru_RU">Популярные бренды</value>
+      <name locale="ru_RU">Заголовок секции</name>
+    </setting>
+    <setting var="shop_sidebars_sections_brands_limit" control_type="text">
+      <value locale="ru_RU">12</value>
+      <name locale="ru_RU">Лимит отображаеммых брендов</name>
+    </setting>
+    <setting var="shop_sidebars_sections_brands_limit_max" control_type="text">
+      <value locale="ru_RU">30</value>
+      <name locale="ru_RU">Максимум брендов</name>
+    </setting>
+    <setting var="shop_sidebars_sections_news" control_type="group_divider">
+      <value>shop_sidebars/shop_sidebars_sections_news</value>
+      <name locale="en_US">“NEWS” section</name>
+      <name locale="ru_RU">Секция “NEWS”</name>
+    </setting>
+    <setting var="shop_sidebars_sections_news_info" control_type="paragraph">
+      <value/>
+      <name locale="ru_RU">
+						&lt;p class="hint"&gt;&lt;a href="http://balance.designmyshop.ru/wa-data/public/site/balance_settings/sidebar-blocks.png" target="_blank"&gt;Иллюстрация секции&lt;/a&gt;
+						&lt;br /&gt;
+						&lt;br /&gt;Только при наличии приложения "Блог".&lt;/p&gt;
+						</name>
+    </setting>
+    <setting var="shop_sidebars_sections_news_title" control_type="text">
+      <value locale="en_US">Latest posts</value>
+      <value locale="ru_RU">Новости</value>
+      <name locale="ru_RU">Заголовок секции</name>
+    </setting>
+    <setting var="shop_sidebars_sections_news_limit" control_type="text">
+      <value locale="ru_RU">3</value>
+      <name locale="ru_RU">Лимит записей</name>
+    </setting>
+    <setting var="shop_sidebars_sections_news_blog" control_type="text">
+      <value/>
+      <name locale="ru_RU">ID блога</name>
+      <description locale="ru_RU">
+						Укажите ID, если хотите, чтобы в список попадали только записи из одного определенного блога. Либо оставьте поле пустым.
+						&lt;br /&gt;&lt;a href="http://help.designmyshop.ru/balance/458/kak-uznat-id-bloga/" target="_blank"&gt;Как узнать ID блога?&lt;/a&gt;
+						
+						</description>
+    </setting>
+    <setting var="shop_sidebars_sections_viewed" control_type="group_divider">
+      <value>shop_sidebars/shop_sidebars_sections_viewed</value>
+      <name locale="en_US">“VIEWED” section</name>
+      <name locale="ru_RU">Секция “VIEWED”</name>
+    </setting>
+    <setting var="shop_sidebars_sections_viewed_info" control_type="paragraph">
+      <value/>
+      <name locale="ru_RU">
+						&lt;p class="hint"&gt;&lt;a href="http://balance.designmyshop.ru/wa-data/public/site/balance_settings/sidebar-blocks.png" target="_blank"&gt;Иллюстрация секции&lt;/a&gt;&lt;/p&gt;
+						</name>
+    </setting>
+    <setting var="shop_sidebars_sections_viewed_title" control_type="text">
+      <value locale="en_US">Viewed products</value>
+      <value locale="ru_RU">Просмотренные товары</value>
+      <name locale="ru_RU">Заголовок секции</name>
+    </setting>
+    <setting var="shop_sidebars_sections_viewed_limit" control_type="text">
+      <value locale="ru_RU">4</value>
+      <name locale="ru_RU">Лимит товаров</name>
+    </setting>
+    <setting var="shop_sidebars_sections_about" control_type="group_divider">
+      <value>shop_sidebars/shop_sidebars_sections_about</value>
+      <name locale="en_US">“ABOUT” section</name>
+      <name locale="ru_RU">Секция “ABOUT”</name>
+    </setting>
+    <setting var="shop_sidebars_sections_about_info" control_type="paragraph">
+      <value/>
+      <name locale="ru_RU">
+						&lt;p class="hint"&gt;&lt;a href="http://balance.designmyshop.ru/wa-data/public/site/balance_settings/sidebar-blocks.png" target="_blank"&gt;Иллюстрация секции&lt;/a&gt;&lt;/p&gt;
+						</name>
+    </setting>
+    <setting var="shop_sidebars_sections_about_title" control_type="text">
+      <value locale="ru_RU">Помощь</value>
+      <name locale="ru_RU">Заголовок секции</name>
+    </setting>
+    <setting var="shop_sidebars_sections_about_text" control_type="text">
+      <value locale="ru_RU">Если у вас возникли вопросы или проблемы при оформление заказа, обратитесь по указанным ниже контактам.</value>
+      <name locale="ru_RU">Текст секции</name>
+    </setting>
+    <setting var="shop_sidebars_sections_about_phone" control_type="text">
+      <value locale="ru_RU">+0 000 00-00-00</value>
+      <name locale="ru_RU">Телефон</name>
+    </setting>
+    <setting var="shop_sidebars_sections_about_email" control_type="text">
+      <value locale="ru_RU">support@myshop.com</value>
+      <name locale="ru_RU">E-mail</name>
+    </setting>
+    <setting var="shop_sidebars_sections_faq" control_type="group_divider">
+      <value>shop_sidebars/shop_sidebars_sections_faq</value>
+      <name locale="en_US">“FAQ” section</name>
+      <name locale="ru_RU">Секция “FAQ”</name>
+    </setting>
+    <setting var="shop_sidebars_sections_faq_info" control_type="paragraph">
+      <value/>
+      <name locale="ru_RU">
+						&lt;p class="hint"&gt;&lt;a href="http://balance.designmyshop.ru/wa-data/public/site/balance_settings/sidebar-blocks.png" target="_blank"&gt;Иллюстрация секции&lt;/a&gt;&lt;/p&gt;
+						</name>
+    </setting>
+    <setting var="shop_sidebars_sections_faq_title" control_type="text">
+      <value>Вопросы и ответы</value>
+      <name locale="ru_RU">Заголовок секции</name>
+    </setting>
+    <setting var="shop_sidebars_sections_faq_1" control_type="group_divider">
+      <value>shop_sidebars/shop_sidebars_sections_faq/shop_sidebars_sections_faq_1</value>
+      <name locale="en_US">Question #1</name>
+      <name locale="ru_RU">Вопрос №1</name>
+    </setting>
+    <setting var="shop_sidebars_sections_faq_1_question" control_type="text">
+      <value>Гарантия</value>
+      <name locale="ru_RU">Вопрос</name>
+      <description locale="ru_RU">Оставьте поле пустым, чтобы не выводить этот вопрос</description>
+    </setting>
+    <setting var="shop_sidebars_sections_faq_1_answer" control_type="text">
+      <value>Гарантия на все товары от производителя. Срок гарантии, при её наличии, указан на странице товара.</value>
+      <name locale="ru_RU">Ответ</name>
+    </setting>
+    <setting var="shop_sidebars_sections_faq_2" control_type="group_divider">
+      <value>shop_sidebars/shop_sidebars_sections_faq/shop_sidebars_sections_faq_2</value>
+      <name locale="en_US">Question #2</name>
+      <name locale="ru_RU">Вопрос №2</name>
+    </setting>
+    <setting var="shop_sidebars_sections_faq_2_question" control_type="text">
+      <value>Условия возврата</value>
+      <name locale="ru_RU">Вопрос</name>
+      <description locale="ru_RU">Оставьте поле пустым, чтобы не выводить этот вопрос</description>
+    </setting>
+    <setting var="shop_sidebars_sections_faq_2_answer" control_type="text">
+      <value>Вы можете вернуть любой товар в течение 14 дней с момента покупки.</value>
+      <name locale="ru_RU">Ответ</name>
+    </setting>
+    <setting var="shop_sidebars_sections_faq_3" control_type="group_divider">
+      <value>shop_sidebars/shop_sidebars_sections_faq/shop_sidebars_sections_faq_3</value>
+      <name locale="en_US">Question #3</name>
+      <name locale="ru_RU">Вопрос №3</name>
+    </setting>
+    <setting var="shop_sidebars_sections_faq_3_question" control_type="text">
+      <value>Что, если я не получу товар вовремя?</value>
+      <name locale="ru_RU">Вопрос</name>
+      <description locale="ru_RU">Оставьте поле пустым, чтобы не выводить этот вопрос</description>
+    </setting>
+    <setting var="shop_sidebars_sections_faq_3_answer" control_type="text">
+      <value>Мы отправляем товар в курьерскую службу в день оформления заказа, если заказ оформлен до 17:00 по московскому времени. Ответственность за задержку несет курьерская служба.</value>
+      <name locale="ru_RU">Ответ</name>
+    </setting>
+    <setting var="shop_sidebars_sections_faq_4" control_type="group_divider">
+      <value>shop_sidebars/shop_sidebars_sections_faq/shop_sidebars_sections_faq_4</value>
+      <name locale="en_US">Question #4</name>
+      <name locale="ru_RU">Вопрос №4</name>
+    </setting>
+    <setting var="shop_sidebars_sections_faq_4_question" control_type="text">
+      <value/>
+      <name locale="ru_RU">Вопрос</name>
+      <description locale="ru_RU">Оставьте поле пустым, чтобы не выводить этот вопрос</description>
+    </setting>
+    <setting var="shop_sidebars_sections_faq_4_answer" control_type="text">
+      <value/>
+      <name locale="ru_RU">Ответ</name>
+    </setting>
+    <setting var="shop_sidebars_sections_faq_5" control_type="group_divider">
+      <value>shop_sidebars/shop_sidebars_sections_faq/shop_sidebars_sections_faq_5</value>
+      <name locale="en_US">Question #5</name>
+      <name locale="ru_RU">Вопрос №5</name>
+    </setting>
+    <setting var="shop_sidebars_sections_faq_5_question" control_type="text">
+      <value/>
+      <name locale="ru_RU">Вопрос</name>
+      <description locale="ru_RU">Оставьте поле пустым, чтобы не выводить этот вопрос</description>
+    </setting>
+    <setting var="shop_sidebars_sections_faq_5_answer" control_type="text">
+      <value/>
+      <name locale="ru_RU">Ответ</name>
+    </setting>
+  </settings>
+  <thumbs>
+    <thumb>96x96</thumb>
+    <thumb>200</thumb>
+    <thumb>970</thumb>
+  </thumbs>
+  <locales>
+    <locale>
+      <msgid>Delivery not included</msgid>
+      <msgstr locale="ru_RU">«Без учета стоимости доставки»</msgstr>
+    </locale>
+    <locale>
+      <msgid>Use the existing account</msgid>
+      <msgstr locale="ru_RU">Использовать существующую учетную запись</msgstr>
+    </locale>
+    <locale>
+      <msgid>First time shopping with us?</msgid>
+      <msgstr locale="ru_RU">Покупаете у нас впервые?</msgstr>
+    </locale>
+    <locale>
+      <msgid>Yay! Done!</msgid>
+      <msgstr locale="ru_RU">Ура! Всё получилось!</msgstr>
+    </locale>
+    <locale>
+      <msgid>Your order has been</msgid>
+      <msgstr locale="ru_RU">Ваш заказ</msgstr>
+    </locale>
+    <locale>
+      <msgid>placed</msgid>
+      <msgstr locale="ru_RU">оформлен</msgstr>
+    </locale>
+    <locale>
+      <msgid>If you’re having problems placing your order online, please call us at: %s</msgid>
+      <msgstr locale="ru_RU">Если вы испытываете сложности при оформление заказа, позвоните нам: %s. Мы оформим ваш заказ по телефону</msgstr>
+    </locale>
+    <locale>
+      <msgid>Use coupon</msgid>
+      <msgstr locale="ru_RU">Использовать купон</msgstr>
+    </locale>
+    <locale>
+      <msgid>as new customer</msgid>
+      <msgstr locale="ru_RU">как новый покупатель</msgstr>
+    </locale>
+    <locale>
+      <msgid>You are currently authorized as</msgid>
+      <msgstr locale="ru_RU">Вы авторизованы как</msgstr>
+    </locale>
+    <locale>
+      <msgid>Ordered products</msgid>
+      <msgstr locale="ru_RU">Состав заказа</msgstr>
+    </locale>
+    <locale>
+      <msgid>Add to favorites</msgid>
+      <msgstr locale="ru_RU">Добавить в избранное</msgstr>
+    </locale>
+    <locale>
+      <msgid>Remove from favorites</msgid>
+      <msgstr locale="ru_RU">Удалить из избранного</msgstr>
+    </locale>
+    <locale>
+      <msgid>Latest posts</msgid>
+      <msgstr locale="ru_RU">Последние записи</msgstr>
+    </locale>
+    <locale>
+      <msgid>all posts</msgid>
+      <msgstr locale="ru_RU">все записи</msgstr>
+    </locale>
+    <locale>
+      <msgid>Product details</msgid>
+      <msgstr locale="ru_RU">Подробнее о товаре</msgstr>
+    </locale>
+    <locale>
+      <msgid>Show all</msgid>
+      <msgstr locale="ru_RU">Посмотреть все</msgstr>
+    </locale>
+    <locale>
+      <msgid>Show products</msgid>
+      <msgstr locale="ru_RU">Посмотреть товары</msgstr>
+    </locale>
+    <locale>
+      <msgid>Popular brands</msgid>
+      <msgstr locale="ru_RU">Популярные бренды</msgstr>
+    </locale>
+    <locale>
+      <msgid>Show all brands</msgid>
+      <msgstr locale="ru_RU">Посмотреть все бренды</msgstr>
+    </locale>
+    <locale>
+      <msgid>Go to shopping cart</msgid>
+      <msgstr locale="ru_RU">Перейти в корзину</msgstr>
+    </locale>
+    <locale>
+      <msgid>Continue shopping</msgid>
+      <msgstr locale="ru_RU">Продолжить покупки</msgstr>
+    </locale>
+    <locale>
+      <msgid>Product has been added to your shopping cart</msgid>
+      <msgstr locale="ru_RU">Товар добавлен в корзину</msgstr>
+    </locale>
+    <locale>
+      <msgid>of discount</msgid>
+      <msgstr locale="ru_RU">скидки</msgstr>
+    </locale>
+    <locale>
+      <msgid>For more information about affiliate program please visit</msgid>
+      <msgstr locale="ru_RU">Подробно о партнерский программы можете прочитать на странице</msgstr>
+    </locale>
+    <locale>
+      <msgid>Discounts and bonuses</msgid>
+      <msgstr locale="ru_RU">Скидки и бонусы</msgstr>
+    </locale>
+    <locale>
+      <msgid>Order details</msgid>
+      <msgstr locale="ru_RU">Детали заказа</msgstr>
+    </locale>
+    <locale>
+      <msgid>Showed</msgid>
+      <msgstr locale="ru_RU">Показано</msgstr>
+    </locale>
+    <locale>
+      <msgid>of</msgid>
+      <msgstr locale="ru_RU">из</msgstr>
+    </locale>
+    <locale>
+      <msgid>Brand</msgid>
+      <msgstr locale="ru_RU">Производитель</msgstr>
+    </locale>
+    <locale>
+      <msgid>All features</msgid>
+      <msgstr locale="ru_RU">Все характеристики</msgstr>
+    </locale>
+    <locale>
+      <msgid>Loading data...</msgid>
+      <msgstr locale="ru_RU">Загрузка данных...</msgstr>
+    </locale>
+    <locale>
+      <msgid>No reviews for this product. Be the first to leave feedback</msgid>
+      <msgstr locale="ru_RU">Отзывов об этом товаре пока нет. Будьте первым</msgstr>
+    </locale>
+    <locale>
+      <msgid>Go to product page</msgid>
+      <msgstr locale="ru_RU">Перейти на страницу товара</msgstr>
+    </locale>
+    <locale>
+      <msgid>saving</msgid>
+      <msgstr locale="ru_RU">экономия</msgstr>
+    </locale>
+    <locale>
+      <msgid>Saving</msgid>
+      <msgstr locale="ru_RU">Экономия</msgstr>
+    </locale>
+    <locale>
+      <msgid>Order by phone</msgid>
+      <msgstr locale="ru_RU">Заказ по телефону</msgstr>
+    </locale>
+    <locale>
+      <msgid>No matches found</msgid>
+      <msgstr locale="ru_RU">По Вашему запросу ничего не найдено</msgstr>
+    </locale>
+    <locale>
+      <msgid>Please try another search</msgid>
+      <msgstr locale="ru_RU">Попробуйте изменить формулировку</msgstr>
+    </locale>
+    <locale>
+      <msgid>Read more</msgid>
+      <msgstr locale="ru_RU">Читать далее</msgstr>
+    </locale>
+    <locale>
+      <msgid>Products list is empty</msgid>
+      <msgstr locale="ru_RU">Список продуктов пуст</msgstr>
+    </locale>
+    <locale>
+      <msgid>is empty</msgid>
+      <msgstr locale="ru_RU">пуста</msgstr>
+    </locale>
+    <locale>
+      <msgid>Quickview</msgid>
+      <msgstr locale="ru_RU">Быстрый просмотр</msgstr>
+    </locale>
+    <locale>
+      <msgid>Default</msgid>
+      <msgstr locale="ru_RU">По умолчанию</msgstr>
+    </locale>
+    <locale>
+      <msgid>Thumbs</msgid>
+      <msgstr locale="ru_RU">Плитка</msgstr>
+    </locale>
+    <locale>
+      <msgid>Expanded</msgid>
+      <msgstr locale="ru_RU">Подробно</msgstr>
+    </locale>
+    <locale>
+      <msgid>Compactly</msgid>
+      <msgstr locale="ru_RU">Компактно</msgstr>
+    </locale>
+    <locale>
+      <msgid>Quantity</msgid>
+      <msgstr locale="ru_RU">Количество</msgstr>
+    </locale>
+    <locale>
+      <msgid>Qty</msgid>
+      <msgstr locale="ru_RU">Кол-во</msgstr>
+    </locale>
+    <locale>
+      <msgid>Last reviews</msgid>
+      <msgstr locale="ru_RU">Последние отзывы</msgstr>
+    </locale>
+    <locale>
+      <msgid>Close window</msgid>
+      <msgstr locale="ru_RU">Закрыть окно</msgstr>
+    </locale>
+    <locale>
+      <msgid>Go to product page</msgid>
+      <msgstr locale="ru_RU">Перейти к странице товара</msgstr>
+    </locale>
+    <locale>
+      <msgid>Edit product</msgid>
+      <msgstr locale="ru_RU">Редактировать товар</msgstr>
+    </locale>
+    <locale>
+      <msgid>Edit page</msgid>
+      <msgstr locale="ru_RU">Редактировать страницу</msgstr>
+    </locale>
+    <locale>
+      <msgid>Checking...</msgid>
+      <msgstr locale="ru_RU">Проверка...</msgstr>
+    </locale>
+    <locale>
+      <msgid>Filters</msgid>
+      <msgstr locale="ru_RU">Фильтры</msgstr>
+    </locale>
+    <locale>
+      <msgid>Delete all products</msgid>
+      <msgstr locale="ru_RU">Удалить все товары</msgstr>
+    </locale>
+    <locale>
+      <msgid>SKU code</msgid>
+      <msgstr locale="ru_RU">Артикул</msgstr>
+    </locale>
+    <locale>
+      <msgid>Your shopping cart is empty</msgid>
+      <msgstr locale="ru_RU">Ваша корзина пуста</msgstr>
+    </locale>
+    <locale>
+      <msgid>hide details</msgid>
+      <msgstr locale="ru_RU">свернуть</msgstr>
+    </locale>
+    <locale>
+      <msgid>Shortlist</msgid>
+      <msgstr locale="ru_RU">Краткий список</msgstr>
+    </locale>
+    <locale>
+      <msgid>Detailed</msgid>
+      <msgstr locale="ru_RU">С подробностями</msgstr>
+    </locale>
+    <locale>
+      <msgid>Bonus info</msgid>
+      <msgstr locale="ru_RU">О бонусной программе</msgstr>
+    </locale>
+    <locale>
+      <msgid>All categories</msgid>
+      <msgstr locale="ru_RU">Все категории</msgstr>
+    </locale>
+    <locale>
+      <msgid>DETAILS</msgid>
+      <msgstr locale="ru_RU">ПОДРОБНЕЕ</msgstr>
+    </locale>
+    <locale>
+      <msgid>HURRY UP</msgid>
+      <msgstr locale="ru_RU">УСПЕЙ</msgstr>
+    </locale>
+    <locale>
+      <msgid>days</msgid>
+      <msgstr locale="ru_RU">дни</msgstr>
+    </locale>
+    <locale>
+      <msgid>hours</msgid>
+      <msgstr locale="ru_RU">часы</msgstr>
+    </locale>
+    <locale>
+      <msgid>minutes</msgid>
+      <msgstr locale="ru_RU">минуты</msgstr>
+    </locale>
+    <locale>
+      <msgid>seconds</msgid>
+      <msgstr locale="ru_RU">секунды</msgstr>
+    </locale>
+    <locale>
+      <msgid>Viewed products</msgid>
+      <msgstr locale="ru_RU">Просмотренные товары</msgstr>
+    </locale>
+    <locale>
+      <msgid>clear history</msgid>
+      <msgstr locale="ru_RU">очистить историю</msgstr>
+    </locale>
+    <locale>
+      <msgid>Information</msgid>
+      <msgstr locale="ru_RU">Информация</msgstr>
+    </locale>
+    <locale>
+      <msgid>If you prefer, you can also get order status or make changes by</msgid>
+      <msgstr locale="ru_RU">При желании вы можете получить информацию о статусе заказа или внести в него изменения, используя</msgstr>
+    </locale>
+    <locale>
+      <msgid>Sale, special offers and interesting goods review on %s home page %s help you right choice</msgid>
+      <msgstr locale="ru_RU">Акции, специальные предложения и обзоры самых интересных товаров на %s главной странице %s помогут вам определиться с выбором</msgstr>
+    </locale>
+    <locale>
+      <msgid>Results for “%s”</msgid>
+      <msgstr locale="ru_RU">По запросу «%s»</msgstr>
+    </locale>
+    <locale>
+      <msgid>Window will close in %s sec</msgid>
+      <msgstr locale="ru_RU">Окно закроется через %s сек.</msgstr>
+    </locale>
+    <locale>
+      <msgid>average rating</msgid>
+      <msgstr locale="ru_RU">общая оценка</msgstr>
+    </locale>
+    <locale>
+      <msgid>compare products</msgid>
+      <msgstr locale="ru_RU">сравнить товары</msgstr>
+    </locale>
+  </locales>
+  <requirements>
+    <requirement property="app.shop" value="8" strict="true"/>
+  </requirements>
+</theme>

@@ -1,0 +1,27 @@
+{strip}
+{if !empty($_faq)}
+	<div class="catalog-pg__side-sect mt-hide">
+		<div class="sidebar-section faq pos-rel">
+			<div class="descr-mode pos-abs"><span class="pos-rel">FAQ</span></div>
+			<div class="faq__header">{$theme_settings.shop_sidebars_sections_faq_title|default:"F.A.Q"}</div>
+			<ul class="faq__list">
+				{foreach $_faq as $q}
+					{if !empty($q.question)}
+						<li class="faq__item">
+							<div class="faq__dd">
+								<div class="faq__dd-text">{$q.question}</div>
+								<div class="faq__dd-icon">
+									<svg class="icon" width="6" height="11">
+										<use xlink:href="#arrow-right-big"></use>
+									</svg>
+								</div>
+							</div>
+							<div class="faq__dt">{$q.answer}</div>
+						</li>
+					{/if}
+				{/foreach}
+			</ul>
+		</div>
+	</div>
+{/if}
+{/strip}

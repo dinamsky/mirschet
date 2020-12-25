@@ -1,0 +1,282 @@
+#sdekint-info-wrapper {
+    margin: 0 220px 1.5em 0;
+    display: none;
+}
+
+#sdekint-info {
+    background-color: #e4f6e5;
+    padding: 0.5em 1em;
+    /*border-radius: 3px;*/
+    min-width: 550px;
+    position: relative;
+    border: 1px solid #a7e0a7;
+}
+
+#sdekint-info .full-width {
+    width: 100%;
+}
+
+#sdekint-info h2.title {
+    color: #1d780a;
+}
+
+#sdekint-info fieldset,
+#sdekint-info legend {
+    border: none;
+    padding: 0;
+    background-color: transparent;
+}
+
+#sdekint-info .field .info-message {
+    font-size: 11px;
+    color: #333434;
+}
+
+#sdekint-info fieldset.field-group {
+    margin-bottom: 2em;
+}
+
+#sdekint-info legend {
+    color: #1d780a;
+    border-bottom: 2px solid #a7e0a7;
+    font-weight: bold;
+    margin-bottom: 0.3em;
+    display: block;
+    width: 100%;
+    padding: 0 0 2px;
+}
+
+#sdekint-info .inline.field {
+    float: left;
+    clear: none;
+    width: 210px;
+    margin: 0 0.5em;
+}
+
+#sdekint-info .long.inline.field {
+    width: 360px;
+}
+
+#sdekint-info .short.inline.field {
+    width: 70px;
+}
+
+#sdekint-info .block.field {
+    width: 100%;
+    display: block;
+    float: none;
+    margin: 0 0.5em;
+    padding: 3px 0 0;
+}
+
+#sdekint-info .block.field .name,
+#sdekint-info .inline.field .name {
+    float: none;
+    width: 100%;
+    padding: 0;
+    color: forestgreen;
+    display: block;
+    margin-bottom: 0.3em;
+}
+
+#sdekint-info table.zebra th, #sdekint-info table.zebra td {
+    padding: 2px 3px;
+}
+
+#sdekint-info table.zebra input {
+    border: 1px solid #eee;
+    width: 100% !important;
+}
+
+#s-plugin-sdekint-package-params table caption {
+    padding: 7px 0 3px;
+    font-weight: bold;
+    color: forestgreen;
+    text-align: left;
+}
+
+#s-plugin-sdekint-package-params table.zebra th {
+    color: forestgreen;
+}
+
+#s-plugin-sdekint-sdek-logo {
+    position: absolute;
+    top: 0.5em;
+    right: 1em;
+}
+
+#s-plugin-sdekint-services-container {
+    margin-top: 0.5em;
+    display: none;
+}
+
+#s-plugin-sdekint-services-container label {
+    display: block;
+    line-height: 120%;
+}
+
+.s-plugin-sdekint-services {
+    padding: 0 0.4em 0.2em;
+    font-size: 0.9em;
+    color: white;
+    margin-right: 1em;
+    border-radius: 3px;
+    cursor: pointer;
+    font-weight: bold;
+    line-height: 160%;
+    white-space: nowrap;
+}
+
+.s-plugin-sdekint-stock-info-fld {
+    margin: 0.3em 0;
+    font-style: italic;
+    color: #777676;
+    font-size: 0.85em;
+    line-height: 125%;
+}
+
+.s-plugin-sdekint-stock-info-fld .value {
+    font-style: normal;
+    color: #333;
+    margin: 0 0 0 1em;
+}
+
+#s-plugin-sdekint-stock-info,
+#s-plugin-sdekint-postomat-info {
+    margin-top: 0.5em;
+    font-size: 13px;
+    line-height: 120%;
+    color: #333434;
+}
+
+#s-plugin-sdekint-service-3 {
+    background-color: tomato;
+    text-shadow: 1px 1px 1px firebrick;
+}
+
+#s-plugin-sdekint-service-30 {
+    background-color: darkorange;
+    text-shadow: 1px 1px 1px firebrick;
+}
+
+#s-plugin-sdekint-service-36 {
+    background-color: mediumorchid;
+    text-shadow: 1px 1px 1px black;
+}
+
+#s-plugin-sdekint-service-37 {
+    background-color: darkcyan;
+    text-shadow: 1px 1px 1px black;
+}
+
+#s-plugin-sdekint-street-address-fields .field {
+    float: left;
+    clear: none;
+    width: 210px;
+}
+
+#s-plugin-sdekint-street-address-fields .short.field {
+    width: 70px;
+}
+
+#s-plugin-sdekint-street-address-fields .field .name {
+    width: auto;
+    float: none;
+    padding: 0;
+}
+
+#s-plugin-sdekint-street-address-fields .field .value {
+    margin: 0;
+}
+
+.s-plugin-sdekint-btn-group {
+    margin: 0.5em 0;
+    padding: 0;
+    list-style-type: none;
+}
+
+.s-plugin-sdekint-btn-group li {
+    display: inline;
+}
+
+.s-plugin-sdekint-btn-group li a.btn.action,
+.s-plugin-sdekint-btn-group li a.btn.action:visited {
+    background: #f2f2f2;
+    background-image: -webkit-linear-gradient(top, #f2f2f2, #adadad);
+    background-image: -moz-linear-gradient(top, #f2f2f2, #adadad);
+    background-image: -ms-linear-gradient(top, #f2f2f2, #adadad);
+    background-image: -o-linear-gradient(top, #f2f2f2, #adadad);
+    background-image: linear-gradient(to bottom, #f2f2f2, #adadad);
+    text-decoration: none;
+    border-radius: 3px;
+    display: inline-block;
+    padding: 3px;
+}
+
+.s-plugin-sdekint-btn-group li a.btn.action:hover {
+    background: #ccc;
+    background-image: -webkit-linear-gradient(top, #ccc, #9c9c9c);
+    background-image: -moz-linear-gradient(top, #ccc, #9c9c9c);
+    background-image: -ms-linear-gradient(top, #ccc, #9c9c9c);
+    background-image: -o-linear-gradient(top, #ccc, #9c9c9c);
+    background-image: linear-gradient(to bottom, #ccc, #9c9c9c);
+    text-decoration: none;
+}
+
+.s-plugin-sdekint-btn-group li a.btn.action i.icon16 {
+    margin: 0;
+}
+
+@media screen and (max-width: 1620px) {
+
+    #sdekint-info {
+        padding: 0.5em 3px
+    }
+
+    #sdekint-info select {
+        font-size: 10px;
+    }
+
+    #sdekint-info input, #sdekint-info textarea {
+        font-size: 12px;
+        line-height: 1.2;
+    }
+
+    #sdekint-info input, textarea {
+        border: 1px solid #ccc;
+    }
+
+    #sdekint-info input.long {
+        min-width: 200px !important;
+        width: 200px !important;
+    }
+
+    #sdekint-info input.short {
+        min-width: 40px !important;
+        width: 40px !important;
+    }
+
+    #sdekint-info .long.inline.field {
+        width: 205px;
+    }
+
+    #sdekint-info .short.inline.field {
+        width: 45px
+    }
+
+    #sdekint-info .block.field .name, #sdekint-info .inline.field .name {
+        font-size: 11px
+    }
+
+    .s-plugin-sdekint-services, #s-plugin-sdekint-add-package-btn {
+        font-size: 12px
+    }
+
+    #sdekint-info table.full-width tr th {
+        font-size: 10px
+    }
+
+    #s-plugin-sdekint-ordered-items tr td input {
+        font-size: 11px;
+    }
+}

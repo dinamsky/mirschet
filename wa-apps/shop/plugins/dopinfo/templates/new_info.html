@@ -1,0 +1,454 @@
+<style type="text/css">
+    .black_group {
+        color: #8f1811;
+        font-weight: bold;
+    }
+    
+    .black_client {
+        color: #8f1811;
+        font-weight: bold;
+    }
+    
+    #order_viewer {
+        font-size: 0.8em;
+    }   
+    
+    .orders_total {
+        font-size: 1.1em;
+        text-align: right;
+        font-weight: bold;
+        color: #8f1811;
+    }
+    
+    .order_from_state {
+        cursor: pointer;
+    }
+    
+    .client_name {
+        font-size: 1.1em;
+        text-align: center;                
+    }
+    
+    #client_info div {
+        margin-top: 5px;
+    }
+    
+</style>
+<link rel="stylesheet" href="//code.jquery.com/ui/1.10.4/themes/smoothness/jquery-ui.css"> 
+<script src="{$wa_url}wa-content/js/jquery-ui/jquery.ui.dialog.min.js"></script>
+<div id="client_info" style="display: none; color: #aaa; font-size: 0.9em;" data-contact-id = "{$contact_id|escape}">
+    {if isset($is_reg)}
+    <div>
+        {$is_reg}
+    </div>
+    {/if}
+    {if isset($state_info)}
+    <div>
+        <b>Заказы:</b>        
+            {$state_info}       
+    </div>    
+    {/if}    
+    {if isset($categories)}
+        <div>
+            <b>Группы клиента:</b>        
+            {$categories} 
+        </div>
+    {/if}
+</div>
+{if isset($email)}
+<div id="email_info" style="display: none; color: #aaa; font-size: 0.9em; margin-bottom: 5px;">
+    {if isset($black_client) && $black_client == 'yes'}
+    <span class="black_client">Внимание!!! Email в черном списке!</span>
+    {/if}        
+    <a href="javascript:void(0)" class="email_orders" data-email="{$email|escape}">
+       Посмотреть заказы       
+    </a>   
+</div>
+{/if}
+{if (isset($phone_client_count) && $phone_client_count > 1) || isset($phone_error)}
+<div id="phone_info" style="display: none; color: #aaa; font-size: 0.9em;">
+    {if isset($phone_error) && $phone_error == 1}
+    Короткий номер. Укажите в настройках меньше цифр для поиска.
+    {/if}
+    {if isset($black_phone) && $black_phone == 'yes'}
+        <span class="black_client">Внимание!!! Телефон в черном списке!</span>
+        <br/>
+    {/if}
+    {if !isset($phone_error)}
+    Клиентов с похожим телефоном: {$phone_client_count|escape}
+    <a href="javascript:void(0)" class="phone_orders" data-phone="{$phone|escape}" title='Посмотреть заказы'>
+        Посмотреть заказы
+    </a>     
+    <input type="checkbox" name="current" id="current_client" checked="checked" />Без текущего клиента
+    {/if}
+</div>
+{/if}
+{if isset($order_ip) && !empty($order_ip)}
+<div id="ip_info" style="display: none; color: #aaa; font-size: 0.9em;" >     
+    <a href="http://ipgeobase.ru/?address={$order_ip|escape}" style="color: #03c" target="_blank" title="посмотреть IP по GeoBase">
+        {$order_ip|escape}
+    </a>
+    {if isset($orders_ip_count)}
+    <br/>
+    Заказы с похожих ip: {$orders_ip_count|escape}
+    <br/>
+    <a href="javascript:void(0)" class="ip_orders" style="color: #03c" data-order-ip="{$order_ip|escape}" title='Посмотреть заказы'>
+        Посмотреть заказы
+    </a> 
+    {/if}
+</div>
+{/if}
+
+<div id="order_viewer">
+    <table class="zebra">
+        <thead>
+            <tr>
+                <th>Номер</th>
+                <th style="text-align: center;">Дата</th>
+                <th style="text-align: center;">Сумма</th>
+                <th>Доставка</th>
+                <th>Адрес</th>
+                <th>IP</th>
+            </tr>
+        </thead>
+        <tfoot class='orders_total'>            
+        </tfoot>
+        <tbody id='orders_list'>            
+        </tbody>
+    </table>
+</div>
+
+
+<script type="text/javascript">
+    
+    var contact_id = $('#client_info').data('contact-id');
+    var email = $('.email_orders').data('email'); 
+    var phone = $('.phone_orders').data('phone');
+    var order_ip = $('.ip_orders').data('order-ip');
+    
+    function initViewClick(){
+        $(".order_from_state").on('click', function(){
+            $("#order_viewer").dialog("close");
+            window.open($(this).attr('data-href'), '_blank');
+        });       
+        
+    }
+    
+    function parsingEmailOrders(ids){
+        var email_orders = '';        
+        $.each(ids, function (key, value){
+            email_orders = email_orders + '<tr class="client_name"><td colspan="6"><strong>Клиент:</strong> ' + value['name'];
+            if(value['black']){
+                email_orders = email_orders + '<br/><span style="color: red;">Внимание! Клиент в черном списке!</span>';
+            }
+            email_orders = email_orders + '</td></tr>';
+            if(value['array']){
+		var orders = parsingOrders(value['array']);
+            	email_orders = email_orders + orders;
+	        email_orders = email_orders + '<tr class="orders_total"><td colspan="6">Всего заказов: ' + value['count'] + ' ';
+            	email_orders = email_orders + 'На сумму: ' + value['state_summ'] + '</td></tr>';
+	    }else{
+	    	email_orders = email_orders + '<tr class="orders_total" style="text-align: center;"><td colspan="6">Заказов нет</td></tr>';
+	    }
+        });
+        
+        return email_orders;
+    }
+    
+    function parsingPhoneOrders(ids){
+        var phone_orders = '';        
+        $.each(ids, function (key, value){
+            phone_orders = phone_orders + '<tr class="client_name"><td colspan="6"><strong>Клиент:</strong> ' + value['name'];
+            if(value['phone']){
+                phone_orders = phone_orders + ' <strong>Телефон:</strong> ' + value['phone'];
+            }            
+            if(value['black']){
+                phone_orders = phone_orders + '<br/><span style="color: red;">Внимание! Клиент в черном списке!</span>';
+            }
+            phone_orders = phone_orders + '</td></tr>';
+            if(value['array']){
+		var orders = parsingOrders(value['array']);
+            	phone_orders = phone_orders + orders;
+	        phone_orders = phone_orders + '<tr class="orders_total"><td colspan="6">Всего заказов: ' + value['count'] + ' ';
+            	phone_orders = phone_orders + 'На сумму: ' + value['state_summ'] + '</td></tr>';
+	    }else{
+	    	phone_orders = phone_orders + '<tr class="orders_total" style="text-align: center;"><td colspan="6">Заказов нет</td></tr>';
+	    }
+        });
+        
+        return phone_orders;
+    }
+    
+    function parsingIpOrders(ids){
+        var ip_orders = '';        
+        $.each(ids, function (key, value){
+            ip_orders = ip_orders + '<tr class="client_name"><td colspan="6"><strong>Клиент:</strong> ' + value['name'];                       
+            if(value['black']){
+                ip_orders = ip_orders + '<br/><span style="color: red;">Внимание! Клиент в черном списке!</span>';
+            }
+            ip_orders = ip_orders + '</td></tr>';
+            if(value['array']){
+		var orders = parsingOrders(value['array']);
+            	ip_orders = ip_orders + orders;
+	        ip_orders = ip_orders + '<tr class="orders_total"><td colspan="6">Всего заказов: ' + value['count'] + ' ';
+            	ip_orders = ip_orders + 'На сумму: ' + value['state_summ'] + '</td></tr>';
+	    }else{
+	    	ip = ip_orders + '<tr class="orders_total" style="text-align: center;"><td colspan="6">Заказов нет</td></tr>';
+	    }
+        });
+        
+        return ip_orders;
+    }
+    
+    
+    function parsingOrders(orders){        
+        var order_table = '';
+        $.each(orders, function(key, value){            
+            order_table = order_table + '<tr class="order_from_state"';            
+            order_table = order_table + ' data-href = "{$wa_backend_url}shop/#/order/'
+                    + value['id'] +'" title="Кликните чтобы открыть заказ">';
+            order_table = order_table + '<td style="text-align: center;';
+			if(value['style']){
+                order_table = order_table + ' ' + value['style'];
+            }
+			order_table = order_table + '">';
+            if(value['icon']){
+                order_table = order_table + '<i class="' + value['icon'] +'"></i>';
+            }
+            order_table = order_table + key;
+            if(value['state_id']){
+               order_table = order_table + '<br/>' + value['state_id']; 
+            }
+            order_table = order_table + '</td>';
+            order_table = order_table + '<td style="text-align: center; max-width: 70px;">' + value['date'] + '</td>';
+            order_table = order_table + '<td style="text-align: center;">' + value['summ'] + '</td>';
+            if(value['shipping']){
+                order_table = order_table + '<td>' + value['shipping'] + '</td>';
+            }else{
+                order_table = order_table + '<td>Не указана</td>';
+            }
+            if(value['addres']){
+                order_table = order_table + '<td>';
+                if(value['addres']['city']){
+                     order_table = order_table + value['addres']['city'];
+                }else{
+                    order_table = order_table + ' - ';
+                }
+                
+                if(value['addres']['street']){
+                     order_table = order_table + '<br/>' + value['addres']['street'];
+                }else{
+                    order_table = order_table + '<br/> - ';
+                }
+                
+                order_table = order_table + '</td>';
+            }else{
+                order_table = order_table + 'Не указан';
+            }
+            
+            if(value['ip']){
+                order_table = order_table + '<td>' + value['ip'] + '</td>';
+            }else{
+                order_table = order_table + '<td>Не указан</td>';
+            }
+            
+            order_table = order_table + '</tr>';            
+           
+        });
+        
+        return order_table; 
+    }
+    
+    function viewEmailOrder(){
+        $.ajax({
+            url: '?plugin=dopinfo&action=viewemailorder',
+            data: 'email=' + email,
+            dataType: "json",
+            type: "post",
+            success: function(response) {
+                var html = parsingEmailOrders(response.data.ids);
+                $(".orders_total").empty();                
+                $('#orders_list').html(html);
+                $("#order_viewer").dialog( "option", "title", 'Заказы с email ' + email);                    
+                $("#order_viewer").dialog("open");
+                initViewClick();
+                console.log(response);               
+            },
+            error: function(response) {
+                console.log(response);
+            }
+        });
+        return false;
+    }
+    
+    function viewPhoneOrder(){
+        
+        var data = 'phone=' + phone;
+        var title = '';
+        if($('#current_client').attr('checked')){            
+            data = data + '&contact_id=' + contact_id; 
+            title = 'Без текущего клиента'
+        }
+        console.log(data);
+        $.ajax({
+            url: '?plugin=dopinfo&action=viewphoneorder',
+            data: data,
+            dataType: "json",
+            type: "post",
+            success: function(response) {
+                var html = parsingPhoneOrders(response.data.ids);
+                $(".orders_total").empty();                
+                $('#orders_list').html(html);
+                $("#order_viewer").dialog( "option", "title", 'Заказы с похожим телефоном (' + phone + ') ' + title);                    
+                $("#order_viewer").dialog("open");
+                initViewClick();
+                console.log(response);               
+            },
+            error: function(response) {
+                console.log(response);
+            }
+        });
+        return false;
+    }
+    
+    function viewIpOrder(){
+        $.ajax({
+            url: '?plugin=dopinfo&action=viewiporder',
+            data: 'order_ip=' + order_ip,
+            dataType: "json",
+            type: "post",
+            success: function(response) {
+                if(!response.data.error){
+                    var html = parsingOrders(response.data.orders);                   
+                    $('#orders_list').html(html);
+                    $(".orders_total").html('<tr><td colspan="6">Всего заказов: '
+                            + response.data.orders_count + ' На сумму: '
+                            + response.data.state_summ);
+                    
+                    $("#order_viewer").dialog( "option", "title", 'Заказы с похожим ip (' + response.data.ips +'.0 - ' + response.data.ips + '.255)');                    
+                    $("#order_viewer").dialog("open");
+                    initViewClick();
+                }else{
+                    console.log(response);
+                }               
+            },
+            error: function(response) {
+                console.log(response);
+            }
+        });
+        return false;
+    }
+    
+    
+    function viewStateOrder(state_id){
+        $.ajax({
+             url: '?plugin=dopinfo&action=viewstateorder',
+            data: 'state_id=' + state_id + 
+                  '&contact_id=' + contact_id,
+            dataType: "json",
+            type: "post",
+            success: function(response) {
+               if(!response.data.error){
+                    var html = parsingOrders(response.data.orders);                   
+                    $('#orders_list').html(html);
+                    $(".orders_total").html('<tr><td colspan="6">Всего заказов: '
+                            + response.data.orders_count + ' На сумму: '
+                            + response.data.state_summ);
+                    
+                    $("#order_viewer").dialog( "option", "title", 'Заказы со статусом ' + response.data.state_name);                    
+                    $("#order_viewer").dialog("open");
+                    initViewClick();
+                }else{
+                    console.log(response);
+                }           
+            },
+            error: function(response) {
+                console.log(response);
+            }
+        });
+        return false;
+    }
+    
+    
+    $(function() { 
+        
+        $("#order_viewer").dialog({
+            autoOpen: false,         
+            width: 800,
+            height: 700,
+            modal: true,            
+            close: function() {
+                
+            }
+        });
+        
+        var name = $('.details h3');
+        var client_info = $('#client_info');
+        
+        if(name && client_info){
+            client_info.insertAfter(name);
+            $('#client_info').css('display', '');
+        }
+        
+        var email_info = $('#email_info');
+        var iconemail = $('.icon16.email');
+        if (email_info && iconemail) {
+            var tmp = iconemail.closest('li');
+            email_info.insertAfter(tmp);
+            email_info.css('display', '');
+        }
+        
+        var phone = $('#phone_info');
+        var iconphone = $('.icon16.phone');
+
+        if (phone && iconphone) {
+            var tmp = iconphone.closest('li');
+            phone.insertAfter(tmp);
+            phone.css('display', '');
+        }
+        
+        if(order_ip){
+            var str = $('strong:contains("' + order_ip + '")');
+            str.replaceWith($('#ip_info'));
+            $('#ip_info').css('display', '');
+        }
+        
+     
+        $('.order_state_id').on('click', function(){
+            var state_id = $(this).data('state-id');
+            viewStateOrder(state_id);            
+        });
+        
+        $('.email_orders').on('click', function(){
+            viewEmailOrder();                    
+        });
+        
+        $('.phone_orders').on('click', function(){
+            viewPhoneOrder();                    
+        });
+        
+        $('.ip_orders').on('click', function(){
+            viewIpOrder();                    
+        });
+        
+        //Перехватываем нажатие "Версия для печати"
+        $('[data-selector="div.s-order"]').on("click", function(){
+            $('#client_info').hide();
+            $('#email_info').hide();
+            $('#phone_info').hide();
+            $('#ip_info').hide();
+            
+            setTimeout(function() {
+                $('#client_info').show();
+                $('#email_info').show();
+                $('#phone_info').show();
+                $('#ip_info').show();                                        
+                }, 10);          
+                
+        });
+        
+        
+        
+        
+    });
+</script>

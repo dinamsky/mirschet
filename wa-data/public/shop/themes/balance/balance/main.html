@@ -1,0 +1,174 @@
+{strip}
+<!-- plugin hook: 'frontend_header' -->
+{* @event frontend_header.%plugin_id% *}
+{foreach $frontend_header as $_}{$_}{/foreach}
+
+{$_use_store_schema = false}
+{if !empty($action) && ($action === "default")}
+    {$_use_store_schema = true}
+{/if}
+<div class="wrapper{if $theme_settings.header_design eq 'view-10'} in-header-content{/if}{if $wa->globals('isOrderPage')} order-page{/if}" id="page-content">
+	<div class="main" itemscope itemtype="{if $_use_store_schema}http://schema.org/Store{else}http://schema.org/WebPage{/if}">
+		{if $wa->globals("showParentBreadcrumbs")}
+			{if !empty($breadcrumbs)}
+				<div class="layout-center">
+					<div class="info-pg__top">
+						<div class="info-pg__bc">
+							<div class="breadcrumbs breadcrumbs_{$theme_settings.breadcrumbs_design}">
+								<ul class="breadcrumbs__list">
+									<li class="breadcrumbs__item">
+										<a class="breadcrumbs__link" href="{$wa_url}">[`Home`]</a>
+									</li>
+									{foreach $breadcrumbs as $bc}
+										<li class="breadcrumbs__item"><a class="breadcrumbs__link" href="{$bc.url}">{$bc.name|escape}</a></li>
+									{/foreach}
+								</ul>
+							</div>
+						</div>
+						<div class="info-pg__tab-menu">
+							<div class="info-pg__tab-menu-btn" href="#">
+								<svg class="icon" width="16" height="10"><use xlink:href="#icon-blog-menu"></use></svg>
+								<span>[`Navigation`]</span>
+							</div>
+						</div>
+						<div class="info-pg__dropdown"></div>
+					</div>
+				</div>
+			{/if}		
+		{/if}		
+		{if $_use_store_schema}
+			{if !empty($theme_settings.store_address)}
+				<meta itemprop="address" content="{$theme_settings.address}">
+			{/if}
+			{if !empty($theme_settings.store_price_range)}
+				<meta itemprop="priceRange" content="{$theme_settings.store_price_range}">
+			{/if}
+			{if !empty($theme_settings.logo)}
+				{$_absolute_thumb_uri = "{$wa->url(true)}{$wa_theme_url|substr:1}{$theme_settings.logo}?v{$wa_theme_version}"}
+				<meta itemprop="image" content="{$_absolute_thumb_uri|escape}">
+			{/if}
+		{/if}
+		{$content}
+		{* Popup wrappers *}
+		<div class="b-popup b-popup_fast mfp-hide mfp-with-anim" id="quickview-popup">
+			<div class="b-popup__inner">
+				<div class="b-fastview">
+				<div class="item-pg"></div>
+				</div>
+			</div>
+		</div>
+		<div class="b-popup b-popup_item-option mfp-with-anim mfp-hide" id="extend-purchase">
+			<div class="b-popup__inner">
+				<div class="b-popup-it-opt">
+					<div class="b-popup-it-opt__header">
+						<div class="b-popup-it-opt__title"></div>
+					</div>
+					<div class="b-popup-it-opt__content"></div>
+				</div>
+			</div>
+		</div>
+		<div class="b-popup b-popup_cart-2 b-popup_compare" id="compare-popup" data-ttl="5">
+			<div class="b-popup__inner">
+				<div class="popup-compare">
+					<div class="popup-compare__inner">
+						<div class="popup-compare__icon">
+							<svg class="icon" width="24" height="17">
+								<use xlink:href="#icon-tick-big"></use>
+							</svg>
+						</div>
+						<a class="popup-compare__image js-compare-popup-productlink" href="#">
+							<img src="#" class="js-compare-popup-productimg" alt="">
+						</a>
+						<div class="popup-compare__info">
+							<a class="popup-compare__item-title js-compare-popup-productlink js-compare-popup-productname" href="#"></a>
+						</div>
+						<a href="#" class="popup-compare__btn btn {$theme_settings.main_buttons_style|replace:'img/themebuttons/':''|replace:'.gif':''} btn_main-3 js-compare-link">
+							<span>[`compare products`] <strong class="compare-popup-count">(0)</strong></span>
+						</a>
+						<button class="popup-compare__close-btn close-x default-btn">
+							<svg class="icon cent-icon" width="8" height="8">
+								<use xlink:href="#arrow-x"></use>
+							</svg>
+						</button>
+					</div>
+				</div>
+			</div>
+		</div>
+		{if $theme_settings.products_added_popup_design eq "center"}
+			<div class="b-popup b-popup_cart-1 mfp-with-anim auto-popup mfp-hide" id="added-to-cart">
+				<div class="b-popup__inner">
+					<div class="b-popup-cart b-popup-cart_1">
+						<div class="b-popup-cart__inner">
+							<div class="b-popup-cart__head">
+								<svg class="icon" width="24" height="17">
+									<use xlink:href="#icon-tick-big"></use>
+								</svg>
+								<div class="b-popup-cart__head-text">[`Product has been added to your shopping cart`]</div>
+							</div>
+							<div class="b-popup-cart__content">
+								<div class="b-popup-cart__main-content">
+									<div class="b-popup-cart__image">
+										<img src="#" alt="">
+									</div>
+									<div class="b-popup-cart__info">
+										<span class="b-popup-cart__item-title js-item__title"></span>
+										<div class="b-popup-cart__qty grey js-item__quantity">[`Quantity`]: <span>1</span></div>
+									</div>
+									<div class="b-popup-cart__price">
+										<div class="b-popup-cart__price-old grey"></div>
+										<div class="b-popup-cart__price-new"></div>
+										{*
+										<div class="b-popup-cart__label">
+											<span class="label" style="background-color:#ffe500;">[`Saving`] <b class="js-item__saving-value"></b></span>
+										</div>
+										*}
+									</div>
+								</div>
+								<div class="b-popup-cart__buttons">
+									<a class="b-popup-cart__btn-continue btn {$theme_settings.main_buttons_style|replace:'img/themebuttons/':''|replace:'.gif':''} btn_sec-4" href="#"><span>[`Continue shopping`]</span></a>
+									<a class="b-popup-cart__btn-go-cart btn {$theme_settings.main_buttons_style|replace:'img/themebuttons/':''|replace:'.gif':''} btn_main-2" href="{if method_exists($wa->shop, 'checkout')}{$wa->shop->checkout()->cartUrl()}{else}{$wa->getUrl('shop/frontend/cart')}{/if}"><span>[`Go to shopping cart`]</span></a>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		{elseif $theme_settings.products_added_popup_design eq "top"}
+			<div class="b-popup b-popup_cart-2" id="added-to-cart">
+				<div class="b-popup__inner">
+					<div class="b-popup-cart b-popup-cart_2">
+						<div class="b-popup-cart__inner">
+							<div class="b-popup-cart__close-btn">[`Close window`]</div>
+							<div class="b-popup-cart__head">
+								<svg class="icon" width="24" height="17">
+									<use xlink:href="#icon-tick-big"></use>
+								</svg>
+								<div class="b-popup-cart__notif grey">({"[`Window will close in %s sec`]"|replace:'%s':'<span class="countdown grey" data-ttl="5"></span>'})</div>
+							</div>
+							<div class="b-popup-cart__content">
+								<div class="b-popup-cart__main-content mb-hide">
+									<div class="b-popup-cart__image">
+										<img src="#" alt="">
+									</div>
+									<div class="b-popup-cart__info">
+										<div class="b-popup-cart__item-title js-item__title"></div>
+										<div class="b-popup-cart__qty grey js-item__quantity">[`Quantity`]: <span>1</span></div>
+									</div>
+									<div class="b-popup-cart__price">
+										<div class="b-popup-cart__price-old grey"></div>
+										<div class="b-popup-cart__price-new"></div>
+										{*<div class="b-popup-cart__label"><span class="label" style="background-color:#ffe500;">[`Saving`] <b class="js-item__saving-value"></b></span></div>*}
+									</div>
+								</div>
+								<div class="b-popup-cart__buttons">
+									<a class="b-popup-cart__btn-go-cart btn {$theme_settings.main_buttons_style|replace:'img/themebuttons/':''|replace:'.gif':''} btn_main-2" href="{if method_exists($wa->shop, 'checkout')}{$wa->shop->checkout()->cartUrl()}{else}{$wa->getUrl('shop/frontend/cart')}{/if}"><span>[`Go to shopping cart`]</span></a>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		{/if}
+	</div>
+</div>
+{/strip}

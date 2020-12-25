@@ -1,0 +1,17 @@
+
+<h1>Шаблоны сообщений</h1>
+
+<table class="zebra">
+{foreach $list as $k => $v}
+<tr>
+    <td> <label><input type="radio" name="template_id" value="{$v.id}"> {$v.name} </label></td>
+</tr>
+{foreachelse}
+<tr>
+    <td>Шаблоны отсутствуют, <a href="?action=plugins#/wtsp">создайте новый шаблон</a></td>
+</tr>
+{/foreach}
+</table>
+<input type="hidden" name="order_id" value="{$order_id}">
+
+<br><br>

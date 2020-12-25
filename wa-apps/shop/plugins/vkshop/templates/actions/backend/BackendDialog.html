@@ -1,0 +1,77 @@
+<div>
+    <div id="s-plugin-vkshop-post-wrapper" class="dialog-content">
+        <div id="s-plugin-vkshop-cropimage-wrapper">
+            <ul id="s-plugin-vkshop-image-list">
+                {foreach $images as $image}
+                    <li style="margin: 0 0.5em 0 0.5em;">
+                        <img src="{$image.url_crop}"/>
+                    </li>
+                {/foreach}
+            </ul>
+        </div>
+        <div id="s-plugin-vkshop-cropimage-description">
+            <h3>[`Product description`]</h3>
+            <textarea>{$caption|escape}</textarea>
+        </div>
+        <div class="clear-both"></div>
+        <div class="field" id="s-plugin-vkshop-vk-name">
+            <div class="name">[`Product name`]</div>
+            <div class="value">
+                <input type="text" value="{strip_tags($product.name|escape)}"/>
+            </div>
+        </div>
+        <div class="field" id="s-plugin-vkshop-vk-price">
+            <div class="name">[`Product price`]</div>
+            <div class="value">
+                {if $settings.convert_currency}
+                    <input type="text"
+                           value="{round(shop_currency($product.price, $product.currency, $settings.currency, false))}"/>
+                {else}
+                    <input type="text" value="{round($product.price)}"/>
+                {/if}
+            </div>
+        </div>
+        <div class="field">
+            <div class="name">[`Select VK group`]</div>
+            <div class="value">
+                {if isset($groups) && !empty($groups)}
+                    <select id="s-plugin-vkshop-vk-group_id" onchange="$.Vkshop.groupselect(this);">
+                        {foreach $groups as $group}
+                            <option value="{$group.id}">
+                                {$group.group_name}
+                            </option>
+                        {/foreach}
+                    </select>
+                {else}
+                    <span style="color: red;">[`No groups defined in the plugin settings`]</span>
+                {/if}
+            </div>
+        </div>
+        <div class="field" id="s-plugin-vkshop-vk-album">
+            <div class="name">[`VK Album`]</div>
+            <div class="value" id="vkshop-albums">
+                {include file="./albums.html" inline}
+            </div>
+        </div>
+        <div class="field" id="s-plugin-vkshop-vk-cat">
+            <div class="name">[`Select VK category`]</div>
+            <div class="value">
+                {shopVkshopPluginViewHelper::getVkCatsHtml('config')}
+            </div>
+        </div>
+        <div class="field" id="s-plugin-vkshop-vk-new-album">
+            <div class="name">[`Create new VK Album`]</div>
+            <div class="value">
+                <input type="text"/>
+                <br>
+                <span class="hint">[`If this field is not empty, the new album will be created with the specified name, and the goods will be placed in it.`]</span>
+            </div>
+        </div>
+    </div>
+    <div id="s-plugin-vkshop-cropimage-actions" class="dialog-buttons">
+        <button type="button" class="button green">[`Share`]</button>
+        <button type="button" class="cancel button">[`Cancel`]</button>
+        <span id="s-plugin-vkshop-posting-in-process" style="display: none"><i class="icon16 loading"></i>[`Posting...`]</span>
+        <span id="s-plugin-vkshop-error" style="color: red"></span>
+    </div>
+</div>

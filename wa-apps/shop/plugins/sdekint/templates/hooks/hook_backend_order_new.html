@@ -1,0 +1,456 @@
+<script type="text/javascript">
+    $(function () {
+        if (!$("link[href='{$wa_app_static_url}plugins/sdekint/css/hook_backend_order_new.css']").length)
+            $('<link href="{$wa_app_static_url}plugins/sdekint/css/hook_backend_order_new.css" rel="stylesheet" />')
+                    .appendTo("head");
+
+        $.when(
+                $.getScript('{$wa_app_static_url}plugins/sdekint/js/sugar.min.js'),
+                $.Deferred(function (deferred) {
+                    if ($.fn.dependsOn) {
+                        deferred.resolve()
+                    } else {
+                        $.getScript(
+                                '{$wa_app_static_url}plugins/sdekint/js/dependsOn-1.0.2.{if !$wa->debug()}min.{/if}js',
+                                deferred.resolve
+                        )
+                    }
+                }),
+                $.Deferred(function (deferred) {
+                    if ((typeof SdekintOrder) !== 'undefined') {
+                        deferred.resolve()
+                    } else {
+                        $.getScript(
+                                '{$wa_app_static_url}plugins/sdekint/js/sdekint_backend_order.{if !$wa->debug()}min.{/if}js',
+                                deferred.resolve
+                        )
+                    }
+                })
+        ).done(function () {
+                    SdekintOrder.init({
+                        is_debug: {if $wa->debug()}true{else}false{/if},
+                        stocks: {$stocks|json_encode},
+                        sdek_city_id: {if $cities && count($cities)==1}{$cities[0]['sdek_id']}{else}0{/if},
+                        sdek_dispatch_number: {if isset($order['params']['sdekint_plugin.dispatch_number'])}{$order['params']['sdekint_plugin.dispatch_number']}{else}null{/if}
+                    });
+                });
+    })
+</script>
+
+{if !empty($order.params.shipping_plugin) && ($order.params.shipping_plugin == 'sydsek') && !empty($order.params.shipping_rate_id) && (substr($order.params.shipping_rate_id,0,7) !== 'TO_DOOR')}
+    {* Скоро мы будем сразу выбирать тот ПВЗ, который выбран пользователем (при использовании плагина доставки sydsek) *}
+{else}
+{/if}
+<div id="sdekint-info-wrapper" style="display: none">
+    <div id="sdekint-info">
+        <h2 class="title">СДЭК</h2>
+        {if $stockupdate}
+            {$notupdated = "-2 days"|strtotime}
+            {if $notupdated > $stockupdate}
+                <div style="background-color: mistyrose;border: 1px solid firebrick; padding: 5px; margin: 5px 0;color: firebrick">
+                    Список пунктов выдачи не обновлялся уже давно, больше суток! Проверьте, настроено-ли выполнение
+                    обновления списка по расписанию cron!
+                    Посмотрите <a href="?action=plugins#/sdekint/">настройки плагина</a>, там есть пример настроек cron!
+                </div>
+            {/if}
+        {/if}
+        <img src="/wa-apps/shop/plugins/sdekint/img/sdek-logo-long-sm.png" alt="Логотип СДЭК"
+             id="s-plugin-sdekint-sdek-logo">
+
+        <form action="">
+
+            <input type="hidden" name="delivery_request[delivery][order_id]" value="{$order.id}">
+
+            <div class="fields" style="width: 100%">
+                <fieldset class="field-group">
+                    <legend>Отправка</legend>
+                    <div class="long inline field">
+                        <label for="s-plugin-sdekint-send-city-input" class="name">Город отправки</label>
+                        <input type="text" id="s-plugin-sdekint-send-city-input" class="long" value="{$from_city.name|escape}">
+                        <div class="hint"{if !$wa->debug()} style="display: none"{/if}>(СДЭК ID города:
+                            <input type="text" name="delivery_request[sending][from_city_code]"
+                                   id="s-plugin-sdekint-send-city-id" class="short" readonly
+                                   value="{$from_city.id}">)</div>
+                        <span class="error-message errormsg"></span>
+                    </div>
+                    <div class="inline field">
+                        <label for="s-plugin-sdekint-send-type-select" class="name">Тип отправки</label>
+                        {html_options
+                        name="delivery_request[sending][delivery_type]"
+                        options=['from-door'=>'От двери', "from-stock"=>'От склада']
+                        id='s-plugin-sdekint-send-type-select'
+                        }
+                    </div>
+                    <div class="clear-both"></div>
+                </fieldset>
+
+                <fieldset class="field-group">
+                    <legend>Доставка</legend>
+                    <div class="long inline field">
+                        <label class="name" for="s-plugin-sdekint-rec-city-input">Город доставки</label>
+                        <input type="text" id="s-plugin-sdekint-rec-city-input" class="long"
+                               {if $cities && count($cities)==1}value="{$cities[0]['name']|escape}"{/if}>
+
+                        <div class="hint"{if !$wa->debug()} style="display: none"{/if}>(СДЭК ID города:
+                            <input type="text" name="delivery_request[delivery][to_city_code]"
+                                   id="s-plugin-sdekint-rec-city-id" class="short" readonly
+                                   {if $cities && count($cities)==1}value="{$cities[0]['sdek_id']}"{/if}>)
+                        </div>
+                        <span class="error-message errormsg"></span>
+                        <div class="info-message"></div>
+                    </div>
+                    <div class="inline field">
+                        <label for="s-plugin-sdekint-delivery-type-select" class="name">Тип доставки</label>
+                        {html_options
+                        name="delivery_request[delivery][delivery_type]"
+                        options=['to-door'=>'До двери', "to-stock"=>'В пункт выдачи', 'to-postomat'=>'В постомат']
+                        id='s-plugin-sdekint-delivery-type-select'
+                        }
+                    </div>
+                    <div class="clear-both"></div>
+                    <div id="s-plugin-sdekint-to-door-addr">
+                        <div class="long inline field">
+                            <label for="s-plugin-sdekint-to-door-addr-street" class="name">Улица</label>
+                            <input type="text" name="delivery_request[delivery][address][street]" class="long"
+                                   id="s-plugin-sdekint-to-door-addr-street">
+                            <span class="error-message errormsg inline"></span>
+                        </div>
+                        <div class="short inline field">
+                            <label for="s-plugin-sdekint-to-door-addr-house" class="name">Дом</label>
+                            <input type="text" name="delivery_request[delivery][address][house]" class="short"
+                                   id="s-plugin-sdekint-to-door-addr-house">
+                            <span class="error-message errormsg inline"></span>
+                        </div>
+                        <div class="short inline field">
+                            <label for="s-plugin-sdekint-to-door-addr-flat" class="name">Квартира</label>
+                            <input type="text" name="delivery_request[delivery][address][flat]" class="short"
+                                   id="s-plugin-sdekint-to-door-addr-flat">
+                            <span class="error-message errormsg inline"></span>
+                        </div>
+                        <div class="clear-both"></div>
+                    </div>
+
+                    <div id="s-plugin-sdekint-to-stock-addr">
+                        <div class="block field">
+                            <label for="s-plugin-sdekint-sdek-stock-select" class="name">Пункт выдачи</label>
+                            <select name="delivery_request[delivery][address][stock_id]"
+                                    id="s-plugin-sdekint-sdek-stock-select"></select>
+                                <span class="loading" style="display: none"><i
+                                            class="icon16 loading"></i> Загрузка...</span>
+                            <div id="s-plugin-sdekint-stock-info"></div>
+                        </div>
+                    </div>
+
+                    <div id="s-plugin-sdekint-to-postomat-addr">
+                        <div class="block field">
+                            <label for="s-plugin-sdekint-sdek-postomat-select" class="name">Постомат</label>
+                            <select name="delivery_request[delivery][address][postomat_id]"
+                                    id="s-plugin-sdekint-sdek-postomat-select"></select>
+                                <span class="loading" style="display: none"><i
+                                            class="icon16 loading"></i> Загрузка...</span>
+                            <div id="s-plugin-sdekint-postomat-info"></div>
+                        </div>
+                    </div>
+
+                </fieldset>
+
+                <fieldset class="field-group" id="s-plugin-sdekint-contact-container">
+                    <legend>Получатель <a href="javascript:void(0);"><i class="icon16 rarr"></i></a></legend>
+                    <div id="s-plugin-sdekint-contact" style="display: none">
+                        <div class="long inline field">
+                            <label class="name">ФИО</label>
+                            <input type="text" name="delivery_request[order][contact][name]"
+                                   class="long"{if $order.contact.name} value="{$order.contact.name}"{/if}
+                                    id="s-plugin-sdekint-contact-name-input"
+                                    >
+                        </div>
+                        <div class="inline field">
+                            <label class="name">Телефон</label>
+                            <input name="delivery_request[order][contact][phone]"
+                                   type="tel" {if $order.contact.phone} value="{$order.contact.phone}"{/if}
+                                   id="s-plugin-sdekint-contact-phone-input"
+                                    >
+                        </div>
+                        <div class="inline field">
+                            <label class="name">E-mail</label>
+                            <input type="email"
+                                   name="delivery_request[order][contact][email]" {if $order.contact.name} value="{$order.contact.email}"{/if}
+                                   id="s-plugin-sdekint-contact-email-input"
+                                    >
+                        </div>
+                    </div>
+                </fieldset>
+
+                <fieldset class="field-group" id="s-plugin-sdekint-package-params">
+                    <legend>Отправление</legend>
+                        <table class="zebra single-lined full-width bottom-bordered"
+                               id="s-plugin-sdekint-packages-table">
+                            <caption>Упаковка</caption>
+                            <thead>
+                            <tr>
+                                <th>Номер</th>
+                                <th>Штрихкод</th>
+                                <th>Длина</th>
+                                <th>Ширина</th>
+                                <th>Высота</th>
+                                <th>Вес</th>
+                                <th>&nbsp;</th>
+                            </tr>
+                            </thead>
+                            <tfoot>
+                            <tr>
+                                <td colspan="2"><a href="javascript:void(0)" id="s-plugin-sdekint-add-package-btn"><i
+                                                class="icon16 add"></i> Добавить</a></td>
+                                <td colspan="5"></td>
+                            </tr>
+                            </tfoot>
+                            <tbody>
+                            {$order_weight =0}
+                            {foreach $sdek_order.items as $item}{$order_weight = $order_weight+$item.weight*$item.quantity}{/foreach}
+                            {if $order_weight < 0.1}{$order_weight=0.1}{/if}
+                            <tr class="s-plugin-sdekint-package">
+                                <td>
+                                    <input type="text"
+                                           class="full-width s-plugin-sdekint-package-number-input" placeholder="Номер"
+                                           value="1"
+                                           data-package-property-type="number"
+                                           data-package-property="number"
+                                           required
+                                           id="s-plugin-sdekint-package-number-input-1">
+                                </td>
+                                <td>
+                                    <input type="text"
+                                           data-package-property-type="number"
+                                           data-package-property="barcode"
+                                           class="full-width" placeholder="если нужно">
+                                </td>
+                                <td>
+                                    <input type="text"
+                                           class="short numerical" placeholder="Длина"
+                                           {if $order_weight <= 0.5}value="10" {/if} data-package-property="length"
+                                           data-package-property-type="number"
+                                           required
+                                           data-package-dimension="1">
+                                </td>
+                                <td>
+                                    <input type="text"
+                                           class="short numerical" placeholder="Ширина"
+                                           {if $order_weight <= 0.5}value="10" {/if} data-package-property="width"
+                                           data-package-property-type="number"
+                                           required
+                                           data-package-dimension="1">
+                                </td>
+                                <td>
+                                    <input type="text"
+                                           class="short numerical" placeholder="Высота"
+                                           {if $order_weight <= 0.5}value="10" {/if} data-package-property="height"
+                                           data-package-property-type="number"
+                                           required
+                                           data-package-dimension="1">
+                                </td>
+                                <td>
+                                    <input type="text"
+                                           id="s-plugin-sdekint-order-weight"
+                                           required
+                                           class="short numerical weight" placeholder="Вес"
+                                           value="{$order_weight|replace:',':'.'}" data-package-property="weight"
+                                           data-package-property-type="number"
+                                           data-package-dimension="1">
+                                    {*<span*}
+                                    {*class="error-message errormsg inline"></span>*}
+                                    {*<br><span class="hint">Вес <b>в килограммах</b></span>*}
+                                </td>
+                                <td class="min-width actions"><a href="javascript:void(0)"
+                                                                 class="action delete"><i
+                                                class="icon16 delete"></i></a></td>
+                            </tr>
+                            </tbody>
+                    </table>
+                    <div id="s-plugin-sdekint-package-messages"></div>
+                </fieldset>
+                <fieldset class="field-group" id="s-plugin-sdekint-ordered-items-container">
+                    <legend>Состав отправления <a href="javascript:void(0);"><i class="icon16 rarr"></i></a></legend>
+                    <div id="s-plugin-sdekint-ordered-items" style="display: none">
+
+                        <ul id="s-plugin-sdekint-ordered-items-toolbar" class="s-plugin-sdekint-btn-group">
+                            <li><a href="javascript:void(0)" id="s-plugin-sdekint-items-reduce-btn" class="btn action merge"><i class="icon16 merge"></i></a></li>
+                            <li><a href="javascript:void(0)" class="btn action add" id="s-plugin-sdekint-items-add-btn"><i class="icon16 add"></i></a></li>
+                        </ul>
+                        <table class="zebra single-lined full-width bottom-bordered">
+                            <thead>
+                            <tr>
+                                <th class="small">Упаковка</th>
+                                <th>Артикул</th>
+                                <th>Наименование</th>
+                                <th>Количество</th>
+                                <th class="small">Вес 1 шт. (кг.)</th>
+                                <th>Цена</th>
+                                <th>С покупателя</th>
+                                <th class="min-width"></th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            {foreach $sdek_order.items as $oitem}
+                                <tr class="s-plugin-sdekint-ordered-item">
+                                    <td>
+                                        <select name="delivery_request[order][items][{$oitem@index}][package]" id=""
+                                                class="s-plugin-sdekint-ordered-item-package-select"
+                                                data-item-property-type="selected-number"
+                                                data-item-property="package"
+                                                >
+                                            <option value="1" selected>1</option>
+                                        </select>
+                                    </td>
+                                    <td><input type="text" name="delivery_request[order][items][{$oitem@index}][sku]"
+                                               data-item-property-type="string"
+                                               data-item-property="sku"
+                                               value="{$oitem.sku}" style="width:100%" class="sku_code"
+                                               data-index-template="delivery_request[order][items][%index%][sku]">
+                                    </td>
+                                    <td><input type="text" name="delivery_request[order][items][{$oitem@index}][name]"
+                                               value="{$oitem.name}" style="width:100%" class="name"
+                                               data-item-property-type="string"
+                                               data-item-property="name"
+                                               data-index-template="delivery_request[order][items][%index%][name]">
+                                    </td>
+                                    <td class="min-width"><input type="text"
+                                                                 name="delivery_request[order][items][{$oitem@index}][quantity]"
+                                                                 value="{$oitem.quantity}"
+                                                                 class="short align-right quantity numerical" min="1" step="1"
+                                                                 data-item-property-type="number"
+                                                                 data-item-property="quantity"
+                                                                 data-index-template="delivery_request[order][items][%index%][quantity]">
+                                    </td>
+                                    <td class="min-width"><input type="text"
+                                                                 name="delivery_request[order][items][{$oitem@index}][weight]"
+                                                                 value="{$oitem.weight}"
+                                                                 class="short align-right weight"
+                                                                 data-item-property-type="number"
+                                                                 data-item-property="weight"
+                                                                 data-index-template="delivery_request[order][items][%index%][weight]">
+                                    </td>
+                                    <td class="min-width"><input type="text"
+                                                                 name="delivery_request[order][items][{$oitem@index}][price]"
+                                                                 value="{$oitem.price|shop_currency:$order.currency:'RUB':false}"
+                                                                 class="short align-right price"
+                                                                 data-item-property-type="number"
+                                                                 data-item-property="price"
+                                                                 data-index-template="delivery_request[order][items][%index%][price]">
+                                    </td>
+                                    <td class="min-width"><input type="text"
+                                                                 name="delivery_request[order][items][{$oitem@index}][cost]"
+                                                                 value="{$oitem.cost|shop_currency:$order.currency:'RUB':false}"
+                                                                 class="short align-right cod"
+                                                                 data-item-property-type="number"
+                                                                 data-item-property="cost"
+                                                                 data-index-template="delivery_request[order][items][%index%][cost]">
+                                    </td>
+                                    <td class="min-width actions"><a href="javascript:void(0)" class="action delete"><i
+                                                    class="icon16 delete"></i></a></td>
+                                </tr>
+                            {/foreach}
+                            </tbody>
+                        </table>
+                    </div>
+                </fieldset>
+                <div class="field-group">
+                    <div class="field">
+                        <div class="name">Тариф</div>
+                        <div class="value">
+                            <select name="delivery_request[delivery][tariff_id]" id="s-plugin-sdekint-tariff-select">
+                                {foreach $tariffs as $tariff}
+                                    <option value="{$tariff.id}"
+                                            data-desc="{$tariff.description|escape}">{$tariff.name|escape}</option>
+                                {/foreach}
+                            </select>
+                            <span class="loading" style="display: none"><i
+                                        class="icon16 loading"></i> Загрузка...</span>
+                            <span class="error" style="display: none"></span>
+                        </div>
+                    </div>
+                    <div class="field">
+                        <div class="name">Дополнительные услуги</div>
+                        <div class="value">
+                            <span class="s-plugin-sdekint-services" id="s-plugin-sdekint-service-3"
+                                    {if isset($default.services[3]) && $default.services[3]}{else}
+                                        style="opacity: 0.3; text-decoration: line-through"{/if} data-service-id="3" title="Доставка в выходной день"
+                                    ><i class="icon16 {if isset($default.services[3]) && $default.services[3]}yes{else}no-bw{/if}"></i>Доставка в выходной день</span>
+                            <span class="s-plugin-sdekint-services" id="s-plugin-sdekint-service-30"
+                                    {if isset($default.services[30]) && $default.services[30]}{else}
+                                        style="opacity: 0.3; text-decoration: line-through"{/if} data-service-id="30" title="Примерка на дому"
+                                    ><i class="icon16 {if isset($default.services[30]) && $default.services[30]}yes{else}no-bw{/if}"></i>Примерка на дому</span>
+                            <span class="s-plugin-sdekint-services" id="s-plugin-sdekint-service-36"
+                                    {if isset($default.services[36]) && $default.services[36]}{else}
+                                        style="opacity: 0.3; text-decoration: line-through"{/if} data-service-id="36" title="Частичная доставка"
+                                    ><i class="icon16 {if isset($default.services[36]) && $default.services[36]}yes{else}no-bw{/if}"></i>Частичная доставка</span>
+                            <span class="s-plugin-sdekint-services" id="s-plugin-sdekint-service-37"
+                                    {if isset($default.services[37]) && $default.services[37]}{else}
+                                        style="opacity: 0.3; text-decoration: line-through"{/if} data-service-id="37" title="Осмотр вложения"
+                                    ><i class="icon16 {if isset($default.services[37]) && $default.services[37]}yes{else}no-bw{/if}"></i>Осмотр вложения</span>
+                            {*<a href="javascript:void(0)" class="small inline-link"
+                               id="s-plugin-sdekint-choose-services-lnk"><b><i class="icon10 darr"></i><i>Изменить</i></b></a>*}
+                            <div id="s-plugin-sdekint-services-container">
+                                <label><input type="checkbox" name="delivery_request[delivery][services][]"
+                                              {if isset($default.services[3]) && $default.services[3]}checked{/if}
+                                              value="3">Доставка в выходной день
+                                </label>
+                                <label><input type="checkbox" name="delivery_request[delivery][services][]"
+                                              {if isset($default.services[30]) && $default.services[30]}checked{/if}
+                                              value="30">Примерка на дому
+                                </label>
+                                <label><input type="checkbox" name="delivery_request[delivery][services][]"
+                                              {if isset($default.services[36]) && $default.services[36]}checked{/if}
+                                              value="36">Частичная доставка
+                                </label>
+                                <label><input type="checkbox" name="delivery_request[delivery][services][]"
+                                              {if isset($default.services[37]) && $default.services[37]}checked{/if}
+                                              value="37">Осмотр вложения
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="field">
+                        <div class="name">Комментарий к заказу</div>
+                        <div class="value">
+                            <textarea name="delivery_request[delivery][comment]" maxlength="255"></textarea>
+                        </div>
+                    </div>
+                </div>
+                <div class="field-group">
+                    <div id="s-plugin-sdekint-form-submit">
+                        <button type="submit" class="button green">Отправить</button>
+                        <button type="button" class="button cancel">Отмена</button>
+                        <span id="s-plugin-sdekint-form-result"></span>
+                    </div>
+                </div>
+            </div>
+            <div class="clear-all"></div>
+        </form>
+        {if $wa->debug()}
+            <i class="icon16 bug"></i>
+            <a href="#" class="inline-link" id="show_var_dump"><b><i>var_dump</i></b><i class="icon10 darr"></i></a>
+            <div style="display: none;padding-top: 1em" id="s-plugin-sdekint-order-var_dump">
+                <h3>Non-existent and existing properties</h3>
+                Isset: {if empty($order.params.shopping_plugin)}Empty{/if}<br>
+                Exists: {$order.params.shipping_plugin}
+                <h3>$order_params</h3>
+                {$order_params|var_dump}
+                <hr>
+                {$default|var_dump}
+                {$order|var_dump}
+            </div>
+        {/if}
+    </div>
+</div>
+<script id="s-plugin-sdekint-point-info-template" type="text/html">
+    {literal}
+        {% if (o.address) { %}<b>Адрес: </b>{%#o.address%}{% } %}
+        {% if (o.phone) { %}<br><b>Телефон(ы): </b>{%#o.phone%}{% } %}
+        {% if (o.work_time) { %}<br><b>Время работы: </b>{%#o.work_time%}{% } %}
+        {% if ((o.min_weight != null) || (o.max_weight != null)) { %}<br><b>Допустимый вес: </b>
+        {% if (o.min_weight != null) { %} от {%#o.min_weight%}кг.{% } %}
+        {% if (o.max_weight != null) { %} до {%#o.max_weight%}кг.{% } %}
+        {% } %}
+        {% if (o.note) { %}<br><b>Примечание: </b>{%#o.note%}{% } %}
+    {/literal}
+</script>

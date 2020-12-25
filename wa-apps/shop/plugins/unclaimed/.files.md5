@@ -1,0 +1,8 @@
+bfed15299266ec37af6eaf091ae5575b *img/logo.png
+2de357c5293b53ba534825b4e8a0f513 *img/unclaimed.png
+a1751e1f10a3b96b05d0401c97e72008 *lib/.htaccess
+be48c5059ed957eed8675e117ae9805c *lib/config/plugin.php
+8da1865fa6c673c6164224df86ae0671 *lib/config/settings.php
+f640c6cd69400042305bdbbb459ba25c *lib/shopUnclaimedPlugin.class.php
+a1751e1f10a3b96b05d0401c97e72008 *templates/.htaccess
+666543c3a19dd4cf1789153358ecb01c *templates/hooks/backend_products.sidebar_top_li.html

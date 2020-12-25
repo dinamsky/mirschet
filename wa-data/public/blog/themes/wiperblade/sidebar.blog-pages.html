@@ -1,0 +1,32 @@
+{strip}
+<div class="info-sdb__wr info-sdb__wr_bd">
+	<div class="info-sdb__header info-sdb__header_btn">
+		<svg class="icon" width="16" height="10">
+			<use xlink:href="#icon-blog-menu"></use>
+		</svg>
+		<strong>[`Information`]</strong>
+	</div>
+	<div class="info-sdb__content">
+		<ul class="info-sdb__list">
+			{foreach $_blogs_pages as $p}
+				<li class="info-sdb__item{if strlen($p.url)>1 && $wa->currentUrl()|strstr:$p.url} active{/if}">
+					<a class="info-sdb__item-l" href="{$p.url}">{$p.name}</a>
+					{if !empty($p.childs) && strlen($p.url)>1 && $wa->currentUrl()|strstr:$p.url}
+						<ul class="info-sdb__list">
+							{foreach $p.childs as $sp}
+								<li class="info-sdb__item">
+									{if strlen($sp.url)>1 && $wa->currentUrl()|strstr:$sp.url}
+										<strong class="info-sdb__item-l">{$sp.name}</strong>
+									{else}
+										<a class="info-sdb__item-l" href="{$sp.url}">{$sp.name}</a>
+									{/if}
+								</li>
+							{/foreach}
+						</ul>
+					{/if}
+				</li>
+			{/foreach}
+		</ul>
+	</div>
+</div>
+{/strip}

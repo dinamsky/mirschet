@@ -1,0 +1,36 @@
+<a id="vkshop_disable" href="javascript:void(0)" title="[`Disable/Undisable`]">
+    <i class="vkshop_disable{if !$disabled}-undisabled{/if}"></i>
+</a>
+
+<script type="text/javascript">
+    $(function () {
+        if (!$("link#s-plugin-vkshop-stylesheet").length)
+            $('<link href="{$wa_app_static_url}plugins/vkshop/css/vkshop.css?_=' + Date.now() + '" rel="stylesheet" id="s-plugin-vkshop-stylesheet">')
+                    .appendTo("head");
+        $.when(
+                $.Deferred(function (deferred) {
+                    if ($.Vkshop) deferred.resolve();
+                    else {
+                        $.shop.trace('Loading vkshop.js', []);
+                        $.getScript('{$wa_app_static_url}plugins/vkshop/js/vkshop.{if !$wa->debug()}min.{/if}js', deferred.resolve)
+                    }
+                })
+        ).done(function () {
+                    window.setTimeout(function () {
+                        "use strict";
+                        var a = $('#vkshop_disable').click(function () {
+                            var i = a.children('i').toggleClass('vkshop_disable').toggleClass('vkshop_disable-undisabled');
+                            var disable = i.hasClass('vkshop_disable') ? 1 : 0;
+                            $.post('?plugin=vkshop&action=disable', {
+                                disable: disable,
+                                id: '{$product_id}'
+                            }, function (r) {
+                                //$('#hidden- .count').text(r.data);
+                            }, 'json');
+                        });
+                    }, 0);
+                    $.Vkshop.product = {$vkshop_product};
+                    $.shop.trace('$.Vkshop initialized', []);
+                });
+    });
+</script>

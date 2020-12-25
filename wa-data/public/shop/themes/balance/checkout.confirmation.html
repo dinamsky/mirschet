@@ -1,0 +1,140 @@
+{strip}
+{if !empty($error)}
+	{include file="checkout.error.html" inline}
+{else}
+	<form method="post" action="">
+		<div class="checkout-pg__main">
+			<div class="check-confirm">
+				<div class="check-confirm__top">
+					<div class="check-confirm__inner">
+						<h1 class="check-confirm__top-title bold u-cen-txt">{$checkout_steps[$checkout_current_step].name|escape}</h1>
+						<ul class="check-confirm__top-list">
+							<li class="check-confirm__top-item">
+								<div class="order-info">
+									<ul class="order-info__list">
+										<li class="order-info__item order-info__item_heading">
+											<svg class="icon" width="20" height="23">
+												<use xlink:href="#icon-user"></use>
+											</svg>
+											<strong>[`Ship to`]</strong>
+										</li>
+										<li class="order-info__item">{$contact.name|escape}</li>
+										<li class="order-info__item">{$shipping_address.value}</li>
+									</ul>
+								</div>
+							</li>
+							{if $billing_address}
+								<li class="check-confirm__top-item">
+									<div class="order-info">
+										<ul class="order-info__list">
+											<li class="order-info__item order-info__item_heading">
+												<svg class="icon" width="20" height="23">
+													<use xlink:href="#icon-user"></use>
+												</svg>
+												<strong>[`Bill to`]</strong>
+											</li>
+											<li class="order-info__item">{$contact.name|escape}</li>
+											<li class="order-info__item">{$billing_address.value}</li>
+										</ul>
+									</div>
+								</li>
+							{/if}
+						</ul>
+					</div>
+				</div>
+				<div class="check-confirm__body">
+					<div class="acc-ord-details">
+						<div class="acc-ord-details__row acc-ord-details__row_header">
+							<div class="acc-ord-details__name acc-ord-details__name_head">[`Product`]</div>
+							<div class="acc-ord-details__total acc-ord-details__total_head">[`Total`]</div>
+							<div class="acc-ord-details__qty acc-ord-details__qty_head">[`Quantity`]</div>
+						</div>
+						{$_items = $wa->shop->cart->items()}
+						{foreach $_items as $item}
+							<div class="acc-ord-details__row">
+								{if !empty($item.product)}
+									<div class="acc-ord-details__image">
+										{$wa->shop->productImgHtml($item.product, '96x96', ['default' => "`$wa_parent_theme_url`img/dummy48.png"])}
+									</div>
+								{/if}
+								<div class="acc-ord-details__content">
+									<div class="acc-ord-details__inner-row">
+										<div class="acc-ord-details__name">
+											<span>{$item.name|escape}</span>
+										</div>
+										<div class="acc-ord-details__qty-total">
+											<div class="acc-ord-details__qty">{$item.quantity} x {shop_currency_html($item.price, $item.currency)}</div>
+											<div class="acc-ord-details__total"><span>=</span> {shop_currency_html($item.price * $item.quantity, $item.currency)}</div>
+										</div>
+									</div>
+									{if !empty($item.services)}
+										{foreach $item.services as $service}
+											<div class="acc-ord-details__inner-row acc-ord-details__inner-row_options">
+												<div class="acc-ord-details__name">+ {$service.name|escape}</div>
+												<div class="acc-ord-details__qty-total">
+													<div class="acc-ord-details__qty">{$service.quantity} x {shop_currency($service.price, $service.currency)}</div>
+													<div class="acc-ord-details__total"><span>=</span> {shop_currency($service.price * $service.quantity, $service.currency)}</div>
+												</div>
+											</div>
+										{/foreach}
+									{/if}
+								</div>
+							</div>
+						{/foreach}
+						<div class="acc-ord-details__row acc-ord-details__row_footer">
+							<div>[`Subtotal`]</div>
+							<div><span>{shop_currency_html($subtotal, true)}</span></div>
+						</div>
+						<div class="acc-ord-details__row acc-ord-details__row_footer">
+							<div>[`Discount`]</div>
+							<div>&minus; {shop_currency_html($discount, true)}</div>
+						</div>
+						<div class="acc-ord-details__row acc-ord-details__row_footer">
+							<div>[`Shipping`]{if !empty($params.shipping_name)} &mdash; <b> {$params.shipping_name}</b>{/if}</div>
+							<div>{shop_currency_html($shipping, true)}</div>
+						</div>
+						{if $tax > 0}
+							<div class="acc-ord-details__row acc-ord-details__row_footer">
+								<div>[`Tax`]</div>
+								<div>{shop_currency_html($tax, true)}</div>
+							</div>
+						{/if}
+						<div class="acc-ord-details__row acc-ord-details__row_footer">
+							<div><strong>[`Total`]</strong></div>
+							<div><strong>{shop_currency_html($total, true)}</strong></div>
+						</div>
+						<div class="input-field input-field_checkout-conf">
+							<label>
+								[`Comment`]
+								<textarea name="comment">{waRequest::post('comment', '', 'string')|escape}</textarea>
+							</label>
+						</div>
+						{if !empty($terms)}
+							{if waRequest::method() == 'post' && !$wa->post('terms')}
+								<div class="check-confirm__error errortxt font-13">[`You must read and agree to the Terms of service to place an order.`]</div>
+							{/if}
+						{/if}
+						<!-- plugin hook: 'frontend_checkout' -->
+						{* @event frontend_checkout.%plugin_id% *}
+						{foreach $frontend_checkout as $_}{$_}{/foreach}
+						<div class="check-confirm__submit">
+							{if !empty($terms)}
+								<label class="form-label">{sprintf('[`I have read and agree to the <a href="%s" target="_blank">Terms of service</a>`]', $wa->getUrl('/frontend/checkout', ['step' => 'confirmation'])|cat:'?terms=1')}
+									<input type="checkbox" name="terms" value="1" class="form-cust-inp">
+									<span class="form-stylized-option"></span>
+								</label>
+							{/if}
+							<button class="btn {$theme_settings.main_buttons_style|replace:'img/themebuttons/':''|replace:'.gif':''} btn_main-1" type="submit">
+								<div class="hover-anim"></div>
+								<span>[`Place order`]</span>
+							</button>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</form>
+{/if}
+{$wa->globals('useCompactHeader',true)}
+{$wa->globals('useCompactFooter',true)}
+{/strip}

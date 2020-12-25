@@ -1,0 +1,10 @@
+{if !empty($errors)}
+    <div>
+        <h3>[`Vkontakte errors`]</h3>
+        {foreach $errors as $error}
+            <p>
+                {$error['error']} : {$error['error_description']}
+            </p>
+        {/foreach}
+    </div>
+{/if}

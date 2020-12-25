@@ -1,0 +1,422 @@
+{strip}
+{if !$cart.count}
+	<div class="cart-pg" id="cart-content">
+		<div class="b-c-row b-c-row_cart">
+			<div class="col-main">
+				<div class="cart-pg__empty-cart">
+					<div class="acc-info-box">
+						<div class="acc-info-box__title">[`Your shopping cart is empty`]!</div>
+						<div class="acc-info-box__text">{sprintf("[`Sale, special offers and interesting goods review on %s home page %s help you right choice`]","<a href='$wa_app_url'>","</a>")}</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+{else}
+	<div class="cart-pg" id="cart-content">
+		<div class="layout-center">
+			<a class="cart-pg__to-back" href="{$wa_app_url}">
+				<svg class="icon" width="4" height="6">
+					<use xlink:href="#arrow-vert-menu"></use>
+				</svg>
+				<span>[`Back to the store`]</span>
+			</a>
+		</div>
+		<form method="post">
+			<div class="b-c-row b-c-row_cart">
+				<div class="col-main">
+					<div class="cart-pg__check-btn">
+						<button class="btn {$theme_settings.main_buttons_style|replace:'img/themebuttons/':''|replace:'.gif':''} btn_main-1 s-cart-submit" type="button">
+							<div class="hover-anim"></div>
+							<span>[`Proceed to checkout`]</span>
+						</button>
+					</div>
+					<div class="cart-list{if count($cart.items) > 5} cart-list_compact{/if}">
+						<ul class="cart-list__ul">
+							{$_theme_subtotal = 0}
+							{foreach $cart.items as $item}
+								<li class="cart-list__item">
+									<div class="cart-item cart-item-{$item.id}" data-id="{$item.id}">
+										<div class="cart-item__inner">
+											<a class="cart-item__image" href="{$wa->shop->productUrl($item.product)}">
+												{$wa->shop->productImgHtml($item.product, '96x96', ['default' => "`$wa_parent_theme_url`img/dummy96.png", 'alt' => $item.product.name|escape])}
+											</a>
+											<div class="cart-item__content">
+												<div class="cart-item__descr">
+													<div class="cart-item__name">
+														<a class="cart-item__name-text" href="{$wa->shop->productUrl($item.product)}">{$item.product.name|escape}</a>
+														{if $item.sku_name && $item.sku_name != $item.product.name}
+															<span class="cart-item__color">({$item.sku_name|escape})</span>
+														{/if}
+													</div>
+													{if !empty($item.services)}
+														<div class="cart-item__options">
+															{foreach $item.services as $service_id => $s}
+																<div class="cart-item__options-i"{if !empty($s.id)} data-id="{$s.id}"{/if}>
+																	<label>
+																		{$s.name|escape}{if $s.price && !isset($s.variants)} (<span>+{shop_currency_html($s.price, $s.currency)}</span>){/if}
+																		<input type="checkbox" name="services[{$item.id}][]" value="{$service_id}" {if !empty($s.id)}checked{/if}>
+																	</label>
+																	{if isset($s.variants)}
+																		<select name="service_variant[{$item.id}][{$service_id}]" class="service-variants" {if empty($s.id)}disabled{/if}>
+																			{foreach $s.variants as $variant_id => $v}
+																				<option {if $s.variant_id == $variant_id}selected{/if} value="{$variant_id}">{$v.name|escape} (+{shop_currency($v.price, $s.currency)})</option>
+																			{/foreach}
+																		</select>
+																	{else}
+																		<input type="hidden" name="service_variant[{$item.id}][{$service_id}]" value="{$s.variant_id}">
+																	{/if}
+																</div>
+															{/foreach}
+														</div>
+													{/if}
+												</div>
+												<div class="cart-item__price-actions">
+													<div class="cart-item__price">
+														{if $item.compare_price > 0}
+															<div class="cart-item__price-old">{shop_currency_html(($item.compare_price), true)}</div>
+														{/if}
+														<div class="cart-item__price-reg">{shop_currency_html($item.price, true)}</div>
+														{if $item.compare_price > $item.price}
+															<div class="cart-item__price-label">
+																<span class="label" style="background-color:#ffe500;">[`Saving`] {shop_currency_html(($item.compare_price - $item.price), true)}</span>
+															</div>
+														{/if}
+													</div>
+													<div class="cart-item__qty-clear">
+														<div class="cart-item__qty">
+															<div class="qty">
+																<div class="qty__inner">
+																	<button class="qty__btn qty__btn_decr default-btn" type="button">
+																		<svg class="icon" width="9" height="9">
+																			<use xlink:href="#icon-minus"></use>
+																		</svg>
+																	</button>
+																	<input class="qty__field{if !empty($item.error)} error{/if}" type="text" name="quantity[{$item.id}]" value="{$item.quantity}" />
+																	<button class="qty__btn qty__btn_incr default-btn" type="button">
+																		<svg class="icon" width="9" height="9">
+																			<use xlink:href="#icon-plus"></use>
+																		</svg>
+																	</button>
+																</div>
+															</div>
+														</div>
+														<a class="cart-item__clear" href="#">
+															<span class="close-x">
+																<svg class="icon cent-icon" width="8" height="8">
+																	<use xlink:href="#arrow-x"></use>
+																</svg>
+															</span>
+															<span class="cart-item__clear-text muted">[`remove`]</span>
+														</a>
+													</div>
+												</div>
+											</div>
+										</div>
+										{if $theme_settings.shop_cart_crossselling eq "many"}
+											{if $item@index < 4}
+												{$_exclude_ids = []}
+												{foreach $cart.items as $i}{$_exclude_ids[] = $i.product.id}{/foreach}
+												{$related = $wa->shop->crossSelling($item.product.id, 5, true, $_exclude_ids)}
+												{if $related}
+													<div class="cart-item__cross-slider">
+														<div class="items-slider">
+															<div class="items-slider__header">
+																<div class="items-slider__cart-header">
+																	<strong>[`Recommended!`]</strong> {sprintf('[`Customers who bought %s also bought`]', $item.product.name|escape)}:
+																</div>
+																<div class="items-slider__arrows-wr">
+																	<div class="items-slider__arrow">
+																		<button class="slider-ar slider-ar_square pos-rel default-btn items-slider__nav-left">
+																			<svg class="icon cent-icon" width="7" height="11">
+																				<use xlink:href="#arrow-left-small"></use>
+																			</svg>
+																		</button>
+																		<button class="slider-ar slider-ar_square pos-rel default-btn items-slider__nav-right">
+																			<svg class="icon cent-icon" width="7" height="11">
+																				<use xlink:href="#arrow-right-small"></use>
+																			</svg>
+																		</button>
+																	</div>
+																</div>
+															</div>
+															<div class="items-slider__body items-slider__body_cart-cross swiper-container">
+																<div class="items-slider__wrapper swiper-wrapper">
+																	{foreach $related as $p}
+																		{$available = $wa->shop->settings('ignore_stock_count') || $p.count === null || $p.count > 0}
+																		{if !empty($p.skus) && !empty($p.skus[$p.sku_id])}
+																			{$sku = $p.skus[$p.sku_id]}
+																			{if empty($sku.available) && (count($p.skus) === 1)}{$available = false}{/if}
+																		{/if}
+																		<div class="items-slider__item items-slider__item_cart swiper-slide">
+																			<div class="pd-equal-item"{if $p.sku_count > 1} data-url="{$p.frontend_url}{if strpos($p.frontend_url, '?')}&{else}?{/if}cart=1" data-title="{$p.name|escape}"{/if}>
+																				<a class="pd-equal-item__image" href="{$p.frontend_url}" title="{$p.name|escape}">
+																					{$wa->shop->productImgHtml($p, '200', ['itemprop' => 'image', 'alt' => $p.name, 'default' => "`$wa_parent_theme_url`img/dummy200.png"])}
+																				</a>
+																				<a class="pd-equal-item__title link link link_ter" href="{$p.frontend_url}" title="{$p.name|escape}">{$p.name}</a>
+																				{if $theme_settings.products_show_reviews && 0}
+																					{if $theme_settings.products_show_rating_stars eq "always" || ($theme_settings.products_show_rating_stars eq "nonempty" && $p.rating > 0)}
+																						{$_rating = round($p.rating)}
+																						<div class="pd-equal-item__rating">
+																							<div class="item-rating item-c__rating">
+																								<div class="item-rating__stars">
+																									<div class="item-rating item-c__rating">
+																										<div class="item-rating__stars">
+																											<div class="stars stars_m">
+																												<div class="stars__list">
+																													{for $i=1 to 5}
+																													<div class="stars__i{if $i <= $_rating} stars__i_checked{/if}">
+																														<svg class="icon" width="16" height="15">
+																															<use xlink:href="#icon-star"></use>
+																														</svg>
+																													</div>
+																													{/for}
+																												</div>
+																											</div>
+																										</div>
+																										<div class="item-rating__revs">
+																											<svg class="icon" width="15" height="14">
+																												<use xlink:href="#icon-bubble"></use>
+																											</svg>
+																											<a class="grey" href="{$p.frontend_url}reviews/">{$p.rating_count}</a>
+																										</div>
+																									</div>
+																								</div>
+																							</div>
+																						</div>
+																					{/if}
+																				{/if}
+																				<div class="pd-equal-item__price">
+																					<div class="simple-price">
+																						<div class="simple-price__price simple-price__price_reg">{shop_currency_html($p.price)}</div>
+																						{if $p.compare_price > 0}
+																							<div class="simple-price__price simple-price__price_old grey">{shop_currency_html($p.compare_price)}</div>
+																						{/if}
+																					</div>
+																				</div>
+																				{if !$available}<strong class="grey">{if $wa->shop->settings('ignore_stock_count')}[`Pre-order only`]{else}[`Out of stock`]{/if}</strong>
+																				{else}<button class="pd-equal-item__to-cart add-to-cart-link" type="button" data-product_id="{$p.id}" data-url="{$wa->getUrl('shop/frontendCart/add')}">[`Add to cart`]</button>{/if}
+																			</div>
+																		</div>
+																	{/foreach}
+																</div>
+															</div>
+														</div>
+													</div>
+												{/if}
+											{/if}
+										{/if}
+									</div>
+								</li>
+								{if !empty($item.error)}<script>alert({json_encode($item.error)});</script>{/if}
+							{/foreach}
+						</ul>
+					</div>
+					{if shopAffiliate::isEnabled()}
+						<div class="bonus-container bonus-container_bd mb-hide{if empty($add_affiliate_bonus)} is-hidden{/if}">
+							<div class="bonus-container__head">
+								<div class="bonus-points">
+									<div class="circle-icon-box circle-icon-box_star">
+										<svg class="icon cent-icon" width="26" height="26">
+											<use xlink:href="#icon-star-big"></use>
+										</svg>
+									</div>
+									<div class="points-box">
+										<strong>+{$add_affiliate_bonus|default:0}</strong>
+										<span>[`points`]</span>
+									</div>
+								</div>
+							</div>
+							<div class="bonus-container__body">
+								<div class="bonus-container__text">{sprintf("[`This order will add <strong>+%s bonuses</strong> to  your account, which you will be able to spend on getting additional discounts later.`]", $add_affiliate_bonus)}</div>
+							</div>
+						</div>
+					{/if}
+					{if $theme_settings.shop_cart_crossselling eq "single"}
+						{$related = $wa->shop->crossSelling($cart.items, 'product_id')}
+						{if $related}
+							<div class="cart-pg__cart-recommend mb-hidess">
+								<div class="items-slider">
+									<div class="items-slider__header">
+										<div class="items-slider__cart-header"><strong>[`Recommended!`]</strong></div>
+										<div class="items-slider__arrows-wr">
+											<div class="items-slider__arrow">
+												<button class="slider-ar slider-ar_square pos-rel default-btn items-slider__nav-left">
+													<svg class="icon cent-icon" width="7" height="11">
+														<use xlink:href="#arrow-left-small"></use>
+													</svg>
+												</button>
+												<button class="slider-ar slider-ar_square pos-rel default-btn items-slider__nav-right">
+													<svg class="icon cent-icon" width="7" height="11">
+														<use xlink:href="#arrow-right-small"></use>
+													</svg>
+												</button>
+											</div>
+										</div>
+									</div>
+									<div class="items-slider__body items-slider__body_cart-cross swiper-container">
+										<div class="items-slider__wrapper swiper-wrapper">
+											{foreach $related as $p}
+												{$available = $wa->shop->settings('ignore_stock_count') || $p.count === null || $p.count > 0}
+												{if !empty($p.skus) && !empty($p.skus[$p.sku_id])}
+													{$sku = $p.skus[$p.sku_id]}
+													{if empty($sku.available) && (count($p.skus) === 1)}{$available = false}{/if}
+												{/if}
+												<div class="items-slider__item items-slider__item_cart swiper-slide">
+													<div class="pd-equal-item"{if $p.sku_count > 1} data-url="{$p.frontend_url}{if strpos($p.frontend_url, '?')}&{else}?{/if}cart=1" data-title="{$p.name|escape}"{/if}>
+														<a class="pd-equal-item__image" href="{$p.frontend_url}" title="{$p.name|escape}">
+															{$wa->shop->productImgHtml($p, '200', ['itemprop' => 'image', 'alt' => $p.name, 'default' => "`$wa_parent_theme_url`img/dummy200.png"])}
+														</a>
+														<a class="pd-equal-item__title link link link_ter" href="{$p.frontend_url}" title="{$p.name|escape}">{$p.name}</a>
+														{if $theme_settings.products_show_reviews && 0}
+															{if $theme_settings.products_show_rating_stars eq "always" || ($theme_settings.products_show_rating_stars eq "nonempty" && $p.rating > 0)}
+																{$_rating = round($p.rating)}
+																<div class="pd-equal-item__rating">
+																	<div class="item-rating item-c__rating">
+																		<div class="item-rating__stars">
+																			<div class="item-rating item-c__rating">
+																				<div class="item-rating__stars">
+																					<div class="stars stars_m">
+																						<div class="stars__list">
+																							{for $i=1 to 5}
+																							<div class="stars__i{if $i <= $_rating} stars__i_checked{/if}">
+																								<svg class="icon" width="16" height="15">
+																									<use xlink:href="#icon-star"></use>
+																								</svg>
+																							</div>
+																							{/for}
+																						</div>
+																					</div>
+																				</div>
+																				<div class="item-rating__revs">
+																					<svg class="icon" width="15" height="14">
+																						<use xlink:href="#icon-bubble"></use>
+																					</svg>
+																					<a class="grey" href="{$p.frontend_url}reviews/">{$p.rating_count}</a>
+																				</div>
+																			</div>
+																		</div>
+																	</div>
+																</div>
+															{/if}
+														{/if}
+														<div class="pd-equal-item__price">
+															<div class="simple-price">
+																<div class="simple-price__price simple-price__price_reg">{shop_currency_html($p.price)}</div>
+																{if $p.compare_price > 0}
+																	<div class="simple-price__price simple-price__price_old grey">{shop_currency_html($p.compare_price)}</div>
+																{/if}
+															</div>
+														</div>
+														{if !$available}<strong class="grey">{if $wa->shop->settings('ignore_stock_count')}[`Pre-order only`]{else}[`Out of stock`]{/if}</strong>
+														{else}<button class="pd-equal-item__to-cart add-to-cart-link" type="button" data-product_id="{$p.id}" data-url="{$wa->getUrl('shop/frontendCart/add')}">[`Add to cart`]</button>{/if}
+													</div>
+												</div>
+											{/foreach}
+										</div>
+									</div>
+								</div>
+							</div>
+						{/if}
+					{/if}
+				</div>
+				<div class="col-side">
+					<div class="cart-check{* is-loading *}">
+						<div class="cart-check__top-icon">
+							<svg class="icon cent-icon" width="20" height="20">
+								<use xlink:href="#icon-cart-2"></use>
+							</svg>
+						</div>
+						<div class="cart-check__price-wr" id="cart-discount-wrapper">
+							<div class="cart-check__price-text">[`Discount`]</div>
+							<div class="cart-check__price-sum" id="sub-total__discount">&minus; {shop_currency_html($discount, true)}</div>
+						</div>
+						<div class="cart-check__price-wr">
+							<div class="cart-check__price-text">[`Total`]:</div>
+							<div class="cart-check__price-sum s-cart-total">{shop_currency_html($cart.total, true)}</div>
+						</div>
+						<div class="cart-check__about-shipping">[`Delivery not included`]</div>
+						{if shopAffiliate::isEnabled() && $affiliate_bonus > 0}
+							<div class="cart-check__agree">
+								<label>
+									{sprintf('[`Your current affiliate bonus of %s points allows you to get an additonal discount of up to %s`]', "<strong>{$affiliate_bonus}</strong>", "<strong class='cart-affiliate_currency'>{shop_currency_html($affiliate_discount)}</strong>")}
+									<input type="checkbox" id="use_affiliate" {if $use_affiliate} checked{/if}>
+								</label>
+							</div>
+						{/if}
+						<div class="cart-check__checkout">
+							<button class="cart-check__checkout-btn btn {$theme_settings.main_buttons_style|replace:'img/themebuttons/':''|replace:'.gif':''} btn_main-1 s-cart-submit" type="button">
+								<span>[`Proceed to checkout`]</span>
+								<div class="hover-anim"></div>
+							</button>
+							<!-- plugin hook: 'frontend_cart' -->
+							{* @event frontend_cart.%plugin_id% *}
+							{foreach $frontend_cart as $_}{$_}{/foreach}
+							{*
+							<button class="cart-check__checkout-btn btn {$theme_settings.main_buttons_style|replace:'img/themebuttons/':''|replace:'.gif':''} btn_sec-3" type="button">
+								<span>КУПИТЬ ЗАКАЗ В 1 КЛИК</span>
+								<div class="hover-anim"></div>
+							</button>
+							*}
+						</div>
+					</div>
+					{if shopAffiliate::isEnabled() && !empty($add_affiliate_bonus)}
+						<div class="bonus-container bonus-container_bd td-hide">
+							<div class="bonus-container__head">
+								<div class="bonus-points">
+									<div class="circle-icon-box circle-icon-box_star">
+										<svg class="icon cent-icon" width="26" height="26">
+											<use xlink:href="#icon-star-big"></use>
+										</svg>
+									</div>
+									<div class="points-box">
+										<strong>+{$add_affiliate_bonus|default:0}</strong>
+										<span>[`points`]</span>
+									</div>
+								</div>
+							</div>
+							<div class="bonus-container__body">
+								<div class="bonus-container__text">{sprintf("[`This order will add <strong>+%s bonuses</strong> to  your account, which you will be able to spend on getting additional discounts later.`]", $add_affiliate_bonus)}</div>
+							</div>
+						</div>
+					{/if}
+					{if shopDiscounts::isEnabled('coupons')}
+						<div class="cart-coupon">
+							<div class="cart-coupon__input-wr">
+								<div class="cart-coupon__input">
+									<input type="text" name="coupon_code" value="{$coupon_code|escape}" placeholder="[`Use coupon`]"{if $coupon_code && empty($coupon_discount) && empty($coupon_free_shipping)} class="error"{/if}>
+									{if $coupon_code && empty($coupon_discount) && empty($coupon_free_shipping)}
+										<div class="errormsg">[`Invalid coupon code`]</div>
+									{/if}
+								</div>
+								<button class="cart-coupon__btn default-btn" type="submit">
+									<svg class="icon cent-icon" width="7" height="12">
+										<use xlink:href="#arrow-right-big"></use>
+									</svg>
+								</button>
+							</div>
+						</div>
+					{/if}
+					{include file="sidebar.faq.html"}
+					{include file="sidebar.about.html"}
+				</div>
+			</div>
+		</form>
+		<script>
+		( function($) {
+			var js_href = "{$wa_theme_url}js/cart.js?v{$wa_theme_version}",
+				is_loaded = (typeof Cart == "function");
+
+			(is_loaded) ? initCart() :  $.getScript(js_href, initCart);
+
+			function initCart() {
+				new Cart({
+					$wrapper: $(".cart-pg")
+				});
+			}
+		})(jQuery);
+		</script>
+	</div>
+{/if}
+{$wa->globals('hideUserPanel',true)}
+{/strip}

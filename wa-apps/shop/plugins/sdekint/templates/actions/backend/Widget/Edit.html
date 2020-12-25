@@ -1,0 +1,71 @@
+<div class="block not-padded bordered-bottom">
+    <h1>
+        <a href="#" class="back">&larr;Назад</a>
+        Конфигурация виджета
+    </h1>
+</div>
+<div class="block not-padded">
+    <div class="block not-padded top-padded">
+        <form action="?plugin=sdekint&module=widget&action=save" method="post" class="sdekint-widget-edit-form">
+            <div class="fields">
+                <input type="hidden" name="widget[id]" value="{ifempty($widget, 'id', '')}">
+                <div class="field">
+                    <div class="name">Название</div>
+                    <div class="value">
+                        <input type="text" placeholder="Не обязательно" class="long" name="widget[name]" value="{ifempty($widget, 'name', '')}"><br>
+                        <span class="hint">Кроме вас это никто не увидит. Возможно, вам пригодится, чтобы отличать одну конфигурацию от другой</span>
+                    </div>
+                </div>
+                <input type="hidden" name="widget[type]" value="{ifempty($widget, 'type', 'legacy')}">
+                <div class="field">
+                    <div class="name">Способ доставки</div>
+                    <div class="value">
+                        <select name="widget[settings][method]">
+                            {$selected = ifempty($widget, 'settings', 'method', null)}
+                            {foreach $shipping_methods as $m}
+                                <option value="{$m.id}"{if $m.id == $selected} selected{/if}>{$m.name|escape}</option>
+                            {/foreach}
+                        </select><br>
+                        <span class="hint">Этот способ будет использоваться для подсчета стоимости доставки, показываемой в виджете</span>
+                    </div>
+                </div>
+            </div>
+            <div class="submit field">
+                <div class="value submit">
+                    <button class="button green" type="submit">Сохранить</button>
+                    <i class="icon16 loading" style="display: none;"></i>
+                </div>
+            </div>
+        </form>
+    </div>
+    <div class="block not-padded top-padded" id="sdekint-code-sample">
+        {capture name="js-template-CodeBlock"}
+        {literal}<p>Код Smarty для получения URL для обращений виджета за расчетом: <code>{$wa->getUrl(&quot;shop/legacy/widget&quot;, [&quot;plugin&quot;=>&quot;sdekint&quot;, &quot;config_id&quot;=>{{>id}}])}</code></p>
+        <p>Пример кода для вставки на страницу</p>
+<pre lang="smarty" class="prettyprint">
+
+&lt;script id=&quot;ISDEKscript&quot; src=&quot;{$wa_static_url}wa-apps/shop/plugins/sdekint/js/vendors/cdek/widjet.js&quot;>&lt;/script>
+&lt;script>
+    var ourWidjet = new ISDEKWidjet ({
+        defaultCity: 'Москва', //какой город отображается по умолчанию
+        cityFrom: 'Москва', // из какого города будет идти доставка
+        country: 'Россия', // можно выбрать страну, для которой отображать список ПВЗ
+        link: 'forpvz', // id элемента страницы, в который будет вписан виджет
+        path: '{$wa_static_url}wa-apps/shop/plugins/sdekint/js/vendors/cdek/scripts/', //директория с бибилиотеками
+        templatepath: '{$wa->getUrl(&quot;shop/legacy/widgetTemplate&quot;, [&quot;plugin&quot;=>&quot;sdekint&quot;])}',
+        servicepath: '{$wa->getUrl(&quot;shop/legacy/widget&quot;, [&quot;plugin&quot;=>&quot;sdekint&quot;, &quot;config_id&quot;=>{{>id}}])}'
+    });
+{/literal}&lt;/script>
+&lt;div id=&quot;forpvz&quot; style=&quot;height: 500px&quot;>&lt;/div>
+
+
+</pre>
+        {/capture}
+    </div>
+</div>
+{foreach $smarty.capture as $name => $template}{if strpos($name, 'js-template')==0}
+<script id="{substr($name, 12)}" type="text/x-jsrender">
+{$template}
+</script>
+{/if}
+{/foreach}

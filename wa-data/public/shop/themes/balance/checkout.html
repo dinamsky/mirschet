@@ -1,0 +1,21 @@
+{strip}
+{include file="system.checkout.html" scope="parent" inline}
+{if $checkout_current_step eq "success" || $checkout_current_step eq "error"}
+	{include file="checkout.`$checkout_current_step`.html"}
+{else}
+{include file="checkout.header.html" inline}
+<div class="checkout-pg">
+	<div class="b-c-row b-c-row_checkout">
+		{if in_array($checkout_current_step,["contactinfo","shipping","payment"])}
+			<div class="col-side">
+				{include file="checkout.sidebar.order.html"}
+				{include file="checkout.sidebar.about.html"}
+			</div>
+		{/if}
+		<div class="col-main checkout-step step-{$checkout_current_step}">
+			{include file="checkout.`$checkout_current_step`.html"}
+		</div>
+	</div>
+</div>
+{/if}
+{/strip}

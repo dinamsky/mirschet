@@ -1,0 +1,756 @@
+{strip}
+{include file="system.product.html" scope="parent" inline}
+<div class="item-pg{if $theme_settings.shop_productpage_view ne 1} item-pg_{$theme_settings.shop_productpage_view}{/if}" itemscope itemtype="http://schema.org/Product">
+	{if !$_is_dialog}
+		<div class="item-pg__breadcrumbs layout-center">
+			{if !empty($breadcrumbs)}
+			<div class="breadcrumbs breadcrumbs_{$theme_settings.breadcrumbs_design}">
+				<ul class="breadcrumbs__list">
+					<li class="breadcrumbs__item">
+						<a class="breadcrumbs__link" href="{$wa_url}">[`Home`]</a>
+					</li>
+					{if $theme_settings.breadcrumbs_design eq "dropdown"}
+						{$_product_category = $wa->shop->category($product.category_id)}
+						{if $_product_category}
+							{$_categories_tree = $wa->shop->categories(0,$_product_category.depth,true)}
+							{if !empty($_categories_tree)}
+								{function breadcrumbs_tree}
+									{foreach $tree as $c}
+										{if $c.left_key <= $_product_category.left_key && $c.right_key >= $_product_category.right_key}
+											<li class="breadcrumbs__item">
+												<a class="breadcrumbs__link" href="{$c.url}">{$c.name}</a>
+												{if count($tree) > 1}
+													<div class="breadcrumbs__btn">
+														<svg class="icon" width="6" height="4">
+															<use xlink:href="#arrow-up-breadcrumb"></use>
+														</svg>
+													</div>
+													<ul class="breadcrumbs__dropdown">
+														{foreach $tree as $sc}
+															{if $sc.id eq $c.id}{continue}{/if}
+															<li class="breadcrumbs__dropdown-i">
+																<a class="breadcrumbs__link" href="{$sc.url}">{$sc.name}</a>
+															</li>
+														{/foreach}
+													</ul>
+												{/if}
+											</li>
+											{breadcrumbs_tree tree=$c.childs}
+										{/if}
+									{/foreach}
+								{/function}
+								{breadcrumbs_tree tree=$_categories_tree}
+							{/if}
+						{/if}
+					{else}
+						{foreach $breadcrumbs as $bc}
+							<li class="breadcrumbs__item">
+								<a class="breadcrumbs__link" href="{$bc.url}">{$bc.name}</a>
+							</li>
+						{/foreach}
+					{/if}
+				</ul>
+			</div>
+			{/if}
+			<div class="item-pg__pluso">
+				<div class="b-popup mfp-with-anim" id="social-popup">
+					<div class="b-popup__inner">
+						<script>
+							(function()
+							{
+								if (window.pluso)
+									if (typeof window.pluso.start == "function") return;
+								if (window.ifpluso == undefined)
+								{
+									window.ifpluso = 1;
+									var d = document,
+										s = d.createElement('script'),
+										g = 'getElementsByTagName';
+									s.type = 'text/javascript';
+									s.charset = 'UTF-8';
+									s.async = true;
+									s.src = ('https:' == window.location.protocol ? 'https' : 'http') + '://share.pluso.ru/pluso-like.js';
+									var h = d[g]('body')[0];
+									h.appendChild(s);
+								}
+							})();
+						</script>
+						<h3 class="social-popup-title ds-hide">Поделится со ссылкой</h3>
+						<div class="pluso desktop-mobile tb-hide" data-background="transparent" data-options="small,square,line,horizontal,nocounter,theme=04" data-services="{$theme_settings.shop_productpage_share_buttons}"></div>
+						<div class="pluso tablet mb-hide ds-hide" data-background="transparent" data-options="medium,square,line,horizontal,counter,theme=04" data-services="{$theme_settings.shop_productpage_share_buttons}"></div>
+					</div>
+				</div>
+			</div>
+			<a class="social-popup inline-popup" href="#social-popup">
+				<svg class="icon" width="14" height="14">
+					<use xlink:href="#icon-share"></use>
+				</svg>
+			</a>
+		</div>
+	{/if}
+	<div class="item-pg__heading layout-center">
+		<h1 class="item-pg__title">
+			<span itemprop="name">{$product.name|escape}</span>
+			{if !empty($product.rating) && $product.rating > 0}
+				<span class="rating nowrap" itemprop="aggregateRating" itemscope itemtype="http://schema.org/AggregateRating" title="{sprintf('[`Average user rating: %s / 5`]', $product.rating)}">
+					{$wa->shop->ratingHtml($product.rating, 16)}
+					<span itemprop="ratingValue" style="display: none;">{$product.rating}</span>
+					<span itemprop="reviewCount" style="display: none;">{$reviews_total_count}</span>
+				</span>
+			{/if}
+		</h1>
+		<div class="item-pg__heading-artikul grey s-product-sku{if $product.sku_type || (!$product.sku_type && (count($product.skus) > 1 || empty($product.skus[$product.sku_id].sku|default:null)))} is-hidden{/if}">[`SKU code`]:
+    		{if $product.sku_type}
+    			{foreach $product.skus as $sku}
+    				{if isset($sku.sku) && !empty($sku.sku)}
+    					<span class="s-product-sku-{$sku.id}" style="display:none"> {$sku.sku}</span>
+    				{/if}
+    			{/foreach}
+    		{else}
+    		    {if count($product.skus) > 1}
+    			    <span> -</span>
+    			{else}
+    			    <span> {$product.skus[$product.sku_id].sku|default:" -"}</span>
+					<meta itemprop="sku" content="{$product.skus[$product.sku_id].sku}">
+    			{/if}
+    		{/if}
+		</div>
+	</div>
+	{if !$_is_dialog}
+		<div class="links-bar layout-center{if $theme_settings.shop_productpage_view eq 2} ds-hide{/if}">
+			<div class="links-bar__list">
+				<div class="links-bar__item active">
+					<div class="links-bar__link">[`Overview`]</div>
+				</div>
+				{if $theme_settings.products_show_reviews}
+					<div class="links-bar__item">
+						<a class="links-bar__link" href="{$wa->shop->productUrl($product, 'reviews')}">[`Reviews`] ({$product.rating_count|default:0})</a>
+					</div>
+				{/if}
+				{foreach $product.pages as $p}
+					<div class="links-bar__item">
+						<a class="links-bar__link" href="{$wa->shop->productUrl($product, 'page', ['page_url' => $p.url])}">{$p.name|escape}</a>
+					</div>
+				{/foreach}
+				<!-- plugin hook: 'frontend_product.menu' -->
+				{* @event frontend_product.%plugin_id%.menu *}
+				{foreach $frontend_product as $_}
+					<div class="links-bar__item">
+						<span class="links-bar__link">{$_.menu}</span>
+					</div>
+				{/foreach}
+			</div>
+		</div>
+	{/if}
+	<div class="item-pg__product layout-center">
+		<div class="b-row-ip b-row-ip_{$theme_settings.shop_productpage_view}{if $theme_settings.shop_productpage_view eq 3 && (!$theme_settings.shop_productpage_info_features_on || $theme_settings.shop_productpage_info_features_position ne 'pos3')} no-col-descr{/if}">
+			<div class="b-row-ip__inner">
+				<div class="b-row-ip__col-image">
+					<div class="pd-image">
+						{$video = $product->video}
+						{if (($product.images && count($product.images)>1) || ($product.images && $video)) && !$_is_dialog}
+							<div class="pd-image__thumbs">
+								<div class="pd-image__thumbs-slider-nav">
+									<div class="thumb-nav thumb-nav_left">
+										<svg class="icon" width="10" height="18">
+											<use xlink:href="#arrow-left-big"></use>
+										</svg>
+									</div>
+									<div class="thumb-nav thumb-nav_right">
+										<svg class="icon" width="10" height="18">
+											<use xlink:href="#arrow-left-big"></use>
+										</svg>
+									</div>
+								</div>
+								<div class="pd-image__thumbs-slider swiper-container{if !$theme_settings.products_border} nobd{/if}">
+									<div class="pd-image__thumbs-slider-body swiper-wrapper">
+										{if $product.images}
+											{foreach $product.images as $image}
+											<div class="swiper-slide pd-thumb is-image" id="product-image-{$image.id}">
+												{$wa->shop->imgHtml($image, '96x96',['alt'=>$image.description|escape,'class'=>'pd-thumb__img'])}
+											</div>
+											{/foreach}
+										{/if}
+										{if $video}
+											<div class="swiper-slide pd-thumb pd-thumb_video">
+												<img class="pd-thumb__img lazy-img" src="data:image/gif;base64,R0lGODlh6gDqAIAAAP///wAAACH5BAEAAAEALAAAAADqAOoAAAL+jI+py+0Po5y02ouz3rz7D4biSJbmiabqyrbuC8fyTNf2jef6zvf+DwwKh8Si8YhMKpfMpvMJjUqn1Kr1is1qt9yu9wsOi8fksvmMTqvX7Lb7DY/L5/S6/Y7P6/f8vv8PGCg4SFhoeIiYqLjI2Oj4CBkpOUlZaXmJmam5ydnp+QkaKjpKWmp6ipqqusra6voKGys7S1tre4ubq7vL2+v7CxwsPExcbHyMnKy8zNzs/AwdLT1NXW19jZ2tvc3d7f0NHi4+Tl5ufo6err7O3u7+Dh8vP09fb3+Pn6+/z9/v/w8woMCBBAsaPIgwocKFDBs6fAgxosSJFCtavIgxo8Y9jRw7evwIMqTIkSRLmjyJMqXKlSxbunwJM6bMmTRr2ryJM6fOnTx7+vwJNKjQoUSLGj2KNKnSpUybOo1UAAA7" data-src="{$video.images[0]}" alt="">
+											</div>
+										{/if}
+									</div>
+								</div>
+							</div>
+						{/if}
+						<div class="pd-image__big-photo">
+							<div id="switching-image"></div>
+							<div class="pd-image__badges">
+								{if $product.badge eq "lowprice"}
+									<div class="pd-image__badges-i">
+										<div class="label label_econom" style="background-color:#FFE500">[`Discount`]</div>
+									</div>
+								{elseif $product.badge eq "new"}
+									<div class="pd-image__badges-i">
+										<div class="label label_light" style="background-color:#1FE499">[`New`]</div>
+									</div>
+								{elseif $product.badge eq "bestseller"}
+									<div class="pd-image__badges-i">
+										<div class="label label_light" style="background-color:#FF2AA9">[`Bestseller`]</div>
+									</div>
+								{elseif !empty($product.badge)}
+									<div class="pd-image__badges-i">
+										<div class="label label_light" style="background-color:#FF2AA9">{$product.badge}</div>
+									</div>
+								{/if}
+							</div>
+							{if 0 && (($product.images && count($product.images)>1) || ($product.images && $video))}
+								<div class="pd-image__nav">
+									<button class="slider-ar slider-ar_round pos-rel default-btn">
+										<svg class="icon cent-icon" width="8" height="15">
+											<use xlink:href="#arrow-left-big"></use>
+										</svg>
+									</button>
+									<button class="slider-ar slider-ar_round pos-rel default-btn">
+										<svg class="icon cent-icon" width="8" height="15">
+											<use xlink:href="#arrow-right-big"></use>
+										</svg>
+									</button>
+								</div>
+							{/if}
+							<div class="pd-image__action-btns td-hide">
+								<div class="action-btns-wrapper">
+									{if $theme_settings.products_show_wishlist}
+										<div class="action-btns-wrapper__item">
+											<div class="item-act-btn item-act-btn_fav btn-fav btn-fav-{$product.id}{if in_array($product.id,$theme_favorite)} active{/if}" data-product="{$product.id}" data-title="[`Add to favorites`]" data-active="[`Remove from favorites`]">
+												<svg class="icon" width="15" height="13">
+													<use xlink:href="#icon-heart-2"></use>
+												</svg>
+												<div class="item-act-btn__text visually-hidden">{if in_array($product.id,$theme_favorite)}[`Remove from favorites`]{else}[`Add to favorites`]{/if}</div>
+											</div>
+										</div>
+									{/if}
+									{if $theme_settings.products_show_compare}
+										<div class="action-btns-wrapper__item">
+											<div class="item-act-btn item-act-btn_comp btn-compare btn-compare-{$product.id}{if in_array($product.id,$compare)} active{/if}" data-title="[`Add to comparison table`]" data-active="[`Remove from comparison table`]" data-url="{$wa->getUrl('/frontend/compare/', ['id' => implode(',', $compare) ])}" data-product="{$product.id}" data-product_name="{$product.name|escape}" data-product_url="{$product.frontend_url}" data-product_image='{$wa->shop->productImgUrl($product, "96x96")|default:"`$wa_parent_theme_url`img/dummy200.png"}'>
+												<svg class="icon" width="11" height="11">
+													<use xlink:href="#icon-chart"></use>
+												</svg>
+												<div class="item-act-btn__text visually-hidden">{if in_array($product.id,$compare)}[`Remove from comparison table`]{else}[`Add to comparison table`]{/if}</div>
+											</div>
+										</div>
+									{/if}
+									<div class="action-btns-wrapper__item">
+										<a class="item-act-btn item-act-btn_comp inline-popup" href="#social-popup">
+											<svg class="icon" width="14" height="14">
+												<use xlink:href="#icon-share"></use>
+											</svg>
+										</a>
+									</div>
+								</div>
+							</div>
+							{if $product.images || $video}
+								{if $product.images}
+									<div class="pd-image__big-photo-inner" data-startindex="0" id="product-core-image">
+										<img src="{$wa->shop->productImgUrl($product, '970')}" id="product-image" itemprop="image" alt="{$product.name|escape}" />
+									</div>
+								{/if}
+								{if $video}
+									<div class="pd-image__big-photo-inner" id="video-container"{if $product.images} style="display:none;"{/if} itemprop="video" itemscope itemtype="http://schema.org/VideoObject">
+										<div class="item-pg_videocontainer" itemprop="embedHTML">
+											<iframe src="{$video.url}" width="{$video.width}" height="{$video.height}" allowfullscreen></iframe>
+										</div>
+										<meta itemprop="width" content="{$video.width}">
+										<meta itemprop="height" content="{$video.height}">
+										<meta itemprop="name" content="{$product.name|default:""|escape}">
+										<meta itemprop="description" content="{$product.description|default:""|escape}">
+										<meta itemprop="uploadDate" content="{$product.create_datetime|default:""|escape}">
+										{if !empty($video.images[0])}
+											{$_thumb = $video.images[0]}
+											{$_absolute_thumb_uri = "{$wa->url(true)}{$_thumb|substr:1}"}
+											<meta itemprop="thumbnailUrl" content="{$_absolute_thumb_uri|escape}">
+										{/if}
+									</div>
+								{/if}
+							{else}
+								<div class="pd-image__big-photo-inner" id="product-core-image">
+									<img src="data:image/gif;base64,R0lGODlh6gDqAIAAAP///wAAACH5BAEAAAEALAAAAADqAOoAAAL+jI+py+0Po5y02ouz3rz7D4biSJbmiabqyrbuC8fyTNf2jef6zvf+DwwKh8Si8YhMKpfMpvMJjUqn1Kr1is1qt9yu9wsOi8fksvmMTqvX7Lb7DY/L5/S6/Y7P6/f8vv8PGCg4SFhoeIiYqLjI2Oj4CBkpOUlZaXmJmam5ydnp+QkaKjpKWmp6ipqqusra6voKGys7S1tre4ubq7vL2+v7CxwsPExcbHyMnKy8zNzs/AwdLT1NXW19jZ2tvc3d7f0NHi4+Tl5ufo6err7O3u7+Dh8vP09fb3+Pn6+/z9/v/w8woMCBBAsaPIgwocKFDBs6fAgxosSJFCtavIgxo8Y9jRw7evwIMqTIkSRLmjyJMqXKlSxbunwJM6bMmTRr2ryJM6fOnTx7+vwJNKjQoUSLGj2KNKnSpUybOo1UAAA7" data-src="{$wa_parent_theme_url}img/dummy200.png" class="is-default lazy-img" alt="">
+								</div>
+							{/if}
+						</div>
+					</div>
+					{if $theme_settings.shop_productpage_brand ne "none" && method_exists("shopProductbrandsPlugin","productBrand") && isset($product)}
+						{$_b = shopProductbrandsPlugin::productBrand($product.id)}
+						{if $_b}
+							<div class="pd-brand-info">
+								<div class="pd-brand-info__inner">
+									{if $theme_settings.shop_productpage_brand eq "full" && isset($_b) && isset($_b.image) && !empty($_b.image)}
+										<div class="pd-brand-info__logo">
+											<img src="data:image/gif;base64,R0lGODlh6gDqAIAAAP///wAAACH5BAEAAAEALAAAAADqAOoAAAL+jI+py+0Po5y02ouz3rz7D4biSJbmiabqyrbuC8fyTNf2jef6zvf+DwwKh8Si8YhMKpfMpvMJjUqn1Kr1is1qt9yu9wsOi8fksvmMTqvX7Lb7DY/L5/S6/Y7P6/f8vv8PGCg4SFhoeIiYqLjI2Oj4CBkpOUlZaXmJmam5ydnp+QkaKjpKWmp6ipqqusra6voKGys7S1tre4ubq7vL2+v7CxwsPExcbHyMnKy8zNzs/AwdLT1NXW19jZ2tvc3d7f0NHi4+Tl5ufo6err7O3u7+Dh8vP09fb3+Pn6+/z9/v/w8woMCBBAsaPIgwocKFDBs6fAgxosSJFCtavIgxo8Y9jRw7evwIMqTIkSRLmjyJMqXKlSxbunwJM6bMmTRr2ryJM6fOnTx7+vwJNKjQoUSLGj2KNKnSpUybOo1UAAA7" data-src="{$wa_url}wa-data/public/shop/brands/{$_b.id}/{$_b.id}{$_b.image}" class="lazy-img" alt>
+										</div>
+									{/if}
+									<div class="pd-brand-info__text">
+										<div class="pd-brand-info__manfr">[`Brand`]:</div>
+										<a class="pd-brand-info__brand-name" href="{$_b.url}">{$_b.name}</a>
+										{if !empty($_b.name)}
+											<meta itemprop="brand" content="{$_b.name}">
+										{/if}
+									</div>
+								</div>
+							</div>
+						{/if}
+					{/if}
+				</div>
+				<div class="b-row-ip__col-info">
+					{if $theme_settings.shop_productpage_view ne 3 || ($theme_settings.shop_productpage_view eq 3 && $theme_settings.shop_productpage_info_features_on && $theme_settings.shop_productpage_info_features_position eq "pos3")}
+						<div class="b-row-ip__col-descr">
+							<div class="pd-descr">
+								{if $theme_settings.shop_productpage_view eq 3 && $theme_settings.shop_productpage_info_features_on && !empty($_infoblocks)}
+									{include file="product.features.html" is_sidebar=true}
+								{else}
+									{if $theme_settings.shop_productpage_view eq 2}
+										<h1 class="pd-descr__title mt-hide">{$product.name|escape}</h1>
+										{if !$_is_dialog}
+											<div class="links-bar mt-hide">
+												<div class="links-bar__list">
+													<div class="links-bar__item active">
+														<div class="links-bar__link">[`Overview`]</div>
+													</div>
+													{if $theme_settings.products_show_reviews}
+														<div class="links-bar__item">
+															<a class="links-bar__link" href="{$wa->shop->productUrl($product, 'reviews')}">[`Reviews`] ({$product.rating_count|default:0})</a>
+														</div>
+													{/if}
+													{foreach $product.pages as $p}
+														<div class="links-bar__item">
+															<a class="links-bar__link" href="{$wa->shop->productUrl($product, 'page', ['page_url' => $p.url])}">{$p.name|escape}</a>
+														</div>
+													{/foreach}
+												</div>
+											</div>
+										{/if}
+									{/if}
+									<div class="pd-descr__artikul grey ds-hide s-product-sku{if $product.sku_type || (!$product.sku_type && (count($product.skus) > 1 || empty($product.skus[$product.sku_id].sku|default:null)))} is-hidden{/if}">
+										[`SKU code`]:
+										{if $product.sku_type}
+											{foreach $product.skus as $sku}
+												{if isset($sku.sku) && !empty($sku.sku)}
+													<span class="s-product-sku-{$sku.id}" style="display:none"> {$sku.sku}</span>
+												{/if}
+											{/foreach}
+										{else}
+											{if count($product.skus) > 1}
+												<span> -</span>
+											{else}
+												<span> {$product.skus[$product.sku_id].sku|default:" -"}</span>
+											{/if}
+										{/if}
+									</div>
+									{if $theme_settings.shop_productpage_show_summary && $product.summary}
+										<div class="pd-descr__description mb-hide">{$product.summary}</div>
+									{/if}
+									{if $theme_settings.shop_productpage_view eq 2}<div class="pd-descr__sku-wrapper">{/if}
+									{if $theme_settings.products_show_reviews && ($theme_settings.products_show_rating_stars eq "always" || ($theme_settings.products_show_rating_stars eq "nonempty" && $product.rating > 0))}
+										{$_rating = round($product.rating)}
+										<div class="pd-descr__rating">
+											<div class="item-rating item-rating_ip">
+												<div class="item-rating__stars">
+													<div class="stars stars_m">
+														<div class="stars__list">
+															{for $i=1 to 5}
+															<div class="stars__i{if $i <= $_rating} stars__i_checked{/if}">
+																<svg class="icon" width="16" height="15">
+																	<use xlink:href="#icon-star"></use>
+																</svg>
+															</div>
+															{/for}
+														</div>
+													</div>
+												</div>
+												<div class="item-rating__revs">
+													<svg class="icon" width="15" height="14">
+														<use xlink:href="#icon-bubble"></use>
+													</svg>
+													<a class="grey" href="{$wa->shop->productUrl($product, 'reviews')}">{_w('%d review', '%d review', $product.rating_count|default:0)}</a>
+												</div>
+											</div>
+										</div>
+									{/if}
+									{if $theme_settings.shop_productpage_view eq 2}
+										<div class="pd-descr__artikul grey mt-hide s-product-sku{if $product.sku_type || (!$product.sku_type && (count($product.skus) > 1 || empty($product.skus[$product.sku_id].sku|default:null)))} is-hidden{/if}">
+											[`SKU code`]:
+											{if $product.sku_type}
+												{foreach $product.skus as $sku}
+													{if isset($sku.sku) && !empty($sku.sku)}
+														<span class="s-product-sku-{$sku.id}" style="display:none"> {$sku.sku}</span>
+													{/if}
+												{/foreach}
+											{else}
+												{if count($product.skus) > 1}
+													<span> -</span>
+												{else}
+													<span> {$product.skus[$product.sku_id].sku|default:" -"}</span>
+												{/if}
+											{/if}
+										</div>
+									{/if}
+									{if $theme_settings.shop_productpage_view eq 2}</div>{/if}
+									{if $theme_settings.shop_productpage_view ne 2}
+										<div class="mb-hide s-product-stocks">
+											{foreach $product.skus as $sku}
+												{if $sku.stock}
+													{foreach $stocks as $stock_id => $stock}
+														<div class="pd-descr__stock s-product-stock sku-{$sku.id}-stock"{if $sku.id != $product.sku_id} style="display:none"{/if} data-sku-count="{$sku.count}">
+															{if isset($sku.stock[$stock_id])}
+																{$stock_count = $sku.stock[$stock_id]}
+															{else}
+																{$stock_count = null}
+															{/if}
+															<div class="pd-descr__stock-title">{$stock.name|escape}</div>
+															{in_stock n=$stock_count low=$stock.low_count critical=$stock.critical_count}
+														</div>
+													{/foreach}
+												{else}
+													<div class="pd-descr__stock s-product-stock sku-{$sku.id}-stock"{if $sku.id != $product.sku_id} style="display:none"{/if} data-sku-count="{$sku.count}">
+														{in_stock n=$sku.count}
+													</div>
+												{/if}
+											{/foreach}
+										</div>
+										{if !empty($_theme_config.brief_features)}
+											<div class="pd-descr__chars">
+												<div class="pd-chars">
+													<h3 class="pd-chars__title">[`Features`]</h3>
+													<ul class="pd-chars__list">
+														{foreach $_theme_config.brief_features as $f_code => $f_value}
+														<li class="pd-chars__i">
+															<dl>
+																<dt>{$features[$f_code].name|escape}</dt>
+																<dd>
+																	{if is_array($f_value)}
+																		{if $features[$f_code].type == 'color'}
+																			{foreach $f_value as $color}
+																				<div class="tab-chars__color-item">
+																					<div class="color-text">
+																						<div class="c-color{if $color->code eq 16777215} c-color_white{/if}" style="{$color->style}"></div>
+																						<div class="color-text__text">{$color->value}</div>
+																					</div>
+																				</div>
+																			{/foreach}
+																		{else}
+																			{implode(', ', $f_value)}
+																		{/if}
+																	{else}
+																		{$f_value}
+																	{/if}
+																</dd>
+															</dl>
+														</li>
+														{/foreach}
+													</ul>
+													<a class="pd-chars__show-all" href="#item-tabs">[`All features`]</a>
+												</div>
+											</div>
+										{/if}
+										{if $theme_settings.shop_productpage_categories ne "none" && $product.categories}
+										<div class="pd-descr__tags">
+											<div class="pd-tag-links">
+												<h5 class="pd-tag-links__title">[`Categories`]</h5>
+												<ul class="pd-tag-links__list list-reset">
+													{foreach $product.categories as $c}
+														{if $c.status}
+															<li class="pd-tag-links__item">
+																<a class="{if $theme_settings.shop_productpage_categories eq 'buttons'}btn {$theme_settings.main_buttons_style|replace:'img/themebuttons/':''|replace:'.gif':''} btn_sec-5{else}pd-tag-links__link{/if}" href="{$wa->getUrl('/frontend/category', ['category_url' => $c.full_url])}">
+																	{$c.name|escape}
+																	<div class="hover-anim"></div>
+																</a>
+															</li>
+														{/if}
+													{/foreach}
+												</ul>
+											</div>
+										</div>
+										{/if}
+										{if $theme_settings.shop_productpage_tags ne "none" && $product.tags}
+											<div class="pd-descr__tags">
+												<div class="pd-tag-links">
+													<h5 class="pd-tag-links__title">[`Tags`]</h5>
+													<ul class="pd-tag-links__list list-reset">
+														{foreach $product.tags as $t}
+															<li class="pd-tag-links__item">
+																<a class="{if $theme_settings.shop_productpage_tags eq 'buttons'}btn {$theme_settings.main_buttons_style|replace:'img/themebuttons/':''|replace:'.gif':''} btn_sec-5{else}pd-tag-links__link{/if}" href="{$wa->getUrl('/frontend/tag', ['tag' => urlencode($t)])}">
+																	{$t}
+																	<div class="hover-anim"></div>
+																</a>
+															</li>
+														{/foreach}
+													</ul>
+												</div>
+											</div>
+										{/if}
+									{/if}
+								{/if}
+							</div>
+						</div>
+					{/if}
+					<div class="b-row-ip__col-cart">
+						{include file="product.cart.html" inline}
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	{if !$_is_dialog}
+		{if $product.images}
+			<div class="pd-image-gallery mfp-hide mfp-with-anim" id="ip-gallery">
+				<div class="pd-image-gallery__main">
+					<div class="pd-image-gallery__photo-wrapper">
+						<div class="pd-image-gallery__nav">
+							<button class="slider-ar slider-ar_round pos-rel default-btn pd-image-gallery__left">
+								<svg class="icon cent-icon" width="8" height="15">
+									<use xlink:href="#arrow-left-big"></use>
+								</svg>
+							</button>
+							<button class="slider-ar slider-ar_round pos-rel default-btn pd-image-gallery__right">
+								<svg class="icon cent-icon" width="8" height="15">
+									<use xlink:href="#arrow-right-big"></use>
+								</svg>
+							</button>
+						</div>
+						<div class="swiper-container gallery-top">
+							<div class="swiper-wrapper">
+								{if $product.images}
+									{foreach $product.images as $image}
+										<div class="swiper-slide" data-startindex="{$image@index}">{$wa->shop->imgHtml($image, '970',['alt'=>$image.description|escape])}</div>
+									{/foreach}
+								{/if}
+							</div>
+						</div>
+					</div>
+				</div>
+				{if count($product.images) > 1}
+					<div class="pd-image-gallery__thumbs">
+						<div class="swiper-container gallery-thumbs">
+							<div class="swiper-wrapper">
+								{foreach $product.images as $image}
+									<div class="swiper-slide" data-startindex="{$image@index}">{$wa->shop->imgHtml($image, '96x96',['alt'=>$image.description|escape])}</div>
+								{/foreach}
+							</div>
+						</div>
+					</div>
+				{/if}
+			</div>
+		{/if}
+		<!-- plugin hook: 'frontend_product.block' -->
+        {* @event frontend_product.%plugin_id%.block *}
+        {foreach $frontend_product as $_}{$_.block}{/foreach}
+		{if $theme_settings.shop_productpage_info_features_position eq "pos1"}
+			{include file="product.features.html"}
+		{/if}
+		{$crossselling = $product->crossSelling(12)}
+		{if $crossselling}
+			{include file="`$theme_settings.shop_productpage_related_crossselling`.html" products=$crossselling title=sprintf('[`Customers who bought %s also bought`]', $product.name|escape)}
+		{/if}
+		<div class="item-pg__tabs" id="item-tabs">
+			<div class="layout-center">
+				<div class="item-tabs">
+					<div class="item-tabs__menu">
+						<ul class="item-tabs__list item-tabs__list_js flex menu">
+							{if $product.description || ($theme_settings.shop_productpage_merge_description_tabs && ($product.description))}
+								<li class="item-tabs__menu-i">
+									<a class="item-tabs__link" href="#">[`Description`]</a>
+								</li>
+							{/if}
+							{if !$theme_settings.shop_productpage_merge_description_tabs && $product.features}
+								<li class="item-tabs__menu-i item-tabs__menu-i_chars">
+									<a class="item-tabs__link" href="#">[`Features`]</a>
+								</li>
+							{/if}
+							{if $theme_settings.products_show_reviews}
+								<li class="item-tabs__menu-i">
+									<a class="item-tabs__link item-tabs__loadform" href="#">[`Reviews`]{if $reviews_total_count > 0} ({$reviews_total_count}){/if}</a>
+								</li>
+							{/if}
+							{foreach $product.pages as $page}
+								<li class="item-tabs__menu-i">
+									<a class="item-tabs__link" href="{$wa->shop->productUrl($product, 'page', ['page_url' => $page.url])}">{$page.name|escape}</a>
+								</li>
+							{/foreach}
+						</ul>
+					</div>
+					<div class="item-tabs__content">
+						<ul class="item-tabs__content-list">
+							{if $product.description || ($theme_settings.shop_productpage_merge_description_tabs && ($product.description))}
+								<li class="item-tabs__content-i">
+									<div class="b-row">
+										<div itemprop="description">
+											{$product.description}
+										</div>
+										{if $theme_settings.shop_productpage_merge_description_tabs}
+											<div class="tab-chars">
+												<div class="tab-chars__content">
+													<table>
+														{foreach $product.features as $f_code => $f_value}
+															{if $features[$f_code].type == 'divider'}
+																	</table>
+																</div>
+																<div class="tab-chars__type">{$features[$f_code].name|escape}</div>
+																<div class="tab-chars__content">
+																	<table>
+															{else}
+																{$_true_params = ["weight", "brand", "model", "width", "height", "depth", "color", "manufacturer"]}
+																{$_is_good_param = ($f_code|in_array:$_true_params)}
+																{$_itemprop = ""}
+																{if $_is_good_param}
+																	{$_itemprop = $f_code}
+																{/if}
+																<tr>
+																	<td>{$features[$f_code].name|escape}</td>
+																	<td{if !empty($_itemprop)} itemprop="{$_itemprop|escape}"{/if}>
+																		{if is_array($f_value)}
+																			{if $features[$f_code].type == 'color'}
+																				{foreach $f_value as $color}
+																					<div class="tab-chars__color-item">
+																						<div class="color-text">
+																							<div class="c-color{if $color->code eq 16777215} c-color_white{/if}" style="{$color->style}"></div>
+																							<div class="color-text__text">{$color->value}</div>
+																						</div>
+																					</div>
+																				{/foreach}
+																			{else}
+																				{implode(', ', $f_value)}
+																			{/if}
+																		{else}
+																			{$f_value}
+																		{/if}
+																	</td>
+																</tr>
+															{/if}
+														{/foreach}
+													</table>
+												</div>
+											</div>
+										{/if}
+									</div>
+								</li>
+							{/if}
+							{if !$theme_settings.shop_productpage_merge_description_tabs && $product.features}
+								<li class="item-tabs__content-i">
+									<div class="b-row">
+										<div class="tab-chars">
+											<div class="tab-chars__content">
+												<table>
+													{foreach $product.features as $f_code => $f_value}
+														{if $features[$f_code].type == 'divider'}
+																</table>
+															</div>
+															<div class="tab-chars__type">{$features[$f_code].name|escape}</div>
+															<div class="tab-chars__content">
+																<table>
+														{else}
+															{$_true_params = ["weight", "brand", "model", "width", "height", "depth", "color", "manufacturer"]}
+															{$_is_good_param = ($f_code|in_array:$_true_params)}
+															{$_itemprop = ""}
+															{if $_is_good_param}
+																{$_itemprop = $f_code}
+															{/if}
+															<tr>
+																<td>{$features[$f_code].name|escape}</td>
+																<td{if !empty($_itemprop)} itemprop="{$_itemprop|escape}"{/if}>
+																	{if is_array($f_value)}
+																		{if $features[$f_code].type == 'color'}
+																			{foreach $f_value as $color}
+																				<div class="tab-chars__color-item">
+																					<div class="color-text">
+																						<div class="c-color{if $color->code eq 16777215} c-color_white{/if}" style="{$color->style}"></div>
+																						<div class="color-text__text">{$color->value}</div>
+																					</div>
+																				</div>
+																			{/foreach}
+																		{else}
+																			{implode(', ', $f_value)}
+																		{/if}
+																	{else}
+																		{$f_value}
+																	{/if}
+																</td>
+															</tr>
+														{/if}
+													{/foreach}
+												</table>
+											</div>
+										</div>
+									</div>
+								</li>
+							{/if}
+							{if $theme_settings.products_show_reviews}
+								<li class="item-tabs__content-i">
+									<div class="b-row">
+										<div class="b-row__inner">
+											<div class="reviews" id="s-product-reviews-wrapper">
+												<div class="reviews-loading__msg">
+													<img src="{$wa_parent_theme_url}img/ajax-loader.gif" alt="" /> [`Loading data...`]
+												</div>
+											</div>
+										</div>
+									</div>
+								</li>
+							{/if}
+							{foreach $product.pages as $page}
+								<li class="item-tabs__content-i">
+									{include file="string:`$page.content`"}
+								</li>
+							{/foreach}
+						</ul>
+						<script>
+						$(".item-tabs__content-list li:first-child, .item-tabs__list li:first-child").addClass("active");
+						</script>
+					</div>
+				</div>
+			</div>
+		</div>
+		{include file="`$wa_parent_theme_path`/admin_edit_button.html" link="`$wa_backend_url`shop/?action=products#/product/`$product.id`/edit/" title="[`Edit product`]"}
+		{if $theme_settings.products_show_reviews}
+		<script src="{$wa_theme_url}js/reviews.js?v{$wa_theme_version}"></script>
+		<script>
+			$('.item-tabs__loadform').one('click', function() {
+				$.ajax({
+					url: "{$wa->shop->productUrl($product)}reviews/",
+					success: function(html) {
+						$('#s-product-reviews-wrapper').html($(html).find('.reviews').html());
+						$.getScript("{$wa_theme_url}js/reviews.js?v{$wa_theme_version}");
+					},
+					error: function (jqXHR, exception) {
+						if (jqXHR.status === 0) {
+							msg = '12Not connect.\nOnly your domain.';
+						} else if (jqXHR.status == 404) {
+							msg = '3213Page not found. [404]';
+						} else if (jqXHR.status == 500) {
+							msg = '43243Internal Server Error. [500]';
+						} else if (exception === 'parsererror') {
+							msg = '4321r432Requested JSON parse failed.';
+						} else if (exception === 'timeout') {
+							msg = '3e1323eTime out error.';
+						} else if (exception === 'abort') {
+							msg = '5y245Ajax request aborted.';
+						} else {
+							msg = 'Uncaught Error.\n' + jqXHR.responseText;
+						}
+						alert(msg);
+					},
+				});
+			});
+			{if !$product.description && !$product.features && $theme_settings.products_show_reviews}
+				$(".item-pg__tabs-loadform").trigger('click');
+			{/if}
+		</script>
+		{/if}
+		{$upselling = $product->upSelling(12)}
+		{if $upselling}
+			{include file="`$theme_settings.shop_productpage_related_upselling`.html" products=$upselling title="[`See also`]"}
+		{/if}
+		{if $theme_settings.shop_productpage_info_features_position eq "pos2"}
+			{include file="product.features.html"}
+		{/if}
+	{/if}
+</div>
+{$wa->globals("is_product_page",true)}
+{$wa->globals("load_tippy_js",true)}
+{/strip}

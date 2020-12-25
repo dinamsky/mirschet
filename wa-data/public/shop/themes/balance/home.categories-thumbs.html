@@ -1,0 +1,69 @@
+{strip}
+{if $theme_settings.homepage_categories_thumbs_view ne "none"}
+	{if !empty($theme_settings.homepage_categories_thumbs_list)}
+		{$_categories = explode(",",$theme_settings.homepage_categories_thumbs_list)}
+		<div class="home-pg__section home-pg__section_subcat-1{if $theme_settings.homepage_categories_thumbs_view ne 'always'} {$theme_settings.homepage_categories_thumbs_view}{/if} pos-rel">
+			<div class="descr-mode pos-abs"><span class="pos-rel">CATEGORIES-THUMBS</span></div>
+			{if !empty($theme_settings.homepage_categories_thumbs_title)}
+				<div class="home-pg__section-header">
+					<h3 class="section-title">{$theme_settings.homepage_categories_thumbs_title}</h3>
+				</div>
+			{/if}
+			<div class="subcat-wrapper subcat-wrapper_pic">
+				{foreach $_categories as $c}
+					{$_category = $wa->shop->category($c)}
+					{if $_category}
+						{$_category.count = 0}
+						{if $theme_settings.homepage_categories_thumbs_count}
+							{$_category.count = $wa->shop->productsCount("category/`$_category.id`")}
+						{/if}
+						{$_category._preview_image = ""}
+						{if isset($_category.params.categories_thumbs_image) && !empty($_category.params.categories_thumbs_image)}
+							{$_category._preview_image = $_category.params.categories_thumbs_image}
+						{elseif method_exists("shopWmimageincatPlugin","getCategoryImage") && shopWmimageincatPlugin::getCategoryImage($_category.id, 'image')}
+							{$_category._preview_image = shopWmimageincatPlugin::getCategoryImage($_category.id, 'image')}
+						{/if}
+						<div class="subcat-wrapper__item{if $theme_settings.homepage_categories_thumbs_border} sub-cat-bd{/if}">
+							<div class="sub-cat{if $theme_settings.homepage_categories_thumbs_border} sub-cat_bd{/if} sub-cat_primary sub-cat_home">
+								<a class="sub-cat__image" href="{$wa->shop->categoryUrl($_category)}">
+									<img src="data:image/gif;base64,R0lGODlh6gDqAIAAAP///wAAACH5BAEAAAEALAAAAADqAOoAAAL+jI+py+0Po5y02ouz3rz7D4biSJbmiabqyrbuC8fyTNf2jef6zvf+DwwKh8Si8YhMKpfMpvMJjUqn1Kr1is1qt9yu9wsOi8fksvmMTqvX7Lb7DY/L5/S6/Y7P6/f8vv8PGCg4SFhoeIiYqLjI2Oj4CBkpOUlZaXmJmam5ydnp+QkaKjpKWmp6ipqqusra6voKGys7S1tre4ubq7vL2+v7CxwsPExcbHyMnKy8zNzs/AwdLT1NXW19jZ2tvc3d7f0NHi4+Tl5ufo6err7O3u7+Dh8vP09fb3+Pn6+/z9/v/w8woMCBBAsaPIgwocKFDBs6fAgxosSJFCtavIgxo8Y9jRw7evwIMqTIkSRLmjyJMqXKlSxbunwJM6bMmTRr2ryJM6fOnTx7+vwJNKjQoUSLGj2KNKnSpUybOo1UAAA7" data-src='{$_category._preview_image|default:"`$wa_parent_theme_url`img/dummy200.png"}' class="lazy-img" alt="{$_category.name|escape}">
+								</a>
+								{if $_category.count > 0}
+									<div class="sub-cat__qty">
+										<div class="sub-cat-qty">{$_category.count}</div>
+									</div>
+								{/if}
+								<a class="sub-cat__title" href="{$wa->shop->categoryUrl($_category)}">{$_category.name|escape}</a>
+								{if $theme_settings.homepage_categories_thumbs_subcategories && !empty($_category.subcategories)}
+									<div class="sub-cat__menu">
+										<div class="subcat-menu">
+											<div class="subcat-menu__list">
+												{foreach $_category.subcategories as $sc}
+												<div class="subcat-menu__item">
+													<a class="subcat-menu__link link link_sec" href="{$sc.url}">{$sc.name|escape}</a>
+												</div>
+												{/foreach}
+												<a class="subcat-menu__link-to-all link link_sec" href="{$wa->shop->categoryUrl($_category)}">
+													<span>[`All categories`]</span>
+													<svg class="icon" width="4" height="6">
+														<use xlink:href="#arrow-right-small"></use>
+													</svg>
+												</a>
+											</div>
+										</div>
+									</div>
+									<div class="sub-cat__arrow">
+										<svg class="icon" width="6" height="11">
+											<use xlink:href="#arrow-vert-menu"></use>
+										</svg>
+									</div>
+								{/if}
+							</div>
+						</div>
+					{/if}
+				{/foreach}
+			</div>
+		</div>
+	{/if}
+{/if}
+{/strip}

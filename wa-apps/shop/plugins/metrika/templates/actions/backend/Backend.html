@@ -1,0 +1,146 @@
+<div class="sidebar left200px" id="s-sidebar">
+    <div class="block">
+        <ul class="menu-v not metrika-menu">
+            <li><a href="#" data-action="traffic">Посещаемость магазина</a></li>
+            <li><a href="#" data-action="sources">Источники переходов</a></li>
+            <li><a href="#" data-action="popular">Популярные страницы</a></li>
+            <li><a href="#" data-action="phrases">Поисковые фразы</a></li>
+            <li><a href="#" data-action="conversion">Конверсия</a></li>
+            <li><a href="#" data-action="geo">География по странам</a></li>
+            <li><a href="#" data-action="interests">Интересы покупателей</a></li>
+            <li><a href="#" data-action="demography">Пол покупателей</a></li>
+            <li><a href="#" data-action="age_gender">Возраст покупателей</a></li>
+            <li><a href="#" data-action="tech_display">Разрешение экрана</a></li>
+            <li><a href="#" data-action="browsers">Браузеры покупателей</a></li>
+            <li><a href="#" data-action="devices">Устройства просмотра</a></li>
+            <li><a href="#" data-action="mobile">Мобильность</a></li>
+            <li><a href="#" data-action="os">Операционные системы</a></li>
+        </ul>
+    </div>
+    <div class="block">
+        <h5 class="heading"><i class="icon16 info"></i> Быстрая справка</h5>
+        <ul class="menu-v">
+            <li><b>Визиты</b> <span class="hint">- число сеансов, включающих один и более просмотров. Прекращается через 30 мин. отсутствия активности.</span></li>
+            <li><b>Посетители</b> – <span class="hint">число уникальных пользователей, ранее не посещявщих магазин.</span></li>
+            <li><b>Просмотры</b> – <span class="hint">число просмотров страниц на сайте за отчетный период.</span></li>
+            <li><b>Отказы</b> – <span class="hint">доля визитов, в рамках которых состоялся лишь один просмотр страницы, продолжавшийся менее 15 секунд.</span></li>
+            <li><b>Глубина просмотра</b> – <span class="hint">количество страниц, просмотренных посетителем во время визита.</span></li>
+            <li><b>Время на сайте</b> – <span class="hint">средняя продолжительность визита в секундах.</span></li>
+            <li style="display:none;"><b>Целевые визиты</b> – <span class="hint">число визитов, в рамках которых была достигнута цель.</span></li>
+            <li style="display:none;"><b>Достижение цели</b> – <span class="hint">количество достижений цели во всех целевых визитах.</span></li>
+        </ul>
+        <a href="#" class="inline-link show-all-help"><b><i>Показать все</i></b></a>
+    </div>
+</div>
+<div class="content left200px blank metrika-content" id="s-content">
+    <div class="block double-padded">
+        <h1><span class="metrika-name"></span> <span id="period-description" class="hint"></span></h1>
+        <div class="error s-alert"></div>
+        <div id="reportscontent">
+            <div id="chart_summary"></div>
+            <div class="type-1 stat_table" style="display:none;">
+                <table class="zebra">
+                    <tr class="white s-header-row">
+                        <td style="width:100px;"></td>
+                        <td>Визиты</td>
+                        <td>Просмотры</td>
+                        <td>Новые посетители</td>
+                        <td>Глубина просмотра</td>
+                        <td>Отказы</td>
+                    </tr>
+                    <tr class="total s-summary-row">
+                        <td>Всего</td>
+                        <td><span class="totals_visits"></span></td>
+                        <td><span class="totals_page_view"></span></td>
+                        <td><span class="totals_new_visitors_count"></span> (<span class="totals_new_visitors"></span>)</td>
+                        <td><span class="totals_depth"></span></td>
+                        <td><span class="totals_denial"></span></td>
+                    </tr>
+                </table>
+            </div>
+            <div class="type-2 stat_table" style="display:none;">
+                <table class="zebra">
+                    <tr class="total s-summary-row">
+                        <td></td>
+                        <td>Визиты</td>
+                        <td>Посетители</td>
+                        <td>Отказы</td>
+                        <td>Глубина просмотра</td>
+                        <td>Время на сайте</td>
+                    </tr>
+                </table>
+            </div>
+            <div class="type-3 stat_table" style="display:none;">
+                <table class="zebra">
+                    <tr class="total s-summary-row">
+                        <td></td>
+                        <td>Целевые визиты</td>
+                        <td>Посетители</td>
+                        <td>Просмотры</td>
+                        <td>Конверсия</td>
+                    </tr>
+                </table>
+            </div>
+            <div class="type-4 stat_table" style="display:none;">
+                <table class="zebra">
+                    <tr class="total s-summary-row">
+                        <td></td>
+                        <td>Пользователи</td>
+                        <td>Просмотры</td>
+                        <td>Глубина просмотра</td>
+                    </tr>
+                </table>
+            </div>
+            <div class="popular stat_table" style="display:none;">
+                <table class="zebra">
+                    <tr class="white s-header-row">
+                        <td style="width:700px;"></td>
+                        <td>Просмотры</td>
+                        <td>Входы</td>
+                        <td>Выходы</td>
+                    </tr>
+                    <tr class="total s-summary-row">
+                        <td>Страница</td>
+                        <td><span class="totals_page_views"></span></td>
+                        <td><span class="entrance"></span></td>
+                        <td><span class="exit"></span></td>
+                    </tr>
+                </table>
+            </div>
+            <div class="demography stat_table" style="display:none;">
+                <table class="zebra">
+                    <tr class="white s-header-row">
+                        <td style="width:300px;"></td>
+                        <td>Визиты</td>
+                        <td>Глубина просмотра</td>
+                        <td>Отказы</td>
+                    </tr>
+                    <tr class="total s-summary-row">
+                        <td>Всего</td>
+                        <td><span class="totals_visits"></span></td>
+                        <td><span class="totals_depth"></span></td>
+                        <td><span class="totals_denial"></span></td>
+                    </tr>
+                </table>
+            </div>
+            <div class="conversion stat_table" style="display:none;">
+                <table class="zebra">
+                    <tr class="white s-header-row">
+                        <td style="width:300px;"></td>
+                        <td>Целевые визиты</td>
+                        <td>Конверсия</td>
+                        <td>Достижение цели</td>
+                        <td>Глубина просмотра</td>
+                    </tr>
+                    <tr class="total s-summary-row">
+                        <td>Название цели</td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,13 @@
+<div class="block">
+    <a href="javascript:void(0)" id="s-plugin-vkshop-share-button"><i class="icon16" style="background-image: url('{$wa_app_static_url}plugins/vkshop/img/vkshop16.png')"></i> {_wp('Share on Vkontakte')}
+    </a>
+</div>
+<script type="text/javascript">
+    $(function () {
+        $('#s-plugin-vkshop-share-button').off().on('click', function () {
+            $.shop.trace('Share on Vkshop clicked');
+            $('#s-plugin-vkshop-content').load('?plugin=vkshop&action=form&product_id={$product.id}');
+            return false;
+        })
+    })
+</script>

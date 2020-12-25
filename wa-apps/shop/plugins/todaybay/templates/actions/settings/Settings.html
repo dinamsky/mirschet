@@ -1,0 +1,311 @@
+<link rel="stylesheet" href="{$wa_url}wa-content/js/jquery-plugins/ibutton/jquery.ibutton.min.css?v={$wa->version()}">
+<script src="{$wa_url}wa-content/js/jquery-plugins/ibutton/jquery.ibutton.min.js"></script>
+<style type="text/css">
+    #wa .CodeMirror{
+        border: 1px solid #eee;
+    }
+    .CodeMirror-scroll {
+        height: auto;
+        overflow-y: hidden;
+        overflow-x: auto;
+    }
+</style>
+<h1>TodayBuy. Сегодня купили</h1>
+<h4>ver. 1.3</h4>
+<p class="gray">
+    Список товаров, которые сегодня приобрели в вашем магазине
+</p>
+<div class="fields form" style='min-width: 500px;'>
+    <form action="?plugin=todaybay&action=save" method="post" id="plugins-settings-form">
+        {$wa->csrf()}
+    <div class="field">
+        <div class="name">Включить/Выключить плагин</div>
+        <div class="value">
+            <div class="ibutton-checkbox">
+               <input class="switcher" 
+                      type="checkbox" 
+                      name="settings[state]" 
+                      value="1" 
+                      {if isset($settings['state']) && $settings['state'] == 1}
+                      checked="checked"
+                      {/if} />
+            </div>            
+        </div>
+    </div>
+    <div class="field">
+        <div class="name">Количество выводимых товаров:</div>
+        <div class="value">
+            <input type="text" 
+                   name="settings[count]" 
+                   value="{if isset($settings['count'])}{$settings['count']|escape}{else}5{/if}" 
+                   style="width: 10px;" />
+        </div>
+        <br/><br/>
+        <p class="gray">
+            Сколько позиций надо выводить в списке
+        </p> 
+    </div>    
+    <div class="field">
+        <div class="name">Если ничего не куплено:</div>
+        <div class="value">
+            <select  name="settings[nothingshow]">
+                <option value="nothing" {if isset($settings['nothingshow']) && $settings['nothingshow'] == 'nothing'} selected="selected"{/if}>Ничего не выводить</option>
+                <option value="addfromlist" {if isset($settings['nothingshow']) && $settings['nothingshow'] == 'addfromlist'} selected="selected"{/if}>Добавить из списка</option> 
+            </select>
+        </div>
+        <br/><br/>
+        <p class="gray">
+            Что делать, если пока нет купленных товаров
+        </p>
+    </div>
+    <div class="field">
+        <div class="name">Если купленных товаров меньше, чем указано выводить:</div>
+        <div class="value">
+            <select  name="settings[dowhat]">
+                <option value="nothing" {if isset($settings['dowhat']) && $settings['dowhat'] == 'nothing'} selected="selected"{/if} >Вывести сколько есть</option>
+                <option value="addfromlist" {if isset($settings['dowhat']) && $settings['dowhat'] == 'addfromlist'} selected="selected"{/if} >Добавить из списка</option> 
+            </select>
+        </div>
+        <br/><br/><br/>
+        <p class="gray">
+            Что делать, если купленных товаров меньше, чем указано выводить
+        </p>
+    </div>    
+    <div class="field">
+        <div class="name">Список, из которого добавлять:</div>
+        {if isset($sets)}
+        <div class="value">
+            <select name="settings[list]">
+                {foreach $sets as $id => $name}                
+                <option value="{$id|escape}" {if isset($settings['list']) &&  $settings['list'] == {$id|escape}} selected="selected"{/if}>{$name|escape}</option>
+                {/foreach}                
+            </select>
+        </div>
+        <br/><br/>
+        <p class="gray">
+            Список, из которого следует добавлять товар при условии, что товар надо добавлять
+        </p>
+        {else}
+        <div class="value">
+            <span style='color: red; font-weight: bold;'>Не задан ни один список. Добавление из списка будет недоступно.</span>
+        </div>
+        {/if}
+    </div>    
+    <div class="field">
+        <div class="name">Для вывода товаров использовать хук frontend_nav или хелпер</div>
+        <div class="value">
+            <select id="todaybay_usehook" name="settings[usehook]">
+                <option value='hook' {if isset($settings['usehook']) && $settings['usehook'] == 'hook'} selected="selected"{/if} >Хук</option>
+                <option value='helper' {if isset($settings['usehook']) && $settings['usehook'] == 'helper'} selected="selected"{/if}>Хелпер</option> 
+            </select> 
+        </div>
+        <br/></br><br/>
+        <span class='use_hook' {if isset($settings['usehook']) && $settings['usehook'] == 'hook'} style="display: none;"{/if}>            
+            {literal}
+            {shopTodaybayPlugin::getProductList()}
+            {/literal}
+            <p class="gray">
+            <i class="icon16 exclamation"></i> 
+            Вставьте данный хелпер в нужное место вашего шаблона.
+            </p>
+        </span>
+        </p>
+    </div>
+    <div class="field">
+        <div class="name">Как выводить:</div>
+        <div class="value">
+            <select id="todaybay_output" name="settings[output]" >
+                <option value='template' {if isset($settings['output']) && $settings['output'] == 'template'} selected="selected"{/if}>Шаблон</option>
+                <option value='list' {if isset($settings['output']) && $settings['output'] == 'list'} selected="selected"{/if}>Список</option> 
+            </select>
+        </div>
+        <p class="gray">
+            Результат в виде шаблона или списка.
+        </p>
+    </div>
+    <div id="template_output" class="field" {if isset($settings['output']) && $settings['output'] != 'template'} style="display: none"{/if}>
+        {if $tml_change}
+        <div class="value">            
+            <input type="checkbox" name="settings[reset_tml]" value="1"  /> - Сбросить изменения, использовать шаблон по умолчанию
+        </div>
+        {/if}         
+        <div class="name">
+            Шаблон<br />
+            <span class="hint">HTML + Smarty</span>
+            {if $tml_change}
+            <br/><span><i class="icon16 exclamation"></i>Внимание! Шаблон по умолчанию был изменен</span>
+            {/if}
+        </div>
+        <div class="value no-shift">
+            <div id="s-editor-core-wrapper">
+                <textarea id="main-template" class="body" name="template">{$template}</textarea>
+            </div>
+        </div>         
+    </div> 
+    <div id="list_output" class="field" {if isset($settings['output']) && $settings['output'] != 'list'} style="display: none"{/if}>
+        {if $list_change}
+        <div class="value">            
+            <input type="checkbox" name="settings[reset_list]" value="1"  /> - Сбросить изменения, использовать шаблон по умолчанию
+        </div>
+        {/if} 
+        <div class="name">
+            Шаблон списка:<br />
+            <span class="hint">HTML + Smarty</span>
+            {if $list_change}
+            <br/><span><i class="icon16 exclamation"></i>Внимание! Шаблон по умолчанию был изменен</span>
+            {/if}
+        </div>
+        <div class="value no-shift">
+            <div id="a-editor-core-wrapper">
+                <textarea id="list-template" class="body" name="listtemplate">{$listtemplate}</textarea>
+            </div>
+        </div>         
+    </div>
+    <div class="field">
+        <div class="value submit">
+            <input id="submit-button" type="submit" class="button green" value="Сохранить">
+            <span id="plugins-settings-form-status" style="display:none">
+                <i style="vertical-align:middle" class="icon16 yes"></i> [`Saved`]
+            </span>
+        </div>
+    </div> 
+    </form>
+    <div class="field">
+        <div class="name">Хелпер для вывода коллекции товаров</div>
+        <div class="value">
+            {literal}
+            {shopTodaybayPlugin::getProductCollection()} - Код хелпера для вывода коллекции товаров
+            {/literal}
+        </div>
+        <br/><br/>
+        <p class="gray">
+            Данный хелпер поможет вывести список купленных товаров использую стандартные методы вывода шаблона
+        </p>
+    </div>
+    <h2>Примеры использования хелпера</h2>
+    <div class="field">
+        <div class="name">Пример использования<br /><span class="hint">шаблон "Купить Просто"</span></div>
+        <div class="value no-shift">            
+                <textarea id="sample1" class="body">
+                    {$sample2_template|escape}
+                </textarea>            
+        </div> 
+    </div> 
+    <div class="field">
+        <div class="name">Пример использования<br /><span class="hint">шаблон "Sidebar"</span></div>
+        <div class="value no-shift">            
+                <textarea id="sample2" class="body">
+                    {$sample1_template|escape}
+                </textarea>           
+        </div> 
+    </div> 
+    <div class="copyright">
+        <span class="gray">&copy; 2014 Студия Было Непросто</span><br/>
+        <span class="gray"><a href="{$wa_backend_url}installer/#/plugins&vendor=986052/shop/" target="_blank">Все плагины</a></span>
+    </div>
+</div>
+<script type="text/javascript"> 
+    
+    function handler(){
+        var onLabelSelector = '#' + this.id + '-on-label',
+            offLabelSelector = '#' + this.id + '-off-label';
+        if (!this.checked) {
+            $(onLabelSelector).addClass('unselected');
+            $(offLabelSelector).removeClass('unselected');            
+        } else {
+            $(onLabelSelector).removeClass('unselected');
+            $(offLabelSelector).addClass('unselected');
+        }
+    }
+    
+    
+    $(function() {
+        
+        var switcher = $('.switcher');
+        handler.call(switcher.get(0));
+        switcher.iButton({
+            labelOn: 'On',
+            labelOff: 'Off',
+            className: 'mini'
+        }).change(handler);      
+         
+        
+        var c = CodeMirror.fromTextArea(document.getElementById('main-template'), {
+            mode: "text/html",
+            tabMode: "indent",
+            height: "dynamic",
+            lineWrapping: true
+        });
+        
+        var listtemp = CodeMirror.fromTextArea(document.getElementById('list-template'), {
+            mode: "text/html",
+            tabMode: "indent",
+            height: "dynamic",
+            lineWrapping: true
+        }); 
+        
+        var sample1 = CodeMirror.fromTextArea(document.getElementById('sample1'), {
+            mode: "text/html",
+            tabMode: "indent",
+            height: "dynamic",
+            lineWrapping: true,
+            readOnly: true
+        });
+        
+        var sample2 = CodeMirror.fromTextArea(document.getElementById('sample2'), {
+            mode: "text/html",
+            tabMode: "indent",
+            height: "dynamic",
+            lineWrapping: true,
+            readOnly: true
+        });
+        
+        $('#todaybay_output').on('change', function() {            
+            if(this.value == 'template'){
+                $('#list_output').hide();
+                $('#template_output').show();
+                $('#template_output').focus();                                
+            }
+            
+            if(this.value == 'list'){
+                $('#template_output').hide();
+                $('#list_output').show();
+                $('#list_output').focus();
+            }
+            
+        });
+        
+        $('#todaybay_usehook').on('change', function() {            
+            if(this.value == 'hook'){
+                $('.use_hook').hide();                                
+            }
+            
+            if(this.value == 'helper'){
+                $('.use_hook').show();
+            }
+            
+        });
+        
+        $("#plugins-settings-form").submit(function () {
+            var f = $(this);
+            $.post(f.attr('action'), f.serialize(), function (response) {
+                if(response.status == 'ok') {
+                    console.log(response);
+                    $('#submit-button').removeClass('red').addClass('green');                    
+                    $("#plugins-settings-form-status").html(response.data.message);
+                    $("#plugins-settings-form-status").fadeIn('slow', function () {
+                        $(this).fadeOut(1000);
+                    });
+                } else {
+                    $('#submit-button').removeClass('green').addClass('red');                    
+                    $("#plugins-settings-form-status").html(response.errors.join(', '));
+                    $("#plugins-settings-form-status").fadeIn('slow');
+                }
+            }, "json")
+            return false;
+        }); 
+        
+    });
+</script>
+    
+    

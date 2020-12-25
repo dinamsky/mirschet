@@ -1,0 +1,30 @@
+.ajax-status {
+	display: none;
+}
+
+.bsui-form.bsui-ajax_status_loading .bsui-form__status.ajax-status_type_loading {
+	display: block;
+}
+
+.bsui-form.bsui-ajax_status_success .bsui-form__status.ajax-status_type_success {
+	display: block;
+}
+
+.bsui-form.bsui-ajax_status_error .bsui-form__status.ajax-status_type_error {
+	display: block;
+}
+
+.link-box {
+	display: inline-block;
+	cursor: pointer;
+}
+
+.link-box__icon {
+	display: inline-block;
+	vertical-align: middle;
+}
+
+.link-box__link {
+	display: inline-block;
+	vertical-align: middle;
+}

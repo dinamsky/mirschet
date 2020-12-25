@@ -1,0 +1,18 @@
+{strip}
+<aside class="account-pg__sidebar col-1-of-5">
+	<div class="info-sdb">
+		<div class="info-sdb__wr info-sdb__wr_bd">
+			<div class="info-sdb__header info-sdb__header_btn">
+				<svg class="icon" width="12" height="14">
+					<use xlink:href="#icon-user"></use>
+				</svg>
+				<strong data-mobile-text="[`Personal area`]">[`Personal area`]</strong>
+			</div>
+			<div class="info-sdb__content">
+				{$wa->myNav('info-sdb__list')|replace:"</ul>":" <li class='info-sdb__item'><a href='?logout'>[s`Log out`]</a></li></ul>"|replace:"<a ":"<a class='info-sdb__item-l'"}
+			</div>
+		</div>
+	</div>
+</aside>
+{$wa->globals('bodyClass', 'account-page')}
+{/strip}

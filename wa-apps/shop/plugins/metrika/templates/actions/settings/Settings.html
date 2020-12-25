@@ -1,0 +1,35 @@
+<h1>Яндекс.Метрика</h1>
+<div class="fields form">
+    <form action="?module=plugins&id=metrika&action=save" method="post" id="plugins-settings-form">
+        {$wa->csrf()}
+        <div class="field">
+            <div class="name">
+                Номер счетчика
+            </div>
+            <div class="value">
+                <input type="text" name="shop_metrika[count]" value="{if isset($settings.count)}{$settings.count}{/if}">
+            </div>
+        </div>
+        <div class="field">
+            <div class="name">
+                Токен (не заполняется)
+            </div>
+            <div class="value">
+                <input type="text" name="shop_metrika[token]" value="{if isset($settings.token)}{$settings.token}{/if}" readonly>
+                <div class="hint">Если вы хотите получить новый токен, <a href="#" class="delete-token">удалите старый токен</a> и нажмите кнопку "Сохранить"</div>
+            </div>
+        </div>
+        <div class="field">
+            <div class="value submit">
+                <input type="submit" class="button green" value="[s`Save`]">
+                <span id="plugins-settings-form-status" style="display:none"></span>
+            </div>
+        </div>
+    </form>
+</div>
+<script>
+    $(".delete-token").click(function () {
+       $(this).closest(".value").find("input").val("");
+        return false;
+    });
+</script>

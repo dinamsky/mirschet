@@ -1,0 +1,8 @@
+{strip}
+{if $wa->globals("_balance_countdown_enabled")}<script src="{$wa_active_theme_url}js/countdown.js?v={$wa->version(true)}" defer></script>{/if}
+<script src="{$wa_active_theme_url}js/shop.js?v{$wa_theme_version}" defer></script>
+{if $wa->globals("load_tippy_js")}
+	<script src="https://unpkg.com/popper.js@1"></script>
+	<script src="https://unpkg.com/tippy.js@5"></script>
+{/if}
+{/strip}

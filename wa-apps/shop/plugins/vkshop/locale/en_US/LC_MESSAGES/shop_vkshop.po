@@ -1,0 +1,1236 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: shop/plugins/vkontakte\n"
+"POT-Creation-Date: 2015-02-17 01:36+0300\n"
+"PO-Revision-Date: \n"
+"Last-Translator: \n"
+"Language-Team: shop/plugins/vkontakte <covoxx@gmail.com>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Poedit-SourceCharset: UTF-8\n"
+"X-Poedit-Basepath: .\n"
+"Language: en_US\n"
+"X-Generator: Poedit 2.0.6\n"
+"X-Poedit-SearchPath-0: .\n"
+"X-Poedit-SearchPath-1: .\n"
+
+#: /wa-apps/shop/plugins/vkontakte/lib/config/settings.php:14
+msgid "Set the vkontakte Application ID"
+msgstr ""
+
+#: /wa-apps/shop/plugins/vkontakte/lib/config/settings.php:20
+msgid "Set number of the VK Group. If group link is http://vk.com/club76633538, then number is 76633538"
+msgstr ""
+
+#: /wa-apps/shop/plugins/vkontakte/lib/config/settings.php:26
+msgid "Set number of the VK photo album. If album link is https://vk.com/album-76633538_201977946, then number is 201977946"
+msgstr ""
+
+#: /wa-apps/shop/plugins/vkontakte/lib/config/settings.php:32
+msgid "If checked, then wall post will be signed."
+msgstr ""
+
+#: /wa-apps/shop/plugins/vkontakte/lib/config/settings.php:13
+msgid "Application ID"
+msgstr ""
+
+#: /wa-apps/shop/plugins/vkontakte/lib/config/settings.php:17
+msgid "Number of the VK Group"
+msgstr ""
+
+#: /wa-apps/shop/plugins/vkontakte/lib/config/settings.php:23
+msgid "Number of the VK photo album"
+msgstr ""
+
+#: /wa-apps/shop/plugins/vkontakte/lib/config/settings.php:29
+msgid "Sign the wall post"
+msgstr ""
+
+#: /wa-apps/shop/plugins/vkontakte/lib/config/plugin.php:4
+msgid "Allows you to send the products to the store's Vkontakte group wall."
+msgstr ""
+
+#: /wa-apps/shop/plugins/vkontakte/lib/config/plugin.php:3
+msgid "Vkontakte"
+msgstr ""
+
+#: /wa-apps/shop/plugins/vkontakte/lib/config/settings.php:36
+msgid "Descryption type"
+msgstr ""
+
+#: /wa-apps/shop/plugins/vkontakte/lib/config/settings.php:37
+msgid "Set description type."
+msgstr ""
+
+#: /wa-apps/shop/plugins/vkontakte/lib/config/settings.php:40
+msgid "Description"
+msgstr ""
+
+#: /wa-apps/shop/plugins/vkontakte/lib/config/settings.php:41
+msgid "Summary"
+msgstr ""
+
+msgid "Maximum execution time"
+msgstr ""
+
+msgid "Maximum execution time of PHP-scripts"
+msgstr ""
+
+msgid "The data exchange with third-party servers"
+msgstr ""
+
+#: /wa-apps/shop/plugins/vkshop/templates/login.html:3
+msgid "Vkshop User:"
+msgstr ""
+
+#: /wa-apps/shop/plugins/vkshop/templates/disable_button.html:1
+msgid "Disable/Undisable"
+msgstr ""
+
+#: /wa-apps/shop/plugins/vkshop/templates/errors.html:3
+msgid "Vkontakte errors"
+msgstr ""
+
+#: /wa-apps/shop/plugins/vkshop/templates/settlements.html:11
+msgid "Check the settings for the settlement of the store."
+msgstr ""
+
+#: /wa-apps/shop/plugins/vkshop/templates/queue.html:4
+#: /wa-apps/shop/plugins/vkshop/lib/config/plugin.php:3
+msgid "VK Shop"
+msgstr ""
+
+#: /wa-apps/shop/plugins/vkshop/templates/queue.html:9
+msgid "Disable products"
+msgstr ""
+
+#: /wa-apps/shop/plugins/vkshop/templates/queue.html:15
+msgid "Undisable products"
+msgstr ""
+
+#: /wa-apps/shop/plugins/vkshop/templates/queue.html:21
+msgid "Add to VK Shop queue"
+msgstr ""
+
+#: /wa-apps/shop/plugins/vkshop/templates/queue.html:26
+msgid "Disabled"
+msgstr ""
+
+#: /wa-apps/shop/plugins/vkshop/templates/queue.html:30
+msgid "Queued"
+msgstr ""
+
+#: /wa-apps/shop/plugins/vkshop/js/vkshop.js:28
+#: /wa-apps/shop/plugins/vkshop/js/vkshop.js:47
+#: /wa-apps/shop/plugins/vkshop/js/vkshop.js:66
+msgid "Please select at least one product"
+msgstr ""
+
+#: /wa-apps/shop/plugins/vkshop/lib/actions/shopVkshopPluginRun.controller.php:163
+msgid "Successfully"
+msgstr ""
+
+#: /wa-apps/shop/plugins/vkshop/lib/actions/shopVkshopPluginRun.controller.php:177
+msgid "%02d hr %02d min %02d sec"
+msgstr ""
+
+#: /wa-apps/shop/plugins/vkshop/lib/actions/shopVkshopPluginRun.controller.php:178
+msgid "(total time: %s)"
+msgstr ""
+
+#: /wa-apps/shop/plugins/vkshop/lib/actions/shopVkshopPluginBackendSend.controller.php:41
+#: /wa-apps/shop/plugins/vkshop/lib/shopVkshopPlugin.class.php:74
+msgid "Auth error"
+msgstr ""
+
+#: /wa-apps/shop/plugins/vkshop/lib/actions/shopVkshopPluginBackendSend.controller.php:42
+#: /wa-apps/shop/plugins/vkshop/lib/shopVkshopPlugin.class.php:75
+msgid "User not authorized"
+msgstr ""
+
+#: /wa-apps/shop/plugins/vkshop/lib/actions/shopVkshopPluginBackendSend.controller.php:50
+msgid "Token error"
+msgstr ""
+
+#: /wa-apps/shop/plugins/vkshop/lib/actions/shopVkshopPluginBackendSend.controller.php:51
+msgid "No access token"
+msgstr ""
+
+#: /wa-apps/shop/plugins/vkshop/lib/config/settings.php:20
+msgid "Set the vkontakte App Secret"
+msgstr ""
+
+#: /wa-apps/shop/plugins/vkshop/lib/config/settings.php:54
+msgid "Sometimes VK refuses to take too long descriptions. This option is introduced in order to be able to cut a description of the size, which receives the VK. Some is 700 characters, some 650 or 600."
+msgstr ""
+
+#: /wa-apps/shop/plugins/vkshop/lib/config/settings.php:19
+msgid "App secret"
+msgstr ""
+
+#: /wa-apps/shop/plugins/vkshop/lib/config/settings.php:52
+msgid "Description size"
+msgstr ""
+
+#: /wa-apps/shop/plugins/vkshop/lib/config/settings.php:58
+msgid "Settlement"
+msgstr ""
+
+#: /wa-apps/shop/plugins/vkshop/lib/config/settings.php:59
+msgid "Select the settlement."
+msgstr ""
+
+#: /wa-apps/shop/plugins/vkshop/lib/config/plugin.php:4
+msgid "Allows you to send the products to the store's Vkontakte."
+msgstr ""
+
+#: /wa-apps/shop/plugins/vkshop/lib/shopVkshopPlugin.class.php:180
+msgid "Settings error"
+msgstr ""
+
+#: /wa-apps/shop/plugins/vkshop/lib/shopVkshopPlugin.class.php:180
+msgid "Do not put app id or app secret in the"
+msgstr ""
+
+#: /wa-apps/shop/plugins/vkshop/lib/shopVkshopPlugin.class.php:181
+msgid "plugin settings"
+msgstr ""
+
+#: /wa-apps/shop/plugins/vkshop/templates/login.html:3
+msgid "VK User:"
+msgstr ""
+
+#: /wa-apps/shop/plugins/vkshop/templates/actions/backend/Setup.html:8
+msgid "Category for generating products"
+msgstr ""
+
+#: /wa-apps/shop/plugins/vkshop/templates/actions/backend/Setup.html:10
+msgid "Select a category"
+msgstr ""
+
+#: /wa-apps/shop/plugins/vkshop/templates/actions/backend/Setup.html:15
+msgid "Prefix the name of the product"
+msgstr ""
+
+#: /wa-apps/shop/plugins/vkshop/templates/actions/backend/Setup.html:17
+msgid "Product"
+msgstr ""
+
+#: /wa-apps/shop/plugins/vkshop/templates/actions/backend/Setup.html:21
+msgid "Type of products"
+msgstr ""
+
+#: /wa-apps/shop/plugins/vkshop/templates/actions/backend/Setup.html:33
+msgid "Number of products generated"
+msgstr ""
+
+#: /wa-apps/shop/plugins/vkshop/templates/actions/backend/Setup.html:51
+msgid "Start"
+msgstr ""
+
+#: /wa-apps/shop/plugins/vkshop/templates/actions/backend/Setup.html:64
+msgid "Do not close the browser window and not leave the page as long as the process is completed"
+msgstr ""
+
+#: /wa-apps/shop/plugins/vkshop/templates/login.html:20
+msgid "Logout"
+msgstr ""
+
+#: /wa-apps/shop/plugins/vkshop/templates/actions/backend/Setup.html:10
+msgid "Errors"
+msgstr ""
+
+#: /wa-apps/shop/plugins/vkshop/templates/actions/backend/Setup.html:17
+msgid "VK Login"
+msgstr ""
+
+#: /wa-apps/shop/plugins/vkshop/templates/actions/backend/Setup.html:27
+msgid "Export images"
+msgstr ""
+
+#: /wa-apps/shop/plugins/vkshop/templates/actions/backend/Setup.html:34
+msgid "Export only new products"
+msgstr ""
+
+#: /wa-apps/shop/plugins/vkshop/templates/actions/backend/Setup.html:40
+msgid "The maximum number of attempts to send the product"
+msgstr ""
+
+#: /wa-apps/shop/plugins/vkshop/templates/actions/backend/Setup.html:46
+msgid "Select VK category"
+msgstr ""
+
+#: /wa-apps/shop/plugins/vkshop/templates/actions/backend/Setup.html:183
+msgid "Select an action to export products"
+msgstr ""
+
+#: /wa-apps/shop/plugins/vkshop/templates/actions/backend/Setup.html:188
+msgid "Export all products"
+msgstr ""
+
+#: /wa-apps/shop/plugins/vkshop/templates/actions/backend/Setup.html:192
+msgid "Export queued products"
+msgstr ""
+
+#: /wa-apps/shop/plugins/vkshop/templates/actions/backend/Setup.html:197
+msgid "Export product set"
+msgstr ""
+
+#: /wa-apps/shop/plugins/vkshop/templates/actions/backend/Setup.html:202
+msgid "Export product type"
+msgstr ""
+
+#: /wa-apps/shop/plugins/vkshop/templates/actions/backend/Setup.html:213
+msgid "Set of products"
+msgstr ""
+
+#: /wa-apps/shop/plugins/vkshop/templates/queue.html:27
+msgid "Clear VK Shop queue"
+msgstr ""
+
+#: /wa-apps/shop/plugins/vkshop/lib/actions/shopVkshopPluginRun.controller.php:71
+msgid "Main album"
+msgstr ""
+
+#: /wa-apps/shop/plugins/vkshop/templates/actions/backend/Setup.html:225
+msgid "VK takes the goods with an image size of at least 400x400 pixels. If the image size is smaller, the goods will be not loaded."
+msgstr ""
+
+#: /wa-apps/shop/plugins/vkshop/templates/actions/backend/Setup.html:6
+msgid "Authorization settings can be found in the "
+msgstr ""
+
+#: /wa-apps/shop/plugins/vkshop/templates/actions/backend/Setup.html:6
+msgid "vkshop plugin settings"
+msgstr ""
+
+#: /wa-apps/shop/plugins/vkshop/templates/hint.html:2
+msgid "Exports of goods is in the "
+msgstr ""
+
+#: /wa-apps/shop/plugins/vkshop/templates/hint.html:2
+msgid "export section"
+msgstr ""
+
+#: /wa-apps/shop/plugins/vkshop/templates/actions/backend/Setup.html:34
+msgid "If you are exporting new products, then this option must be enabled. Without pictures, new products are not loaded. It makes sense to switch off only when you export the goods again and, for example, want to sync rates. Then disable images download option saves time for export."
+msgstr ""
+
+#: /wa-apps/shop/plugins/vkshop/templates/actions/backend/Setup.html:50
+msgid "When exporting large quantities of goods, VK API sometimes does not accept some of the goods, so you can set the maximum number of attempts to export. Some products may still be exported. This is either due to not matching the pictures of goods Vkontakte requirements or due to exceeding the daily limit for API calls. Sometimes it makes sense to repeat the operation in a day or inspect the dimensions of the image of the goods, which was not loaded."
+msgstr ""
+
+#: /wa-apps/shop/plugins/vkshop/templates/actions/backend/Setup.html:42
+msgid "If this option is enabled, only those products are exported, which had not previously been exported in the trade group."
+msgstr ""
+
+#: /wa-apps/shop/plugins/vkshop/templates/feedbackControl.html:5
+msgid "QR code"
+msgstr ""
+
+#: /wa-apps/shop/plugins/vkshop/templates/feedbackControl.html:9
+msgid "Technical support"
+msgstr ""
+
+#: /wa-apps/shop/plugins/vkshop/lib/config/settings.php:45
+msgid "Ask for technical support"
+msgstr ""
+
+#: /wa-apps/shop/plugins/vkshop/lib/config/settings.php:46
+msgid "Click on the link to contact the developer."
+msgstr ""
+
+#: /wa-apps/shop/plugins/vkshop/lib/actions/shopVkshopPluginBackend.actions.php:35
+msgid "Do not put App id or App secret in the"
+msgstr ""
+
+#: /wa-apps/shop/plugins/vkshop/lib/actions/shopVkshopPluginBackend.actions.php:35
+msgid "plugin-settings"
+msgstr ""
+
+#: /wa-apps/shop/plugins/vkshop/lib/actions/shopVkshopPluginBackend.actions.php:35
+msgid "Do not put App id or App secret in the <a href=\"%s\">plugin settings</a>."
+msgstr ""
+
+#: /wa-apps/shop/plugins/vkshop/lib/config/settings.php:48
+msgid "If enabled, any activity will be logged."
+msgstr ""
+
+#: /wa-apps/shop/plugins/vkshop/lib/config/settings.php:47
+msgid "Logging activities"
+msgstr ""
+
+#: /wa-apps/shop/plugins/vkshop/lib/config/settings.php:54
+msgid "If enabled, any all errors will be logged."
+msgstr ""
+
+#: /wa-apps/shop/plugins/vkshop/lib/config/settings.php:53
+msgid "Logging errors"
+msgstr ""
+
+#: /wa-apps/shop/plugins/vkshop/templates/actions/backend/Setup.html:199
+msgid "If you export items from the set, then in the group VK will be created album with the name of the set, and the items will be added at the same time in it and in the main album."
+msgstr ""
+
+#: /wa-apps/shop/plugins/vkshop/templates/controls/captionhintControl.html:2
+msgid "Product name"
+msgstr ""
+
+#: /wa-apps/shop/plugins/vkshop/templates/controls/captionhintControl.html:5
+msgid "Product price"
+msgstr ""
+
+#: /wa-apps/shop/plugins/vkshop/templates/controls/captionhintControl.html:8
+msgid "Product link"
+msgstr ""
+
+#: /wa-apps/shop/plugins/vkshop/templates/controls/captionhintControl.html:11
+msgid "Product short description"
+msgstr ""
+
+#: /wa-apps/shop/plugins/vkshop/templates/controls/captionhintControl.html:14
+msgid "Product long description"
+msgstr ""
+
+#: /wa-apps/shop/plugins/vkshop/templates/controls/captionhintControl.html:17
+msgid "Product hashtags"
+msgstr ""
+
+#: /wa-apps/shop/plugins/vkshop/templates/controls/captionhintControl.html:20
+msgid "You can also use all the known properties of the product object"
+msgstr ""
+
+#: /wa-apps/shop/plugins/vkshop/templates/actions/settings/Templates.html:1
+#: /wa-apps/shop/plugins/vkshop/lib/shopVkshopPlugin.class.php:141
+msgid "Templates"
+msgstr ""
+
+#: /wa-apps/shop/plugins/vkshop/templates/actions/settings/Basic.html:1
+#: /wa-apps/shop/plugins/vkshop/templates/actions/settings/Settings.html:6
+msgid "Basic settings"
+msgstr ""
+
+#: /wa-apps/shop/plugins/vkshop/templates/actions/settings/Settings.html:24
+msgid "Save"
+msgstr ""
+
+#: /wa-apps/shop/plugins/vkshop/templates/actions/settings/Info.html:1
+#: /wa-apps/shop/plugins/vkshop/lib/shopVkshopPlugin.class.php:147
+msgid "Information"
+msgstr ""
+
+#: /wa-apps/shop/plugins/vkshop/templates/actions/backend/Setup.html:46
+msgid "Export only products that are in stock"
+msgstr ""
+
+#: /wa-apps/shop/plugins/vkshop/templates/actions/backend/Setup.html:50
+msgid "If the goods are not available, they will not be exported."
+msgstr ""
+
+#: /wa-apps/shop/plugins/vkshop/templates/actions/backend/Setup.html:54
+msgid "Remove items that ended in stock"
+msgstr ""
+
+#: /wa-apps/shop/plugins/vkshop/templates/actions/backend/Setup.html:58
+msgid "If the goods have been exported previously, but have ended, they will be removed from the group."
+msgstr ""
+
+#: /wa-apps/shop/plugins/vkshop/templates/actions/backend/Setup.html:210
+msgid "Delete queued products"
+msgstr ""
+
+#: /wa-apps/shop/plugins/vkshop/templates/actions/backend/Setup.html:212
+msgid "If you decide to remove items from the group, put them in place and use this option."
+msgstr ""
+
+#: /wa-apps/shop/plugins/vkshop/lib/config/settings.php:65
+msgid "Description template"
+msgstr ""
+
+#: /wa-apps/shop/plugins/vkshop/lib/config/settings.php:66
+msgid "Product description template."
+msgstr ""
+
+#: /wa-apps/shop/plugins/vkshop/lib/config/settings.php:71
+msgid "Description hint"
+msgstr ""
+
+#: /wa-apps/shop/plugins/vkshop/lib/config/settings.php:72
+msgid "Tip for objects used in the description template. Used Smarty."
+msgstr ""
+
+#: /wa-apps/shop/plugins/vkshop/templates/actions/backend/Setup.html:212
+msgid "If you decide to remove items from the group, put them in queue and use this option."
+msgstr ""
+
+#: /wa-apps/shop/plugins/vkshop/templates/hooks/backend_product.toolbar_section.html:2
+msgid "Share on Vkontakte"
+msgstr ""
+
+#: /wa-apps/shop/plugins/vkshop/templates/actions/backend/BackendDialog.html:13
+msgid "Product description"
+msgstr ""
+
+#: /wa-apps/shop/plugins/vkshop/templates/actions/backend/BackendDialog.html:19
+msgid "Share"
+msgstr ""
+
+#: /wa-apps/shop/plugins/vkshop/templates/actions/backend/BackendDialog.html:20
+msgid "Cancel"
+msgstr ""
+
+#: /wa-apps/shop/plugins/vkshop/templates/actions/backend/BackendDialog.html:21
+msgid "Posting..."
+msgstr ""
+
+#: /wa-apps/shop/plugins/vkshop/templates/actions/backend/BackendForm.html:2
+msgid "Close"
+msgstr ""
+
+#: /wa-apps/shop/plugins/vkshop/templates/actions/backend/BackendForm.html:4
+msgid "Share on Vkshop"
+msgstr ""
+
+#: /wa-apps/shop/plugins/vkshop/templates/actions/backend/BackendForm.html:6
+msgid "Select image you want to share"
+msgstr ""
+
+#: /wa-apps/shop/plugins/vkshop/templates/actions/backend/product_images.html:11
+msgid "Prepare"
+msgstr ""
+
+#: /wa-apps/shop/plugins/vkshop/lib/config/settings.php:65
+msgid "Max tags quantity"
+msgstr ""
+
+#: /wa-apps/shop/plugins/vkshop/lib/config/settings.php:66
+msgid "Set the max tags quantity. The maximum permitted number - 30"
+msgstr ""
+
+#: /wa-apps/shop/plugins/vkshop/lib/config/settings.php:72
+msgid "Max tags text lenght"
+msgstr ""
+
+#: /wa-apps/shop/plugins/vkshop/lib/config/settings.php:73
+msgid "Set the max tags text lenght. The maximum permitted lenght - 500 symbols"
+msgstr ""
+
+#: /wa-apps/shop/plugins/vkshop/lib/config/settings.php:65
+msgid "Max hashtags quantity"
+msgstr ""
+
+#: /wa-apps/shop/plugins/vkshop/lib/config/settings.php:66
+msgid "Set the max hashtags quantity."
+msgstr ""
+
+#: /wa-apps/shop/plugins/vkshop/lib/config/settings.php:72
+msgid "Max hashtags text lenght"
+msgstr ""
+
+#: /wa-apps/shop/plugins/vkshop/lib/config/settings.php:73
+msgid "Set the max hashtags text lenght."
+msgstr ""
+
+#: /wa-apps/shop/plugins/vkshop/lib/config/settings.php:79
+msgid "Maximum description lenght"
+msgstr ""
+
+#: /wa-apps/shop/plugins/vkshop/lib/config/settings.php:80
+msgid "Set the max description lenght."
+msgstr ""
+
+#: /wa-apps/shop/plugins/vkshop/templates/actions/backend/BackendDialog.html:36
+msgid "VK Album"
+msgstr ""
+
+#: /wa-apps/shop/plugins/vkshop/templates/actions/backend/BackendDialog.html:55
+msgid "Create new VK Album"
+msgstr ""
+
+#: /wa-apps/shop/plugins/vkshop/templates/actions/backend/BackendDialog.html:59
+msgid "If this field is not empty, the new album will be created with the specified name, and the goods will be placed in it."
+msgstr ""
+
+#: /wa-apps/shop/plugins/vkshop/lib/classes/shopVkshopPluginSend.class.php:59
+msgid "Login: Could not login to the server. Check credentials."
+msgstr ""
+
+#: /wa-apps/shop/plugins/vkshop/lib/actions/shopVkshopPluginBackendSend.controller.php:33
+msgid "No images to post"
+msgstr ""
+
+#: /wa-apps/shop/plugins/vkshop/lib/actions/shopVkshopPluginBackendSend.controller.php:38
+msgid "No product to post"
+msgstr ""
+
+#: /wa-apps/shop/plugins/vkshop/lib/actions/shopVkshopPluginBackendSend.controller.php:43
+msgid "No message to post"
+msgstr ""
+
+#: /wa-apps/shop/plugins/vkshop/lib/actions/shopVkshopPluginBackendSend.controller.php:59
+msgid "All done"
+msgstr ""
+
+#: /wa-apps/shop/plugins/vkshop/lib/actions/shopVkshopPluginBackendSend.controller.php:62
+msgid "Access denied"
+msgstr ""
+
+#: /wa-apps/shop/plugins/vkshop/lib/classes/shopVkshopPluginSend.class.php:62
+msgid "Сan not create the main album"
+msgstr ""
+
+#: /wa-apps/shop/plugins/vkshop/templates/actions/backend/Setup.html:94
+msgid "If you export items from the type, then in the group VK will be created album with the name of the type, and the items will be added at the same time in it and in the main album."
+msgstr ""
+
+#: /wa-apps/shop/plugins/vkshop/lib/config/settings.php:40
+msgid "Currency"
+msgstr ""
+
+#: /wa-apps/shop/plugins/vkshop/lib/config/settings.php:41
+msgid "The currency, which has a shop Vkontakte."
+msgstr ""
+
+#: /wa-apps/shop/plugins/vkshop/lib/config/settings.php:42
+msgid "If enabled, currency will be converted."
+msgstr ""
+
+#: /wa-apps/shop/plugins/vkshop/lib/config/settings.php:41
+msgid "Convert currency"
+msgstr ""
+
+#: /wa-apps/shop/plugins/vkshop/templates/controls/feedbackControl.html:9
+msgid "Technical support for this plugin"
+msgstr ""
+
+#: /wa-apps/shop/plugins/vkshop/lib/config/settings.php:97
+msgid "The number of products in one stack"
+msgstr ""
+
+#: /wa-apps/shop/plugins/vkshop/lib/config/settings.php:98
+msgid "To work a little faster plugin when exporting goods takes not one, but several pieces in groups. Set the number of items in a single package. With an increase of the number of exports will be faster. But, at a certain value, depending on your server`s exports may hang. If this happens, reduce the number and try again."
+msgstr ""
+
+#: /wa-apps/shop/plugins/vkshop/templates/controls/feedbackControl.html:10
+msgid "Technical support for thi"
+msgstr ""
+
+#: /wa-apps/shop/plugins/vkshop/lib/classes/shopVkshopPluginViewHelper.class.php:43
+msgid "Fashion"
+msgstr ""
+
+#: /wa-apps/shop/plugins/vkshop/lib/classes/shopVkshopPluginViewHelper.class.php:44
+msgid "Women`s Clothing"
+msgstr ""
+
+#: /wa-apps/shop/plugins/vkshop/lib/classes/shopVkshopPluginViewHelper.class.php:45
+msgid "Men`s Clothing"
+msgstr ""
+
+#: /wa-apps/shop/plugins/vkshop/lib/classes/shopVkshopPluginViewHelper.class.php:46
+msgid "Children`s Clothing"
+msgstr ""
+
+#: /wa-apps/shop/plugins/vkshop/lib/classes/shopVkshopPluginViewHelper.class.php:47
+msgid "Shoes &amp; Bags"
+msgstr ""
+
+#: /wa-apps/shop/plugins/vkshop/lib/classes/shopVkshopPluginViewHelper.class.php:48
+msgid "Accessories"
+msgstr ""
+
+#: /wa-apps/shop/plugins/vkshop/lib/classes/shopVkshopPluginViewHelper.class.php:50
+msgid "Kids &amp; Baby"
+msgstr ""
+
+#: /wa-apps/shop/plugins/vkshop/lib/classes/shopVkshopPluginViewHelper.class.php:51
+msgid "Car Safety Seats"
+msgstr ""
+
+#: /wa-apps/shop/plugins/vkshop/lib/classes/shopVkshopPluginViewHelper.class.php:52
+msgid "Baby Carriages"
+msgstr ""
+
+#: /wa-apps/shop/plugins/vkshop/lib/classes/shopVkshopPluginViewHelper.class.php:53
+msgid "Kids Room"
+msgstr ""
+
+#: /wa-apps/shop/plugins/vkshop/lib/classes/shopVkshopPluginViewHelper.class.php:54
+msgid "Toys"
+msgstr ""
+
+#: /wa-apps/shop/plugins/vkshop/lib/classes/shopVkshopPluginViewHelper.class.php:55
+msgid "Moms &amp; Babies"
+msgstr ""
+
+#: /wa-apps/shop/plugins/vkshop/lib/classes/shopVkshopPluginViewHelper.class.php:56
+msgid "Education &amp; Art"
+msgstr ""
+
+#: /wa-apps/shop/plugins/vkshop/lib/classes/shopVkshopPluginViewHelper.class.php:57
+msgid "School"
+msgstr ""
+
+#: /wa-apps/shop/plugins/vkshop/lib/classes/shopVkshopPluginViewHelper.class.php:59
+msgid "Electronics"
+msgstr ""
+
+#: /wa-apps/shop/plugins/vkshop/lib/classes/shopVkshopPluginViewHelper.class.php:60
+msgid "Phones &amp; Accessories"
+msgstr ""
+
+#: /wa-apps/shop/plugins/vkshop/lib/classes/shopVkshopPluginViewHelper.class.php:61
+msgid "Cameras"
+msgstr ""
+
+#: /wa-apps/shop/plugins/vkshop/lib/classes/shopVkshopPluginViewHelper.class.php:62
+msgid "Audio &amp; Video"
+msgstr ""
+
+#: /wa-apps/shop/plugins/vkshop/lib/classes/shopVkshopPluginViewHelper.class.php:63
+msgid "Portable Devices"
+msgstr ""
+
+#: /wa-apps/shop/plugins/vkshop/lib/classes/shopVkshopPluginViewHelper.class.php:64
+msgid "Consoles &amp; Games"
+msgstr ""
+
+#: /wa-apps/shop/plugins/vkshop/lib/classes/shopVkshopPluginViewHelper.class.php:65
+msgid "Сar Electronics"
+msgstr ""
+
+#: /wa-apps/shop/plugins/vkshop/lib/classes/shopVkshopPluginViewHelper.class.php:66
+msgid "Scopes"
+msgstr ""
+
+#: /wa-apps/shop/plugins/vkshop/lib/classes/shopVkshopPluginViewHelper.class.php:68
+msgid "Computers"
+msgstr ""
+
+#: /wa-apps/shop/plugins/vkshop/lib/classes/shopVkshopPluginViewHelper.class.php:69
+msgid "PC"
+msgstr ""
+
+#: /wa-apps/shop/plugins/vkshop/lib/classes/shopVkshopPluginViewHelper.class.php:70
+msgid "Laptops &amp; Netbooks"
+msgstr ""
+
+#: /wa-apps/shop/plugins/vkshop/lib/classes/shopVkshopPluginViewHelper.class.php:71
+#: /wa-apps/shop/plugins/vkshop/lib/classes/shopVkshopPluginViewHelper.class.php:82
+msgid "Parts &amp; Accessories"
+msgstr ""
+
+#: /wa-apps/shop/plugins/vkshop/lib/classes/shopVkshopPluginViewHelper.class.php:72
+msgid "Peripherals"
+msgstr ""
+
+#: /wa-apps/shop/plugins/vkshop/lib/classes/shopVkshopPluginViewHelper.class.php:73
+msgid "Networking"
+msgstr ""
+
+#: /wa-apps/shop/plugins/vkshop/lib/classes/shopVkshopPluginViewHelper.class.php:74
+msgid "Office Supplies &amp; Consumables"
+msgstr ""
+
+#: /wa-apps/shop/plugins/vkshop/lib/classes/shopVkshopPluginViewHelper.class.php:75
+msgid "Movies, Music, Software"
+msgstr ""
+
+#: /wa-apps/shop/plugins/vkshop/lib/classes/shopVkshopPluginViewHelper.class.php:77
+msgid "Vehicles"
+msgstr ""
+
+#: /wa-apps/shop/plugins/vkshop/lib/classes/shopVkshopPluginViewHelper.class.php:78
+msgid "Cars"
+msgstr ""
+
+#: /wa-apps/shop/plugins/vkshop/lib/classes/shopVkshopPluginViewHelper.class.php:79
+msgid "Moto &amp; Equipment"
+msgstr ""
+
+#: /wa-apps/shop/plugins/vkshop/lib/classes/shopVkshopPluginViewHelper.class.php:80
+msgid "Trucks &amp; Special Vehicles"
+msgstr ""
+
+#: /wa-apps/shop/plugins/vkshop/lib/classes/shopVkshopPluginViewHelper.class.php:81
+msgid "Water Transport"
+msgstr ""
+
+#: /wa-apps/shop/plugins/vkshop/lib/classes/shopVkshopPluginViewHelper.class.php:84
+msgid "Real Estate"
+msgstr ""
+
+#: /wa-apps/shop/plugins/vkshop/lib/classes/shopVkshopPluginViewHelper.class.php:85
+msgid "Apartments"
+msgstr ""
+
+#: /wa-apps/shop/plugins/vkshop/lib/classes/shopVkshopPluginViewHelper.class.php:86
+msgid "Rooms"
+msgstr ""
+
+#: /wa-apps/shop/plugins/vkshop/lib/classes/shopVkshopPluginViewHelper.class.php:87
+msgid "Houses, Villas, Cottages"
+msgstr ""
+
+#: /wa-apps/shop/plugins/vkshop/lib/classes/shopVkshopPluginViewHelper.class.php:88
+msgid "Land"
+msgstr ""
+
+#: /wa-apps/shop/plugins/vkshop/lib/classes/shopVkshopPluginViewHelper.class.php:89
+msgid "Garages &amp; Car Places"
+msgstr ""
+
+#: /wa-apps/shop/plugins/vkshop/lib/classes/shopVkshopPluginViewHelper.class.php:90
+msgid "Commercial Property"
+msgstr ""
+
+#: /wa-apps/shop/plugins/vkshop/lib/classes/shopVkshopPluginViewHelper.class.php:91
+msgid "International Real Estate"
+msgstr ""
+
+#: /wa-apps/shop/plugins/vkshop/lib/classes/shopVkshopPluginViewHelper.class.php:93
+msgid "Home"
+msgstr ""
+
+#: /wa-apps/shop/plugins/vkshop/lib/classes/shopVkshopPluginViewHelper.class.php:94
+msgid "Appliances"
+msgstr ""
+
+#: /wa-apps/shop/plugins/vkshop/lib/classes/shopVkshopPluginViewHelper.class.php:95
+msgid "Furniture &amp; Decor"
+msgstr ""
+
+#: /wa-apps/shop/plugins/vkshop/lib/classes/shopVkshopPluginViewHelper.class.php:96
+msgid "Kitchen &amp; Dining"
+msgstr ""
+
+#: /wa-apps/shop/plugins/vkshop/lib/classes/shopVkshopPluginViewHelper.class.php:97
+msgid "Textile"
+msgstr ""
+
+#: /wa-apps/shop/plugins/vkshop/lib/classes/shopVkshopPluginViewHelper.class.php:98
+msgid "Household Goods"
+msgstr ""
+
+#: /wa-apps/shop/plugins/vkshop/lib/classes/shopVkshopPluginViewHelper.class.php:99
+msgid "Building &amp; Repair"
+msgstr ""
+
+#: /wa-apps/shop/plugins/vkshop/lib/classes/shopVkshopPluginViewHelper.class.php:100
+msgid "Country House &amp; Garden"
+msgstr ""
+
+#: /wa-apps/shop/plugins/vkshop/lib/classes/shopVkshopPluginViewHelper.class.php:102
+#: /wa-apps/shop/plugins/vkshop/lib/classes/shopVkshopPluginViewHelper.class.php:146
+msgid "Beauty &amp; Health"
+msgstr ""
+
+#: /wa-apps/shop/plugins/vkshop/lib/classes/shopVkshopPluginViewHelper.class.php:103
+msgid "Makeup"
+msgstr ""
+
+#: /wa-apps/shop/plugins/vkshop/lib/classes/shopVkshopPluginViewHelper.class.php:104
+msgid "Fragrances"
+msgstr ""
+
+#: /wa-apps/shop/plugins/vkshop/lib/classes/shopVkshopPluginViewHelper.class.php:105
+msgid "Skin Care"
+msgstr ""
+
+#: /wa-apps/shop/plugins/vkshop/lib/classes/shopVkshopPluginViewHelper.class.php:106
+msgid "Tools &amp; Accessories"
+msgstr ""
+
+#: /wa-apps/shop/plugins/vkshop/lib/classes/shopVkshopPluginViewHelper.class.php:107
+msgid "Glasses"
+msgstr ""
+
+#: /wa-apps/shop/plugins/vkshop/lib/classes/shopVkshopPluginViewHelper.class.php:109
+msgid "Sport &amp; Leisure"
+msgstr ""
+
+#: /wa-apps/shop/plugins/vkshop/lib/classes/shopVkshopPluginViewHelper.class.php:110
+msgid "Outdoors"
+msgstr ""
+
+#: /wa-apps/shop/plugins/vkshop/lib/classes/shopVkshopPluginViewHelper.class.php:111
+msgid "Tourism"
+msgstr ""
+
+#: /wa-apps/shop/plugins/vkshop/lib/classes/shopVkshopPluginViewHelper.class.php:112
+msgid "Hunting &amp; Fishing"
+msgstr ""
+
+#: /wa-apps/shop/plugins/vkshop/lib/classes/shopVkshopPluginViewHelper.class.php:113
+msgid "Gym &amp; Fitness Equipment"
+msgstr ""
+
+#: /wa-apps/shop/plugins/vkshop/lib/classes/shopVkshopPluginViewHelper.class.php:114
+msgid "Games"
+msgstr ""
+
+#: /wa-apps/shop/plugins/vkshop/lib/classes/shopVkshopPluginViewHelper.class.php:116
+msgid "Spare Time &amp; Gifts"
+msgstr ""
+
+#: /wa-apps/shop/plugins/vkshop/lib/classes/shopVkshopPluginViewHelper.class.php:117
+msgid "Tickets &amp; Tours"
+msgstr ""
+
+#: /wa-apps/shop/plugins/vkshop/lib/classes/shopVkshopPluginViewHelper.class.php:118
+msgid "Books &amp; Magazines"
+msgstr ""
+
+#: /wa-apps/shop/plugins/vkshop/lib/classes/shopVkshopPluginViewHelper.class.php:119
+msgid "Collectibles"
+msgstr ""
+
+#: /wa-apps/shop/plugins/vkshop/lib/classes/shopVkshopPluginViewHelper.class.php:120
+msgid "Musical Instruments"
+msgstr ""
+
+#: /wa-apps/shop/plugins/vkshop/lib/classes/shopVkshopPluginViewHelper.class.php:121
+msgid "Table Games"
+msgstr ""
+
+#: /wa-apps/shop/plugins/vkshop/lib/classes/shopVkshopPluginViewHelper.class.php:122
+msgid "Gift Sets &amp; Certificates"
+msgstr ""
+
+#: /wa-apps/shop/plugins/vkshop/lib/classes/shopVkshopPluginViewHelper.class.php:123
+msgid "Gifts &amp; Flowers"
+msgstr ""
+
+#: /wa-apps/shop/plugins/vkshop/lib/classes/shopVkshopPluginViewHelper.class.php:124
+msgid "Crafts"
+msgstr ""
+
+#: /wa-apps/shop/plugins/vkshop/lib/classes/shopVkshopPluginViewHelper.class.php:126
+msgid "Pets"
+msgstr ""
+
+#: /wa-apps/shop/plugins/vkshop/lib/classes/shopVkshopPluginViewHelper.class.php:127
+msgid "Dogs"
+msgstr ""
+
+#: /wa-apps/shop/plugins/vkshop/lib/classes/shopVkshopPluginViewHelper.class.php:128
+msgid "Cats"
+msgstr ""
+
+#: /wa-apps/shop/plugins/vkshop/lib/classes/shopVkshopPluginViewHelper.class.php:129
+msgid "Rodents"
+msgstr ""
+
+#: /wa-apps/shop/plugins/vkshop/lib/classes/shopVkshopPluginViewHelper.class.php:130
+msgid "Birds"
+msgstr ""
+
+#: /wa-apps/shop/plugins/vkshop/lib/classes/shopVkshopPluginViewHelper.class.php:131
+msgid "Fish"
+msgstr ""
+
+#: /wa-apps/shop/plugins/vkshop/lib/classes/shopVkshopPluginViewHelper.class.php:132
+msgid "Other Pets"
+msgstr ""
+
+#: /wa-apps/shop/plugins/vkshop/lib/classes/shopVkshopPluginViewHelper.class.php:133
+msgid "Feeding &amp; Accessories"
+msgstr ""
+
+#: /wa-apps/shop/plugins/vkshop/lib/classes/shopVkshopPluginViewHelper.class.php:135
+msgid "Food"
+msgstr ""
+
+#: /wa-apps/shop/plugins/vkshop/lib/classes/shopVkshopPluginViewHelper.class.php:136
+msgid "Grocery"
+msgstr ""
+
+#: /wa-apps/shop/plugins/vkshop/lib/classes/shopVkshopPluginViewHelper.class.php:137
+msgid "Organic"
+msgstr ""
+
+#: /wa-apps/shop/plugins/vkshop/lib/classes/shopVkshopPluginViewHelper.class.php:138
+msgid "Baby Food"
+msgstr ""
+
+#: /wa-apps/shop/plugins/vkshop/lib/classes/shopVkshopPluginViewHelper.class.php:139
+msgid "Food to Order"
+msgstr ""
+
+#: /wa-apps/shop/plugins/vkshop/lib/classes/shopVkshopPluginViewHelper.class.php:140
+msgid "Drinks"
+msgstr ""
+
+#: /wa-apps/shop/plugins/vkshop/lib/classes/shopVkshopPluginViewHelper.class.php:142
+msgid "Services"
+msgstr ""
+
+#: /wa-apps/shop/plugins/vkshop/lib/classes/shopVkshopPluginViewHelper.class.php:143
+msgid "Photo &amp; Video"
+msgstr ""
+
+#: /wa-apps/shop/plugins/vkshop/lib/classes/shopVkshopPluginViewHelper.class.php:144
+msgid "Freelancers"
+msgstr ""
+
+#: /wa-apps/shop/plugins/vkshop/lib/classes/shopVkshopPluginViewHelper.class.php:145
+msgid "Events"
+msgstr ""
+
+#: /wa-apps/shop/plugins/vkshop/lib/classes/shopVkshopPluginViewHelper.class.php:147
+msgid "Equipment Service"
+msgstr ""
+
+#: /wa-apps/shop/plugins/vkshop/lib/classes/shopVkshopPluginViewHelper.class.php:148
+msgid "Home Improvement"
+msgstr ""
+
+#: /wa-apps/shop/plugins/vkshop/lib/classes/shopVkshopPluginViewHelper.class.php:149
+msgid "Delivery &amp; Transportation"
+msgstr ""
+
+#: /wa-apps/shop/plugins/vkshop/lib/classes/shopVkshopPluginViewHelper.class.php:150
+msgid "Education"
+msgstr ""
+
+#: /wa-apps/shop/plugins/vkshop/lib/classes/shopVkshopPluginViewHelper.class.php:151
+msgid "Financial services"
+msgstr ""
+
+#: /wa-apps/shop/plugins/vkshop/lib/classes/shopVkshopPluginViewHelper.class.php:152
+msgid "Consulting"
+msgstr ""
+
+#: /wa-apps/shop/plugins/vkshop/lib/actions/shopVkshopPluginRun.controller.php:901
+msgid "Аlbum-"
+msgstr ""
+
+#: /wa-apps/shop/plugins/vkshop/lib/config/settings.php:34
+msgid "Select a category of goods VC, which will be set by default when exporting."
+msgstr ""
+
+#: /wa-apps/shop/plugins/vkshop/lib/config/settings.php:32
+msgid "Default VK category"
+msgstr ""
+
+#: /wa-apps/shop/plugins/vkshop/lib/config/settings.php:33
+msgid "Image size"
+msgstr ""
+
+#: /wa-apps/shop/plugins/vkshop/lib/config/settings.php:34
+msgid "Select the image size. Remember that the size should be no less than 400x400 pixels."
+msgstr ""
+
+#: /wa-apps/shop/plugins/vkshop/templates/controls/groupsControl.html:6
+#: /wa-apps/shop/plugins/vkshop/templates/controls/groupsControl.html:15
+msgid "VK group ID:"
+msgstr ""
+
+#: /wa-apps/shop/plugins/vkshop/templates/controls/groupsControl.html:7
+#: /wa-apps/shop/plugins/vkshop/templates/controls/groupsControl.html:16
+msgid "VK group name:"
+msgstr ""
+
+#: /wa-apps/shop/plugins/vkshop/templates/hooks/queue.html:31
+#: /wa-apps/shop/plugins/vkshop/templates/hooks/queue.html:71
+#: /wa-apps/shop/plugins/vkshop/templates/actions/backend/Setup.html:87
+msgid "No groups defined in the plugin settings"
+msgstr ""
+
+#: /wa-apps/shop/plugins/vkshop/templates/actions/backend/Setup.html:76
+msgid "Select VK group"
+msgstr ""
+
+#: /wa-apps/shop/plugins/vkshop/templates/controls/captionhintControl.html:20
+msgid "Product features"
+msgstr ""
+
+#: /wa-apps/shop/plugins/vkshop/lib/config/settings.php:136
+msgid "Features"
+msgstr ""
+
+#: /wa-apps/shop/plugins/vkshop/lib/config/settings.php:137
+msgid "Select the available features."
+msgstr ""
+
+#: /wa-apps/shop/plugins/vkshop/lib/config/settings.php:147
+msgid "Features delimiter"
+msgstr ""
+
+#: /wa-apps/shop/plugins/vkshop/lib/config/settings.php:148
+msgid "Select the delimiter"
+msgstr ""
+
+#: /wa-apps/shop/plugins/vkshop/lib/config/settings.php:163
+msgid "Break line"
+msgstr ""
+
+#: /wa-apps/shop/plugins/vkshop/templates/controls/cronHint.html:3
+msgid "Use this string for use in you crontab:"
+msgstr ""
+
+#: /wa-apps/shop/plugins/vkshop/lib/actions/shopVkshopPluginBackendGetalbums.controller.php:40
+msgid "Unknown group ID"
+msgstr ""
+
+#: /wa-apps/shop/plugins/vkshop/lib/config/settings.php:184
+msgid "Automatically update products"
+msgstr ""
+
+#: /wa-apps/shop/plugins/vkshop/lib/config/settings.php:185
+msgid "The cron script will automatically update the products in the VK group if they have been updated in the store."
+msgstr ""
+
+#: /wa-apps/shop/plugins/vkshop/lib/config/settings.php:191
+msgid "Automatically delete products"
+msgstr ""
+
+#: /wa-apps/shop/plugins/vkshop/lib/config/settings.php:192
+msgid "The cron script will automatically delete the products in the VK group if they have been deleted in the store."
+msgstr ""
+
+#: /wa-apps/shop/plugins/vkshop/lib/config/settings.php:197
+msgid "Default cron group"
+msgstr ""
+
+#: /wa-apps/shop/plugins/vkshop/lib/config/settings.php:198
+msgid "The cron script will work with this group."
+msgstr ""
+
+#: /wa-apps/shop/plugins/vkshop/lib/config/settings.php:203
+msgid "Default cron album"
+msgstr ""
+
+#: /wa-apps/shop/plugins/vkshop/lib/config/settings.php:204
+msgid "The cron script will work with this album."
+msgstr ""
+
+#: /wa-apps/shop/plugins/vkshop/lib/config/settings.php:209
+msgid "Cron hint"
+msgstr ""
+
+#: /wa-apps/shop/plugins/vkshop/lib/shopVkshopPlugin.class.php:219
+msgid "Cron"
+msgstr ""
+
+#: /wa-apps/shop/plugins/vkshop/templates/controls/cronGroup.html:8
+#: /wa-apps/shop/plugins/vkshop/templates/controls/cronAlbum.html:8
+msgid "Check the settings for the groups in the plugin settings. If the group is set, save the settings and reload the page."
+msgstr ""
+
+#: /wa-apps/shop/plugins/vkshop/templates/controls/cronAlbum.html:8
+msgid "Check the settings for the albums in the plugin settings. If the album is set, save the settings and reload the page."
+msgstr ""
+
+#: /wa-apps/shop/plugins/vkshop/lib/cli/shopVkshop.cli.php:17
+msgid "Attempting to re-run the script. Stopped."
+msgstr ""
+
+#: /wa-apps/shop/plugins/vkshop/lib/cli/shopVkshop.cli.php:18
+msgid "The script is still running."
+msgstr ""
+
+#: /wa-apps/shop/plugins/vkshop/lib/config/settings.php:198
+msgid "Automatically delete hidden products"
+msgstr ""
+
+#: /wa-apps/shop/plugins/vkshop/lib/config/settings.php:199
+msgid "The cron script will automatically delete the products in the VK group if they have been hidden in the store."
+msgstr ""
+
+#: /wa-apps/shop/plugins/vkshop/lib/config/settings.php:205
+msgid "Automatically remove missing products"
+msgstr ""
+
+#: /wa-apps/shop/plugins/vkshop/lib/config/settings.php:206
+msgid "The cron script will automatically delete the products in the VK group if they run out of stock."
+msgstr ""
+
+#: /wa-apps/shop/plugins/vkshop/templates/category.html:20
+msgid "Select the default album"
+msgstr ""
+
+#: /wa-apps/shop/plugins/vkshop/templates/category.html:31
+msgid "Hint"
+msgstr ""
+
+#: /wa-apps/shop/plugins/vkshop/templates/category.html:34
+msgid "Determine the appropriateness of the category and album of VK for the automatic unloading of goods for each connected group."
+msgstr ""
+
+#: /wa-apps/shop/plugins/vkshop/lib/shopVkshopPlugin.class.php:466
+msgid "Undefined groups in plugin settings."
+msgstr ""
+
+#: /wa-apps/shop/plugins/vkshop/lib/shopVkshopPlugin.class.php:498
+msgid "VK is not authentificated."
+msgstr ""
+
+#: /wa-apps/shop/plugins/vkshop/lib/config/settings.php:184
+msgid "Cron job status"
+msgstr ""
+
+#: /wa-apps/shop/plugins/vkshop/lib/config/settings.php:185
+msgid "If the light is green, the script is working."
+msgstr ""
+
+#: /wa-apps/shop/plugins/vkshop/lib/config/settings.php:191
+msgid "Automatically add products"
+msgstr ""
+
+#: /wa-apps/shop/plugins/vkshop/lib/config/settings.php:192
+msgid "If in the settings of the category of this product there is a match with a album of VK, then the product will be added to the appropriate album."
+msgstr ""
+
+#: /wa-apps/shop/plugins/vkshop/lib/shopVkshopPlugin.class.php:568
+msgid "Cron script is started"
+msgstr ""
+
+#: /wa-apps/shop/plugins/vkshop/lib/shopVkshopPlugin.class.php:571
+msgid "Cron script not started"
+msgstr ""
+
+#: /wa-apps/shop/plugins/vkshop/templates/actions/backend/BackendForm.html:11
+msgid "Item not exported yet in VK"
+msgstr ""
+
+#: /wa-apps/shop/plugins/vkshop/templates/actions/backend/BackendForm.html:17
+msgid "Item already exported in VK"
+msgstr ""
+
+#: /wa-apps/shop/plugins/vkshop/templates/actions/backend/BackendForm.html:22
+msgid "Product albums for"
+msgstr ""
+
+#: /wa-apps/shop/plugins/vkshop/templates/actions/settings/Groups.html:1
+#: /wa-apps/shop/plugins/vkshop/lib/shopVkshopPlugin.class.php:238
+msgid "Groups"
+msgstr ""
+
+#: /wa-apps/shop/plugins/vkshop/templates/actions/settings/Settings.html:51
+msgid "Are you sure? Deleting a group will make it impossible to continue working with products of this group."
+msgstr ""
+
+#: /wa-apps/shop/plugins/vkshop/templates/controls/groupsControl.html:30
+#: /wa-apps/shop/plugins/vkshop/templates/controls/groupsControl.html:72
+msgid "Settlement:"
+msgstr ""
+
+#: /wa-apps/shop/plugins/vkshop/templates/controls/groupsControl.html:29
+#: /wa-apps/shop/plugins/vkshop/templates/controls/groupsControl.html:91
+msgid "Application ID:"
+msgstr ""
+
+#: /wa-apps/shop/plugins/vkshop/templates/controls/groupsControl.html:40
+#: /wa-apps/shop/plugins/vkshop/templates/controls/groupsControl.html:102
+msgid "App secret:"
+msgstr ""
+
+#: /wa-apps/shop/plugins/vkshop/templates/actions/backend/login.html:25
+msgid "Login"
+msgstr ""
+
+#: /wa-apps/shop/plugins/vkshop/lib/actions/shopVkshopPluginBackendSend.controller.php:70
+msgid "Group is not authorized"
+msgstr ""

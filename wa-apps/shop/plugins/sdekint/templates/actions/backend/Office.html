@@ -1,0 +1,54 @@
+<div class="block not-padded bordered-bottom">
+    <h1>Пункты выдачи</h1>
+</div>
+<div class="block s-sdekint-backend s-sdekint-backend-office">
+    <form action="" class="form">
+        <div class="fields">
+            <div class="field">
+                <div class="name">Страна</div>
+                <div class="value"><select id="s-sdekint-country" style="min-width: 250px"></select></div>
+            </div>
+            <div class="field">
+                <div class="name">Город</div>
+                <div class="value"><select id="s-sdekint-city" data-placeholder="Для поиска города начните набирать его название" class="long" style="width: 250px"></select></div>
+            </div>
+        </div>
+    </form>
+
+    <div class="map-wrapper">
+        <div class="map-container">
+            <div style="min-width: 480px; min-height: 320px; width: 100%; border: none; box-sizing: border-box" id="s-sdekint-map">
+            </div>
+        </div>
+        <div class="point-list-container">
+            <div style="overflow-y: auto; box-sizing: border-box" id="s-sdekint-list">
+            </div>
+        </div>
+    </div>
+</div>
+<script type="text/x-jsrender" id="BalloonContent">
+{literal}<div>
+    <p>{{> address}}</p>
+    {{if phone}}{{>phone}}{{/if}}
+    <p>Время работы: {{>work_time}}</p>
+    {{if note}}<p class="hint">{{>note}}{{/if}}
+</div>{/literal}
+</script>
+<script type="text/x-jsrender" id="ListItems">{literal}
+{{if points && points.length}}
+<ul>
+    {{for points}}
+    <li>
+    <h3>{{>name}} ({{>code}})</h3>
+    <p class="address-line">{{>city}}, {{>address}}</p>
+    {{if max_weight || min_weight}}
+    <p class="address-line">Допустимый вес отправления{{if min_weight}} от <b>{{:min_weight}}</b>кг.{{/if}}{{if max_weight}} до <b>{{:max_weight}}</b>кг.{{/if}}</p>
+    {{/if}}
+    <p class="address-line">Время работы: {{>work_time}}</p>
+    {{if phone && phone.length}}<p class="address-line">Тел. {{>phone}}</p>{{/if}}
+    {{if note && note.length}}<p class="address-line hint">{{>note}}</p>{{/if}}
+    </li>
+    {{/for}}
+</ul>
+{{/if}}
+{/literal}</script>

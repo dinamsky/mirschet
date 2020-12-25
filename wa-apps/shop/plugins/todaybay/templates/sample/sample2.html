@@ -1,0 +1,8 @@
+
+<!--Сегодня купили -->
+{$tt = shopTodaybayPlugin::getProductCollection()}
+{if $tt && count($tt)}
+<div class="product-slider-cart"> <!--Слайдер для вывода в корзине-->
+    {include file="product-slider.html" products=$tt list='crossselling' name='сегодня у нас  уже купили'}
+</div>
+{/if}

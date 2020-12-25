@@ -1,0 +1,435 @@
+{strip}
+<header class="site-header site-header_mob site-header_1{if $theme_settings.header_mobile_style eq 'dark'} site-header_dark{/if}">
+	{if $theme_settings.header_mobile_catalog && !empty($_theme_config.mainmenu_links)}
+		<div class="site-header__menu-row">
+			<a class="cat-menu-btn-mob" href="#">
+				<span class="cat-menu-btn-mob__inner">
+					<span class="icon">
+						<svg class="icon" width="10" height="10">
+							<use xlink:href="#icon-catalog-mob"></use>
+						</svg>
+					</span>
+					<span class="cat-menu-btn-mob__text">{if $theme_settings.mainmenu_links eq "shop-categories"}[`Catalog`]{else}[`Navigation`]{/if}</span>
+				</span>
+			</a>
+		</div>
+	{/if}
+	<div class="site-header__main">
+		<div class="site-header__main-inner">
+			<div class="site-header__hamb-logo">
+				<a class="hamburger" href="#mmenu"><span class="hamburger__inner"></span></a>
+				<a class="site-header__logo" href="{$wa_url}">
+					<img src="{$wa_theme_url}{$theme_settings.header_logo_mobile|default:$theme_settings.header_logo}?v{$wa_theme_version}" alt="{$wa->accountName()}">
+				</a>
+			</div>
+			{if !empty($theme_settings.header_contacts_phone_1)}
+				<div class="site-header__tel">
+					<div class="callback-wr">
+						<div class="callback-info">
+							<div class="callback-info__inner">
+								<div class="callback-info__main-num callback-info__main-num_top">
+									<svg class="icon" width="16" height="16">
+										<use xlink:href="#icon-phone"></use>
+									</svg>
+									<div class="callback-info__main-num-text has-down-arrow">{$theme_settings.header_contacts_phone_1}</div>
+									<div class="callback-info__main-content">
+										<div class="callback-info__main-content-top">
+											<div class="callback-info__call-text">{$theme_settings.header_contacts_phone_1_text}</div>
+											{if !empty($theme_settings.header_contacts_phone_2)}
+												<div class="callback-info__main-num">
+													<svg class="icon" width="16" height="16">
+														<use xlink:href="#icon-phone"></use>
+													</svg>
+													<div class="callback-info__main-num-text">{$theme_settings.header_contacts_phone_2}</div>
+												</div>
+												<div class="callback-info__call-text">{$theme_settings.header_contacts_phone_2_text}</div>
+											{/if}
+											<div class="callback-info__call-btn btn {$theme_settings.main_buttons_style|replace:'img/themebuttons/':''|replace:'.gif':''} btn_main-2 balance_callback">
+												<span>[`Callback`]</span>
+												<div class="hover-anim"></div>
+											</div>
+										</div>
+										{if !empty($theme_settings.header_contacts_workhours)}
+											<div class="callback-info__main-content-bottom">
+												<div class="callback-info__daytime-title">[`Working hours`]:</div>
+												<div class="callback-info__daytime-text">{$theme_settings.header_contacts_workhours}</div>
+											</div>
+										{/if}
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			{/if}
+			<div class="site-header__actions">
+				<div class="site-actions site-actions_mob">
+					{if !empty($_theme_config.search.url)}
+						<div class="site-actions__btn site-actions__btn_search">
+							<a class="action-btn inline-popup-search" href="#search-popup">
+								<span class="action-btn__inner">
+									<svg class="icon" width="22" height="22">
+										<use xlink:href="#icon-search"></use>
+									</svg>
+									<span class="action-btn__text">[`Search`]</span>
+								</span>
+							</a>
+							<div class="b-popup b-popup_search mfp-hide mfp-with-anim" id="search-popup">
+								<div class="b-popup__inner">
+									<div class="site-search">
+										<div class="site-search__title">[`Search`]</div>
+										<form{if $theme_settings.searchautocomplete_on} class="search__form-autocomplete {$_theme_config.search.class}"{/if} action="{$_theme_config.search.url}" data-images="{$theme_settings.searchautocomplete_show_photos}" data-limit="{$theme_settings.searchautocomplete_max_results|default:3}">
+											<div class="site-search__inner">
+												<div class="site-search__input-wrapper">
+													<input class="site-search__input site-search__input_merged" type="search" name="query" autocomplete="off" placeholder="{$_theme_config.search.placeholder}" value="{if !empty($_theme_config.search.query)}{$_theme_config.search.query}{/if}" />
+													<div class="site-search__loader"></div>
+												</div>
+												<button class="site-search__btn">
+													<svg class="icon cent-icon" width="16" height="16">
+														<use xlink:href="#icon-search"></use>
+													</svg>
+													<span class="site-search__btn-text">[`Search`]</span>
+												</button>
+											</div>
+										</form>
+										{if $theme_settings.searchautocomplete_on}
+											<div class="autocomplete-suggestions">
+												<div class="autocomplete-suggestion autocomplete-suggestion-showall">
+													<a class="btn {$theme_settings.main_buttons_style|replace:'img/themebuttons/':''|replace:'.gif':''} btn_sec-9 view-all" href="{$_theme_config.search.url}" data-href="{$_theme_config.search.url}?*"><span>[`Show all results`]</span></a>
+												</div>
+											</div>
+										{/if}
+									</div>
+								</div>
+							</div>
+						</div>
+					{/if}
+					{if $wa->isAuthEnabled()}
+						<div class="site-actions__btn site-actions__btn_user">
+							<a class="action-btn" href="{$wa->loginUrl()}">
+								<span class="action-btn__inner">
+									<svg class="icon" width="19" height="22">
+										<use xlink:href="#icon-user"></use>
+									</svg>
+									<span class="action-btn__text">[`Personal area`]</span>
+								</span>
+							</a>
+						</div>
+					{/if}
+					{if $wa->shop}
+						{if $theme_settings.products_show_compare}
+							<div class="site-actions__btn site-actions__btn_comp">
+								<a class="action-btn js-compare-link js-compare-status{if $compare|count > 1} not-empty{/if}" href="{if count($compare)>1}{$wa->getUrl('/frontend/compare/', ['id' => implode(',', $compare) ])}{else}javascript:void(0);{/if}">
+									<span class="action-btn__inner">
+										<svg class="icon" width="20" height="20">
+											<use xlink:href="#icon-chart"></use>
+										</svg>
+										<span class="action-btn__text">[`Compare`]</span>
+										<span class="action-btn__qty js-compare-count">{$compare|count}</span>
+									</span>
+								</a>
+							</div>
+						{/if}
+						{if $theme_settings.products_show_wishlist}
+							<div class="site-actions__btn site-actions__btn_fav">
+								<a class="action-btn js-wishlist-status{if $theme_favorite|count > 0} not-empty{/if}" href="{$wa->getUrl('/frontend/search/')}?_balance_type=favorites">
+									<span class="action-btn__inner">
+										<svg class="icon" width="20" height="19">
+											<use xlink:href="#icon-heart"></use>
+										</svg>
+										<span class="action-btn__text">[`Favorites`]</span>
+										<span class="action-btn__qty js-wishlist-count">{$theme_favorite|count}</span>
+									</span>
+								</a>
+							</div>
+						{/if}
+						<div class="site-actions__btn site-actions__btn_cart">
+							<a href="{$_cart_url}" class="action-btn js-minicart{if !empty($_topcart_items)} not-empty{else} is-empty{/if}">
+								<div class="action-btn__inner">
+									<svg class="icon" width="24" height="20">
+										<use xlink:href="#icon-cart"></use>
+									</svg>
+									<div class="action-btn__qty js-minicart-count">{$wa->shop->cart->count()}</div>
+								</div>
+							</a>
+						</div>
+					{/if}
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="mob-search">
+		<form action="{$_theme_config.search.url}" data-images="{$theme_settings.searchautocomplete_show_photos}" data-limit="{$theme_settings.searchautocomplete_max_results|default:3}">
+			<input type="search" name="query" autocomplete="off" placeholder="{$_theme_config.search.placeholder}" value="{if !empty($_theme_config.search.query)}{$_theme_config.search.query}{/if}">
+			<input type="submit">
+		</form>
+	</div>
+	<nav class="mobile-nav" id="mmenu">
+		<ul class="mobile-nav__list">
+			{if !empty($_theme_config.mainmenu_links)}
+			<li class="mobile-nav__item mobile-nav__item_catalog mobile-nav__item_main">
+				<span class="mobile-nav__btn">
+					<svg class="icon" width="16" height="16">
+						<use xlink:href="#icon-catalog-mob"></use>
+					</svg>
+					<span class="mobile-nav__text">{if $theme_settings.mainmenu_links eq "shop-categories"}[`Catalog`]{else}[`Navigation`]{/if}</span>
+					{* <span class="mobile-nav__count">588</span> *}
+				</span>
+				<ul class="mobile-nav__list">
+					{foreach $_theme_config.mainmenu_links as $cat}
+						{if isset($cat.params.mainmenu_hide)}{continue}{/if}
+						<li class="mobile-nav__item">
+							{if !empty($cat.childs)}
+								<span class="mobile-nav__btn">
+									{if !empty($cat.menu_icon)}
+										<span class="mobile-nav__icon mobile-nav__icon_big">
+											<img class="lazy-img" src="data:image/gif;base64,R0lGODlh6gDqAIAAAP///wAAACH5BAEAAAEALAAAAADqAOoAAAL+jI+py+0Po5y02ouz3rz7D4biSJbmiabqyrbuC8fyTNf2jef6zvf+DwwKh8Si8YhMKpfMpvMJjUqn1Kr1is1qt9yu9wsOi8fksvmMTqvX7Lb7DY/L5/S6/Y7P6/f8vv8PGCg4SFhoeIiYqLjI2Oj4CBkpOUlZaXmJmam5ydnp+QkaKjpKWmp6ipqqusra6voKGys7S1tre4ubq7vL2+v7CxwsPExcbHyMnKy8zNzs/AwdLT1NXW19jZ2tvc3d7f0NHi4+Tl5ufo6err7O3u7+Dh8vP09fb3+Pn6+/z9/v/w8woMCBBAsaPIgwocKFDBs6fAgxosSJFCtavIgxo8Y9jRw7evwIMqTIkSRLmjyJMqXKlSxbunwJM6bMmTRr2ryJM6fOnTx7+vwJNKjQoUSLGj2KNKnSpUybOo1UAAA7" data-src="{$cat.menu_icon}" alt>
+										</span>
+									{/if}
+									<span class="mobile-nav__text">{$cat.name}</span>
+								</span>
+								<ul class="mobile-nav__list mobile-nav__list_next">
+									<li class="mobile-nav__item">
+										<a class="mobile-nav__btn" href="{$cat.url}">[`View all products`]</a>
+									</li>
+									{foreach $cat.childs as $subcat}
+										<li class="mobile-nav__item">
+											{if !empty($subcat.childs)}
+												<span class="mobile-nav__btn">
+													{if !empty($subcat.menu_icon)}
+														<span class="mobile-nav__icon mobile-nav__icon_big">
+															<img class="lazy-img" src="data:image/gif;base64,R0lGODlh6gDqAIAAAP///wAAACH5BAEAAAEALAAAAADqAOoAAAL+jI+py+0Po5y02ouz3rz7D4biSJbmiabqyrbuC8fyTNf2jef6zvf+DwwKh8Si8YhMKpfMpvMJjUqn1Kr1is1qt9yu9wsOi8fksvmMTqvX7Lb7DY/L5/S6/Y7P6/f8vv8PGCg4SFhoeIiYqLjI2Oj4CBkpOUlZaXmJmam5ydnp+QkaKjpKWmp6ipqqusra6voKGys7S1tre4ubq7vL2+v7CxwsPExcbHyMnKy8zNzs/AwdLT1NXW19jZ2tvc3d7f0NHi4+Tl5ufo6err7O3u7+Dh8vP09fb3+Pn6+/z9/v/w8woMCBBAsaPIgwocKFDBs6fAgxosSJFCtavIgxo8Y9jRw7evwIMqTIkSRLmjyJMqXKlSxbunwJM6bMmTRr2ryJM6fOnTx7+vwJNKjQoUSLGj2KNKnSpUybOo1UAAA7" data-src="{$subcat.menu_icon}" alt>
+														</span>
+													{/if}
+													<span class="mobile-nav__text">{$subcat.name}</span>
+												</span>
+												<ul class="mobile-nav__list mobile-nav__list_next">
+													<li class="mobile-nav__item">
+														<a class="mobile-nav__btn" href="{$subcat.url}">[`View all products`]</a>
+													</li>
+													{foreach $subcat.childs as $subsubcat}
+														<li class="mobile-nav__item">
+															<a href="{$subsubcat.url}" class="mobile-nav__btn">
+																{if !empty($subsubcat.menu_icon)}
+																	<span class="mobile-nav__icon mobile-nav__icon_big">
+																		<img class="lazy-img" src="data:image/gif;base64,R0lGODlh6gDqAIAAAP///wAAACH5BAEAAAEALAAAAADqAOoAAAL+jI+py+0Po5y02ouz3rz7D4biSJbmiabqyrbuC8fyTNf2jef6zvf+DwwKh8Si8YhMKpfMpvMJjUqn1Kr1is1qt9yu9wsOi8fksvmMTqvX7Lb7DY/L5/S6/Y7P6/f8vv8PGCg4SFhoeIiYqLjI2Oj4CBkpOUlZaXmJmam5ydnp+QkaKjpKWmp6ipqqusra6voKGys7S1tre4ubq7vL2+v7CxwsPExcbHyMnKy8zNzs/AwdLT1NXW19jZ2tvc3d7f0NHi4+Tl5ufo6err7O3u7+Dh8vP09fb3+Pn6+/z9/v/w8woMCBBAsaPIgwocKFDBs6fAgxosSJFCtavIgxo8Y9jRw7evwIMqTIkSRLmjyJMqXKlSxbunwJM6bMmTRr2ryJM6fOnTx7+vwJNKjQoUSLGj2KNKnSpUybOo1UAAA7" data-src="{$subsubcat.menu_icon}" alt>
+																	</span>
+																{/if}
+																<span class="mobile-nav__text">{$subsubcat.name}</span>
+															</a>
+														</li>
+													{/foreach}
+												</ul>
+											{else}
+												<a href="{$subcat.url}" class="mobile-nav__btn">
+													{if !empty($subcat.menu_icon)}
+														<span class="mobile-nav__icon mobile-nav__icon_big">
+															<img class="lazy-img" src="data:image/gif;base64,R0lGODlh6gDqAIAAAP///wAAACH5BAEAAAEALAAAAADqAOoAAAL+jI+py+0Po5y02ouz3rz7D4biSJbmiabqyrbuC8fyTNf2jef6zvf+DwwKh8Si8YhMKpfMpvMJjUqn1Kr1is1qt9yu9wsOi8fksvmMTqvX7Lb7DY/L5/S6/Y7P6/f8vv8PGCg4SFhoeIiYqLjI2Oj4CBkpOUlZaXmJmam5ydnp+QkaKjpKWmp6ipqqusra6voKGys7S1tre4ubq7vL2+v7CxwsPExcbHyMnKy8zNzs/AwdLT1NXW19jZ2tvc3d7f0NHi4+Tl5ufo6err7O3u7+Dh8vP09fb3+Pn6+/z9/v/w8woMCBBAsaPIgwocKFDBs6fAgxosSJFCtavIgxo8Y9jRw7evwIMqTIkSRLmjyJMqXKlSxbunwJM6bMmTRr2ryJM6fOnTx7+vwJNKjQoUSLGj2KNKnSpUybOo1UAAA7" data-src="{$subcat.menu_icon}" alt>
+														</span>
+													{/if}
+													<span class="mobile-nav__text">{$subcat.name}</span>
+												</a>
+											{/if}
+										</li>
+									{/foreach}
+								</ul>
+							{else}
+								<a href="{$cat.url}" class="mobile-nav__btn">
+									{if !empty($cat.menu_icon)}
+										<span class="mobile-nav__icon mobile-nav__icon_big">
+											<img class="lazy-img" src="data:image/gif;base64,R0lGODlh6gDqAIAAAP///wAAACH5BAEAAAEALAAAAADqAOoAAAL+jI+py+0Po5y02ouz3rz7D4biSJbmiabqyrbuC8fyTNf2jef6zvf+DwwKh8Si8YhMKpfMpvMJjUqn1Kr1is1qt9yu9wsOi8fksvmMTqvX7Lb7DY/L5/S6/Y7P6/f8vv8PGCg4SFhoeIiYqLjI2Oj4CBkpOUlZaXmJmam5ydnp+QkaKjpKWmp6ipqqusra6voKGys7S1tre4ubq7vL2+v7CxwsPExcbHyMnKy8zNzs/AwdLT1NXW19jZ2tvc3d7f0NHi4+Tl5ufo6err7O3u7+Dh8vP09fb3+Pn6+/z9/v/w8woMCBBAsaPIgwocKFDBs6fAgxosSJFCtavIgxo8Y9jRw7evwIMqTIkSRLmjyJMqXKlSxbunwJM6bMmTRr2ryJM6fOnTx7+vwJNKjQoUSLGj2KNKnSpUybOo1UAAA7" data-src="{$cat.menu_icon}" alt>
+										</span>
+									{/if}
+									<span class="mobile-nav__text">{$cat.name}</span>
+								</a>
+							{/if}
+						</li>
+					{/foreach}
+				</ul>
+			</li>
+			{/if}
+			<li class="mobile-nav__item mobile-nav__item_main mobile-nav__item_search">
+				<div class="mobile-nav-search">
+					<form action="{$_theme_config.search.url}" data-images="{$theme_settings.searchautocomplete_show_photos}" data-limit="{$theme_settings.searchautocomplete_max_results|default:3}">
+						<input type="search" name="query" autocomplete="off" placeholder="{$_theme_config.search.placeholder}" value="{if !empty($_theme_config.search.query)}{$_theme_config.search.query}{/if}">
+						<button type="submit">
+							<svg class="icon" width="15" height="15">
+								<use xlink:href="#icon-search"></use>
+							</svg>
+						</button>
+					</form>
+				</div>
+			</li>
+			{if !empty($theme_settings.header_contacts_phone_1)}
+				<li class="mobile-nav__item mobile-nav__item_main mobile-nav__item_callback">
+					<span class="mobile-nav__btn">
+						<svg class="icon" width="16" height="16">
+							<use xlink:href="#icon-phone"></use>
+						</svg>
+						<span class="mobile-nav__text">{$theme_settings.header_contacts_phone_1}</span>
+					</span>
+					<ul class="mobile-nav__list">
+						<li class="mobile-nav__item">
+							<span class="b-contact">
+								<span class="b-contact__top">
+									<span class="b-contact__top-item">
+										<span class="b-contact__tel">
+											<svg class="icon" width="16" height="16">
+												<use xlink:href="#icon-phone"></use>
+											</svg>
+											<a class="b-contact__tel-text" href="tel:{$theme_settings.header_contacts_phone_1|regex_replace:"/[^+0-9]/":""}">{$theme_settings.header_contacts_phone_1}</a>
+										</span>
+										<span class="b-contact__callinfo">{$theme_settings.header_contacts_phone_1_text}</span>
+									</span>
+									{if !empty($theme_settings.header_contacts_phone_2)}
+										<span class="b-contact__top-item">
+											<span class="b-contact__tel">
+												<svg class="icon" width="16" height="16">
+													<use xlink:href="#icon-phone"></use>
+												</svg>
+												<a class="b-contact__tel-text" href="tel:{$theme_settings.header_contacts_phone_2|regex_replace:"/[^+0-9]/":""}">{$theme_settings.header_contacts_phone_2}</a>
+											</span>
+											<span class="b-contact__callinfo">{$theme_settings.header_contacts_phone_2_text}</span>
+										</span>
+									{/if}
+									<a class="b-contact__btn btn {$theme_settings.main_buttons_style|replace:'img/themebuttons/':''|replace:'.gif':''} btn btn_main-2 balance_callback" href="#">
+										<span>[`Callback`]</span>
+									</a>
+								</span>
+								{if !empty($theme_settings.header_contacts_workhours)}
+									<span class="b-contact__bottom">
+										<span class="b-contact__worktime">[`Working hours`]</span>
+										<span class="b-contact__workinfo">{$theme_settings.header_contacts_workhours}</span>
+									</span>
+								{/if}
+							</span>
+						</li>
+					</ul>
+				</li>
+			{/if}
+			{if 0}
+				<li class="mobile-nav__item mobile-nav__item_main">
+					<a class="mobile-nav__btn" href="#">
+						<svg class="icon" width="16" height="16">
+							<use xlink:href="#icon-gps"></use>
+						</svg>
+						<span class="mobile-nav__text">Ваш город: Александровская-на-Амуре</span>
+					</a>
+				</li>
+			{/if}
+			{if $wa->isAuthEnabled()}
+				<li class="mobile-nav__item mobile-nav__item_main profile">
+					{if $wa->user()->isAuth()}
+						<a href="{$wa->myUrl()}" class="mobile-nav__btn">
+							<svg class="icon" width="17" height="16">
+								<use xlink:href="#icon-user"></use>
+							</svg>
+							<span class="mobile-nav__text">[`Personal area`]</span>
+						</a>
+					{else}
+						<span class="mobile-nav__btn">
+							<svg class="icon" width="17" height="16">
+								<use xlink:href="#icon-user"></use>
+							</svg>
+							<span class="mobile-nav__text">[`Personal area`]</span>
+						</span>
+						<ul class="mobile-nav__list">
+							<li class="mobile-nav__item">
+								<a class="mobile-nav__btn" href="{$wa->loginUrl()}">[s`Log in`]</a>
+							</li>
+							<li class="mobile-nav__item">
+								<a class="mobile-nav__btn" href="{$wa->signupUrl()}">[s`Sign up`]</a>
+							</li>
+						</ul>
+					{/if}
+				</li>
+			{/if}
+			{if $wa->shop}
+				{if $theme_settings.products_show_wishlist}
+					<li class="mobile-nav__item mobile-nav__item_main">
+						<a class="mobile-nav__btn" href="{$wa->getUrl('/frontend/search/')}?_balance_type=favorites">
+							<svg class="icon" width="17" height="15">
+								<use xlink:href="#icon-heart"></use>
+							</svg>
+							<span class="mobile-nav__text">[`Favorites`]</span>
+							<span class="mobile-nav__qty-count js-wishlist-count js-wishlist-status{if $theme_favorite|count > 0} not-empty{/if}">{$theme_favorite|count}</span>
+						</a>
+					</li>
+				{/if}
+				{if $theme_settings.products_show_compare}
+					<li class="mobile-nav__item mobile-nav__item_main">
+						<a class="mobile-nav__btn js-compare-link" href="{if count($compare)>1}{$wa->getUrl('/frontend/compare/', ['id' => implode(',', $compare) ])}{else}javascript:void(0);{/if}">
+							<svg class="icon" width="16" height="16">
+								<use xlink:href="#icon-chart"></use>
+							</svg>
+							<span class="mobile-nav__text">[`Compare`]</span>
+							<span class="mobile-nav__qty-count js-compare-count js-compare-status{if $compare|count > 1} not-empty{/if}">{$compare|count}</span>
+						</a>
+					</li>
+				{/if}
+				<li class="mobile-nav__item mobile-nav__item_main">
+					<a class="mobile-nav__btn" href="{$wa->getUrl('/frontend/search/')}?_balance_type=viewed">
+						<svg class="icon" width="16" height="16">
+							<use xlink:href="#icon-eye"></use>
+						</svg>
+						<span class="mobile-nav__text">[`Viewed products`]</span>
+						<span class="mobile-nav__qty-count js-viewed-count js-viewed-status{if $theme_viewed|count > 1} not-empty{/if}">{$theme_viewed|count|default:0}</span>
+					</a>
+				</li>
+				{if !isset($currencies)}
+					{$currencies = $wa->shop->currencies()}
+				{/if}
+				{if $theme_settings.shop_allow_change_currency && count($currencies) > 1}
+					<li class="mobile-nav__item mobile-nav__item_main profile">
+						<span class="mobile-nav__btn">
+							<svg class="icon" width="16" height="16">
+								<use xlink:href="#icon-currency"></use>
+							</svg>
+							<span class="mobile-nav__text">[`Currency`]</span>
+						</span>
+						<ul class="mobile-nav__list">
+							{foreach $currencies as $c_code => $c}
+							<li class="mobile-nav__item">
+								<a class="mobile-nav__btn" href="?currency={$c_code}">{$c_code}</a>
+							</li>
+							{/foreach}
+						</ul>
+					</li>
+				{/if}
+			{/if}
+			{if !empty($_theme_config.header_links)}
+				{foreach $_theme_config.header_links as $page}
+					<li class="mobile-nav__item mobile-nav__item_info">
+						{if !empty($page.childs)}
+							<span class="mobile-nav__btn mobile-nav__btn_expand">
+								<span class="menu-toggle-text">
+									<a class="menu-toggle-text__text" href="{$page.url}">{$page.name|escape}</a>
+									<div class="menu-toggle-text__icon">
+										<svg class="icon icon-plus" width="10" height="10">
+											<use xlink:href="#icon-plus-thin"></use>
+										</svg>
+										<svg class="icon icon-minus" width="10" height="10">
+											<use xlink:href="#icon-minus-thin"></use>
+										</svg>
+									</div>
+								</span>
+								<span class="mob-side-dropmenu" style="display:none;">
+									<div class="mob-side-dropmenu__list">
+										{foreach $page.childs as $child}
+											<div class="mob-side-dropmenu__item">
+												<a href="{$child.url}">{$child.name|escape}</a>
+											</div>
+										{/foreach}
+									</div>
+								</span>
+							</span>
+						{else}
+							<a class="mobile-nav__btn" href="{$page.url}">{$page.name|escape}</a>
+						{/if}
+					</li>
+				{/foreach}
+			{/if}
+		</ul>
+	</nav>
+</header>
+{/strip}

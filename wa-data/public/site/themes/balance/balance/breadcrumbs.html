@@ -1,0 +1,16 @@
+{strip}
+	<div class="layout-center">
+		<div class="breadcrumbs breadcrumbs_{$theme_settings.breadcrumbs_design}">
+			<ul class="breadcrumbs__list">
+				<li class="breadcrumbs__item">
+					<a class="breadcrumbs__link" href="{$wa_url}"></a>
+				</li>
+				{foreach $breadcrumbs as $bc}
+				<li class="breadcrumbs__item">
+					<a class="breadcrumbs__link" href="{$bc.url}">{$bc.name}</a>
+				</li>
+				{/foreach}
+			</ul>
+		</div>
+	</div>
+{/strip}

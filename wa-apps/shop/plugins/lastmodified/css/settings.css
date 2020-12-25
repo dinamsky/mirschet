@@ -1,0 +1,73 @@
+.bottom-bar {
+	position: fixed;
+	z-index: 100;
+	bottom: 0;
+	left: 0;
+	right: 0;
+	box-shadow: 0 1px 5px rgba(0, 0, 0, 0.1);
+	background: #f7f7f7;
+	border-top: 1px solid #dddddd;
+	padding: 10px 10px 0 220px;
+}
+
+.settings-group {
+	margin: 15px 0;
+}
+
+.settings-group__header {
+	font-weight: bold;
+	font-size: 18px;
+	margin-top: 15px;
+}
+
+.bsui-select_fixed-width .bsui-select__control {
+	width: 220px;
+}
+#wa {
+	min-width: 950px;
+}
+
+.toolbar {
+	float: right;
+	text-align: right;
+	cursor: pointer;
+}
+
+
+.icon-help {
+	width: 22px;
+	height: 22px;
+}
+
+.icon-help {
+	background: url('../img/icons/help.png');
+}
+
+.help-block,
+.help-block p {
+	font-size: 10pt;
+	font-family: 'Helvetica Neue', 'Trebuchet MS', Arial, sans-serif;
+}
+
+.help-block p {
+	margin-bottom: 10px;
+}
+
+.clean-hash-btn {
+	margin-left: 15px;
+}
+
+.help-block-template,
+.help-controls-template {
+	display: none;
+}
+
+.bsui-page__header {
+	height: 34px;
+}
+
+.help-sml-btn {
+	display: inline-block;
+	vertical-align: -6px;
+	cursor: pointer;
+}

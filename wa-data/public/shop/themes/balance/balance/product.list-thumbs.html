@@ -1,0 +1,34 @@
+{strip}
+{if !empty($products)}
+	<div class="item-pg__similar-items mob-paddings">
+		<div class="layout-center">
+			<div class="items-slider">
+				<div class="items-slider__header">
+					{if isset($title) && !empty($title)}
+						<div class="items-slider__heading">
+							<h2 class="section-title">{$title}</h2>
+						</div>
+					{/if}
+					<div class="items-slider__arrow">
+						<button class="slider-ar slider-ar_square pos-rel default-btn items-slider__nav-left">
+							<svg class="icon cent-icon" width="7" height="11">
+								<use xlink:href="#arrow-left-small"></use>
+							</svg>
+						</button>
+						<button class="slider-ar slider-ar_square pos-rel default-btn items-slider__nav-right">
+							<svg class="icon cent-icon" width="7" height="11">
+								<use xlink:href="#arrow-right-small"></use>
+							</svg>
+						</button>
+					</div>
+				</div>
+				<div class="items-slider__body swiper-container{if !$theme_settings.products_border} nobd{/if}">
+					<div class="items-slider__wrapper swiper-wrapper">
+						{include file="list-thumbs.html" show_features=false hide_quickbuy=true list_only=true hide_description=true wrapper="items-slider__item swiper-slide item-c-mob-`$theme_settings.products_list_mobile_view`" inline}
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+{/if}
+{/strip}

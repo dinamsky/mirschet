@@ -1,0 +1,33 @@
+<script type="text/javascript">
+    (function ($) {
+        if(shopSdekintOrders && shopSdekintOrders.order_list_handler && (typeof shopSdekintOrders.order_list_handler == 'function')) {
+            var handler_ready = false, $maincontainer = $('#maincontent');
+            var events = $maincontainer.data('events');
+            var handlers = events ? events.append_order_list : [];
+            $.each(handlers, function (i, o) {
+                if (o.handler.toString() == shopSdekintOrders.order_list_handler.toString()) handler_ready = true;
+            });
+            if (!handler_ready) {
+                $maincontainer.on('append_order_list', '#order-list', shopSdekintOrders.order_list_handler);
+            }
+        }
+    })(jQuery);
+</script>
+<style type="text/css">
+    div.s-plugin-sdekint-productlist-info {
+        margin: 3px 0;
+        color: forestgreen;
+        font-size: 12px;
+    }
+    div.s-plugin-sdekint-productlist-info i.icon16 {
+        margin: 0;
+        background: url("/wa-apps/shop/plugins/sdekint/img/sdek12.png");
+        width: 12px;
+        height: 12px;
+    }
+    #order-list tr.order i.icon16.s-plugin-sdekint-sdekicon {
+        margin: 0;
+        background: url("/wa-apps/shop/plugins/sdekint/img/sdek16.png");
+        vertical-align: bottom;
+    }
+</style>

@@ -1,0 +1,11 @@
+{
+    "name": "syrnik/wa-logger",
+    "license":"private",
+    "version": "1.0.1",
+    "autoload": {
+        "psr-4": {"Syrnik\\" : "src/"}
+    },
+    "require": {
+        "psr/log": "~1.0.0"
+    }
+}

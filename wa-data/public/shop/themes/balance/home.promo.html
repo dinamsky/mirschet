@@ -1,0 +1,72 @@
+{strip}
+{if $theme_settings.shop_homepage_promo_view ne "none"}
+	{$promocards = $wa->shop->promos()}
+	{if !empty($promocards)}
+		<div class="home-pg__section home-pg__section_promo{if $theme_settings.shop_homepage_promo_view ne 'always'} {$theme_settings.shop_homepage_promo_view}{/if}">
+			<div class="promo-g pos-rel">
+				<div class="descr-mode pos-abs"><span class="pos-rel">PROMO</span></div>
+				<div class="promo-g__inner">
+					{foreach $promocards as $promo}
+					<div class="promo-g__item"{if $promo.background_color|upper eq "#FFFFFF" || $promo.background_color|upper eq "#FFF"} style="border:1px solid #f0f0f0;border-radius:5px"{/if}>
+						<div class="home-promo"{if !empty($promo.background_color)} style="background-color:{$promo.background_color};"{/if}>
+							{if !empty($promo.image)}
+								<div class="home-promo__image">
+									{if !empty($promo.link)}<a href="{$promo.link|escape}">{/if}
+										<img src="data:image/gif;base64,R0lGODlh6gDqAIAAAP///wAAACH5BAEAAAEALAAAAADqAOoAAAL+jI+py+0Po5y02ouz3rz7D4biSJbmiabqyrbuC8fyTNf2jef6zvf+DwwKh8Si8YhMKpfMpvMJjUqn1Kr1is1qt9yu9wsOi8fksvmMTqvX7Lb7DY/L5/S6/Y7P6/f8vv8PGCg4SFhoeIiYqLjI2Oj4CBkpOUlZaXmJmam5ydnp+QkaKjpKWmp6ipqqusra6voKGys7S1tre4ubq7vL2+v7CxwsPExcbHyMnKy8zNzs/AwdLT1NXW19jZ2tvc3d7f0NHi4+Tl5ufo6err7O3u7+Dh8vP09fb3+Pn6+/z9/v/w8woMCBBAsaPIgwocKFDBs6fAgxosSJFCtavIgxo8Y9jRw7evwIMqTIkSRLmjyJMqXKlSxbunwJM6bMmTRr2ryJM6fOnTx7+vwJNKjQoUSLGj2KNKnSpUybOo1UAAA7" data-src="{$promo.image}" class="lazy-img" alt="{$promo.title|escape}">
+									{if !empty($promo.link)}</a>{/if}
+								</div>
+							{/if}
+							<div class="home-promo__content"{if !empty($promo.color)} style="color:{$promo.color};"{/if}>
+								{if !empty($promo.title)}
+									<h3 class="home-promo__title bold">
+										{if !empty($promo.link)}<a href="{$promo.link|escape}"{if !empty($promo.color)} style="color:{$promo.color};"{/if}>{/if}
+										{$promo.title|escape}
+										{if !empty($promo.link)}</a>{/if}
+									</h3>
+								{/if}
+								{if !empty($promo.body)}
+									<h3 class="home-promo__descr">{$promo.body}</h3>
+								{/if}
+								{if !empty($promo.countdown_datetime) && time() <= strtotime($promo.countdown_datetime)}
+									{$wa->globals("_balance_countdown_enabled",true)}
+									<div class="home-promo__countdown">
+										<div class="countdown">
+											<div class="countdown__inner">
+												<div class="countdown__title">
+													<strong>[`HURRY UP`]!</strong>
+												</div>
+												<div class="countdown__timer" data-start="{date('Y-m-d H:i:s')}" data-end="{$promo.countdown_datetime}">
+													<div class="countdown__timer-item">
+														<strong class="days">0</strong>
+														<span class="grey">[`days`]</span>
+													</div>
+													<div class="countdown__timer-item">
+														<strong class="hours">0</strong>
+														<span class="grey">[`hours`]</span>
+													</div>
+													<div class="countdown__timer-item">
+														<strong class="minutes">0</strong>
+														<span class="grey">[`minutes`]</span>
+													</div>
+													<div class="countdown__timer-item">
+														<strong class="seconds">0</strong>
+														<span class="grey">[`seconds`]</span>
+													</div>
+												</div>
+											</div>
+										</div>
+									</div>
+								{/if}
+								{if !empty($promo.link)}
+									<a class="home-promo__btn" href="{$promo.link|escape}"{if !empty($promo.color)} style="color:{$promo.color}; border-color:{$promo.color};"{/if}>[`DETAILS`]</a>
+								{/if}
+							</div>
+						</div>
+					</div>
+					{/foreach}
+				</div>
+			</div>
+		</div>
+	{/if}
+{/if}
+{/strip}

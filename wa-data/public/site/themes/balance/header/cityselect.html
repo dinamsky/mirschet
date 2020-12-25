@@ -1,0 +1,31 @@
+{strip}
+{if 0}
+<div class="site-header__city-chooser">
+	<div class="city-chooser is-active">
+		<div class="city-chooser__inner">
+			<svg class="icon" width="16" height="16">
+				<use xlink:href="#icon-compass"></use>
+			</svg>
+			<div class="city-chooser__text has-down-arrow">Санкт-Петербург</div>
+		</div>
+		<div class="city-chooser__dropdown">
+			<div class="univ-dropd univ-dropd_single univ-dropd_ar-top">
+				<div class="city-choose-drop">
+					<h5 class="city-choose-drop__title">Ваш город Санкт-Петербург</h5>
+					<div class="city-choose-drop__btns">
+						<button class="btn {$theme_settings.main_buttons_style|replace:'img/themebuttons/':''|replace:'.gif':''} btn_main-2">
+							<span>Да</span>
+							<span class="hover-anim"></span>
+						</button>
+						<button class="btn {$theme_settings.main_buttons_style|replace:'img/themebuttons/':''|replace:'.gif':''} btn_sec-4">
+							<span>Нет, выбрать другой город</span>
+							<span class="hover-anim"></span>
+						</button>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+{/if}
+{/strip}

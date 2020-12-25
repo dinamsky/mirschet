@@ -1,0 +1,360 @@
+[
+    {
+        "name": "doctrine/collections",
+        "version": "v1.4.0",
+        "version_normalized": "1.4.0.0",
+        "source": {
+            "type": "git",
+            "url": "https://github.com/doctrine/collections.git",
+            "reference": "1a4fb7e902202c33cce8c55989b945612943c2ba"
+        },
+        "dist": {
+            "type": "zip",
+            "url": "https://api.github.com/repos/doctrine/collections/zipball/1a4fb7e902202c33cce8c55989b945612943c2ba",
+            "reference": "1a4fb7e902202c33cce8c55989b945612943c2ba",
+            "shasum": ""
+        },
+        "require": {
+            "php": "^5.6 || ^7.0"
+        },
+        "require-dev": {
+            "doctrine/coding-standard": "~0.1@dev",
+            "phpunit/phpunit": "^5.7"
+        },
+        "time": "2017-01-03T10:49:41+00:00",
+        "type": "library",
+        "extra": {
+            "branch-alias": {
+                "dev-master": "1.3.x-dev"
+            }
+        },
+        "installation-source": "dist",
+        "autoload": {
+            "psr-0": {
+                "Doctrine\\Common\\Collections\\": "lib/"
+            }
+        },
+        "notification-url": "https://packagist.org/downloads/",
+        "license": [
+            "MIT"
+        ],
+        "authors": [
+            {
+                "name": "Roman Borschel",
+                "email": "roman@code-factory.org"
+            },
+            {
+                "name": "Benjamin Eberlei",
+                "email": "kontakt@beberlei.de"
+            },
+            {
+                "name": "Guilherme Blanco",
+                "email": "guilhermeblanco@gmail.com"
+            },
+            {
+                "name": "Jonathan Wage",
+                "email": "jonwage@gmail.com"
+            },
+            {
+                "name": "Johannes Schmitt",
+                "email": "schmittjoh@gmail.com"
+            }
+        ],
+        "description": "Collections Abstraction library",
+        "homepage": "http://www.doctrine-project.org",
+        "keywords": [
+            "array",
+            "collections",
+            "iterator"
+        ]
+    },
+    {
+        "name": "php-units-of-measure/php-units-of-measure",
+        "version": "v2.1.0",
+        "version_normalized": "2.1.0.0",
+        "source": {
+            "type": "git",
+            "url": "https://github.com/PhpUnitsOfMeasure/php-units-of-measure.git",
+            "reference": "25f476e9c50e11af8cf044d22ffc271c96aa5248"
+        },
+        "dist": {
+            "type": "zip",
+            "url": "https://api.github.com/repos/PhpUnitsOfMeasure/php-units-of-measure/zipball/25f476e9c50e11af8cf044d22ffc271c96aa5248",
+            "reference": "25f476e9c50e11af8cf044d22ffc271c96aa5248",
+            "shasum": ""
+        },
+        "require": {
+            "php": ">=5.4.0"
+        },
+        "replace": {
+            "triplepoint/php-units-of-measure": "*"
+        },
+        "require-dev": {
+            "phpunit/phpunit": "4.8.*",
+            "squizlabs/php_codesniffer": "2.2.*"
+        },
+        "time": "2016-07-24T22:36:00+00:00",
+        "type": "library",
+        "installation-source": "dist",
+        "autoload": {
+            "psr-4": {
+                "PhpUnitsOfMeasure\\": "source/"
+            }
+        },
+        "notification-url": "https://packagist.org/downloads/",
+        "license": [
+            "MIT"
+        ],
+        "authors": [
+            {
+                "name": "Jonathan Hanson",
+                "email": "jonathan@jonathan-hanson.org",
+                "homepage": "http://www.jonathan-hanson.org/",
+                "role": "Developer"
+            }
+        ],
+        "description": "A PHP library for converting between standard units of measure.",
+        "homepage": "https://github.com/PhpUnitsOfMeasure/php-units-of-measure",
+        "keywords": [
+            "conversion",
+            "data",
+            "measurements"
+        ]
+    },
+    {
+        "name": "psr/log",
+        "version": "1.0.2",
+        "version_normalized": "1.0.2.0",
+        "source": {
+            "type": "git",
+            "url": "https://github.com/php-fig/log.git",
+            "reference": "4ebe3a8bf773a19edfe0a84b6585ba3d401b724d"
+        },
+        "dist": {
+            "type": "zip",
+            "url": "https://api.github.com/repos/php-fig/log/zipball/4ebe3a8bf773a19edfe0a84b6585ba3d401b724d",
+            "reference": "4ebe3a8bf773a19edfe0a84b6585ba3d401b724d",
+            "shasum": ""
+        },
+        "require": {
+            "php": ">=5.3.0"
+        },
+        "time": "2016-10-10T12:19:37+00:00",
+        "type": "library",
+        "extra": {
+            "branch-alias": {
+                "dev-master": "1.0.x-dev"
+            }
+        },
+        "installation-source": "dist",
+        "autoload": {
+            "psr-4": {
+                "Psr\\Log\\": "Psr/Log/"
+            }
+        },
+        "notification-url": "https://packagist.org/downloads/",
+        "license": [
+            "MIT"
+        ],
+        "authors": [
+            {
+                "name": "PHP-FIG",
+                "homepage": "http://www.php-fig.org/"
+            }
+        ],
+        "description": "Common interface for logging libraries",
+        "homepage": "https://github.com/php-fig/log",
+        "keywords": [
+            "log",
+            "psr",
+            "psr-3"
+        ]
+    },
+    {
+        "name": "serger/cake-utility",
+        "version": "v1.0.0",
+        "version_normalized": "1.0.0.0",
+        "source": {
+            "type": "git",
+            "url": "https://github.com/SergeR/cake-utils.git",
+            "reference": "c7d6554c08f1d93be9f3f4b1c5cae10733558d42"
+        },
+        "dist": {
+            "type": "zip",
+            "url": "https://api.github.com/repos/SergeR/cake-utils/zipball/c7d6554c08f1d93be9f3f4b1c5cae10733558d42",
+            "reference": "c7d6554c08f1d93be9f3f4b1c5cae10733558d42",
+            "shasum": ""
+        },
+        "require": {
+            "php": ">=5.6.0"
+        },
+        "suggest": {
+            "ext-intl": "To use Text::transliterate() or Text::slug()",
+            "lib-ICU": "To use Text::transliterate() or Text::slug()"
+        },
+        "time": "2019-04-04T22:17:46+00:00",
+        "type": "library",
+        "installation-source": "dist",
+        "autoload": {
+            "psr-4": {
+                "SergeR\\CakeUtility\\": "src"
+            }
+        },
+        "notification-url": "https://packagist.org/downloads/",
+        "license": [
+            "MIT"
+        ],
+        "authors": [
+            {
+                "name": "CakePHP Community",
+                "homepage": "https://github.com/cakephp/utility/graphs/contributors"
+            }
+        ],
+        "description": "CakePHP 3.x Utility classes such as Inflector, String, and Hash without Cake/Core dependency",
+        "keywords": [
+            "hash",
+            "inflector",
+            "string"
+        ]
+    },
+    {
+        "name": "serger/webasyst-shipping-package",
+        "version": "v1.0.0",
+        "version_normalized": "1.0.0.0",
+        "source": {
+            "type": "git",
+            "url": "git@gitlab.com:sergerod/webasyst-shipping-package.git",
+            "reference": "f0cdb6d6614fbf56d0ac1bfd9fc98b38eee8f134"
+        },
+        "dist": {
+            "type": "zip",
+            "url": "https://gitlab.com/api/v4/projects/sergerod%2Fwebasyst-shipping-package/repository/archive.zip?sha=f0cdb6d6614fbf56d0ac1bfd9fc98b38eee8f134",
+            "reference": "f0cdb6d6614fbf56d0ac1bfd9fc98b38eee8f134",
+            "shasum": ""
+        },
+        "require": {
+            "doctrine/collections": "^1.4",
+            "php": "^5.6 || 7.0",
+            "php-units-of-measure/php-units-of-measure": "^2.1.0"
+        },
+        "time": "2018-12-13T01:22:48+00:00",
+        "type": "library",
+        "installation-source": "dist",
+        "autoload": {
+            "psr-4": {
+                "SergeR\\Webasyst\\Shipping\\Packages\\": "src/"
+            }
+        },
+        "license": [
+            "proprietary"
+        ],
+        "authors": [
+            {
+                "name": "Serge Rodovnichenko",
+                "homepage": "https://www.syrnik.com",
+                "email": "serge@syrnik.com"
+            }
+        ],
+        "description": "Class for single package and collection of packages",
+        "keywords": [
+            "package"
+        ]
+    },
+    {
+        "name": "syrnik/html",
+        "version": "1.0.0",
+        "version_normalized": "1.0.0.0",
+        "source": {
+            "type": "git",
+            "url": "git@gitlab.com:sergerod/wa-html.git",
+            "reference": "9ed2cce7a343afef629d97af183997bfde7da917"
+        },
+        "dist": {
+            "type": "zip",
+            "url": "https://gitlab.com/api/v4/projects/sergerod%2Fwa-html/repository/archive.zip?sha=9ed2cce7a343afef629d97af183997bfde7da917",
+            "reference": "9ed2cce7a343afef629d97af183997bfde7da917",
+            "shasum": ""
+        },
+        "time": "2018-07-17T19:51:34+00:00",
+        "type": "library",
+        "installation-source": "dist",
+        "autoload": {
+            "psr-4": {
+                "Syrnik\\": "src/"
+            }
+        },
+        "license": [
+            "mit"
+        ]
+    },
+    {
+        "name": "syrnik/wa-logger",
+        "version": "1.0.1",
+        "version_normalized": "1.0.1.0",
+        "source": {
+            "type": "git",
+            "url": "git@gitlab.com:sergerod/wa-logger.git",
+            "reference": "dfd1d4697b154d369d7f23487022a09dd96a4ec1"
+        },
+        "dist": {
+            "type": "zip",
+            "url": "https://gitlab.com/api/v4/projects/sergerod%2Fwa-logger/repository/archive.zip?sha=dfd1d4697b154d369d7f23487022a09dd96a4ec1",
+            "reference": "dfd1d4697b154d369d7f23487022a09dd96a4ec1",
+            "shasum": ""
+        },
+        "require": {
+            "psr/log": "~1.0.0"
+        },
+        "time": "2018-07-18T23:12:29+00:00",
+        "type": "library",
+        "installation-source": "dist",
+        "autoload": {
+            "psr-4": {
+                "Syrnik\\": "src/"
+            }
+        },
+        "license": [
+            "private"
+        ]
+    },
+    {
+        "name": "webit/eval-math",
+        "version": "1.0.1",
+        "version_normalized": "1.0.1.0",
+        "source": {
+            "type": "git",
+            "url": "https://github.com/dbojdo/eval-math.git",
+            "reference": "0e7c3a1e0f536b826f04553726c112996b52ded6"
+        },
+        "dist": {
+            "type": "zip",
+            "url": "https://api.github.com/repos/dbojdo/eval-math/zipball/0e7c3a1e0f536b826f04553726c112996b52ded6",
+            "reference": "0e7c3a1e0f536b826f04553726c112996b52ded6",
+            "shasum": ""
+        },
+        "require": {
+            "php": ">=5.3"
+        },
+        "require-dev": {
+            "phpunit/phpunit": "~4.2"
+        },
+        "time": "2016-02-15T09:34:24+00:00",
+        "type": "library",
+        "extra": {
+            "branch-alias": {
+                "dev-master": "1.x-dev"
+            }
+        },
+        "installation-source": "dist",
+        "autoload": {
+            "psr-4": {
+                "Webit\\Util\\EvalMath\\": "src/"
+            }
+        },
+        "notification-url": "https://packagist.org/downloads/",
+        "description": "EvalMath",
+        "keywords": [
+            "EvalMath"
+        ]
+    }
+]

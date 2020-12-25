@@ -1,0 +1,39 @@
+{strip}
+{if !empty($_shop_brands)}
+	<div class="catalog-pg__side-sect mt-hide">
+		<div class="sidebar-section pos-rel">
+			{if $wa->user()->isAdmin()}<div class="descr-mode pos-abs"><span class="pos-rel" style="font-size:2rem">PRODUCTBRANDS</span></div>{/if}
+			<div class="sidebar-section__title section-title section-title_mini">{$theme_settings.shop_sidebars_sections_brands_title|default:"[`Popular brands`]"}</div>
+			<div class="sidebar-section__body">
+				{if $theme_settings.shop_sidebars_sections_brands_limit > 0}
+					{$limit = $theme_settings.shop_sidebars_sections_brands_limit}
+				{else}
+					{$limit = 12}
+				{/if}
+				{if $theme_settings.shop_sidebars_sections_brands_limit_max > 0}
+					{$max_limit = $theme_settings.shop_sidebars_sections_brands_limit_max}
+				{else}
+					{$max_limit = 30}
+				{/if}
+				<div class="side-brands has-toggle" data-show-qty="{$limit}">
+					<div class="side-brands__list">
+						{foreach $_shop_brands as $b}
+							{if $b@iteration > $max_limit}{break}{/if}
+							<div class="side-brands__item show-more-item">
+								<a class="side-brands__link" href="{$b.url}">{$b.name|escape}</a>
+							</div>
+						{/foreach}
+					</div>
+					<a class="tags__btn btn {$theme_settings.main_buttons_style|replace:'img/themebuttons/':''|replace:'.gif':''} btn_sec-6 btn-toggle" data-show="[`show more`]" data-hide="[`hide`]" href="#">
+						<span>[`show more`]</span>
+						<svg class="icon" width="7" height="4">
+							<use xlink:href="#arrow-down-breadcrumb"></use>
+						</svg>
+						<div class="hover-anim"></div>
+					</a>
+				</div>
+			</div>
+		</div>
+	</div>
+{/if}
+{/strip}

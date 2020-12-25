@@ -1,0 +1,47 @@
+{strip}
+<div class="catalog-pg__side-sect mt-hide">
+	<div class="catalog-pg__sidebar-menu-wr pos-rel">
+		<div class="descr-mode pos-abs"><span class="pos-rel">CATEGORIES</span></div>
+		<div class="catalog-pg__sidebar-header">
+			<div class="catalog-pg__sidebar-header-title">
+				<svg class="icon" width="16" height="10">
+					<use xlink:href="#icon-blog-menu"></use>
+				</svg>
+				<strong>[`Catalog`]</strong>
+			</div>
+			<div class="catalog-pg__sidebar-header-close">
+				<svg class="icon" width="10" height="10">
+					<use xlink:href="#icon-close"></use>
+				</svg>
+			</div>
+		</div>
+		<div class="catalog-pg__sidebar-inner">
+			<div class="catalog-pg__menu-v">
+				{foreach $_theme_config.categories_links as $cat}
+					<div class="catalog-pg__menu-item{if isset($category) && ($cat.left_key <= $category.left_key && $cat.right_key >= $category.right_key)} active{/if}">
+						<a class="catalog-pg__menu-link" href="{$cat.url}">{$cat.name}</a>
+						{if isset($category) && ($cat.left_key <= $category.left_key && $cat.right_key >= $category.right_key && !empty($cat.childs))}
+							<ul>
+								{foreach $cat.childs as $subcat}
+								<li{if isset($category) && ($subcat.left_key <= $category.left_key && $subcat.right_key >= $category.right_key)} class="active"{/if}>
+									<a href="{$subcat.url}">{$subcat.name}</a>
+									{if isset($category) && ($subcat.left_key <= $category.left_key && $subcat.right_key >= $category.right_key && !empty($subcat.childs))}
+									<ul>
+										{foreach $subcat.childs as $subsubcat}
+											<li{if isset($category) && ($subsubcat.left_key <= $category.left_key && $subsubcat.right_key >= $category.right_key)} class="active"{/if}>
+												<a href="{$subsubcat.url}">{$subsubcat.name}</a>
+											</li>
+										{/foreach}
+									</ul>
+									{/if}
+								</li>
+								{/foreach}
+							</ul>
+						{/if}
+					</div>
+				{/foreach}
+			</div>
+		</div>
+	</div>
+</div>
+{/strip}

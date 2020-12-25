@@ -1,0 +1,255 @@
+{strip}
+
+{$_social_svg_styles = [
+	'vkontakte' => [
+		'id' => 'vk',
+		'icon' => '<svg class="icon cent-icon" width="16" height="9"><use xlink:href="#icon-vk"></use></svg>'
+	],
+	'facebook' => [
+		'id' => 'fb',
+		'icon' => '<svg class="icon cent-icon" width="7" height="16"><use xlink:href="#icon-fb"></use></svg>'
+	],
+	'google' => [
+		'id' => 'ggp',
+		'icon' => '<svg class="icon cent-icon" width="18" height="10"><use xlink:href="#icon-gp"></use></svg>'
+	],
+	'twitter' => [
+		'id' => 'tw',
+		'icon' => '<svg class="icon cent-icon" width="16" height="13"><use xlink:href="#icon-tw"></use></svg>'
+	],
+	'yandex' => [
+		'id' => 'ya',
+		'icon' => '<svg class="icon cent-icon" width="8" height="15"><use xlink:href="#icon-ya"></use></svg>'
+	],
+	'mailru' => [
+		'id' => 'magent',
+		'icon' => '<svg class="icon cent-icon" width="16" height="15"><use xlink:href="#icon-magent"></use></svg>'
+	]
+]}
+
+
+{$_theme_config = []}
+
+
+{* build topbar-menu *}
+{if $theme_settings.header_links == 'site-pages'}
+	{if $wa->site}{$_theme_config.header_links = $wa->site->pages(true)}{/if}
+{elseif $theme_settings.header_links == 'shop-pages'}
+	{if $wa->shop}{$_theme_config.header_links = $wa->shop->pages(true)}{/if}
+{elseif $theme_settings.header_links == 'blog-pages'}
+	{if $wa->blog}{$_theme_config.header_links = $wa->blog->pages(true)}{/if}
+{elseif $theme_settings.header_links == 'photos-pages'}
+	{if $wa->photos}{$_theme_config.header_links = $wa->photos->pages(true)}{/if}
+{elseif $theme_settings.header_links == 'hub-pages'}
+	{if $wa->hub}{$_theme_config.header_links = $wa->hub->pages(true)}{/if}
+{elseif $theme_settings.header_links != 'none'}
+	{$_theme_config.header_links = $wa->apps()}
+{/if}
+
+
+{* build main-menu *}
+{$_theme_config.mainmenu_links = []}
+{if $theme_settings.mainmenu_links == 'site-pages'}
+	{$_theme_config.mainmenu_links = $wa->site->pages(true)}
+{elseif $theme_settings.mainmenu_links == 'shop-categories'}
+	{if $wa->shop}
+		{if in_array($theme_settings.header_design ,['view-5-2','view-6-2','view-9-2','view-12-2','view-14-2','view-15-2'])}
+			{$_theme_config.mainmenu_links = $wa->shop->categories(0, 4, true, true)}
+		{else}
+			{$_theme_config.mainmenu_links = $wa->shop->categories(0, 3, true, true)}
+		{/if}
+		{foreach $_theme_config.mainmenu_links as $id=>$cat}
+			{if isset($cat.params.childs_grid) && !empty($cat.params.childs_grid)}
+				{$_theme_config.mainmenu_links[$id]._childs_grid = $cat.params.childs_grid}
+			{/if}
+			{if isset($cat.params.menu_icon) && !empty($cat.params.menu_icon)}
+				{$_theme_config.mainmenu_links[$id].menu_icon = $cat.params.menu_icon}
+			{elseif method_exists("shopWmimageincatPlugin","getCategoryImage") && shopWmimageincatPlugin::getCategoryImage($cat.id, 'icon')}
+				{$_theme_config.mainmenu_links[$id].menu_icon = shopWmimageincatPlugin::getCategoryImage($cat.id, 'icon')}
+			{else}
+				{$_theme_config.mainmenu_links[$id].menu_icon = ""}
+			{/if}
+			{$_theme_config.mainmenu_links[$id].submenu_mono_viewtype = $cat.params.submenu_mono_viewtype|default:$theme_settings.mainmenu_submenu_mono_viewtype}
+			{if !empty($cat.childs)}
+				{foreach $cat.childs as $sub_id=>$subcat}
+					{$_theme_config.mainmenu_links[$id].childs[$sub_id].submenu_mono_viewtype = $subcat.params.submenu_mono_viewtype|default:$theme_settings.mainmenu_submenu_mono_viewtype}
+					{if isset($subcat.params.menu_icon) && !empty($subcat.params.menu_icon)}
+						{$_theme_config.mainmenu_links[$id].childs[$sub_id].menu_icon = $subcat.params.menu_icon}
+					{elseif method_exists("shopWmimageincatPlugin","getCategoryImage") && shopWmimageincatPlugin::getCategoryImage($subcat.id, 'icon')}
+						{$_theme_config.mainmenu_links[$id].childs[$sub_id].menu_icon = shopWmimageincatPlugin::getCategoryImage($subcat.id, 'icon')}
+					{else}
+						{$_theme_config.mainmenu_links[$id].childs[$sub_id].menu_icon = ""}
+					{/if}
+					{if !empty($subcat.childs)}
+						{foreach $subcat.childs as $subsub_id=>$subsubcat}
+							{$_theme_config.mainmenu_links[$id].childs[$sub_id].childs[$subsub_id].submenu_mono_viewtype = $subsubcat.params.submenu_mono_viewtype|default:$theme_settings.mainmenu_submenu_mono_viewtype}
+							{if isset($subsubcat.params.menu_icon) && !empty($subsubcat.params.menu_icon)}
+								{$_theme_config.mainmenu_links[$id].childs[$sub_id].childs[$subsub_id].menu_icon = $subsubcat.params.menu_icon}
+							{elseif method_exists("shopWmimageincatPlugin","getCategoryImage") && shopWmimageincatPlugin::getCategoryImage($subsubcat.id, 'icon')}
+								{$_theme_config.mainmenu_links[$id].childs[$sub_id].childs[$subsub_id].menu_icon = shopWmimageincatPlugin::getCategoryImage($subsubcat.id, 'icon')}
+							{else}
+								{$_theme_config.mainmenu_links[$id].childs[$sub_id].childs[$subsub_id].menu_icon = ""}
+							{/if}
+							{if !empty($subsubcat.childs)}
+								{foreach $subsubcat.childs as $subsubcat_id=>$subsubsubcat}
+									{$_theme_config.mainmenu_links[$id].childs[$sub_id].childs[$subsub_id].childs[$subsubcat_id].submenu_mono_viewtype = $subsubsubcat.params.submenu_mono_viewtype|default:$theme_settings.mainmenu_submenu_mono_viewtype}
+									{if isset($subsubsubcat.params.menu_icon) && !empty($subsubsubcat.params.menu_icon)}
+										{$_theme_config.mainmenu_links[$id].childs[$sub_id].childs[$subsub_id].childs[$subsubcat_id].menu_icon = $subsubsubcat.params.menu_icon}
+									{elseif method_exists("shopWmimageincatPlugin","getCategoryImage") && shopWmimageincatPlugin::getCategoryImage($subsubsubcat.id, 'icon')}
+										{$_theme_config.mainmenu_links[$id].childs[$sub_id].childs[$subsub_id].childs[$subsubcat_id].menu_icon = shopWmimageincatPlugin::getCategoryImage($subsubsubcat.id, 'icon')}
+									{else}
+										{$_theme_config.mainmenu_links[$id].childs[$sub_id].childs[$subsub_id].childs[$subsubcat_id].menu_icon = ""}
+									{/if}
+								{/foreach}
+							{/if}
+						{/foreach}
+					{/if}
+				{/foreach}
+			{/if}
+		{/foreach}
+	{/if}
+{elseif $theme_settings.mainmenu_links == 'shop-pages'}
+	{if $wa->shop}{$_theme_config.mainmenu_links = $wa->shop->pages(true)}{/if}
+{elseif $theme_settings.mainmenu_links == 'blog-pages'}
+	{if $wa->blog}{$_theme_config.mainmenu_links = $wa->blog->pages(true)}{/if}
+{elseif $theme_settings.mainmenu_links == 'photos-pages'}
+	{if $wa->photos}{$_theme_config.mainmenu_links = $wa->photos->pages(true)}{/if}
+{elseif $theme_settings.mainmenu_links == 'hub-pages'}
+	{if $wa->hub}{$_theme_config.mainmenu_links = $wa->hub->pages(true)}{/if}
+{elseif $theme_settings.mainmenu_links != 'none'}
+	{$_theme_config.mainmenu_links = $wa->apps()}
+{/if}
+
+{* construct params for $_theme_config.mainmenu_links *}
+{if $theme_settings.mainmenu_links != 'none' && $theme_settings.mainmenu_links != 'shop-categories'}
+	{foreach $_theme_config.mainmenu_links as $id=>$cat}
+		{if isset($cat.childs_grid) && !empty($cat.childs_grid)}
+			{$_theme_config.mainmenu_links[$id]._childs_grid = $cat.childs_grid}
+		{/if}
+		{if isset($cat.menu_icon) && !empty($cat.menu_icon)}
+			{$_theme_config.mainmenu_links[$id].menu_icon = $cat.menu_icon}
+		{else}
+			{$_theme_config.mainmenu_links[$id].menu_icon = ""}
+		{/if}
+		{if !empty($cat.childs)}
+			{foreach $cat.childs as $sub_id=>$subcat}
+				{if isset($subcat.menu_icon) && !empty($subcat.menu_icon)}
+					{$_theme_config.mainmenu_links[$id].childs[$sub_id].menu_icon = $subcat.menu_icon}
+				{else}
+					{$_theme_config.mainmenu_links[$id].childs[$sub_id].menu_icon = ""}
+				{/if}
+				{$_theme_config.mainmenu_links[$id].childs[$sub_id].submenu_mono_viewtype = $subcat.submenu_mono_viewtype|default:$theme_settings.mainmenu_submenu_mono_viewtype}
+			{/foreach}
+		{/if}
+	{/foreach}
+{/if}
+
+{* global search config *}
+{if $theme_settings.search_app eq 'shop'}
+	{$_theme_config.search = [
+		"class" => "search__form-shop",
+		"url" => "{$wa->getUrl('shop/frontend/search')}",
+		"query" => "{$query|default:''}",
+		"placeholder" => "[s`Find products`]"
+	]}
+{elseif $theme_settings.search_app eq 'blog'}
+	{$_theme_config.search = [
+		"class" => "",
+		"url" => "{$wa->getUrl('blog/frontend')}",
+		"query" => "{$blog_query|default:''}",
+		"placeholder" => "[`Search`]"
+	]}
+{/if}
+
+{if $wa->shop}
+	{if method_exists($wa->shop, 'checkout')}
+		{$_cart_url = $wa->shop->checkout()->cartUrl()}
+	{else}
+		{$_cart_url = $wa->getUrl('shop/frontend/cart')}
+	{/if}
+	{$viewed = explode(",",waRequest::cookie('balance_viewed'))}
+	{if $theme_settings.products_show_wishlist}
+		{$theme_favorite = waRequest::cookie('shop_favorite')}
+		{if !empty($theme_favorite)}
+			{$theme_favorite = explode(",",$theme_favorite)}
+		{else}
+			{$theme_favorite = []}
+		{/if}
+	{/if}
+	{if $theme_settings.products_show_compare}
+		{$compare = waRequest::cookie('shop_compare')}
+		{if !empty($compare)}
+			{$compare = explode(",",$compare)}
+		{else}
+			{$compare = []}
+		{/if}
+	{/if}
+	{$theme_viewed = explode(",",waRequest::cookie('balance_viewed'))}
+	{$cart_total = $wa->shop->cart->total()}
+	{$_topcart_items = $wa->shop->cart->items()}
+{/if}
+
+
+{* Smarty support for contact's vars for SEO-Regions *}
+
+{capture assign="_tmp_capture"}
+	{include file="string:`$theme_settings.header_contacts_phone_1`" inline}
+{/capture}
+{$theme_settings.header_contacts_phone_1 = $_tmp_capture}
+
+{capture assign="_tmp_capture"}
+	{include file="string:`$theme_settings.header_contacts_phone_1_text`" inline}
+{/capture}
+{$theme_settings.header_contacts_phone_1_text = $_tmp_capture}
+
+{capture assign="_tmp_capture"}
+	{include file="string:`$theme_settings.header_contacts_phone_2`" inline}
+{/capture}
+{$theme_settings.header_contacts_phone_2 = $_tmp_capture}
+
+{capture assign="_tmp_capture"}
+	{include file="string:`$theme_settings.header_contacts_phone_2_text`" inline}
+{/capture}
+{$theme_settings.header_contacts_phone_2_text = $_tmp_capture}
+
+{capture assign="_tmp_capture"}
+	{include file="string:`$theme_settings.header_contacts_address`" inline}
+{/capture}
+{$theme_settings.header_contacts_address = $_tmp_capture}
+
+{capture assign="_tmp_capture"}
+	{include file="string:`$theme_settings.header_contacts_workhours`" inline}
+{/capture}
+{$theme_settings.header_contacts_workhours = $_tmp_capture}
+
+{capture assign="_tmp_capture"}
+	{include file="string:`$theme_settings.footer_contacts_phone1`" inline}
+{/capture}
+{$theme_settings.footer_contacts_phone1 = $_tmp_capture}
+
+{capture assign="_tmp_capture"}
+	{include file="string:`$theme_settings.footer_contacts_phone2`" inline}
+{/capture}
+{$theme_settings.footer_contacts_phone2 = $_tmp_capture}
+
+{capture assign="_tmp_capture"}
+	{include file="string:`$theme_settings.footer_contacts_phone_text`" inline}
+{/capture}
+{$theme_settings.footer_contacts_phone_text = $_tmp_capture}
+
+{capture assign="_tmp_capture"}
+	{include file="string:`$theme_settings.footer_contacts_address`" inline}
+{/capture}
+{$theme_settings.footer_contacts_address = $_tmp_capture}
+
+{capture assign="_tmp_capture"}
+	{include file="string:`$theme_settings.footer_contacts_email`" inline}
+{/capture}
+{$theme_settings.footer_contacts_email = $_tmp_capture}
+
+{capture assign="_tmp_capture"}
+	{include file="string:`$theme_settings.address_map`" inline}
+{/capture}
+{$theme_settings.address_map = $_tmp_capture}
+
+{/strip}

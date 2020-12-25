@@ -1,0 +1,10 @@
+2a72da1468a30ee8b5fab0b4c1633d43 *img/hidset.png
+3090a34d2bec647ec66c2adf4569c51f *js/hidset.js
+a1751e1f10a3b96b05d0401c97e72008 *lib/.htaccess
+b5d5c93d9a9a8292bd0d643863b057cc *lib/actions/shopHidsetPluginBackendSave.controller.php
+c2f246ba85e3c232314c5f312a5f1fe5 *lib/actions/shopHidsetPluginSettings.action.php
+4209cd922dd42b5b38d614a0a652d692 *lib/config/plugin.php
+deffb4da02bd9e97f7778b442de8dfb1 *lib/shopHidsetPlugin.class.php
+a1751e1f10a3b96b05d0401c97e72008 *templates/.htaccess
+af2d2d970d41003ee16bc51ddad66af9 *templates/actions/settings/Settings.html
+9347782ac19fa91e7daa78c9c86d8b72 *templates/actions/settings/setting.tr.html

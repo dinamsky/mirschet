@@ -1,0 +1,92 @@
+<div class="block not-padded bordered-bottom">
+    <div class="float-right">
+        <a href="#/sdekint/addrule/" class="inline-link js-action" data-action="edit"><i class="icon16 add"></i><b><i>Добавить
+                    правило обработки</i></b></a>
+    </div>
+    <h1>Обработка заказов</h1>
+</div>
+<div>
+    <div class="block not-padded" id="s-plugin-sdekint-rule-list-container">
+        {if $order_actions}
+            <table class="zebra light" id="s-plugin-sdekint-rule-list">
+                <thead>
+                <tr>
+                    <th colspan="2">Текущий статус в Магазине</th>
+                    <th colspan="2">Текущее состояние в СДЭК</th>
+                    <th>Выполнить действие</th>
+                    <th></th>
+                </tr>
+                </thead>
+                <tbody>
+                {foreach $order_actions as $action}
+                    <tr data-id="{$action.id}">
+                        <td><span style="{if $action.shop_state}{$action.shop_state.state->getStyle()}{else}color:#999;text-decoration: line-through{/if}">{if $action.shop_state}{$action.shop_state.state->getName()}{else}<i class="icon16 exclamation"></i> Несуществующий статус{/if}</span></td>
+                        <td class="min-width"><i class="icon16 plus"></i></td>
+                        <td>{$action.sdek_state.name}</td>
+                        <td class="min-width"><i class="icon16 move"></i></td>
+                        <td>{if $action.wf_action.action}<b>{$action.wf_action.action->getName()}</b>{else}<span style="color:#999;text-decoration: line-through"><i class="icon16 exclamation"></i>несуществующее действие</span>{/if}</td>
+                        <td><ul class="menu-h with-icons">
+                                <li><a href="#" data-action="edit" data-id="{$action.id}" class="nowrap js-action"><i class="icon16 edit"></i>Изменить</a></li>
+                                <li><a href="#" class="nowrap js-action js-confirm" data-action="delete" data-id="{$action.id}" data-js-confirm="Это правило будет полностью удалено. Продолжить?"><i class="icon16 delete"></i>Удалить</a></li>
+                            </ul></td>
+                    </tr>
+                {/foreach}
+                </tbody>
+            </table>
+        {else}
+            <div class="padded highlighted block" style="text-align: right" id="s-plugin-sdekint-rule-list-promo">
+                <p><b>Добавьте правило для автоматической смены статусов заказов</b> <img src="{$wa_app_static_url}img/start-here-tr.png"></p>
+                <p style="text-align: center">Также проверьте <a href="?action=plugins#/sdekint/" style="white-space: nowrap">в настройках плагина периодичность проверки</a> и
+                    настройки <a href="https://www.syrnik.com/docs/5/integratsiya-sdek/#cron" target="_blank" style="white-space: nowrap">запуска плагина по расписанию (cron) <i class="icon16 new-window"></i></a></p>
+            </div>
+        {/if}
+    </div>
+</div>
+{capture name="js-template-EditOrderactionDialog"}
+<div class="sdekint-dialog-wrapper is-full-screen" id="sdekint-edit-orderaction-dialog">
+    <div class="sdekint-dialog-background"></div>
+    <div class="sdekint-dialog-block is-animated gray-header compact-header" style="min-width: 300px; min-height: 300px">
+        <header class="sdekint-dialog-header">
+            {literal}<h3>{{if rule_id}}Редактирование{{else}}Добавление{{/if}} правила</h3>{/literal}
+        </header>
+        <div class="sdekint-dialog-content" style="overflow: auto; border: none">
+            <div class="block double-padded">
+                <div class="sdekint-loading128"></div>
+            </div>
+        </div>
+        <footer class="sdekint-dialog-footer" style="box-sizing: border-box;position: absolute; bottom: 0; padding: 12px; margin: 0; border-top: 1px solid #f3f3f3; width: 100%; text-align: right">
+            <div class="sdekint-actions nowrap">
+                <button type="button" class="button js-close-dialog sdekint-button" disabled>[`Cancel`]</button>
+                <button type="button" class="green submit button sdekint-button" disabled>[`Save`]</button>
+            </div>
+        </footer>
+    </div>
+</div>
+{/capture}
+{capture name="js-template-DeleteOrderactionDialog"}
+    <div class="sdekint-dialog-wrapper is-full-screen" id="sdekint-edit-orderaction-dialog">
+        <div class="sdekint-dialog-background"></div>
+        <div class="sdekint-dialog-block is-animated alert-dialog compact-header" style="min-width: 450px; min-height: 200px">
+            <header class="sdekint-dialog-header">
+                <h3>Подтверждение удаления</h3>
+            </header>
+            <div class="sdekint-dialog-content" style="overflow: auto; border: none">
+                <div class="block double-padded">
+                    {literal}<p class="bold red align-center">{{>message}}</p>{/literal}
+                </div>
+            </div>
+            <footer class="sdekint-dialog-footer" style="box-sizing: border-box;position: absolute; bottom: 0; padding: 12px; margin: 0; border-top: 1px solid #f3f3f3; width: 100%; text-align: right">
+                <div class="sdekint-actions nowrap">
+                    <button type="button" class="red submit button sdekint-button">[`Delete`]</button>
+                    <button type="button" class="button js-close-dialog sdekint-button">[`Cancel`]</button>
+                </div>
+            </footer>
+        </div>
+    </div>
+{/capture}
+{foreach $smarty.capture as $name => $template}{if strpos($name, 'js-template')==0}
+    <script id="{substr($name, 12)}" type="text/x-jsrender">
+        {$template}
+    </script>
+{/if}
+{/foreach}

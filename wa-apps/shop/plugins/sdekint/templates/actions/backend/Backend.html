@@ -1,0 +1,54 @@
+<section id="sdekint"{if $wa->locale() == 'ru_RU'} lang="ru"{/if}>
+    <div class="sidebar right15px">
+        <div class="block s-nolevel2-sidebar"></div>
+    </div>
+    <div class="sidebar left15px">
+        <div class="block s-nolevel2-sidebar"></div>
+    </div>
+    <div class="content left15px right15px s-nolevel2-box">
+        <div class="sidebar left250px" id="sdekint-sidebar">
+            <div class="s-inner-sidebar block">
+                <ul class="menu-v with-icons sdekint-menu">
+                    <li data-action="calculator"><a href="#calculator"><i class="icon16 s-sdekint calculator"></i>Калькулятор<br><span
+                                    class="hint">Посчитать стоимость с учетом веса и габаритов</span></a></li>
+                    <li data-action="offices"><a href="#offices"><i class="icon16 store"></i>Пункты
+                            выдачи<br><span class="hint">Просмотр списка пунктов выдачи по городам</span></a>
+                    </li>
+            </div>
+            <div class="block bordered-top">
+                <h5>Вызовы курьера</h5>
+                <ul class="menu-v with-icons sdekint-menu">
+                    <li data-action="couriercalls"><a href="#couriercalls"><i class="icon16 s-sdekint book-open-list"></i>Вызовы курьера <br><span
+                                    class="hint">Просмотр списка вызовов курьера и заявок на забор заказов интернет-магазина</span></a>
+                    </li>
+                    {*<li><a><i
+                                    class="icon16 s-sdekint runner"></i>Вызвать курьера <br><span class="hint">Отправить заявку на приезд курьера</span></a>
+                    </li>*}
+                    <li data-action="pickup"><a href="#pickup"><i
+                                    class="icon16 s-sdekint truck"></i>Забор заказов <br><span class="hint">Оформление накладной по тарифу забора заказов интернет-магазина</span></a>
+                    </li>
+                </ul>
+            </div>
+            <div class="block bordered-top">
+                <h5><i class="icon16 settings"></i>Настройки</h5>
+                <ul class="menu-v with-icons sdekint-menu">
+                    <li data-action="orderactions"><a href="#orderactions"><i class="icon16 s-sdekint robot"></i>Обработка заказов<br><span class="hint">Правила автоматической смены статусов заказов</span></a></li>
+                    <li data-action="calccontrol"><a href="#calccontrol"><i class="icon16 s-sdekint calculator-scientific"></i>Управление расчётом<br><span class="hint">Правила для методов расчета стоимости, использующих плагин &laquo;Расчет стоимости доставки СДЭК&raquo;</span></a></li>
+                    <li data-action="widgetcontrol"><a href="#widgetcontrol"><i class="icon16 s-sdekint maps"></i>Управление виджетами<br><span class="hint">Настройки информационных виджетов</span></a></li>
+                </ul>
+            </div>
+            <div class="clear"></div>
+        </div>
+        <div class="content left250px blank bordered-left">
+            <div class="block double-padded" id="s-sdekint-content">
+
+            </div>
+            <div class="clear"></div>
+        </div>
+    </div>
+</section>
+<script type="text/javascript">
+    (function ($) {
+        $.sdekint.init({$data|json_encode});
+    })(jQuery);
+</script>

@@ -1,0 +1,143 @@
+{strip}
+{if !empty($posts)}
+	{if $theme_settings.blog_list_design eq "thumbs"}
+		<div class="posts posts_multi">
+			<div class="posts__list">
+				{foreach $posts as $post}
+					{$_balance_post_image = null}
+					{if isset($post.preview) && !empty($post.preview)}
+						{$_balance_post_image = $post.preview}
+					{else if method_exists("blogMainpicPluginViewHelper","getPostMainpicUrlById")}
+						{$post.preview = blogMainpicPluginViewHelper::getPostMainpicUrlById($post.id, 'image')}
+						{if $post.preview}
+							{$_balance_post_image = $post.preview}
+						{/if}
+					{/if}
+					<div class="posts__item posts__item_tile" id="post-{$post.id}"{if $wa->param('blog_url')} itemprop="blogPosts"{/if} itemscope itemtype="http://schema.org/BlogPosting">
+						<a class="b-post-tile" href="{$post.link}"{if $_balance_post_image} style="background-image: url('{$_balance_post_image}')"{/if} itemprop="url">
+							<span class="b-post-tile__inner">
+								<span class="b-post-tile__day">{$post.datetime|wa_datetime:"humandate"}</span>
+								<h3 class="b-post-tile__title">
+									«{$post.title}»
+									{* @event prepare_posts_frontend.%plugin_id%.post_title *}
+									{if !empty($post.plugins.post_title)}
+										{foreach $post.plugins.post_title as $plugin => $output}{$output}{/foreach}
+									{/if}
+								</h3>
+							</span>
+						</a>
+					</div>
+				{/foreach}
+			</div>
+		</div>
+	{elseif $theme_settings.blog_list_design eq "twocols"}
+		<div class="posts posts_multi">
+			<div class="posts__list">
+				{foreach $posts as $post}
+					{$_balance_post_image = null}
+					{if isset($post.preview) && !empty($post.preview)}
+						{$_balance_post_image = $post.preview}
+					{else if method_exists("blogMainpicPluginViewHelper","getPostMainpicUrlById")}
+						{$post.preview = blogMainpicPluginViewHelper::getPostMainpicUrlById($post.id, 'image')}
+						{if $post.preview}
+							{$_balance_post_image = $post.preview}
+						{/if}
+					{/if}
+					<div class="posts__item posts__item_card">
+						<div class="b-post-card">
+							{if $_balance_post_image}
+								<a class="b-post-card__img" href="{$post.link}">
+									<img src="{$_balance_post_image}" alt="{$post.title|escape}">
+								</a>
+							{/if}
+							<h3>
+								<a class="b-post-card__title" href="{$post.link}" itemprop="url">«{$post.title}»</a>
+								{* @event prepare_posts_frontend.%plugin_id%.post_title *}
+								{if !empty($post.plugins.post_title)}
+									{foreach $post.plugins.post_title as $plugin => $output}{$output}{/foreach}
+								{/if}
+							</h3>
+							<div class="b-post-card__text">
+								{* @event prepare_posts_frontend.%plugin_id%.before *}
+								{if !empty($post.plugins.before)}
+									<div class="text_before">
+										{foreach $post.plugins.before as $plugin => $output}{$output}{/foreach}
+									</div>
+								{/if}
+								{$post.text|strip_tags|truncate:600}
+								{* @event prepare_posts_frontend.%plugin_id%.after *}
+								{if !empty($post.plugins.after)}
+									<div class="text_after">
+										{foreach $post.plugins.after as $plugin => $output}{$output}{/foreach}
+									</div>
+								{/if}
+							</div>
+							{if $post.cutted}
+								<a class="b-post-card__btn btn btn_default btn_sec-5" href="{$post.link}">{$post.cut_link_label|default:'[`Continue reading →`]'}</a>
+							{/if}
+						</div>
+					</div>
+				{/foreach}
+			</div>
+		</div>
+	{else}
+		<div class="posts">
+			<div class="posts__list">
+				{foreach $posts as $post}
+					<div class="posts__item">
+						<div class="b-post-card b-post-card_list">
+							<h3>
+								<a class="b-post-card__title" href="{$post.link}" itemprop="url">«{$post.title}»</a>
+								{* @event prepare_posts_frontend.%plugin_id%.post_title *}
+								{if !empty($post.plugins.post_title)}
+									{foreach $post.plugins.post_title as $plugin => $output}{$output}{/foreach}
+								{/if}
+							</h3>
+							<div class="b-post-card__postinfo">
+								{if $theme_settings.blog_show_authors}
+									{if $post.user.posts_link}
+										<a class="b-post-card__author" href="#">{$post.user.name}</a>
+									{else}
+										<span class="b-post-card__author" href="#">{$post.user.name}</span>
+									{/if}
+								{/if}
+								<div class="b-post-card__date iconed-text">
+									<svg class="icon" width="16" height="16">
+										<use xlink:href="#icon-cal"></use>
+									</svg>
+									<span>{$post.datetime|wa_datetime:"humandate"}</span>
+								</div>
+							</div>
+							<div class="b-post-card__text">
+								{* @event prepare_posts_frontend.%plugin_id%.before *}
+								{if !empty($post.plugins.before)}
+									<div class="text_before">
+										{foreach $post.plugins.before as $plugin => $output}{$output}{/foreach}
+									</div>
+								{/if}
+								{$post.text}
+								{* @event prepare_posts_frontend.%plugin_id%.after *}
+								{if !empty($post.plugins.after)}
+									<div class="text_after">
+										{foreach $post.plugins.after as $plugin => $output}{$output}{/foreach}
+									</div>
+								{/if}
+							</div>
+							{if $post.cutted}
+								<a class="b-post-card__btn btn btn_default btn_sec-5" href="{$post.link}">{$post.cut_link_label|default:'[`Continue reading →`]'}</a>
+							{/if}
+						</div>
+					</div>
+				{/foreach}
+			</div>
+		</div>
+	{/if}
+{else}
+	<div class="posts">
+		<div class="no-post">
+			<h1 class="no-post__title">Записи в этом блоге пока отсутствуют</h1>
+			<div class="no-post__text">Наш редактор уже пишет большой пост для блога. Совсем скоро он его опубликует.</div>
+		</div>
+	</div>
+{/if}
+{/strip}

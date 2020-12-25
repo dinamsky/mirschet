@@ -1,0 +1,12 @@
+<select name="sfvid" class="sfvid" style="width: 140px" title="[`feature value`]">
+    <option value="null" >[`select feature value`]</option>
+    {foreach from=$featurevalues key=id item=fv}
+        {if $fv }
+            <option value="{$id|escape}" {if $id==$feature_value_id && $feature_value_id!==null} selected {/if} >{$fv|escape}</option>
+        {else}
+            <option disabled></option>
+        {/if}
+    {foreachelse}
+        <option disabled>[`nothing found`]</option>
+    {/foreach}
+</select>

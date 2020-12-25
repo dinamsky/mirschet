@@ -1,0 +1,42 @@
+{strip}
+{if !empty($sidebar_posts)}
+	<div class="catalog-pg__side-sect mt-hide">
+		<div class="sidebar-section pos-rel">
+			<div class="descr-mode pos-abs"><span class="pos-rel">NEWS</span></div>
+			{$_blog_details = ""}
+			{if $theme_settings.homepage_news_blog_id > 0}
+				{$_blog_details = $wa->blog->blog($theme_settings.homepage_news_blog_id)}
+			{/if}
+			{if empty($_blog_details)}
+				{$_blogs = $wa->blog->blogs()}
+				{foreach $_blogs as $blog}
+					{$_blog_details = $blog}
+					{break}
+				{/foreach}
+			{/if}
+			<div class="sidebar-section__title section-title section-title_mini">{$theme_settings.shop_sidebars_sections_lastposts_title|default:"[`Latest posts`]"}</div>
+			<div class="sidebar-section__body">
+				<div class="sidebar-news-sec">
+					<div class="sidebar-news-sec__list">
+						{foreach $sidebar_posts as $post}
+							<div class="sidebar-news-sec__item">
+								<div class="side-news">
+									<div class="side-news__date grey mb10">{$post.datetime|wa_datetime:"humandate"}</div>
+									<div class="side-news__text-wrapper">
+										<a class="side-news__text" href="{$post.link}">{$post.title|escape}</a>
+										<div class="side-news__arrow"></div>
+									</div>
+								</div>
+							</div>
+						{/foreach}
+					</div>
+					<a class="sidebar-news-sec__btn btn {$theme_settings.main_buttons_style|replace:'img/themebuttons/':''|replace:'.gif':''} btn_sec-6" href="{$_blog_details.link}">
+						<span>[`all posts`]</span>
+						<div class="hover-anim"></div>
+					</a>
+				</div>
+			</div>
+		</div>
+	</div>
+{/if}
+{/strip}

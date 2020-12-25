@@ -1,0 +1,111 @@
+{strip}{function name=ru_plurals num=1 plu=['день', 'дня', 'дней'] template='%s %s'}
+    {$n = $num % 100}
+    {if $n > 10 && $n < 20}
+        {sprintf($template, $num, $plu[2])}
+        {else}
+        {$i = $n % 10}
+        {if $i == 1}
+            {sprintf($template, $num, $plu[0])}
+        {elseif $i>1 && $i < 5}
+            {sprintf($template, $num, $plu[1])}
+        {else}
+            {sprintf($template, $num, $plu[2])}
+        {/if}
+    {/if}
+{/function}
+{/strip}<div class="s-plugin-sdekint">
+{if !empty($points)}
+    {$p = reset($points)}
+    <style>
+        .s-plugin-sdekint .points-wrapper .map { box-sizing: border-box; width: 50%; float: left; }
+        .s-plugin-sdekint .points-wrapper .list { box-sizing: border-box; width: 49%; float: left; padding-left: 1.5em; }
+        .s-plugin-sdekint .list ul { list-style-type: none; margin: 0; padding: 0; }
+        .s-plugin-sdekint .list li { margin-bottom: 1.3em; }
+        .s-plugin-sdekint .list h4 { margin-bottom: 0.3em; }
+        .s-plugin-sdekint .list p { margin: 0; line-height: 1.35; }
+    </style>
+    {strip}<h3>Пункты выдачи в городе {$p.city.name}
+    {if $p.region.name && mb_strtolower($p.region.name) != mb_strtolower($p.city.name)}, {$p.region.name}{/if}
+    {if $p.country.iso3 != 'rus' && $p.country.iso3}, {$p.country.name}{/if}</h3>{/strip}
+    <div class="points-wrapper">
+        <div class="map">
+        </div>
+        <div class="list">
+            <ul>
+                {foreach $points as $p}
+                    <li{if $p@iteration > 6} style="display: none" {/if}><h4>{$p.name}</h4>
+                        {if $p.address}<p>{$p.address}</p>{/if}
+                        {if $p.work_time}<p>{$p.work_time}</p>{/if}
+                        {if $p.phone}<p>тел. {$p.phone}</p>{/if}
+                        {if $p.note}<p class="hint">{$p.note}</p>{/if}
+                    </li>
+                {/foreach}
+            </ul>
+            {if count($points) > 6}<a href="javascript:void(0)" class="show-all">{ru_plurals num=count($points)-6 plu=['пункт', 'пункта', 'пунктов'] template='Показать еще %s %s'}</a>{/if}
+        </div>
+    </div>
+
+    <script type="text/javascript">
+        if(window.jQuery) {
+            $(function () {
+                if ((typeof ymaps) === 'undefined') {
+                    $.getScript('https://api-maps.yandex.ru/2.1/?lang=ru_RU', function () {
+                        showMap();
+                    })
+                } else {
+                    showMap();
+                }
+
+                $('a.show-all', '.s-plugin-sdekint').on('click.s-plugin-sdekint', function(){
+                    $(this).closest('.list').find('li').css('display', '');
+                    $(this).hide();
+                });
+
+                function showMap() {
+                    ymaps.ready(function () {
+                        var points = {$points|json_encode};
+                        var $container = $('.map', '.s-plugin-sdekint').first();
+                        var width = $container.width() < 100 ? $container.width('100px').width() : $container.width();
+                        $container.height(width * 0.75 + 'px');
+                        var map = new ymaps.Map($container[0], {
+                            center: [55.753559, 37.609218],
+                            zoom: 10,
+                            controls: ['zoomControl', 'typeSelector', 'routeEditor', 'trafficControl']
+                        });
+                        var pointsCollection = new ymaps.GeoObjectCollection();
+                        $.each(points, function(i, p){
+                            var balloonContent = '<h4>'+ p.name +'</h4>';
+                            if (typeof p.address != 'undefined' && p.address.length > 0) {
+                                balloonContent += 'Адрес: ' + p.address;
+                            }
+                            if (typeof p.work_time != 'undefined' && p.work_time.length > 0) {
+                                balloonContent += '<br>Время работы: ' + p.work_time;
+                            }
+                            if(p.note && p.note.length) balloonContent += '<p class="hint">'+ p.note+'</p>';
+
+                            pointsCollection.add(
+                                    new ymaps.Placemark([p.geo.lat, p.geo.lon], {
+                                        hintContent: p.name,
+                                        balloonContent: balloonContent
+                                    }, {
+                                        iconLayout: 'default#image',
+                                    })
+                            );
+                        });
+                        map.geoObjects.add(pointsCollection);
+                        map.setBounds(
+                                pointsCollection.getBounds(),
+                                {
+                                    checkZoomRange: true
+                                }
+                        ).then(function () {
+                            if (map.getZoom() > 14) map.setZoom(13);
+                        });
+                    })
+                }
+            });
+        }
+    </script>
+
+{/if}
+</div>

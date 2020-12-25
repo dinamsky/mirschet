@@ -1,0 +1,23 @@
+{strip}
+<div class="checkout-pg__main">
+	<h1 class="checkout-pg__title u-cen-txt">[`Oops!`]</h1>
+	<div class="check-error u-cen-txt">
+		{if !empty($error)}
+			<div class="errortxt">{$error}</div>
+		{else}
+			<div class="errortxt">[`An error occurred while processing your payment.`]</div>
+		{/if}
+		<a href="{$wa->getUrl('/frontend/checkout')}" class="btn {$theme_settings.main_buttons_style|replace:'img/themebuttons/':''|replace:'.gif':''} btn_main-1">
+			<div class="hover-anim"></div>
+			<span>[`Restart checkout`]</span>
+		</a>
+		<!-- plugin hook: 'frontend_checkout' -->
+		{if !empty($frontend_checkout)}
+			{* @event frontend_checkout.%plugin_id% *}
+			{foreach $frontend_checkout as $_}{$_}{/foreach}
+		{/if}
+	</div>
+</div>
+{$wa->globals('useCompactHeader',true)}
+{$wa->globals('useCompactFooter',true)}
+{/strip}

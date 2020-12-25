@@ -1,0 +1,47 @@
+{strip}
+<div class="checkout-pg">
+	<div class="b-c-row-success-outer">
+		<div class="b-c-row-success">
+			<div class="col-img">
+				<img src="{$wa_parent_theme_url}img/img-success.svg" alt="">
+			</div>
+			<div class="col-content">
+				<div class="check-success">
+					<div class="check-success__title bold single-line">
+						{if !empty($thankyou_header)}
+							{$thankyou_header}
+						{else}
+							[`Thank you!`]
+						{/if}
+					</div>
+					<div class="check-success__num">
+						<span>[`Your order number is `]</span>
+						<strong><a href="{$wa->getUrl('shop/frontend/myOrder', ['id' => $order._id])}">{$order.id}</a></strong>
+					</div>
+					{if !empty($payment)}
+						<div class="form-ui-wr form-ui-wr_s-pad form-ui-wr_qiwi">
+							<div class="form-ui-wr__inner">
+								<div class="s-plugin-wrapper">{$payment}</div>
+							</div>
+						</div>
+					{/if}
+					<div class="grey">{$theme_settings.shop_checkout_steps_success_text}</div>
+					<div class="check-success__info">
+						{if !empty($theme_settings.shop_checkout_steps_email) || !empty($theme_settings.shop_checkout_steps_phone)}
+							<div>[`If you prefer, you can also get order status or make changes by`]:</div>
+						{/if}
+						{if !empty($theme_settings.shop_checkout_steps_email)}<div>[`E-mail`]: <a href="mailto:{$theme_settings.shop_checkout_steps_email}">{$theme_settings.shop_checkout_steps_email}</a></div>{/if}
+						{if !empty($theme_settings.shop_checkout_steps_phone)}<div class="check-success__tel-num"><span>[`Phone`]: {$theme_settings.shop_checkout_steps_phone}</span>{/if}
+						</div>
+					</div>
+					<!-- plugin hook: 'frontend_checkout' -->
+					{if !empty($frontend_checkout)}
+						{* @event frontend_checkout.%plugin_id% *}
+						{foreach $frontend_checkout as $_}{$_}{/foreach}
+					{/if}
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+{/strip}

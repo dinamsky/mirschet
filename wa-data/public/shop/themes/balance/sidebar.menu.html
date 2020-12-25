@@ -1,0 +1,130 @@
+{strip}
+{if !empty($_theme_config.mainmenu_links)}
+	<div class="catalog-pg__side-sect mt-hide">
+		<div class="home-pg__sidebar-menu pos-rel">
+			<div class="descr-mode pos-abs"><span class="pos-rel">MENU</span></div>
+			<div class="vert-m vert-m_g vert-m_js">
+				<div class="cat-menu-btn-desk cat-menu-btn-desk_fullheight cat-menu-btn-desk_sec on-sidebar">
+					<div class="cat-menu-btn-desk__inner">
+						<div class="cat-btn-text">
+							<div class="icon-hamb"><span></span><span></span><span></span></div>
+							<div class="cat-btn-text__text">{if $theme_settings.mainmenu_links eq "shop-categories"}[`Catalog`]{else}[`Navigation`]{/if}</div>
+						</div>
+					</div>
+				</div>
+				<ul class="vert-m__list side-menu">
+					{foreach $_theme_config.mainmenu_links as $cat}
+						{if isset($cat.params.mainmenu_hide)}{continue}{/if}
+						{if !isset($cat.submenu_mono_viewtype)}{$cat.submenu_mono_viewtype = 'dropdown'}{/if}
+						<li class="vert-m__item{if $cat.submenu_mono_viewtype eq 'opened'} vert-m__item_minisubm{/if}">
+							{if !empty($cat.childs) && $cat.submenu_mono_viewtype eq 'dropdown'}
+								<ul class="vert-m__submenu">
+									{foreach $cat.childs as $subcat}
+										{if !isset($subcat.submenu_mono_viewtype)}{$subcat.submenu_mono_viewtype = 'dropdown'}{/if}
+										<li class="vert-m__item{if $subcat.submenu_mono_viewtype eq 'opened'} vert-m__item_minisubm{/if}">
+											{if !empty($subcat.childs) && $subcat.submenu_mono_viewtype eq 'dropdown'}
+												<ul class="vert-m__submenu">
+													{foreach $subcat.childs as $subsubcat}
+														<li class="vert-m__item">
+															<a class="vert-m__link" href="{$subsubcat.url}">
+																{if !empty($subsubcat.menu_icon)}
+																	<span class="vert-m__item-icon">
+																		<img src="data:image/gif;base64,R0lGODlh6gDqAIAAAP///wAAACH5BAEAAAEALAAAAADqAOoAAAL+jI+py+0Po5y02ouz3rz7D4biSJbmiabqyrbuC8fyTNf2jef6zvf+DwwKh8Si8YhMKpfMpvMJjUqn1Kr1is1qt9yu9wsOi8fksvmMTqvX7Lb7DY/L5/S6/Y7P6/f8vv8PGCg4SFhoeIiYqLjI2Oj4CBkpOUlZaXmJmam5ydnp+QkaKjpKWmp6ipqqusra6voKGys7S1tre4ubq7vL2+v7CxwsPExcbHyMnKy8zNzs/AwdLT1NXW19jZ2tvc3d7f0NHi4+Tl5ufo6err7O3u7+Dh8vP09fb3+Pn6+/z9/v/w8woMCBBAsaPIgwocKFDBs6fAgxosSJFCtavIgxo8Y9jRw7evwIMqTIkSRLmjyJMqXKlSxbunwJM6bMmTRr2ryJM6fOnTx7+vwJNKjQoUSLGj2KNKnSpUybOo1UAAA7" data-src="{$subsubcat.menu_icon}" class="lazy-img" alt="{$subsubcat.name|escape}">
+																	</span>
+																{/if}
+																<span class="vert-m__text">
+																	<span class="vert-m__text-node">{$subsubcat.name}</span>
+																	{if !empty($subsubcat.params.menu_label_text)}
+																		<span class="vert-m__label">
+																			<span class="label label_light label_micro" style="{if !empty($subsubcat.params.menu_label_background)}background-color:{$subsubcat.params.menu_label_background};{/if}{if !empty($subsubcat.params.menu_label_color)}color:{$subsubcat.params.menu_label_color};{/if}">{$subsubcat.params.menu_label_text}</span>
+																		</span>
+																	{/if}
+																</span>
+															</a>
+														</li>
+													{/foreach}
+												</ul>
+											{elseif !empty($subcat.childs) && $subcat.submenu_mono_viewtype eq 'opened'}
+												<div class="vert-m__mini-subm">
+													<ul class="vert-m__mini-subm-list">
+														{foreach $subcat.childs as $subsubcat}
+															<li class="vert-m__mini-subm-i sub-item">
+																<a class="vert-m__mini-subm-l" href="{$subsubcat.url}">{$subsubcat.name}</a>
+															</li>
+														{/foreach}
+													</ul>
+												</div>
+											{/if}
+											<a class="vert-m__link" href="{$subcat.url}">
+												{if !empty($subcat.menu_icon)}
+													<span class="vert-m__item-icon">
+														<img src="data:image/gif;base64,R0lGODlh6gDqAIAAAP///wAAACH5BAEAAAEALAAAAADqAOoAAAL+jI+py+0Po5y02ouz3rz7D4biSJbmiabqyrbuC8fyTNf2jef6zvf+DwwKh8Si8YhMKpfMpvMJjUqn1Kr1is1qt9yu9wsOi8fksvmMTqvX7Lb7DY/L5/S6/Y7P6/f8vv8PGCg4SFhoeIiYqLjI2Oj4CBkpOUlZaXmJmam5ydnp+QkaKjpKWmp6ipqqusra6voKGys7S1tre4ubq7vL2+v7CxwsPExcbHyMnKy8zNzs/AwdLT1NXW19jZ2tvc3d7f0NHi4+Tl5ufo6err7O3u7+Dh8vP09fb3+Pn6+/z9/v/w8woMCBBAsaPIgwocKFDBs6fAgxosSJFCtavIgxo8Y9jRw7evwIMqTIkSRLmjyJMqXKlSxbunwJM6bMmTRr2ryJM6fOnTx7+vwJNKjQoUSLGj2KNKnSpUybOo1UAAA7" data-src="{$subcat.menu_icon}" class="lazy-img" alt="{$subcat.name|escape}">
+													</span>
+												{/if}
+												<span class="vert-m__text">
+													<span class="vert-m__text-node">{$subcat.name}</span>
+													{if !empty($subcat.params.menu_label_text)}
+														<span class="vert-m__label">
+															<span class="label label_light label_micro" style="{if !empty($subcat.params.menu_label_background)}background-color:{$subcat.params.menu_label_background};{/if}{if !empty($subcat.params.menu_label_color)}color:{$subcat.params.menu_label_color};{/if}">{$subcat.params.menu_label_text}</span>
+														</span>
+													{/if}
+												</span>
+												{if !empty($subcat.childs)}
+													<span class="vert-m__arrow">
+														<svg class="icon" width="6" height="12">
+															<use xlink:href="#arrow-vert-menu"></use>
+														</svg>
+														<svg class="icon icon-hover" width="6" height="12">
+															<use xlink:href="#arrow-vert-menu-hover"></use>
+														</svg>
+													</span>
+												{/if}
+											</a>
+										</li>
+									{/foreach}
+								</ul>
+							{/if}
+							{if !empty($cat.childs) && $cat.submenu_mono_viewtype eq 'opened'}
+								<div class="vert-m__mini-subm">
+									<ul class="vert-m__mini-subm-list">
+										{foreach $cat.childs as $subcat}
+											<li class="vert-m__mini-subm-i sub-item">
+												<a class="vert-m__mini-subm-l" href="{$subcat.url}">{$subcat.name}</a>
+											</li>
+										{/foreach}
+									</ul>
+								</div>
+							{/if}
+							<a class="vert-m__link" href="{$cat.url}">
+								{if !empty($cat.menu_icon)}
+									<span class="vert-m__item-icon">
+										<img src="data:image/gif;base64,R0lGODlh6gDqAIAAAP///wAAACH5BAEAAAEALAAAAADqAOoAAAL+jI+py+0Po5y02ouz3rz7D4biSJbmiabqyrbuC8fyTNf2jef6zvf+DwwKh8Si8YhMKpfMpvMJjUqn1Kr1is1qt9yu9wsOi8fksvmMTqvX7Lb7DY/L5/S6/Y7P6/f8vv8PGCg4SFhoeIiYqLjI2Oj4CBkpOUlZaXmJmam5ydnp+QkaKjpKWmp6ipqqusra6voKGys7S1tre4ubq7vL2+v7CxwsPExcbHyMnKy8zNzs/AwdLT1NXW19jZ2tvc3d7f0NHi4+Tl5ufo6err7O3u7+Dh8vP09fb3+Pn6+/z9/v/w8woMCBBAsaPIgwocKFDBs6fAgxosSJFCtavIgxo8Y9jRw7evwIMqTIkSRLmjyJMqXKlSxbunwJM6bMmTRr2ryJM6fOnTx7+vwJNKjQoUSLGj2KNKnSpUybOo1UAAA7" data-src="{$cat.menu_icon}" class="lazy-img" alt="{$cat.name|escape}">
+									</span>
+								{/if}
+								<span class="vert-m__text">
+									<span class="vert-m__text-node">{$cat.name}</span>
+									{if !empty($cat.params.menu_label_text)}
+										<span class="vert-m__label">
+											<span class="label label_light label_micro" style="{if !empty($cat.params.menu_label_background)}background-color:{$cat.params.menu_label_background};{/if}{if !empty($cat.params.menu_label_color)}color:{$cat.params.menu_label_color};{/if}">{$cat.params.menu_label_text}</span>
+										</span>
+									{/if}
+								</span>
+								{if !empty($cat.childs) && $cat.submenu_mono_viewtype eq 'dropdown'}
+									<span class="vert-m__arrow">
+										<svg class="icon" width="6" height="12">
+											<use xlink:href="#arrow-vert-menu"></use>
+										</svg>
+										<svg class="icon icon-hover" width="6" height="12">
+											<use xlink:href="#arrow-vert-menu-hover"></use>
+										</svg>
+									</span>
+								{/if}
+							</a>
+						</li>
+					{/foreach}
+				</ul>
+			</div>
+		</div>
+	</div>
+{/if}
+{/strip}

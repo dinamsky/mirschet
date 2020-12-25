@@ -1,0 +1,7 @@
+{strip}
+	{if $my_app == $wa->app()}
+		<li class="info-sdb__item site{if $my_nav_selected == 'profile'} active{/if}">
+			<a class="info-sdb__item-l" href="{$wa->myUrl()}">[s`My profile`]</a>
+		</li>
+	{/if}
+{/strip}

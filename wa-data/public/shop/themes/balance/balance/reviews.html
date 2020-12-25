@@ -1,0 +1,269 @@
+{strip}
+{$wa->title(sprintf('[`%s reviews`]', $product.name))}
+{function review_reviews}
+		{$depth=-1}
+		{foreach $reviews as $review}
+				{if $review.depth < $depth}
+						{$loop=($depth-$review.depth)}
+						{section name="end-review" loop=$loop}
+			</div>
+						{/section}
+						{$depth=$review.depth}
+				{/if}
+
+				{if $review.depth == $depth}
+			</div>
+			<div class="comment{if ifempty($review.author.is_user) > 0} is-admin{/if}{if $depth < 10} is-reply{/if}" data-id={$review.id} data-parent-id="0" itemprop="review" itemscope itemtype="http://schema.org/Review">
+				{/if}
+
+				{if $review.depth > $depth}
+					<div class="comment{if ifempty($review.author.is_user) > 0} is-admin{/if}{if $depth < 10} is-reply{/if}" data-id={$review.id} data-parent-id="0" itemprop="review" itemscope itemtype="http://schema.org/Review">
+					{$depth=$review.depth}
+				{/if}
+
+				{include file="review.html" inline reply_allowed=$reply_allowed single_view=true review=$review}
+		{/foreach}
+
+		{section name="end-review" loop=$depth}
+				</div>
+		{/section}
+{/function}
+<div class="rev-pg">
+	{if !empty($breadcrumbs)}
+		<div class="layout-center">
+			<div class="breadcrumbs breadcrumbs_{$theme_settings.breadcrumbs_design}">
+				<ul class="breadcrumbs__list">
+					<li class="breadcrumbs__item">
+						<a class="breadcrumbs__link" href="{$wa_url}">[`Home`]</a>
+					</li>
+					{if $theme_settings.breadcrumbs_design eq "dropdown"}
+						{$_product_category = $wa->shop->category($product.category_id)}
+						{if $_product_category}
+							{$_categories_tree = $wa->shop->categories(0,$_product_category.depth,true)}
+							{if !empty($_categories_tree)}
+								{function breadcrumbs_tree}
+									{foreach $tree as $c}
+										{if $c.left_key <= $_product_category.left_key && $c.right_key >= $_product_category.right_key}
+											<li class="breadcrumbs__item">
+												<a class="breadcrumbs__link" href="{$c.url}">{$c.name}</a>
+												{if count($tree) > 1}
+													<div class="breadcrumbs__btn">
+														<svg class="icon" width="6" height="4">
+															<use xlink:href="#arrow-up-breadcrumb"></use>
+														</svg>
+													</div>
+													<ul class="breadcrumbs__dropdown">
+														{foreach $tree as $sc}
+															{if $sc.id eq $c.id}{continue}{/if}
+															<li class="breadcrumbs__dropdown-i">
+																<a class="breadcrumbs__link" href="{$sc.url}">{$sc.name}</a>
+															</li>
+														{/foreach}
+													</ul>
+												{/if}
+											</li>
+											{breadcrumbs_tree tree=$c.childs}
+										{/if}
+									{/foreach}
+								{/function}
+								{breadcrumbs_tree tree=$_categories_tree}
+							{/if}
+						{/if}
+						<li class="breadcrumbs__item">
+							<a class="breadcrumbs__link" href="{$wa->shop->productUrl($product)}">{$product.name}</a>
+						</li>
+					{else}
+						{foreach $breadcrumbs as $bc}
+							<li class="breadcrumbs__item">
+								<a class="breadcrumbs__link" href="{$bc.url}">{$bc.name}</a>
+							</li>
+						{/foreach}
+					{/if}
+				</ul>
+			</div>
+		</div>
+	{/if}
+	<div class="rev-pg__main b-row">
+		<div class="b-row__inner">
+			<div class="rev-pg__content col-4-of-5">
+				<div class="reviews">
+					<h1 class="reviews__title">{sprintf('[`%s reviews`]', $product.name|escape)}</h1>
+					{if !waRequest::isXMLHttpRequest()}
+						<div class="links-bar layout-center">
+							<div class="links-bar__list">
+								<div class="links-bar__item">
+									<a href="{$wa->shop->productUrl($product)}" class="links-bar__link">[`Overview`]</a>
+								</div>
+								<div class="links-bar__item active">
+									<div class="links-bar__link">[`Reviews`] ({$product.rating_count|default:0})</div>
+								</div>
+								{foreach $product.pages as $p}
+									<div class="links-bar__item">
+										<a class="links-bar__link" href="{$wa->shop->productUrl($product, 'page', ['page_url' => $p.url])}">{$p.name|escape}</a>
+									</div>
+								{/foreach}
+							</div>
+						</div>
+					{/if}
+					{if $reviews_count > 0}
+						{if !empty($product.rating) && $product.rating > 0}
+							<span itemprop="aggregateRating" itemscope itemtype="http://schema.org/AggregateRating" title="{sprintf('[`Average user rating: %s / 5`]', $product.rating)}" style="display: none;">
+								<span itemprop="ratingValue" style="display: none;">{$product.rating}</span>
+								<span itemprop="reviewCount" style="display: none;">{count($reviews)|default:0}</span>
+							</span>
+						{/if}
+						{if !isset($rates)}
+							{for $j=5 to 0 step -1}
+								{$rates[$j] = 0}
+							{/for}
+							{if !empty($reviews)}
+								{foreach $reviews as $r}
+								{$r.rate = $r.rate|number_format:0} 
+									{if !empty($r.rate)}{$rates[$r.rate] = $rates[$r.rate]+1}
+									{else}{$rates[0] = $rates[0]+1}{/if}
+								{/foreach}
+							{/if}
+						{/if}
+						{if !empty($rates)}
+							<div class="reviews__header">
+								<div class="reviews__info">
+									<div class="reviews__circle">
+										<div class="circle-progress">
+											<div class="circle-progress__rate">{number_format($product.rating,1,".","")}</div>
+											<div class="circle-progress__text">[`average rating`]</div>
+										</div>
+										<div class="reviews__svg">
+											<svg>
+												<circle cx="59" cy="59" r="53" style="stroke-dashoffset:{(330-(65*$product.rating))};stroke-dasharray:335"></circle>
+											</svg>
+										</div>
+									</div>
+									<div class="reviews__stats">
+										<div class="reviews__main-info">
+											<div class="reviews__rating">
+												<div class="stars stars_l">
+													<div class="stars__list">
+														{for $i=1 to 5}
+															<div class="stars__i{if $i <= $product.rating} stars__i_checked{/if}">
+																<svg class="icon" width="16" height="15">
+																	<use xlink:href="#icon-star"></use>
+																</svg>
+															</div>
+														{/for}
+													</div>
+												</div>
+											</div>
+											<div class="reviews__stat-title">{_w('%d review for ','%d reviews for ', $reviews_count)|cat:$product.name|escape}</div>
+										</div>
+										<div class="reviews__details">
+											{$_total_count = 0}
+											{foreach $rates as $_rate => $_count}
+												{$_total_count = $_total_count + $_count}
+											{/foreach}
+											{for $i = 5 to 0 step -1}
+												{if empty($rates[$i]) || !$rates[$i]}{$_count = 0}{else}{$_count = $rates[$i]}{/if}
+												{if $i || $_count}
+													<div class="reviews__rating-row">
+														<div class="reviews__rating-stars">
+															<div class="stars stars_s">
+																<div class="stars__list">
+																	{for $j=4 to 0 step -1}
+																		<div class="stars__i{if $i>$j} stars__i_checked{/if}">
+																			<svg class="icon" width="12" height="11">
+																				<use xlink:href="#icon-star"></use>
+																			</svg>
+																		</div>
+																	{/for}
+																</div>
+															</div>
+														</div>
+														<div class="reviews__rating-bar">
+															<div class="reviews__rating-rail">
+															</div>
+															<div class="reviews__rating-fill" style="width:{if $_total_count > 0}{str_replace(',','.', 100*$_count/$_total_count)}{else}0{/if}%;"></div>
+														</div>
+														<div class="reviews__rating-text"><span>{_w('%d review','%d reviews', $_count)}</span></div>
+													</div>
+												{/if}
+											{/for}
+										</div>
+									</div>
+								</div>
+								<div class="reviews__actions">
+									<div class="reviews__btn-call-to-action">
+										<strong>Напишите свое мнение о товаре</strong>
+										<span>Сделайте выбор других покупалетей легче.</span>
+									</div>
+									<a class="reviews__btn btn {$theme_settings.main_buttons_style|replace:'img/themebuttons/':''|replace:'.gif':''} btn_main-2 reviews__btn-showform" href="#">
+										<span>[`Write a review`]</span>
+										<div class="hover-anim"></div>
+									</a>
+								</div>
+							</div>
+						{/if}
+					{else}
+						<div class="reviews__no-rev">
+							<div class="reviews__no-rev-stars">
+								<div class="stars">
+									<div class="stars__list">
+										<div class="stars__i stars__i_checked">
+											<svg class="icon" width="43" height="40">
+												<use xlink:href="#icon-star"></use>
+											</svg>
+										</div>
+										<div class="stars__i stars__i_checked">
+											<svg class="icon" width="43" height="40">
+												<use xlink:href="#icon-star"></use>
+											</svg>
+										</div>
+										<div class="stars__i stars__i_checked">
+											<svg class="icon" width="43" height="40">
+												<use xlink:href="#icon-star"></use>
+											</svg>
+										</div>
+										<div class="stars__i stars__i_checked">
+											<svg class="icon" width="43" height="40">
+												<use xlink:href="#icon-star"></use>
+											</svg>
+										</div>
+										<div class="stars__i stars__i_checked">
+											<svg class="icon" width="43" height="40">
+												<use xlink:href="#icon-star"></use>
+											</svg>
+										</div>
+									</div>
+								</div>
+							</div>
+							<div class="reviews__no-rev-text">
+								<h6>Мы ждем Вашей оценки. Будьте первыми!</h6>
+								<span>Сделайте выбор других покупалетей легче.</span>
+							</div>
+						</div>
+					{/if}
+					<div class="reviews__main">
+						<div class="comments-sec">
+							{include file="reviews.form.html" inline}
+							<div id="s-reviews-list">
+								{foreach $reviews as $review}
+									<div class="comment{if ifempty($review.author.is_user) > 0} is-admin{/if}" data-id={$review.id} data-parent-id="0" itemprop="review" itemscope itemtype="http://schema.org/Review">
+										{include file="review.html" reply_allowed=true inline}
+										{if !empty($review.comments)}
+											{review_reviews reviews=$review.comments}
+										{/if}
+									</div>
+								{/foreach}
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			<aside class="rev-pg__sidebar col-1-of-5">
+				{$_products = $wa->shop->products("id/`$product.id`")}
+				{include file="list-thumbs.html" show_features=false list_only=true hide_description=true wrapper="rev-pg__shop-item" item_id="sticky-shop-item" products=$_products inline}
+			</aside>
+		</div>
+	</div>
+</div>
+<script src="{$wa_theme_url}js/reviews.js?v{$wa_theme_version}"></script>
+{$wa->globals('bodyClass','item-page')}
+{/strip}

@@ -1,0 +1,65 @@
+<table class="zebra" id="{$id}">
+    <thead>
+    <tr>
+        <th class="js-weight">Вес</th>
+        <th colspan="2">Высота</th>
+        <th colspan="2">Ширина</th>
+        <th>Длина</th>
+        <th class="js-weight">&nbsp;</th>
+    </tr>
+    </thead>
+    <tfoot>
+    <tr class="white js-weight">
+        <td><a href="#" class="inline inline-link js-add-size"><i class="icon16 plus"></i> <b><i>Добавить размер</i></b></a>
+        </td>
+        <td colspan="4"><span class="hint">Сохраните размеры ваших упаковок в зависимости от веса заказа.</span></td>
+    </tr>
+    </tfoot>
+    <tbody>
+    {$control}
+    </tbody>
+</table>
+<script type="text/javascript">
+    $(function () {
+        'use strict';
+        var container = $('#{$id}');
+
+        container.on('click', '.js-add-size', function () {
+            var el = $(this);
+            var table = el.parents('table:first');
+            var last = table.find('tr.js-size:last');
+            var clone = last.clone();
+
+            clone.find('input').each(function () {
+                var input = $(this);
+
+                // increase index inside input name
+                var name = input.attr('name');
+                input.attr('name', name.replace(/\[table]\[(\d+)]/, function (str, p1) {
+                    return '[table][' + (parseInt(p1, 10) + 1) + ']';
+                }));
+                var value = parseFloat(input.val());
+                input.val(value >= 10 ? value + 5 : (value < 2 ? value + 0.5 : value + 1));
+            });
+
+            last.after(clone);
+            return false;
+        });
+
+        container.on('click', '.js-delete-size', function () {
+            /**
+             * @this HTMLInputElement
+             */
+            var el = $(this);
+            var table = el.parents('table:first');
+            if (table.find('tr.js-size').length > 1) {
+                el.parents('tr:first').remove();
+            } else {
+                el.parents('tr:first').find('input').each(function () {
+                    this.value = this.defaultValue;
+                });
+            }
+            return false;
+        });
+    });
+</script>

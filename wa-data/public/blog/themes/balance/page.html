@@ -1,0 +1,9 @@
+{strip}
+<div class="info-sec" itemscope itemtype="http://schema.org/WebPage">
+	<h1 class="info-sec__title" itemprop="name">{$page.name}</h1>
+	<div class="info-sec__main" role="main" itemprop="description">
+		{$page.content}
+	</div>
+</div>
+{$wa->globals("showParentBreadcrumbs",1)}
+{/strip}

@@ -1,0 +1,36 @@
+{if count($gc_coupons)}
+	<style type="text/css">
+		.gc_orders_code { text-align: left; }
+	</style>
+	
+	<h3>Подарочные сертификаты</h3>
+	
+	<table class="gc_orders">
+	<tr>
+		<th class="gc_orders_code">Сертификат</th>
+		<th>Стоимость</th>
+		<th>Использование</th>
+		<th>Печать</th>
+	</tr>
+	{foreach $gc_coupons as $coupon}
+		<tr>
+			<td>{$coupon.code}</td>
+			<td>{floatval($coupon.price)} {$coupon.type}</td>
+			<td>
+				{if $coupon.used > 0}
+					<span style="color: red;">Использован</span>
+				{else}
+					<span style="color: green;">Не использовался</span>
+				{/if}
+			</td>
+			<td><a class="gc_print" href="{$wa->getUrl('shop/frontend/printcard', ['plugin' => 'giftcard'])}?coupon_id={$coupon.coupon}&hash={$coupon.bruteforce_protection}" target="blank">Распечатать</a></td>
+		</tr>
+	{/foreach}
+	</table>
+	<script type="text/javascript">
+		$('.gc_print').click(function() {
+			var newWin = window.open($(this).attr('href'), 'Подарочный сертификат', "width=750,height=400,resizable=yes,scrollbars=no,status=no");
+			return false;
+		});
+	</script>
+{/if}

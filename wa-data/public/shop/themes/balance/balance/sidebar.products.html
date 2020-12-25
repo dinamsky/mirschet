@@ -1,0 +1,69 @@
+{strip}
+{if !empty($sidebar_products)}
+	<div class="catalog-pg__side-sect mt-hide">
+		<div class="sidebar-section pos-rel">
+			<div class="descr-mode pos-abs"><span class="pos-rel">PRODUCTS</span></div>
+			<div class="sidebar-section__title section-title section-title_mini">{$theme_settings.shop_sidebars_sections_products_title|default:"[`Bestsellers`]"}</div>
+			<div class="sidebar-section__body">
+				<div class="mini-items">
+					{foreach $sidebar_products as $p}
+						{$_product_image_src = $wa->shop->productImgUrl($p, "96x96")}
+						<div class="mini-items__item">
+							<div class="mini-items__item">
+								<div class="mini-item mini-item_custom">
+									{if $_product_image_src}
+										<a class="mini-item__image" href="{$p.frontend_url}">
+											<img src="data:image/gif;base64,R0lGODlh6gDqAIAAAP///wAAACH5BAEAAAEALAAAAADqAOoAAAL+jI+py+0Po5y02ouz3rz7D4biSJbmiabqyrbuC8fyTNf2jef6zvf+DwwKh8Si8YhMKpfMpvMJjUqn1Kr1is1qt9yu9wsOi8fksvmMTqvX7Lb7DY/L5/S6/Y7P6/f8vv8PGCg4SFhoeIiYqLjI2Oj4CBkpOUlZaXmJmam5ydnp+QkaKjpKWmp6ipqqusra6voKGys7S1tre4ubq7vL2+v7CxwsPExcbHyMnKy8zNzs/AwdLT1NXW19jZ2tvc3d7f0NHi4+Tl5ufo6err7O3u7+Dh8vP09fb3+Pn6+/z9/v/w8woMCBBAsaPIgwocKFDBs6fAgxosSJFCtavIgxo8Y9jRw7evwIMqTIkSRLmjyJMqXKlSxbunwJM6bMmTRr2ryJM6fOnTx7+vwJNKjQoUSLGj2KNKnSpUybOo1UAAA7" data-src="{$_product_image_src}" class="lazy-img" alt="{$p.name|escape}">
+										</a>
+									{/if}
+									<div class="mini-item__content">
+										<a class="mini-item__name" href="{$p.frontend_url}">{$p.name}</a>
+										{if $theme_settings.products_show_reviews}
+											{if $p.rating > 0}
+												{$_rating = round($p.rating)}
+												<div class="mini-item__rating">
+													<div class="item-rating">
+														<div class="item-rating__stars">
+															<div class="stars stars_m">
+																<div class="stars__list">
+																	{for $i=1 to 5}
+																		<div class="stars__i{if $i <= $_rating} stars__i_checked{/if}">
+																			<svg class="icon" width="16" height="15">
+																				<use xlink:href="#icon-star"></use>
+																			</svg>
+																		</div>
+																	{/for}
+																</div>
+															</div>
+														</div>
+														<div class="item-rating__revs">
+															<svg class="icon" width="15" height="14">
+																<use xlink:href="#icon-bubble"></use>
+															</svg>
+															<a class="grey" href="{$p.frontend_url}reviews/">{$p.rating_count}</a>
+														</div>
+													</div>
+												</div>
+											{/if}
+										{/if}
+										<div class="mini-item__price-list">
+											<div class="mini-item__price mini-item__price_regl">
+												<span>{shop_currency_html($p.price)}</span>
+											</div>
+											{if $p.compare_price > 0}
+												<div class="mini-item__price mini-item__price_old">
+													<span>{shop_currency_html($p.compare_price)}</span>
+												</div>
+											{/if}
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					{/foreach}
+				</div>
+			</div>
+		</div>
+	</div>
+{/if}
+{/strip}

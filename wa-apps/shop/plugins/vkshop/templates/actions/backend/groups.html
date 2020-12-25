@@ -1,0 +1,13 @@
+{if isset($select_groups)}
+    <select name="config[group_id]" onchange="$.Vkshop.groupselect(this);">
+        {foreach $select_groups as $group}
+            {if !empty($group.user_id)}
+                <option value="{$group.id}">
+                    {$group.group_name|escape}
+                </option>
+            {/if}
+        {/foreach}
+    </select>
+{else}
+    <span style="color: red;">[`No groups defined in the plugin settings`]</span>
+{/if}

@@ -1,0 +1,8 @@
+ebbc7f88ab41abf5d9cb06d34a2b671f *.htaccess
+71de1f8107698aa397f7cf50e6ae78df *img/addtogroup.png
+a285da79a1cf95556e4eb1fd40059097 *lib/.htaccess
+58eeed44492952afab423aa701fb46bd *lib/config/plugin.php
+8422bd0e7d58c7b8c3bc35025b218716 *lib/config/settings.php
+4ce2669f7a76fbb561956b0d5c7abb85 *lib/models/shopAddtogroupPluginWacontactcategories.model.php
+8430de2355a2b3ca1ed42dc045d21c37 *lib/models/shopAddtogroupPluginWacontactcategory.model.php
+aec5620975e12d2d609987740df4882c *lib/shopAddtogroup.plugin.php

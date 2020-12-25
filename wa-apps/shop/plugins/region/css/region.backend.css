@@ -1,0 +1,67 @@
+.redactor-editor {
+	border:1px solid #BBBBBB!important;
+	border-top:0px!important;
+	box-shadow: none!important;
+	width:99%!important;
+	padding:0px!important;
+	height:100px;
+}
+
+li .redactor-editor {
+	border:1px solid #BBBBBB!important;
+	border-top:0px!important;
+	box-shadow: none!important;
+	width:100%!important;
+	padding:0px!important;
+	height:100px;
+}
+
+.redactor-toolbar {
+    background: #EEEEEE!important;
+	width:99%!important;
+	border:1px solid #BBBBBB!important;
+	box-shadow: none!important;
+	border-bottom:0px;
+	height: 32px;
+}
+
+li .redactor-toolbar {
+    background: #EEEEEE!important;
+	width:100%!important;
+	border:1px solid #BBBBBB!important;
+	box-shadow: none!important;
+	border-bottom:0px;
+	height: 32px;
+}
+
+.redactor-toolbar li {
+    background: #EEEEEE!important;
+}
+ 
+.redactor-toolbar li a:hover {
+    color: #fff!important;
+}
+ 
+.redactor-toolbar li a:active,
+.redactor-toolbar li a.redactor-act {
+    background: #000;
+    color: #aaa;
+}
+
+.redactor-box {
+	margin-bottom:0px!important;
+}
+
+.redactor-box textarea {
+	width:99%!important;
+	background: #F7F7F7!important;
+	border:1px solid #BBBBBB!important;
+	color:black!important;
+}
+
+li .redactor-box textarea, textarea {
+	width:100%!important;
+	background: #F7F7F7!important;
+	border:1px solid #BBBBBB!important;
+	color:black!important;
+}

@@ -1,0 +1,62 @@
+<div id="shop-sdekint-plugin-settings"></div>
+<script>
+    (function ($) {
+        $.when($.Deferred(function(defer){
+            if (typeof ShopSdekintPluginSettings != "undefined") {
+                defer.resolve();
+                return;
+            }
+            $.getScript("{$wa_app_static_url}plugins/sdekint/js/settings.js?v={$info.version}").done(function () {
+                defer.resolve();
+            }).fail(function () {
+                defer.reject();
+            });
+        })).then(function () {
+            ShopSdekintPluginSettings("#shop-sdekint-plugin-settings", {$info|json_encode}, {$settings|json_encode});
+        }, function () {
+            $('#shop-sdekint-plugin-settings').html('<p class="red">Ошибка загрузки скрипта настроек.</p>')
+        });
+    })(jQuery);
+</script>
+<div style="display: none">
+    <div id="sdekint-sellers-dlg">
+        <div>
+            <form>
+                <div class="dialog-content">
+                    <div class="field">
+                        <div class="name">Наименование</div>
+                        <div class="value"><input type="text" name="name" class="long" data-field="name"></div>
+                    </div>
+                    <div class="field">
+                        <div class="name">Адрес</div>
+                        <div class="value"><input type="text" name="address" class="long" data-field="address"></div>
+                    </div>
+                    <div class="field">
+                        <div class="name">Телефон</div>
+                        <div class="value"><input type="text" name="phone" data-field="phone"></div>
+                    </div>
+                    <div class="field">
+                        <div class="name">ИНН</div>
+                        <div class="value"><input type="text" name="inn" data-field="inn"></div>
+                    </div>
+                    <div class="field">
+                        <div class="name">Форма собственности</div>
+                        <div class="value"><select name="ownership_form" data-field="ownership_form">
+                                <option value=""> (не указано) </option>
+                                {foreach $info.ownership_forms as $of}<option value="{$of.value|escape}">{$of.title|escape}</option>{/foreach}
+                            </select>
+                        </div>
+                    </div>
+                    <div class="field">
+                        <div class="name">Профиль по умолчанию</div>
+                        <div class="value"><input type="hidden" name="_is_default" value="0"><input name="_is_default" type="checkbox" value="1"></div>
+                    </div>
+                </div>
+                <div class="dialog-buttons">
+                    <button type="submit" class="green button">Сохранить</button>
+                    <button type="button" class="cancel button">Отмена</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,97 @@
+{strip}
+{if $theme_settings.shop_homepage_viewed_view ne "none"}
+	{$_viewed_pids = waRequest::cookie('balance_viewed')}
+	{if !empty($_viewed_pids)}
+		{$_products = $wa->shop->products("id/`$_viewed_pids`",10)}
+		{if !empty($_products)}
+			<div class="home-pg__section home-pg__section_slider home-pg__section_ls viewed-history-wrapper{if $theme_settings.shop_homepage_viewed_view ne 'always'} {$theme_settings.shop_homepage_viewed_view}{/if}">
+				<div class="items-slider pos-rel">
+					<div class="descr-mode pos-abs"><span class="pos-rel">VIEWED</span></div>
+					<div class="items-slider__header">
+						<div class="items-slider__heading">
+							<h2 class="section-title">[`Viewed products`]</h2>
+						</div>
+						<div class="items-slider__arrows-wr">
+							<div class="items-slider-clear-btn btn {$theme_settings.main_buttons_style|replace:'img/themebuttons/':''|replace:'.gif':''} btn_sec-5 mb-hide clear-viewed-history">
+								<span>[`clear history`]</span>
+								<div class="hover-anim"></div>
+							</div>
+							<div class="items-slider__arrow">
+								<button class="slider-ar slider-ar_square pos-rel default-btn items-slider__nav-left">
+									<svg class="icon cent-icon" width="7" height="11">
+										<use xlink:href="#arrow-left-small"></use>
+									</svg>
+								</button>
+								<button class="slider-ar slider-ar_square pos-rel default-btn items-slider__nav-right">
+									<svg class="icon cent-icon" width="7" height="11">
+										<use xlink:href="#arrow-right-small"></use>
+									</svg>
+								</button>
+							</div>
+						</div>
+					</div>
+					<div class="items-slider__body swiper-container">
+						<div class="items-slider__wrapper swiper-wrapper">
+							{foreach $_products as $p}
+								<div class="items-slider__item item-c-mob-`$theme_settings.products_list_mobile_view` swiper-slide">
+									<div class="pd-equal-item">
+										{$_product_image_src = $wa->shop->productImgUrl($p, "96x96")}
+										<form class="addtocart" data-title="{$p.name|escape}" data-price="{shop_currency_html($p.price)|escape}" data-oldprice="{if $p.compare_price > 0}{shop_currency_html($p.compare_price)|escape}{/if}" data-image="{$_product_image_src|default:"`$wa_parent_theme_url`img/dummy200.png"}" {if $p.sku_count > 1}data-url="{$p.frontend_url}{if strpos($p.frontend_url, '?')}&{else}?{/if}cart=1"{/if} method="post" action="{$wa->getUrl('shop/frontendCart/add')}">
+											<a class="pd-equal-item__image" href="{$p.frontend_url}">
+												<img src='{$_product_image_src|default:"`$wa_parent_theme_url`img/dummy200.png"}' alt="{$p.name|escape}">
+											</a>
+											<a class="pd-equal-item__title link link link_ter" href="{$p.frontend_url}">{$p.name}</a>
+											{if $theme_settings.products_show_reviews}
+												{if $theme_settings.products_show_rating_stars eq "always" || ($theme_settings.products_show_rating_stars eq "nonempty" && $p.rating > 0)}
+													{$_rating = round($p.rating)}
+													<div class="pd-equal-item__rating">
+														<div class="item-rating item-c__rating">
+															<div class="item-rating__stars">
+																<div class="item-rating item-c__rating">
+																	<div class="item-rating__stars">
+																		<div class="stars stars_m">
+																			<div class="stars__list">
+																				{for $i=1 to 5}
+																					<div class="stars__i{if $i <= $_rating} stars__i_checked{/if}">
+																						<svg class="icon" width="16" height="15">
+																							<use xlink:href="#icon-star"></use>
+																						</svg>
+																					</div>
+																				{/for}
+																			</div>
+																		</div>
+																	</div>
+																	<div class="item-rating__revs">
+																		<svg class="icon" width="15" height="14">
+																			<use xlink:href="#icon-bubble"></use>
+																		</svg>
+																		<a class="grey" href="{$p.frontend_url}reviews/">{$p.rating_count}</a>
+																	</div>
+																</div>
+															</div>
+														</div>
+													</div>
+												{/if}
+											{/if}
+											<div class="pd-equal-item__price">
+												<div class="simple-price">
+													<div class="simple-price__price simple-price__price_reg">{shop_currency_html($p.price)}</div>
+													{if $p.compare_price > 0}
+														<div class="simple-price__price simple-price__price_old grey">{shop_currency_html($p.compare_price)}</div>
+													{/if}
+												</div>
+											</div>
+											<a class="pd-equal-item__to-cart addtocart-submit js-addtocart-submit" href="{$p.frontend_url}">[`Add to cart`]</a>
+											<input type="hidden" name="product_id" value="{$p.id}">
+										</form>
+									</div>
+								</div>
+							{/foreach}
+						</div>
+					</div>
+				</div>
+			</div>
+		{/if}
+	{/if}
+{/if}
+{/strip}

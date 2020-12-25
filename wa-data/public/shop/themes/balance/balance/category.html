@@ -1,0 +1,183 @@
+{strip}
+{include file="system.category.html" scope="parent" inline}
+<div class="catalog-pg">
+	{if $category.parent_id && !empty($breadcrumbs)}
+		<div class="layout-center">
+			<div class="breadcrumbs breadcrumbs_{$theme_settings.breadcrumbs_design}">
+				<ul class="breadcrumbs__list">
+					<li class="breadcrumbs__item">
+						<a class="breadcrumbs__link" href="{$wa_url}">[`Home`]</a>
+					</li>
+					{if $theme_settings.breadcrumbs_design eq "dropdown"}
+						{$_categories_tree = $wa->shop->categories(0,$category.depth,true)}
+						{if !empty($_categories_tree)}
+							{function breadcrumbs_tree}
+								{foreach $tree as $c}
+									{if $c.left_key < $category.left_key && $c.right_key > $category.right_key}
+										<li class="breadcrumbs__item">
+											<a class="breadcrumbs__link" href="{$c.url}">{$c.name}</a>
+											{if count($tree) > 1}
+												<div class="breadcrumbs__btn">
+													<svg class="icon" width="6" height="4">
+														<use xlink:href="#arrow-up-breadcrumb"></use>
+													</svg>
+												</div>
+												<ul class="breadcrumbs__dropdown">
+													{foreach $tree as $sc}
+														{if $sc.id eq $c.id}{continue}{/if}
+														<li class="breadcrumbs__dropdown-i">
+															<a class="breadcrumbs__link" href="{$sc.url}">{$sc.name}</a>
+														</li>
+													{/foreach}
+												</ul>
+											{/if}
+										</li>
+										{breadcrumbs_tree tree=$c.childs}
+									{/if}
+								{/foreach}
+							{/function}
+							{breadcrumbs_tree tree=$_categories_tree}
+						{/if}
+					{else}
+						{foreach $breadcrumbs as $bc}
+							<li class="breadcrumbs__item">
+								<a class="breadcrumbs__link" href="{$bc.url}">{$bc.name}</a>
+							</li>
+						{/foreach}
+					{/if}
+				</ul>
+			</div>
+		</div>
+	{/if}
+	<div class="layout-center">
+		<h1 class="catalog-pg__title category-name">{$category.name|escape}</h1>
+	</div>
+	{if !empty($category.params.image_banner)}
+		<div class="layout-center">
+			<div class="cat-top-bannner">
+				{if !empty($category.params.image_banner_url)}<a href="{$category.params.image_banner_url}">{/if}
+					<img src="data:image/gif;base64,R0lGODlh6gDqAIAAAP///wAAACH5BAEAAAEALAAAAADqAOoAAAL+jI+py+0Po5y02ouz3rz7D4biSJbmiabqyrbuC8fyTNf2jef6zvf+DwwKh8Si8YhMKpfMpvMJjUqn1Kr1is1qt9yu9wsOi8fksvmMTqvX7Lb7DY/L5/S6/Y7P6/f8vv8PGCg4SFhoeIiYqLjI2Oj4CBkpOUlZaXmJmam5ydnp+QkaKjpKWmp6ipqqusra6voKGys7S1tre4ubq7vL2+v7CxwsPExcbHyMnKy8zNzs/AwdLT1NXW19jZ2tvc3d7f0NHi4+Tl5ufo6err7O3u7+Dh8vP09fb3+Pn6+/z9/v/w8woMCBBAsaPIgwocKFDBs6fAgxosSJFCtavIgxo8Y9jRw7evwIMqTIkSRLmjyJMqXKlSxbunwJM6bMmTRr2ryJM6fOnTx7+vwJNKjQoUSLGj2KNKnSpUybOo1UAAA7" data-src="{$category.params.image_banner}" class="lazy-img" alt="{$category.name|escape}">
+				{if !empty($category.params.image_banner_url)}</a>{/if}
+			</div>
+		</div>
+	{else}
+		{if method_exists("shopWmimageincatPlugin","getCategoryImage")}
+			{if shopWmimageincatPlugin::getCategoryImage($category.id, 'banner')}
+				<div class="layout-center">
+					<div class="cat-top-bannner">
+						{if !empty($category.params.image_banner_url)}<a href="{$category.params.image_banner_url}">{/if}
+							<img src="data:image/gif;base64,R0lGODlh6gDqAIAAAP///wAAACH5BAEAAAEALAAAAADqAOoAAAL+jI+py+0Po5y02ouz3rz7D4biSJbmiabqyrbuC8fyTNf2jef6zvf+DwwKh8Si8YhMKpfMpvMJjUqn1Kr1is1qt9yu9wsOi8fksvmMTqvX7Lb7DY/L5/S6/Y7P6/f8vv8PGCg4SFhoeIiYqLjI2Oj4CBkpOUlZaXmJmam5ydnp+QkaKjpKWmp6ipqqusra6voKGys7S1tre4ubq7vL2+v7CxwsPExcbHyMnKy8zNzs/AwdLT1NXW19jZ2tvc3d7f0NHi4+Tl5ufo6err7O3u7+Dh8vP09fb3+Pn6+/z9/v/w8woMCBBAsaPIgwocKFDBs6fAgxosSJFCtavIgxo8Y9jRw7evwIMqTIkSRLmjyJMqXKlSxbunwJM6bMmTRr2ryJM6fOnTx7+vwJNKjQoUSLGj2KNKnSpUybOo1UAAA7" data-src="{shopWmimageincatPlugin::getCategoryImage($category.id, 'banner')}" class="lazy-img" alt="{$category.name|escape}">
+						{if !empty($category.params.image_banner_url)}</a>{/if}
+					</div>
+				</div>
+			{/if}
+		{/if}
+	{/if}
+	{if !empty($category.subcategories) && $theme_settings.products_subcategories_view ne "none"}
+		<div class="layout-center">
+			{include file="category.subcategories.html" inline}
+		</div>
+	{/if}
+	{if $theme_settings.products_description_location eq "top" && $category.description && !waRequest::get('page',0)}
+		<div class="layout-center">
+			<div class="catalog-pg__descr category-desc">
+				{$category.description}
+			</div>
+		</div>
+	{/if}
+	<div class="catalog-pg__main b-row">
+		<div class="b-row__inner">
+			{if !empty($_theme_config.leftbar)}
+				<aside class="catalog-pg__sidebar catalog-pg__sidebar_menu col-1-of-5">
+					{foreach $_theme_config.leftbar as $section}
+						{if $section.type eq "section"}
+							{include file="sidebar.`$section.value`.html" inline}
+						{else}
+							<div class="catalog-pg__side-sect mt-hide">
+								<div class="sidebar-section">
+									{include file="string:`$section.value`" inline}
+								</div>
+							</div>
+						{/if}
+					{/foreach}
+				</aside>
+			{/if}
+			<div class="catalog-pg__content col-{if !empty($_theme_config.leftbar)}{if !empty($_theme_config.rightbar)}3{else}4{/if}{else}4{/if}-of-5">
+				{if isset($_theme_config_bars) && !empty($_theme_config_bars)}
+					{if (in_array("filters",$_theme_config_bars) && isset($filters) && !empty($filters))}
+						<div class="catalog-pg__adaptive-btns">
+							<div class="catalog-pg__toggle-panel" data-sidebar-btn="filters">
+								<svg class="icon" width="16" height="16">
+									<use xlink:href="#icon-filter"></use>
+								</svg>
+								<strong>[`Filter`]</strong>
+							</div>
+						</div>
+					{/if}
+				{/if}
+				{if $products}
+					{include file="category.sorting.html" sorting=!empty($category.params.enable_sorting)}
+				{/if}
+				<!-- plugin hook: 'frontend_category' -->
+				{* @event frontend_category.%plugin_id% *}
+				{foreach $frontend_category as $_}{$_}{/foreach}
+				<div class="catalog-pg__items">
+					<div id="product-list">
+						{if !$products}
+							{if !empty($filters)}
+								<div class="acc-info-box">
+									<div class="acc-info-box__title">[`No products were found.`]</div>
+								</div>
+							{else}
+								<div class="acc-info-box">
+									<div class="acc-info-box__text">[`This category does not contain any products.`]</div>
+								</div>
+							{/if}
+						{else}
+							{$_theme_products_view_mode = waRequest::cookie('_theme_products_view_mode',$theme_settings.products_mode_default)}
+							{if !in_array($_theme_products_view_mode,["thumbs","expanded","compact"])}{$_theme_products_view_mode = "thumbs"}{/if}
+							{include file="list-`$_theme_products_view_mode`.html" show_features=true}
+							{if isset($pages_count) && $pages_count > 1}
+								<div class="catalog-pg__pagination">
+									<div class="pagination lazyloading-paging"  data-times="2" data-link-text="[`Load more`]" data-loading-str="[`Loading...`]">
+										{wa_pagination total=$pages_count attrs=['class' => "pagination__list"]}
+									</div>
+								</div>
+							{/if}
+						{/if}
+					</div>
+				</div>
+				{if $theme_settings.products_description_location eq "bottom" && $category.description && !waRequest::get('page',0)}
+				<div class="catalog-pg__seo-text category-desc">
+					{$category.description}
+				</div>
+				{/if}
+			</div>
+			{if !empty($_theme_config.rightbar)}
+				<aside class="catalog-pg__sidebar catalog-pg__sidebar_menu col-1-of-5">
+					{foreach $_theme_config.rightbar as $section}
+						{if $section.type eq "section"}
+							{include file="sidebar.`$section.value`.html" inline}
+						{else}
+							<div class="catalog-pg__side-sect mt-hide">
+								<div class="sidebar-section">
+									{include file="string:`$section.value`" inline}
+								</div>
+							</div>
+						{/if}
+					{/foreach}
+				</aside>
+			{/if}
+			<div class="bg-overlay"></div>
+		</div>
+	</div>
+</div>
+{if $wa->user()->isAdmin()}
+	<a class="show-toggle-btn" href="#">
+		<svg class="icon cent-icon" width="18" height="18">
+			<use xlink:href="#icon-info"></use>
+		</svg>
+	</a>
+{/if}
+{if isset($category)}{include file="`$wa_parent_theme_path`/admin_edit_button.html" link="`$wa_backend_url`shop/?action=products#/products/category_id=`$category.id`" title="[`Edit category`]"}{/if}
+{/strip}

@@ -1,0 +1,91 @@
+<div id="vkshopContent">
+    <button id="s-plugin-vkshop-close-form-button" type="button" title="[`Close`]"><i class="icon16 cross-bw"></i>
+    </button>
+    <h2>
+        [`Share on Vkshop`]
+    </h2>
+    <div id="vkshopProductInfo">
+        {if empty($vk_products)}
+            <p>
+                <strong style="color: red;">
+                    [`Item not exported yet in VK`]
+                </strong>
+            </p>
+        {else}
+            <p>
+                <strong style="color: green;">
+                    [`Item already exported in VK`]
+                </strong>
+            </p>
+            {foreach $vk_groups as $vk_group}
+                {if !empty($vk_group.albums)}
+                    [`Product albums for`]&nbsp;{$vk_group.name}:
+                    <ul>
+                        {foreach $vk_group.albums as $album}
+                            <li style="list-style-type: none;">{$album.name}</li>
+                        {/foreach}
+                    </ul>
+                {/if}
+            {/foreach}
+        {/if}
+    </div>
+    <div>
+        [`Select image you want to share`]
+    </div>
+    <div id="vkshopProductImages">
+        {include file="./product_images.html" inline}
+    </div>
+</div>
+
+<script type="text/javascript">
+    $(function () {
+        if (!$("link#s-plugin-vkshop-stylesheet").length)
+            $('<link href="{$wa_app_static_url}plugins/vkshop/css/vkshop.css?_=' + Date.now() + '" rel="stylesheet" id="s-plugin-vkshop-stylesheet">')
+                    .appendTo("head");
+        if (!$("link#s-plugin-vkshop-imagepicker").length)
+            $('<link href="{$wa_app_static_url}plugins/vkshop/css/image-picker.css?_=' + Date.now() + '" rel="stylesheet" id="s-plugin-vkshop-imagepicker">')
+                    .appendTo("head");
+        $.when(
+                $.Deferred(function (deferred) {
+                    if (String.prototype.underscore) deferred.resolve();
+                    else {
+                        $.shop.trace('Loading sugar.js');
+                        $.getScript('{$wa_app_static_url}plugins/vkshop/js/sugar.min.js', deferred.resolve)
+                    }
+                }),
+                $.Deferred(function (deferred) {
+                    if (String.prototype.underscore) deferred.resolve();
+                    else {
+                        $.shop.trace('Loading image-picker.js');
+                        $.getScript('{$wa_app_static_url}plugins/vkshop/js/image-picker.min.js', deferred.resolve)
+                    }
+                }),
+                $.Deferred(function (deferred) {
+                    if ($.fn.waDialog) deferred.resolve();
+                    else {
+                        $.shop.trace('Loading waDialog');
+                        $.getScript('{$wa_url}wa-content/js/jquery-wa/wa.dialog.js', deferred.resolve)
+                    }
+                }),
+                $.Deferred(function (deferred) {
+                    if ($.Vkshop) deferred.resolve();
+                    else {
+                        $.shop.trace('Loading vkshop.js');
+                        $.getScript('{$wa_app_static_url}plugins/vkshop/js/vkshop.{if !$wa->debug()}min.{/if}js', deferred.resolve)
+                    }
+                })
+        ).done(function () {
+                    $.Vkshop.init({
+                        product_id: {$product.id}
+                    });
+
+                    $('#s-plugin-vkshop-content').show(200, function () {
+                        $('html, body').animate({
+                            scrollTop: $('#s-plugin-vkshop-content').offset().top - 90
+                        }, 500);
+                    });
+
+                    $.shop.trace('$.Vkshop initialized');
+                });
+    });
+</script>

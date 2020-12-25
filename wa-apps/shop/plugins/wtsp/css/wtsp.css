@@ -1,0 +1,60 @@
+.wtsp-link i.icon16{
+    background-image: url(../../../plugins/wtsp/img/wtsp.png);
+    background-size: 16px 16px;
+}
+.wtsp-viber-link i.icon16{
+    width: 16px;
+    height: 16px;
+    background: url("../../../plugins/wtsp/img/viber.png")  no-repeat;
+    background-size: 100%;
+}
+#wtsp-content{
+    background-color: #d0e9ea;
+    padding: 10px 30px;
+    margin-bottom: 20px;
+    color: #455a64;
+    padding: 10px;
+}
+#wtsp-content .field .name{
+    background-color: #d0e9ea;
+    color: #000;
+    font-weight: 700;
+    color: #455a64;
+}
+#wtsp-content input:focus,
+#wtsp-content textarea:focus{
+    border: 1px solid #075e54;
+    outline: none;
+}
+#wtsp-content .field .value input[name="phone"]{
+    min-width: 177px;
+    width: 177px;
+    color: #455a64;
+    border: 1px solid #075e54;
+}
+.s-order #wtsp-content  textarea{
+    width: 96%;
+    min-height: 70px;
+    padding: 5px;
+    margin-bottom: 10px;
+    border: 1px solid #075e54;
+}
+#wtsp-dialog-plugin label {
+    display: block;
+    min-height: 100%;
+    height: auto !important;
+    height: 100%;
+    padding: 5px;
+    cursor: pointer;
+}
+#wtsp-dialog-plugin table.zebra td {
+    padding: 0px;
+}
+#wtsp-dialog-plugin table.zebra a {
+    display: initial;
+}
+#wtsp-dialog-plugin a.wtdropright{
+    position: absolute;
+    right: 10px;
+    top: 33%;
+}

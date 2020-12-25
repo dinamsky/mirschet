@@ -1,0 +1,89 @@
+{strip}
+<div class="catalog-pg__options">
+	<div class="option-p">
+		<div class="option-p__inner">
+			{if !empty($sorting)}
+				<div class="option-p__sort-col option-p__sort-col_left">
+					{$sort_fields = [
+						'create_datetime'=>'[`Date added`]',
+						'price' => '[`Price`]',
+						'name' => '[`Name`]'
+					]}
+					{$active_sort = $wa->get('sort', 'create_datetime')}
+					<div class="option-p__sort-toggle"><span>[`Sort by`]</span>
+						<svg class="icon" width="7" height="4">
+							<use xlink:href="#arrow-down-big"></use>
+						</svg>
+					</div>
+					<div class="option-p__sort-list option-p__sort-list_left">
+						{foreach $sort_fields as $sort => $name}
+							<div class="option-p__sort-by{if $active_sort == $sort} active{/if}">
+								{$wa->shop->sortUrl($sort, $name, $active_sort)}
+							</div>
+							{if $wa->get('sort') == $sort}{$wa->title( $wa->title()|cat:' — '|cat:$name)}{/if}
+						{/foreach}
+					</div>
+				</div>
+			{/if}
+			<div class="option-p__sort-col">
+				<div class="option-p__sort-list option-p__sort-list_right">
+					{if $theme_settings.products_mode_userchange_thumbs || $theme_settings.products_mode_userchange_expanded || $theme_settings.products_mode_userchange_compact}
+						{$_theme_products_view_mode = waRequest::cookie('_theme_products_view_mode',$theme_settings.products_mode_default)}
+						{if !in_array($_theme_products_view_mode,["thumbs","expanded","compact"])}{$_theme_products_view_mode = "thumbs"}{/if}
+						<div class="option-p__item-types">
+							{if $theme_settings.products_mode_userchange_thumbs}
+							<div class="option-p__item-type{if $_theme_products_view_mode eq 'thumbs'} active{/if}" data-type="thumbs" title="[`Thumbs`]"><span class="visually-hidden">[`Thumbs`]</span>
+								<svg class="icon cent-icon" width="16" height="16">
+									<use xlink:href="#icon-card"></use>
+								</svg>
+							</div>
+							{/if}
+							{if $theme_settings.products_mode_userchange_expanded}
+							<div class="option-p__item-type{if $_theme_products_view_mode eq 'expanded'} active{/if}" data-type="expanded" title="[`Expanded`]"><span class="visually-hidden">[`Expanded`]</span>
+								<svg class="icon cent-icon" width="16" height="16">
+									<use xlink:href="#icon-list"></use>
+								</svg>
+							</div>
+							{/if}
+							{if $theme_settings.products_mode_userchange_compact}
+							<div class="option-p__item-type{if $_theme_products_view_mode eq 'compact'} active{/if}" data-type="compact" title="[`Compactly`]"><span class="visually-hidden">[`Compactly`]</span>
+								<svg class="icon cent-icon" width="16" height="16">
+									<use xlink:href="#icon-line"></use>
+								</svg>
+							</div>
+							{/if}
+						</div>
+					{/if}
+					{if 1}
+						{$pp_values = ['30','60','90','150']}
+						{$pp_current = waRequest::cookie('products_per_page',30)}
+						<script>
+							$(document).ready(function(){
+								$.cookie('products_per_page', {$pp_current}, { expires: 30, path: '/'});
+							});
+						</script>
+						<div class="option-p__qty">
+							<div class="option-p__header">
+								<span>[`Qty`]:</span>
+								<b>{$pp_current}</b>
+								<svg class="icon" width="7" height="4">
+									<use xlink:href="#icon-down-btn"></use>
+								</svg>
+							</div>
+							<div class="option-p__dropdown">
+								<div class="drop-list drop-list_multi">
+									{foreach $pp_values as $pp}
+										<div class="drop-list__item{if $pp eq $pp_current} active{/if}">
+											<a class="drop-list__link" href="#">{$pp}</a>
+										</div>
+									{/foreach}
+								</div>
+							</div>
+						</div>
+					{/if}
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+{/strip}

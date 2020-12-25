@@ -1,0 +1,19 @@
+{strip}
+<div class="info-sdb__wr info-sdb__wr_bd">
+	<div class="info-sdb__header info-sdb__header_btn">
+		<svg class="icon" width="16" height="10">
+			<use xlink:href="#icon-blog-menu"></use>
+		</svg>
+		<strong>[`Categories`]</strong>
+	</div>
+	<div class="info-sdb__content">
+		<ul class="info-sdb__list">
+			{foreach $wa->blog->blogs() as $blog}
+				<li class="info-sdb__item{if $wa->globals('blog_id') eq $blog.id && empty($is_search)} active{/if}">
+					<a class="info-sdb__item-l" href="{$blog.link}">{$blog.name}</a>
+				</li>
+			{/foreach}
+		</ul>
+	</div>
+</div>
+{/strip}

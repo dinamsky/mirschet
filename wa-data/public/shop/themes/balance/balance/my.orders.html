@@ -1,0 +1,91 @@
+{strip}
+<div class="account-pg">
+	<div class="layout-center">
+		<div class="info-pg__top">
+			<div class="info-pg__tab-menu">
+				<div class="info-pg__tab-menu-btn" href="#">
+					<svg class="icon" width="12" height="14">
+						<use xlink:href="#icon-user"></use>
+					</svg>
+					<span>[`Personal navigation`]</span>
+				</div>
+			</div>
+			<div class="info-pg__dropdown"></div>
+		</div>
+	</div>
+	{if !empty($orders)}
+		<div class="layout-center">
+			<h2 class="account-pg__title">[`My orders`]</h2>
+		</div>
+	{/if}
+	<div class="account-pg__main b-row">
+		<div class="b-row__inner">
+			{include file="`$wa_parent_theme_path`/my.menu.html" inline}
+			<div class="account-pg__content col-4-of-5">
+				{if !empty($orders)}
+					<div class="mob-orders-view-toggle">
+						<div class="mob-orders-view-toggle__tab short active">[`Shortlist`]</div>
+						<div class="mob-orders-view-toggle__tab">[`Detailed`]</div>
+					</div>
+					<div class="account-pg__order-list">
+						<table class="order-list order-list_short">
+							<tbody>
+								<tr class="order-list__row order-list__row_header">
+									<th class="order-list__heading">[`Order ID`]</th>
+									<th class="order-list__heading">[`Order status`]</th>
+									<th class="order-list__heading">[`Shipping`]</th>
+									<th class="order-list__heading">[`Payment`]</th>
+									<th class="order-list__heading">[`Date created`]</th>
+								</tr>
+								{foreach $orders as $o}
+								<tr class="order-list__row">
+									<td class="order-list__cell order-list__cell_num">
+										<span>[`Order ID`]:</span>
+										<a class="order-list__num" href="{$o.url}">{$o.id_str}</a>
+									</td>
+									<td class="order-list__cell order-list__cell_status">
+										<div class="order-list__status-inner">
+											<span>[`Order status`]:</span>
+											<strong class="stat-icon" style="{$o.state->getStyle(1)}"></strong>
+											<div class="order-list__status">{$o.state->getName()}</div>
+										</div>
+									</td>
+									<td class="order-list__cell order-list__cell_delivery">
+										<span>[`Shipping`]:</span>
+										<div class="order-list__status">{if $o.shipping_name}{$o.shipping_name|escape}{else}&minus;{/if}</div>
+									</td>
+									<td class="order-list__cell order-list__cell_payment">
+										<span>[`Payment`]:</span>
+										<div class="order-list__status">{if $o.payment_name}{$o.payment_name|escape}{else}&minus;{/if}</div>
+									</td>
+									<td class="order-list__cell order-list__cell_date">
+										<span>[`Date created`]:</span>
+										<div class="order-list__status">{$o.create_datetime|wa_date:'humandate'}</div>
+									</td>
+									<td class="order-list__cell order-list__cell_more">
+										<a class="order-list__order-details" href="{$o.url}">
+											<span>[`Order details`]</span>
+											<svg class="icon" width="4" height="7">
+												<use xlink:href="#arrow-right-small"></use>
+											</svg>
+										</a>
+									</td>
+								</tr>
+								{/foreach}
+							</tbody>
+						</table>
+					</div>
+				{else}
+					<div class="acc-info-box">
+						<div class="acc-info-box__title">[`Orders`]</div>
+						<div class="acc-info-box__text">[`You have no order history yet.`]</div>
+					</div>
+				{/if}
+			</div>
+		</div>
+	</div>
+	<!-- plugin hook: 'frontend_my_orders' -->
+	{* @event frontend_my_orders.%plugin_id% *}
+	{foreach $frontend_my_orders as $_}{$_}{/foreach}
+</div>
+{/strip}

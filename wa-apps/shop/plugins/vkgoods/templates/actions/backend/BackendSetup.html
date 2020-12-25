@@ -1,0 +1,200 @@
+<div class="block double-padded" id="vkgoods" >
+	<p>
+		Экспорт товаров магазина в сервис ВКонтакте "Товары"
+	</p>
+	{if !$yes_curl}
+	<h2>На сервере не обнаружена необходимая для работы плагина библиотека cURL</h2>
+	{else}
+	{if $vkgoods_settings['token'] == ""}
+	<div class="value no-shift">
+		Для экспорта товаров необходимо авторизоваться в ВКонтакте. Права доступа к сервису 'Товары' будут соответствовать правам доступа используемого при авторизации аккаунта.
+		<br>
+		<br>
+		<input type="button" class="button red" id="b_auth_vk"  value="Авторизоваться" >
+	</div>
+	<script type="text/javascript">
+		$('#b_auth_vk').click(function() {
+			var oauth_win = window.open("https://oauth.vk.com/authorize?client_id={$vkgoods_settings['app_site']}&scope=photos,groups,offline,market&display=page&redirect_uri={$oauth_vk_uri}&response_type=code&v=5.25", "newWindow", "width=656,height=377,resizable=yes,scrollbars=no,status=no,left=100,top=100,toolbar=no,location=no");
+		});
+
+	</script>
+	{else}
+	<form method="post" action="?plugin=vkgoods&action=exportlist" id="vk-expwait-form">
+		<input name="pid_type" type="text" value="wait" style="display: none;"/>
+		<div class="field" style="display: block;">
+			<div class="name">
+				Авторизованы как
+			</div>
+
+			<div class="profile image96px">
+				<div class="image" style="padding: 10px">
+					<img src="{$user_info['photo_50']|escape}"/>
+				</div>
+				<div class="details">
+					<h3>{$user_info['first_name']|escape} {$user_info['last_name']|escape}</h3>
+					<p class="hint" style="max-width: 750px;">
+						При экспорте товаров будут использованы права доступа этого пользователя ВКонтакте. Если прав этого пользователя недостаточно для публикации товаров, войдите с использованием другого аккаунта ВКонтакте.
+					</p>
+					<p>
+						<input type="button" class="button blue" id="clrbtn" value="Сменить аккаунт">
+					</p>
+				</div>
+
+			</div>
+
+			<div class="value">
+
+			</div>
+		</div>
+		<hr />
+		<!-- Градусник и т.п. -->
+		<div class="field-group" id="vkgoods-export-report" style="display: none">
+			<div class="field">
+				<div class="value">
+					<div class="vkgoods-export-stats done" id="exp_done">
+						<h2>Экспорт завершен!</h2>
+<!--						<h3 id="err_vkgoods_message" style="display: none; color: red">В процессе публикации некоторых товаров произошли ошибки. Подробнее см. vkgoods.log</h3> -->
+						<ul>
+							<li>
+								<i class="icon16 clock"></i>Общее время экспорта: <strong id="exp_time"></strong>
+							</li>
+							<li>
+								<i class="icon16 info"></i>Обработано продуктов: <strong id="exp_prd"></strong>
+							</li>
+							<li id="li_exp_full" style="display: none;">
+								<i class="icon16 yes"></i>Полностью экспортировано товаров: <strong id="val_exp_full"></strong>
+							</li>
+							<li id="li_exp_aid" style="display: none;">
+								<i class="icon16 info"></i>Актуальных товаров добавлено в подборки: <strong id="val_exp_aid"></strong>
+							</li>
+							<li id="li_exp_actual" style="display: none;">
+								<i class="icon16 info"></i>Ранее размещенных товаров не требующих актуализации <strong id="val_exp_actual"></strong>
+							</li>
+							<li id="li_err_hidden" style="display: none;">
+								<i class="icon16 info"></i>Товаров не подлежащих публикации (скрыт с сайта): <strong id="val_err_hidden"></strong>
+							</li>
+							<li id="li_null_count" style="display: none;">
+								<i class="icon16 info"></i>Товаров с нулевыми остатками (не опубликованы): <strong id="val_null_count"></strong>
+							</li>
+							<li id="li_err_noimg" style="display: none;">
+								<i class="icon16 info"></i>Товаров без изображений (не опубликованы): <strong id="val_err_noimg"></strong>
+							</li>
+							<li id="li_err_imgupload" style="display: none;">
+								<i class="icon16 info"></i>Отказано в загрузке изображений (не соответствуют требованиям ВК в части размеров): <strong id="val_err_imgupload"></strong>
+							</li>
+							<li id="li_err_delete" style="display: none;">
+								<i class="icon16 no"></i>Ошибок при удалении товаров из ВК: <strong id="val_err_delete"></strong>
+							</li>
+							<li id="li_err_vkpid" style="display: none;">
+								<i class="icon16 no"></i>Ошибок при получении данных о ранее опубликованных товарах: <strong id="val_err_vkpid"></strong>
+							</li>
+							<li id="li_err_prd" style="display: none;">
+								<i class="icon16 no"></i>Ошибок при публикации товаров: <strong id="val_err_prd"></strong>
+							</li>
+							<li id="li_err_album" style="display: none;">
+								<i class="icon16 no"></i>Ошибок при размещении товара ВК в подборке: <strong id="val_err_album"></strong>
+							</li>
+
+						</ul>
+						<br>
+					</div>
+				</div>
+			</div>
+			<div class="value">
+				<div class="vkgoods-export-stats done" id="exp_err">
+					<h2>Экспорт завершен с ошибками!</h2>
+					<ul>
+						<li>
+							<i class="icon16 no"></i>Во время экспорта произошли ошибки: <strong id="err_txt"></strong>
+						</li>
+					</ul>
+
+				</div>
+			</div>
+		</div>
+
+		<input type="submit" value="Опубликовать отложенные товары" class="button red" id="goexport"/ {if $wait_count == 0}disabled="disabled"{/if}>&nbsp;&nbsp;&nbsp;&nbsp;
+		<input type="button" value="Менеджер удаления" class="button blue" id="delman">
+
+		<div class="value js-progressbar-container" style="display: none;">
+
+			<div class="progressbar blue float-left" style="display: none; width: 70%;">
+				<div class="progressbar-outer">
+					<div class="progressbar-inner" style="width: 0;"></div>
+				</div>
+			</div>
+			<img style="float:left; margin-top:8px;" src="{$wa_url}wa-content/img/loading32.gif">
+			<div class="clear"></div>
+			<span class="progressbar-description"></span>
+			<br>
+			<br>
+			<span class="small italic"> Пожалуйста, не закрывайте браузер и не покидайте эту страницу до тех пор, пока публикация товаров не будет полностью завершена. </span>
+		</div>
+
+		<!-- EOF Градусник и т.п. -->
+		<div id="public_info">		
+		<hr />
+		<div class="field" style="display: block;">
+			<div class="name">
+				Информация о публикациях
+			</div>
+
+			<div class="value no-shift">
+				<ul>
+					<li class="vkg_stats">
+						<i class="icon16 info"></i>Всего товаров доступных на витринах: <strong id="exp_time">{$all_prd_count|escape}</strong>
+					</li>
+					<li class="vkg_stats">
+						<i class="icon16 yes"></i>Опубликовано товаров из магазина в ВКонтакте: <strong id="c_prod">{$prd_public|escape}</strong>
+					</li>
+					<li class="vkg_stats">
+						<i class="icon16 sync"></i>Последняя полная актуализация: <strong id="c_img">{if $vkgoods_settings['last_sync'] != ''}{$vkgoods_settings["last_sync"]|escape}{else}Полная актуализация еще не проводилась{/if}</strong>
+					</li>
+					
+				</ul>
+			</div>
+		</div>
+		
+		<div class="field" style="display: block;">
+			<div class="name">
+				Информация об отложенных публикациях<br><br>
+			</div>
+
+			<div class="value no-shift">
+				<ul>
+					<li class="vkg_stats">
+						<i class="icon16 clock"></i>Количество отложенных публикаций: <strong>{$wait_count|escape}</strong>
+					</li>
+					<li class="vkg_stats">
+						<i class="icon16 clock"></i>Ожидающих публикации товаров: <strong>{$wait_prd_count|escape}</strong>
+					</li>
+					<li class="vkg_stats">
+						<i class="icon16 vkontakte"></i>Количество сообществ в которых будут произведены отложенные публикации: <strong>{$wait_group_vk|escape}</strong>
+					</li>
+					<li class="vkg_stats">
+						<i class="icon16 sync"></i>Для автоматической публикации и/или актуализации используйте команду в вашем планировщике заданий:<br><br><i>[путь до интерпретатора PHP]<strong>/php &nbsp;&nbsp;{$path}/cli.php shop vkgoodsPlugin</strong></i>
+					</li>
+					
+				</ul>
+				{if $wait_count != 0}
+				<input type="button" value="Очистить список отложенных публикаций" class="button grey" id="clearwait">
+				{/if}
+			</div>
+		</div>
+		<hr />		
+		</div>
+	</form>
+	{/if}
+	{/if} <!-- cURL -->
+</div>
+
+<style>
+	.vkgoods {
+		padding: 10px;
+		margin: 10px;
+	}
+</style>
+
+<script src="{$wa_app_static_url}plugins/vkgoods/js/vkgoods.js" type="text/javascript"></script>
+<script type="text/javascript" src="{$wa_url}wa-content/js/jquery-wa/wa.dialog.js" type="text/javascript"></script>
+<link rel="stylesheet" type="text/css" href="{$wa_app_static_url}plugins/vkgoods/css/vkgoods.css">

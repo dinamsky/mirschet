@@ -1,0 +1,160 @@
+<ul id="vkgoods-category-info">
+{if !isset($params.publics) || !$params.publics}
+    <i class="icon16 vk-unpublished"></i>
+    <span>Автоматическая публикация товаров из этой категории не настроена. <a class="vkgoods_category_dialog" data-cid="{$params.category.id}" href="#">[`Добавить`]</a> </span>
+{else}
+    <i class="icon16 vkontakte"></i>
+    <span>[`Настроенные автоматические публикации`]:</span>
+    <ul>
+        {foreach $params.publics as $public}
+            <li style="margin-top: 3px;">
+            <span>[`Сообщество`]: {$public.group_name} <a class="vkgoods-cats-info" data-public-id="{$public.id}" href="#"><i class="icon16 info"></i></a></span>
+            <div id="vkgoods-real-hint" class="real-hint" style="display: none;">
+                <div class="prm-cross block">
+                    <i class="icon10 close"></i>
+                </div>
+                <br><br>
+                <div id="vkgoods-category-hint">
+                </div>
+            </div>
+
+            <select name="{$name}[{$public.id}]">
+                <option value="0" {if $public.subcategories==0}selected{/if}>Товары только из этой категории</option>
+                <option value="1" {if $public.subcategories==1}selected{/if}>Включать товары из подкатегорий</option>
+            </select>&nbsp;&nbsp;
+            <span class="small"><a class="vkgoods_category_dialog" data-cid="{$params.category.id}" data-public-id="{$public.id}" href="#">Задать новые настройки</a> или <a class="del_category_publish" data-public-id="{$public.id}" data-category-id="{$params.category.id} href="#">Удалить настройки публикации</a></span>
+            </li>
+        {/foreach}
+        <li><i class="icon10 add"></i> <a class="vkgoods_category_dialog" data-cid="{$params.category.id}" href="#" class="small">[`Добавить`]</a></li>
+    </ul>
+{/if}
+</ul>
+
+<style>
+    .real-hint {
+        background-color: beige;
+        border: 1px solid #aaa;
+        border-radius: 10px;
+        font-size: 0.8em;
+        display: none;
+        padding: 10px 10px;
+        position: absolute;
+        max-width: 50%;
+        z-index: 99;
+    }
+
+    .real-hint .hint-caption {
+        font-weight: bold;
+        text-transform: uppercase;
+    }
+
+    .real-hint .prm-cross {
+        cursor: pointer;
+        float: right;
+        height: 16px;
+        margin-top: 3px;
+        padding-left: 15px;
+        right: 10px;
+        width: 16px;
+    }
+
+    .real-show-hint {
+        cursor: pointer;
+        border-bottom: dashed 1px;
+        color: #8c0000;
+    }
+</style>
+{if $params.need_script}
+<script type="text/javascript">
+    $(document).ready(function () {
+        var div_field = $('#vkgoods-category-info').closest('div.value');
+        $(div_field).on('click', '.vkgoods-cats-info', function(){
+            var e = $(this);
+            debugger;
+            $.post('?plugin=vkgoods&action=getCategoryExportTemplate', { 'public_id':$(e).data('public-id') }, function(r) {
+                if(r.status != 'ok'){
+                    alert(r.error);
+                    return false;
+                }else{
+                    var RealHint =  $('#vkgoods-real-hint');
+                    $('#vkgoods-category-hint').html(r.data);
+                    $(RealHint).css('top',e.position().top+5);
+                    $(RealHint).css('left',e.position().left-275);
+                    $(RealHint).show();
+                }
+            }, 'json');
+
+            return false;
+        });
+        $(div_field).on('click', '.prm-cross', function() {
+            $(this).parent().hide();
+        });
+        $(div_field).on('click', '.del_category_publish', function(){
+            var public_id = $(this).data('public-id');
+            var category_id = $(this).data('category-id');
+            $.post('?plugin=vkgoods&action=delWaitCategory', { 'public_id':public_id }, function(r) {
+                if(r.status != 'ok') {
+                    alert('Ошибка удаления настроек');
+                    return false;
+                }else{
+                    $.post('?plugin=vkgoods&action=getCategoryField', { 'category_id':category_id }, function(f) {
+                        $(div_field).empty();
+                        $(div_field).html(f.data.html);
+                        return false;
+                    }, 'json');
+                }
+            }, 'json');
+            return false;
+        });
+        $(div_field).on('click', '.vkgoods_category_dialog', function () {
+            debugger;
+            var category_id = $(this).data('cid');
+            var public_id = $(this).data('public-id');
+            $.post('?plugin=vkgoods&action=tmpltdlg', { 'event':'category','pid':category_id,'public_id': public_id }, function(mydialog) {
+                $(mydialog).waDialog({
+                    'height' : '500px',
+                    'width' : '660px',
+                    'onLoad' : function() {
+                    },
+                    'onClose' : function(f) {
+                        $(this).remove;
+                    },
+                    'esc' : false,
+                    'onSubmit' : function(wadlg){
+                        if ($('#storefront').val() == 'no_storefront') {
+                            alert("Необходимо выбрать витрину магазина");
+                            return false;
+                        }
+                        if ($('#vkalbums').val() == 'new') {
+                            alert("Автоматические публикации можно делать только в уже существующие подборки\nВыберите подборку из существующих");
+                            return false;
+                        }
+                        if ($('#vkcat').val() == 0) {
+                            alert("Не выбрана категория ВК к которой относится товар");
+                            return false;
+                        }
+                        var form = $('#vkgoods-prod-post');
+                        var category_id = $(form).find('input[name=pid]').val();
+                        $.post($(form).attr('action'), form.serialize(), function callback(r) {
+                            if(r.status != 'ok'){
+                                alert("Ошибка при сохранении информации");
+                                return false;
+                            }else{
+                                $.post('?plugin=vkgoods&action=getCategoryField', { 'category_id':category_id }, function(f) {
+                                    $(div_field).empty();
+                                    $(div_field).html(f.data.html);
+                                    wadlg.remove();
+                                    return false;
+                                }, 'json');
+                            }
+                        }, 'json');
+                        return false;
+                    }
+                });
+            });
+
+            return false;
+        });
+    });
+</script>
+{/if}

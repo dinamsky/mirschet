@@ -1,0 +1,177 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: shop/plugins/coupon\n"
+"POT-Creation-Date: 2015-05-29 00:11+0300\n"
+"PO-Revision-Date: \n"
+"Last-Translator: shop/plugins/coupon\n"
+"Language-Team: shop/plugins/coupon\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=3; plural=((((n%10)==1)&&((n%100)!=11))?(0):(((((n%10)>=2)&&((n%10)<=4))&&(((n%100)<10)||((n%100)>=20)))?(1):2));\n"
+"X-Poedit-SourceCharset: utf-8\n"
+"X-Poedit-Basepath: .\n"
+"Language: ru_RU\n"
+"X-Generator: Poedit 1.7.5\n"
+"X-Poedit-SearchPath-0: .\n"
+"X-Poedit-SearchPath-1: .\n"
+
+#: /wa-apps/shop/plugins/coupon/templates/actions/settings/Settings.html:3
+msgid "Discount coupons generator"
+msgstr "Генератор скидочных купонов"
+
+#: /wa-apps/shop/plugins/coupon/templates/actions/settings/Settings.html:8
+msgid "New generator"
+msgstr "Новый генератор"
+
+#: /wa-apps/shop/plugins/coupon/templates/actions/settings/Settings.html:22
+msgid "Remove expired"
+msgstr "Удалять просроченные"
+
+#: /wa-apps/shop/plugins/coupon/templates/actions/settings/Settings.html:23
+msgid "If checked plugin will automatically delete all expired coupons including created manually."
+msgstr "Плагин будет автоматически удалять все просреченные неиспользованные купоны (включая созданные вручную)."
+
+#: /wa-apps/shop/plugins/coupon/templates/actions/settings/Settings.html:29
+msgid "Loading..."
+msgstr "Загрузка..."
+
+#: /wa-apps/shop/plugins/coupon/templates/actions/settings/SettingsEditor.html:5
+msgid "Discounts by coupons are turned off. Enable discounts in your <a href=\"%s\">store settings</a>."
+msgstr "Скидки по купонам отключены. Включите скидки <a href=\"%s\">в настройках</a> вашего магазина."
+
+#: /wa-apps/shop/plugins/coupon/templates/actions/settings/SettingsEditor.html:20
+msgid "You can use this generator anywhere:"
+msgstr "Вы можете использовать генератор где-угодно"
+
+#: /wa-apps/shop/plugins/coupon/templates/actions/settings/SettingsEditor.html:21
+msgid "In SMARTY (site templates, emails, etc.):"
+msgstr "В шаблонах SMARTY (шаблоны сайта, email и т.д.)"
+
+#: /wa-apps/shop/plugins/coupon/templates/actions/settings/SettingsEditor.html:22
+msgid "In PHP (applications, plugins, helpers):"
+msgstr "В PHP-коде (приложения, плагины, хелперы):"
+
+#: /wa-apps/shop/plugins/coupon/templates/actions/settings/SettingsEditor.html:23
+msgid "Notice"
+msgstr "Примечание"
+
+#: /wa-apps/shop/plugins/coupon/templates/actions/settings/SettingsEditor.html:23
+msgid "a new code will be created each time you call any of helper above."
+msgstr "новый скидочный купон будет создан каждый раз при вызове любого из хелперов выше."
+
+#: /wa-apps/shop/plugins/coupon/templates/actions/settings/SettingsEditor.html:31
+msgid "Generator name"
+msgstr "Название генератора"
+
+#: /wa-apps/shop/plugins/coupon/templates/actions/settings/SettingsEditor.html:35
+msgid "Optional name for your convenience. Will never be shown to customers."
+msgstr "Необязательное название для вашего удобства. Не будет показано покупателям."
+
+#: /wa-apps/shop/plugins/coupon/templates/actions/settings/SettingsEditor.html:40
+msgid "Coupon type"
+msgstr "Тип купона"
+
+#: /wa-apps/shop/plugins/coupon/templates/actions/settings/SettingsEditor.html:54
+msgid "Discount will be calculated automatically to match the order shipping cost."
+msgstr "Скидка будет рассчитана автоматически для соответствия стоимости доставки."
+
+#: /wa-apps/shop/plugins/coupon/templates/actions/settings/SettingsEditor.html:59
+msgid "Max number of usage"
+msgstr "Максимальное кол-во использований"
+
+#: /wa-apps/shop/plugins/coupon/templates/actions/settings/SettingsEditor.html:63
+msgid "Enter the maximum number of times of <b>ONE COUPON</b> can be used. Leave empty for no limits."
+msgstr "Введите максимальное количество использований <b>ОДНОГО КУПОНА</b>. Чтобы отключить ограничение, оставьте поле пустым."
+
+#: /wa-apps/shop/plugins/coupon/templates/actions/settings/SettingsEditor.html:68
+msgid "Expire hours"
+msgstr "Часов действителен"
+
+#: /wa-apps/shop/plugins/coupon/templates/actions/settings/SettingsEditor.html:72
+msgid "Hours from coupon creation until it expires. Leave empty for no expiration date."
+msgstr "Количество часов, которое купон будет действителен с момента генерации. Чтобы не устанавливать дату истечения, оставьте поле пустым."
+
+#: /wa-apps/shop/plugins/coupon/templates/actions/settings/SettingsEditor.html:78
+msgid "Prefix"
+msgstr "Префикс"
+
+#: /wa-apps/shop/plugins/coupon/templates/actions/settings/SettingsEditor.html:81
+msgid "PROMO-"
+msgstr "PROMO-"
+
+#: /wa-apps/shop/plugins/coupon/templates/actions/settings/SettingsEditor.html:82
+msgid "The prefix appears before generated random code"
+msgstr "Префикс перед случайной частью купона"
+
+#: /wa-apps/shop/plugins/coupon/templates/actions/settings/SettingsEditor.html:87
+msgid "Length"
+msgstr "Длина"
+
+#: /wa-apps/shop/plugins/coupon/templates/actions/settings/SettingsEditor.html:91
+msgid "Random part length. Minimum 3 chars."
+msgstr "Длина случайной части. Минимум 3 символа."
+
+#: /wa-apps/shop/plugins/coupon/templates/actions/settings/SettingsEditor.html:97
+msgid "Character Set"
+msgstr "Набор символов"
+
+#: /wa-apps/shop/plugins/coupon/templates/actions/settings/SettingsEditor.html:100
+msgid "numbers"
+msgstr "числа"
+
+#: /wa-apps/shop/plugins/coupon/templates/actions/settings/SettingsEditor.html:103
+msgid "lowercase latin"
+msgstr "латинские буквы нижнего регистра"
+
+#: /wa-apps/shop/plugins/coupon/templates/actions/settings/SettingsEditor.html:106
+msgid "uppercase latin"
+msgstr "латинские буквы верхнего регистра"
+
+#: /wa-apps/shop/plugins/coupon/templates/actions/settings/SettingsEditor.html:109
+msgid "lowercase cyrillic"
+msgstr "кириллические буквы нижнего регистра"
+
+#: /wa-apps/shop/plugins/coupon/templates/actions/settings/SettingsEditor.html:112
+msgid "uppercase cyrillic"
+msgstr "кириллические буквы верхнего регистра"
+
+#: /wa-apps/shop/plugins/coupon/templates/actions/settings/SettingsEditor.html:115
+msgid "other"
+msgstr "другие"
+
+#: /wa-apps/shop/plugins/coupon/templates/actions/settings/SettingsEditor.html:118
+msgid "Character set will be used to generate random part of the code."
+msgstr "Набор символов, которые будут использованы для генерации случайной части кода."
+
+#: /wa-apps/shop/plugins/coupon/templates/actions/settings/SettingsEditor.html:125
+msgid "Delete this generator"
+msgstr "Удалить генератор"
+
+#: /wa-apps/shop/plugins/coupon/templates/actions/settings/SettingsEditor.html:129
+msgid "Save"
+msgstr "Сохранить"
+
+#: /wa-apps/shop/plugins/coupon/templates/actions/settings/SettingsEditor.html:145
+msgid "This will permanently delete discount coupon generator %s. Are you sure?"
+msgstr "Генератор купонов «%s» будет удален. Продолжить?"
+
+#: /wa-apps/shop/plugins/coupon/templates/actions/settings/SettingsEditor.html:150
+msgid "Coupon generator %s has been deleted."
+msgstr "Генератор купонов «%s» удален."
+
+#: /wa-apps/shop/plugins/coupon/templates/actions/settings/SettingsEditor.html:188
+msgid "This field is required."
+msgstr "Это поле обязательно"
+
+#: /wa-apps/shop/plugins/coupon/templates/actions/settings/SettingsEditor.html:198
+msgid "Must be a value from 0 to 100"
+msgstr "Значение должно быть в диапазоне 0-100"
+
+#: /wa-apps/shop/plugins/coupon/lib/shopCouponPlugin.class.php:36
+msgid "for"
+msgstr "для"
+
+#: /wa-apps/shop/plugins/coupon/lib/shopCouponPlugin.class.php:78
+msgid "Free shipping"
+msgstr "Бесплатная доставка"

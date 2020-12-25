@@ -1,0 +1,32 @@
+<div class="settings-group__header">Статические страницы</div>
+<ul class="bsui-field-group">
+	<li class="bsui-field-group__item bsui-field">
+		<label class="bsui-field__text">
+			Для кого посылать заголовки:
+		</label>
+		<div class="bsui-field__control">
+			<div class="bsui-select bsui-select_fixed-width">
+				<select class="bsui-select__control" name="settings[page][for]" title="">
+					<option value="off">Не посылать</option>
+					<option value="bots" {if $settings['page']['for'] == 'bots'}selected="selected"{/if}>Для поисковых роботов</option>
+					<option value="all" {if $settings['page']['for'] == 'all'}selected="selected"{/if}>Для всех</option>
+				</select>
+			</div>
+		</div>
+	</li>
+	<li class="bsui-field-group__item bsui-field">
+		<label class="bsui-field__text">
+			Какую дату посылать:
+		</label>
+		<div class="bsui-field__control">
+			<div class="bsui-select bsui-select_fixed-width">
+				<select class="bsui-select__control" name="settings[page][date]" title="">
+					<option value="prev_day">Предыдущий день</option>
+					<option value="prev_hour" {if $settings['page']['date'] == 'prev_hour'}selected="selected"{/if}>Предыдущий час</option>
+					<option value="now" {if $settings['page']['date'] == 'now'}selected="selected"{/if}>Текущая дата</option>
+					<option value="actual" {if $settings['page']['date'] == 'actual'}selected="selected"{/if}>Актуальная</option>
+				</select>
+			</div>
+		</div>
+	</li>
+</ul>

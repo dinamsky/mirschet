@@ -1,0 +1,45 @@
+{strip}
+{if $wa->mailer && $wa->getUrl('mailer/frontend/subscribe')}
+	<div class="home-pg__section home-pg__section_subsc pos-rel">
+		<div class="descr-mode pos-abs"><span class="pos-rel">SUBSCRIBE</span></div>
+		<div class="home-subsc" id="js-subscribe-section">
+			<div class="home-subsc__inner">
+				<div class="home-subsc__span">
+					<div class="home-subsc__icon">
+						<svg class="icon cent-icon" width="26" height="16">
+							<use xlink:href="#icon-envelope"></use>
+						</svg>
+					</div>
+					<div class="home-subsc__descr">
+						<div class="home-subsc__title bold" data-success="Спасибо! Будем держать вас в курсе.">Горячие скидки только для особых </div>
+						<div class="home-subsc__text grey" data-success="Все наши подписчики получают первыми информацию о закрытых скидка и распродаж">Все наши подписчики получают первыми информацию о закрытых скидка и распродаж </div>
+					</div>
+				</div>
+				<div class="home-subsc__span">
+					<form>
+					<div class="home-subsc__form-wr">
+						<div class="home-subsc__input">
+							<input type="text" name="email" value="" class="js-subscribe-email-field" placeholder="E-mail" autocomplete="off">
+						</div>
+						<button class="home-subsc__btn btn {$theme_settings.main_buttons_style|replace:'img/themebuttons/':''|replace:'.gif':''} btn_main-2" type="submit">
+							<span>[`Subscribe me!`]</span>
+							<i class="hover-anim"></i>
+						</button>
+						<div class="s-hidden">{$wa->captcha(['app_id'=>'mailer'])}</div>
+					</div>
+					</form>
+				</div>
+			</div>
+		</div>
+	</div>
+	<script>
+		$.getScript("{$wa_parent_theme_url|default:$wa_theme_url}js/subscribe.js?v{$wa_theme_version}", initSubscribe);
+		function initSubscribe() {
+			new SubscribeSection({
+				$wrapper: $("#js-subscribe-section"),
+				request_uri: "{$wa->getUrl('mailer/frontend/subscribe')}"
+			});
+		}
+	</script>
+{/if}
+{/strip}

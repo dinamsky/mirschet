@@ -1,0 +1,38 @@
+{strip}
+<div class="info-pg" itemscope itemtype="http://schema.org/WebPage">
+	<div class="info-pg__main b-row">
+		<div class="b-row__inner">
+			{$subpages = $wa->site->pages($page.id)}
+			{if $subpages}
+			<aside class="info-pg__sidebar col-1-of-5">
+				<div class="info-sdb">
+					<div class="info-sdb__wr info-sdb__wr_bd">
+						<div class="info-sdb__header info-sdb__header_btn">
+							<svg class="icon" width="16" height="10"><use xlink:href="#icon-blog-menu"></use></svg>
+							<strong>[`Navigation`]</strong>
+						</div>
+						<div class="info-sdb__content">
+							<ul class="info-sdb__list" role="complementary">
+								{foreach $subpages as $p}
+									<li class="info-sdb__item"><a class="info-sdb__item-l" href="{$p.url}">{$p.name}</a></li>
+								{/foreach}
+							</ul>
+						</div>
+					</div>
+				</div>
+			</aside>
+			{/if}
+			<div class="info-pg__content col-4-of-5">
+				<div class="info-sec">
+					<h1 class="info-sec__title" itemprop="name">{$page.name}</h1>
+					<div class="info-sec__main" role="main" itemprop="description">
+						{$page.content}
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+{if $page.id > 0}{include file="admin_edit_button.html" link="`$wa_backend_url`site/#/pages/`$page.id`" title="[`Edit page`]"}{/if}
+{$wa->globals("showParentBreadcrumbs",1)}
+{/strip}

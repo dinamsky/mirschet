@@ -1,0 +1,82 @@
+{if !$gc_error}
+	<style type="text/css">
+		.giftcard
+		{
+			border: 1px dashed #ccc;
+			padding: 25px;
+			position: relative;
+			background: #ffc;
+			min-height: 185px;
+			padding-right: 200px;
+			font-family: sans-serif;
+		}
+		.bant
+		{
+			width: 221px;
+			height: 185px;
+			position: absolute;
+			top: 0px;
+			right: 0px;
+			border: none;
+		}
+		.giftcard_caption
+		{
+			margin-top: 0px;
+			font-size: 25px;
+		}
+		.price
+		{
+			color: red;
+			font-weight: bold;
+			font-size: 35px;
+			margin-bottom: 30px;
+		}
+		.code
+		{
+			margin-top: 10px;
+			font-size: 25px;
+			color: red;
+		}
+		.feedback
+		{
+			font-size: 13px;
+			margin-top: 15px;
+		}
+		.gc_print
+		{
+			margin-top: 10px;
+		}
+		@media print 
+		{
+			.gc_print
+			{
+				display: none;
+			}
+		}
+	</style>
+
+	<div class="giftcard">
+		<img src="{$wa_url}wa-apps/shop/plugins/giftcard/img/bant.png" class="bant">
+		<h1 class="giftcard_caption">Подарочный сертификат от магазина {$gc_shopname}</h1>
+		<div class="price">
+			{floatval($gc_coupon.value)} {$gc_coupon.type}
+		</div>
+		<div class="hint">
+			Введите этот код при оформлении заказа в нашем магазине и получите скидку!
+		</div>
+		<div class="code">
+			{$gc_coupon.code}
+		</div>
+		<div class="feedback">
+			{if strlen($gc_shopname)}Интернет-магазин <b>{$gc_shopname|escape}</b><br>{/if}
+			{if strlen($gc_shopphone)}Телефон: <b>{$gc_shopphone|escape}</b><br>{/if}
+			{if strlen($gc_shopmail)}Е-Mail: <b>{$gc_shopmail|escape}</b><br>{/if}
+			{if strlen($gc_shop_url)}<b>{$gc_shop_url}</b>{/if}
+		</div>
+	</div>
+	<div class="gc_print">
+		<input type="button" value="Печать" onclick="window.print()">
+	</div>
+{else}
+	Сертификат не найден.
+{/if}

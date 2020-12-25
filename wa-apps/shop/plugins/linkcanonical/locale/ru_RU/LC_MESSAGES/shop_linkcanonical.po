@@ -1,0 +1,119 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: ShopLinkCanonical\n"
+"POT-Creation-Date: 2015-08-10 11:27+0500\n"
+"PO-Revision-Date: 2017-10-24 16:12+0500\n"
+"Last-Translator: Bodysite\n"
+"Language-Team: Bodysite <zakaz@bodysite.ru>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 1.8.4\n"
+"Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
+"Language: ru_RU\n"
+"X-Poedit-SourceCharset: UTF-8\n"
+
+msgid "Link Canonical"
+msgstr "Link Canonical"
+
+msgid "Generate automatic URL for the tag link rel=\"canonical\""
+msgstr "Автоматическая генерация URL для тега link rel=\"canonical\""
+
+msgid "Plugin status"
+msgstr "Статус плагина"
+
+msgid "Enable"
+msgstr "Включен"
+
+msgid "Disable"
+msgstr "Выключен"
+
+msgid "General"
+msgstr "Все витрины (Общий шаблон для всех витрин)"
+
+msgid "Settings"
+msgstr "Настройки"
+
+msgid "Storefront name"
+msgstr "Название витрины"
+
+msgid "Enabling or disabling the plugin"
+msgstr "Включение и отключение плагина"
+
+msgid "Choosing storefront"
+msgstr "Выбор витрин"
+
+msgid "Use a tag to all pages with the get-settings"
+msgstr "Проставлять тег со всех страниц с get-параметрами"
+
+msgid "Don't use the tag, if present in the url get-settings"
+msgstr "Не проставлять тег, если в url присутствуют get-параметры"
+
+msgid "Use the tag to the canonical page"
+msgstr "Проставлять тег на канонической странице"
+
+msgid "Don't use the tag on pages of pagination"
+msgstr "Не проставлять canonical на страницах пагинации"
+
+msgid "Categories"
+msgstr "Категории"
+
+msgid "Don't use the tag to the page pagination on category page"
+msgstr "Не проставлять тег со страниц пагинации на страницу категории"
+
+msgid "Don't use a tag to filter pages on the category page"
+msgstr "Не проставлять тег со страниц фильтров на страницу категории"
+
+msgid "Don't use a tag to sort pages into categories page"
+msgstr "Не проставлять тег со страниц сортировки на страницу категории"
+
+msgid "SEO-filter"
+msgstr "SEO-фильтр"
+
+msgid "Don't use the tag to the page pagination on SEO-filter page"
+msgstr "Не проставлять тег со страниц пагинации на страницу SEO-фильтра"
+
+msgid "Products"
+msgstr "Товары"
+
+msgid "Use a tag on the reviews page"
+msgstr "Проставлять тег со страниц отзывов на товар"
+
+msgid "Use a tag from all sub-product in the commodity itself"
+msgstr "Проставлять тег со всех подстраниц товара на сам товар"
+
+msgid "Brands"
+msgstr "Бренды"
+
+msgid "Don't use the tag to the pagination of pages on the brand page"
+msgstr "Не проставлять тег со страниц пагинации на страницу бренда"
+
+msgid "Don't use the tag to the pagination of pages to page brands subcategories"
+msgstr "Не проставлять тег со страниц пагинации на страницу подкатегории брендов"
+
+msgid "Save"
+msgstr "Сохранить"
+
+msgid "Saved"
+msgstr "Сохранено"
+
+msgid "Saving"
+msgstr "Сохранение"
+
+msgid "Error"
+msgstr "Ошибка"
+
+msgid "Storefronts"
+msgstr "Витрины"
+
+msgid "Canonical link"
+msgstr "Канонический URL"
+
+msgid "Use tags link rel=\"prev\", link rel=\"next\""
+msgstr "Проставлять теги link rel=\"prev\", link rel=\"next\""
+
+msgid "Use a tag on the reviews page (only if there is no reviews)"
+msgstr "Проставлять тег со страниц отзывов на товар (только если нет отзывов)"
+
+msgid "Canonical to lower case"
+msgstr "Приводить каноническую ссылку к нижнему регистру"

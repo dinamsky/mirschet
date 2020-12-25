@@ -1,0 +1,9 @@
+6a41cfe202427b1258b434ca7b7fb6ec *img/tagnav.png
+0e4d392bba56991b0f8cbce684e94757 *img/tagnav_logo.png
+a1751e1f10a3b96b05d0401c97e72008 *lib/.htaccess
+9926538efdab3caf83fa3e0c973fdff4 *lib/config/plugin.php
+47218edca36624a32d0907cf3e0037bc *lib/config/settings.php
+05e16fe434a410ce2e9b952be83e7335 *lib/model/shopTagnavPlugin.model.php
+c8f561be8af255e1d4deaa4859043cf5 *lib/shopTagnavPlugin.class.php
+a1751e1f10a3b96b05d0401c97e72008 *templates/.htaccess
+78189726b3e91955cbd7c39791aba9c8 *templates/hooks/frontendSearch.html

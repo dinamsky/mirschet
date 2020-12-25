@@ -1,0 +1,64 @@
+{strip}
+<div class="checkout-pg__main checkout-content" data-step-id="payment">
+	<h1 class="checkout-pg__title u-cen-txt">{$checkout_steps[$checkout_current_step].name|escape}</h1>
+	<form method="post" action="">
+		<div class="check-option">
+			{if $checkout_payment_methods}
+				<ul class="check-option__list checkout-options payment">
+					{foreach $checkout_payment_methods as $m}
+					<li class="check-option__item{if $m.id == $payment_id} active{/if}">
+						<label class="check-option__label custom-radio form-label">
+							<input {if !empty($m.error)}disabled="disabled"{/if} type="radio" name="payment_id" value="{$m.id}" {if $m.id == $payment_id}checked{/if}>
+							<span class="form-stylized-option"></span>
+							<span class="check-option__input-content">
+								{if !empty($m.logo)}
+									<span class="check-option__image">
+										<img src="{$m.logo}" alt="{$m.name|escape}">
+									</span>
+								{/if}
+								<span class="check-option__name-wrapper">
+									<span class="check-option__input-name">{$m.name|escape}</span>
+								</span>
+							</span>
+						</label>
+						{if $m.description}
+							<div class="font-13">{$m.description}</div>
+						{/if}
+						{if !empty($m.error)}
+							<div class="errortxt font-13">{$m.error}</div>
+						{/if}
+						{if !empty($m.custom_html)}
+							<div class="wa-form" {if $m.id != $payment_id}style="display:none"{/if}>{$m.custom_html}</div>
+						{/if}
+					</li>
+					{/foreach}
+				</ul>
+			{else}
+				[`Oops! We are sorry, but <strong>we cannot offer any payment option for your order</strong>. Checkout cannot be completed.`]
+			{/if}
+			<script>
+				$(".checkout-options.payment input:radio").change(function () {
+					var selected_class = "active";
+					if ($(this).is(':checked')) {
+						$(".checkout-options.payment .wa-form").hide();
+						$(this).closest('li').siblings().removeClass(selected_class);
+						$(this).closest('li').addClass(selected_class).find('.wa-form').show();
+					}
+				});
+			</script>
+			<!-- plugin hook: 'frontend_checkout' -->
+			{* @event frontend_checkout.%plugin_id% *}
+			{foreach $frontend_checkout as $_}{$_}{/foreach}
+			{if !empty($error)}
+				<div class="errortxt font-13">{$error}</div>
+			{/if}
+		</div>
+		<button class="checkout-pg__next-btn btn {$theme_settings.main_buttons_style|replace:'img/themebuttons/':''|replace:'.gif':''} btn_main-1">
+			<div class="hover-anim"></div>
+			<span>[`Next &rarr;`]</span>
+		</button>
+	</form>
+</div>
+{$wa->globals('useCompactHeader',true)}
+{$wa->globals('useCompactFooter',true)}
+{/strip}

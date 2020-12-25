@@ -1,0 +1,62 @@
+<!-- Навигация -->
+<div class="breadcrumbs">
+	<a href="{$wa_app_url}">Главная</a> / Купить подарочный сертификат
+</div>
+
+<h1>Купить подарочный сертификат</h1>
+
+{if $gc_error}
+	К сожалению, продажа подарочных сертификатов сейчас недоступна. Приносим свои извинения за доставленные неудобства.
+{else}
+	<style type="text/css">
+		.gc_hint 
+		{ 
+			margin-bottom: 20px;
+		}
+	</style>
+	<h3>Нет времени на выбор подарка? Порадуйте своих близких и друзей - приобретите подарочный сертификат!</h3>
+	<div class="gc_hint">
+		Вы сможете распечатать сертификат после оплаты Вашего заказа, перейдя в личный кабинет или по ссылке, которая будет отправлена Вам<br>
+		на электронную почту, если Вы покупаете товары без регистрации, прямо со страницы заказа.
+	</div>
+	<form class="gc_buy">
+		<select name="sku_id">
+			{foreach $gc_skus as $gc_sku}
+				<option value="{$gc_sku.id}">{$gc_sku.name|escape}</option>
+			{/foreach}
+		</select>
+		<input type="submit" value="Купить">
+	</form>
+	<div class="gc_result">
+		<div class="gc_preloader" style="display: none;">Добавляю сертификат..</div>
+		<div class="gc_success" style="color: green; display: none;"></div>
+		<div class="gc_error" style="color: red; display: none;"></div>
+	</div>
+	
+	<script type="text/javascript">
+		$(document).ready(function() {
+			$('.gc_buy').submit(function() {
+				$('.gc_success').fadeOut(400);
+				$('.gc_error').fadeOut(400);
+				$('.gc_preloader').delay(500).fadeIn(400);
+				$.post('buycard/', $(this).serialize(), function(JData) {
+					if(JData.data.result == 'ok') {
+						$('.gc_preloader').fadeOut(400);
+						$('.gc_success').html(JData.data.message).delay(500).fadeIn(400);
+						var cart = $('#cart');
+						if(cart.hasClass('empty')) {
+							cart.removeClass('empty');
+						}
+						cart.find('.cart-total').html(JData.data.cart_total);
+					}
+					else {
+						$('.gc_preloader').fadeOut(400);
+						$('.gc_error').html(JData.data.message).delay(500).fadeIn(400);
+					}
+					console.log(JData);
+				}, "json");
+				return false;
+			});
+		});
+	</script>
+{/if}

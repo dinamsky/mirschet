@@ -1,0 +1,421 @@
+{function price_type_options selected='asis'}
+    {html_options
+    options=['asis'=>'Оставить как есть', 'fixed'=>'Фиксированная стоимость', 'formula'=>'Стоимость по формуле', 'grid'=>'Тарифная сетка']
+    selected=$selected
+    }
+{/function}
+{function rule_condition cond=[] countries=[]}
+    <li class="sdekint-rule-conditions-list-item">{$default_country = ifset($countries, 0, ['name' => 'Российская Федерация', 'iso3letter' => 'rus', 'iso2letter' => 'ru', 'isonumeric' => '643', 'region_count' => 85])}
+        <div class="sdekint-rule-condition-selector">{$ctype = ifset($cond, 'type', 'country')}
+            <select class="sdekint-rule-condition-select">
+                <optgroup label="География">
+                    <option value="country"{if $ctype === 'country'} selected{/if}>Страна</option>
+                    <option value="region"{if $ctype === 'region'} selected{/if}>Регион</option>
+                    <option value="city_name"{if $ctype === 'city_name'} selected{/if}>Название города</option>
+                    <option value="city_sdek"{if $ctype === 'city_sdek'} selected{/if}>Город СДЭК</option>
+                </optgroup>
+                <optgroup label="Заказ">
+                    <option value="order_weight"{if $ctype === 'order_weight'} selected{/if}>Вес заказа</option>
+                    <option value="order_price"{if $ctype === 'order_price'} selected{/if}>Стоимость заказа</option>
+                </optgroup>
+            </select>
+            <a href="#" title="Удалить" class="sdekint-rule-condition-delete"><i class="icon16 delete"></i></a>
+        </div>
+        <div class="condition-type condition-type-country sdekint-has-comparison"{if $ctype !== 'country'} style="display: none;"{/if}>
+            Значение поля адреса <i>Страна</i>
+            <select class="condition-type-comparison">
+                <option value="eq"{if ($ctype === 'country') && (ifset($cond, 'comparison', 'eq') === 'eq')} selected{/if}>равно</option>
+                <option value="ne"{if ($ctype === 'country') && (ifset($cond, 'comparison', 'eq') === 'ne')} selected{/if}>не равно</option>
+            </select>
+            <select class="condition-type-country-country-select">{foreach $countries as $c}
+                    <option value="{$c.iso3letter}"{if ($ctype === 'country') && (ifset($cond, 'value', 'rus') === $c.iso3letter)} selected{/if}>{$c.name|escape}</option>{/foreach}
+            </select>
+        </div>
+        <div class="condition-type condition-type-region sdekint-has-comparison"{if $ctype !== 'region'} style="display: none;"{/if}>
+            Значение поля адреса <i>Регион</i> страны
+            <select class="condition-type-region-country-select">{foreach $countries as $c}
+                    <option value="{$c.iso3letter}" data-country='{$c|json_encode}'{if ($ctype === 'region') && (ifset($cond, 'value', 'country', 'rus') === $c.iso3letter)} selected{/if}>{$c.name|escape}</option>{/foreach}
+            </select>
+            <select class="condition-type-comparison">
+                <option value="eq"{if ($ctype === 'region') && (ifset($cond, 'comparison', 'eq') === 'eq')} selected{/if}>равно</option>
+                <option value="ne"{if ($ctype === 'region') && (ifset($cond, 'comparison', 'eq') === 'ne')} selected{/if}>не равно</option>
+            </select>
+            <span class="condition-type-regions-region-wrapper">{$_country = ($ctype === 'region') ? ifset($cond, 'value', 'country', 'rus') : $default_country['iso3letter']}
+                {$regions = shopSdekintPlugin::helper()->regionByCountry($_country)}
+                <select class="condition-type-regions-region"{if empty($regions)} style="display: none;"{/if}>
+                                            {foreach $regions as $r}
+                                                <option value="{$r.code|escape}"{if ($ctype === 'region') && (ifset($cond, 'value', 'region', '') === $r.code)} selected{/if}>{$r.name|escape}</option>{/foreach}
+                                        </select>
+                                        <input type="text" class="condition-type-regions-region"{if !empty($regions)} style="display: none;"{/if} value="{if ($ctype==='regions') && (empty($regions))}{ifset($cond, 'value', 'region', '')}{/if}">
+                                        <i class="icon16 loading" style="display: none;"></i>
+                                    </span>
+        </div>
+        <div class="condition-type condition-type-city_name sdekint-has-comparison"{if $ctype !== 'city_name'} style="display: none;"{/if}>
+            Значение поля адреса <i>Город</i>
+            <span class="condition-type-city_name-country-wrapper">
+                                        <br>
+                                        страны
+                                        <select class="condition-type-city_name-country-select">{$_s_country = (($ctype === 'city_name') ? ifempty($cond, 'value', 'country', '0') : '0')}
+                                            <option value="0"{if ($ctype === 'city_name') && ($_s_country == '0')} selected{/if}>неважно</option>{foreach $countries as $c}
+                                            <option value="{$c.iso3letter}"{if ($ctype === 'city_name') && ($_s_country == $c.iso3letter)} selected{/if}>{$c.name|escape}</option>{/foreach}
+                                        </select>
+                                    </span>{$_s_region = (($ctype === 'city_name') ? ifempty($cond, 'value', 'region', '0') : '0')}
+            <span class="condition-type-city_name-region-wrapper"{if ($ctype !== 'city_name') || ($_s_country == '0')} style="display: none;"{/if}>
+                                        <br>региона
+                                        <select class="condition-type-city_name-region-select">
+                                            {$regions = ((($ctype === 'city_name') && $_s_country != '0') ? shopSdekintPlugin::helper()->regionByCountry($_s_country) : [])}
+                                            <option value="0">неважно</option>
+                                            {if !empty($regions)}
+                                                <option value="" disabled></option>{/if}
+                                            {foreach $regions as $r}
+                                                <option value="{$r.code|escape}">{$r.name|escape}</option>{/foreach}
+                                        </select>
+                                        <i class="icon16 loading" style="display: none;"></i>
+                                    </span>
+            <br>
+            <select class="condition-type-comparison">
+                <option value="eq"{if ($ctype === 'city_name') && (ifset($cond, 'comparison', 'eq') === 'eq')} selected{/if}>равно</option>
+                <option value="ne"{if ($ctype === 'city_name') && (ifset($cond, 'comparison', 'eq') === 'ne')} selected{/if}>не равно</option>
+            </select>
+            <input type="text" class="long condition-type-city_name-city_input" placeholder="Название города" value="{if $ctype === 'city_name'}{ifset($cond, 'value', 'city', '')|escape}{/if}">
+        </div>
+        <div class="condition-type condition-type-city_sdek sdekint-has-comparison"{if $ctype !== 'city_sdek'} style="display: none;"{/if}>
+            Значение поля адреса <i>Город СДЭК</i> страны{$_s_country = (($ctype === 'city_sdek') ? ifempty($cond, 'value', 'country', $default_country) : '')}
+            <select class="condition-type-city_sdek-country-select">{foreach $countries as $c}
+                    <option value="{$c.iso3letter}"{if ($ctype === 'city_sdek') && ($c.iso3letter == $_s_country)} selected{/if}>{$c.name|escape}</option>{/foreach}
+            </select>
+            <br>
+            <select class="condition-type-comparison">
+                <option value="eq"{if ($ctype === 'city_sdek') && (ifset($cond, 'comparison', 'eq') === 'eq')} selected{/if}>равно</option>
+                <option value="ne"{if ($ctype === 'city_sdek') && (ifset($cond, 'comparison', 'eq') === 'ne')} selected{/if}>не равно</option>
+            </select>
+            <select class="condition-type-city_sdek-city-select">{$_sdek_city = (($ctype === 'city_sdek') ? shopSdekintPlugin::helper()->cdekCityByCode(ifempty($cond, 'value', 0)) : [])}
+            {if !empty($_sdek_city)}
+                <option value="{$_sdek_city.code}">{$_sdek_city.short_full|escape}</option>{/if}
+            </select>
+        </div>
+        <div class="condition-type condition-type-order_weight sdekint-has-comparison"{if $ctype !== 'order_weight'} style="display: none;"{/if}>
+            Вес заказа
+            <select class="condition-type-comparison">
+                <option value="eq""{if ($ctype === 'order_weight') && $cond && (ifset($cond, 'comparison', 'gte') === 'eq')} selected{/if}>равно</option>
+                <option value="neq""{if ($ctype === 'order_weight') && $cond && (ifset($cond, 'comparison', 'gte') === 'neq')} selected{/if}>не равно</option>
+                <option value="lt""{if ($ctype === 'order_weight') && $cond && (ifset($cond, 'comparison', 'gte') === 'lt')} selected{/if}>меньше</option>
+                <option value="lte""{if ($ctype === 'order_weight') && $cond && (ifset($cond, 'comparison', 'gte') === 'lte')} selected{/if}>меньше либо равно</option>
+                <option value="gt""{if ($ctype === 'order_weight') && $cond && (ifset($cond, 'comparison', 'gte') === 'gt')} selected{/if}>больше</option>
+                <option value="gte""{if ($ctype === 'order_weight') && $cond && (ifset($cond, 'comparison', 'gte') === 'gte')} selected{/if}>больше либо равно</option>
+            </select>
+            <input type="number" min="0" step="0.001" class="short numerical condition-type-order_weight-value"
+                   placeholder="0"{if $ctype === 'order_weight'} value="{ifempty($cond, 'value', 0)|replace:',':'.'}"{/if}>кг
+        </div>
+        <div class="condition-type condition-type-order_price"{if $ctype !== 'order_price'} style="display: none;"{/if}>
+            Стоимость товаров заказа без учета скидок <i>больше, либо равна</i>
+            <input type="number" min="0" step="0.01" class="short numerical condition-type-order_price-value" placeholder="0"{if $ctype === 'order_price'} value="{ifempty($cond, 'value', 0)|replace:',':'.'}"{/if}>р.
+        </div>
+    </li>
+{/function}
+<div class="block not-padded bordered-bottom">
+    <a href="#" class="back">&larr;Назад</a>
+    <h1>Правило расчета</h1>
+</div>
+<div class="block not-padded">
+    {$countries = shopSdekintPlugin::helper()->sdekCountries()}
+    <div class="not-padded top-padded block">
+        <form class="sdekint-rule-form">
+            <input type="hidden" name="id" value="{ifempty($rule, 'id', '')}">
+            <fieldset>
+                <legend>Общие настройки</legend>
+                <div class="fields">
+                    <div class="field">
+                        <div class="name">Статус</div>
+                        <div class="value">
+                            <input type="checkbox" name="status"{if ifset($rule, status, 1)} checked{/if}>
+                        </div>
+                    </div>
+                    <div class="field">
+                        <div class="name">Название</div>
+                        <div class="value"><input type="text" placeholder="Можно оставить пустым" class="long" name="name" value="{ifset($rule, 'name', '')}"><br><span
+                                    class="hint">Это название показывается только вам, чтобы было проще ориентироваться в списке правил</span>
+                        </div>
+                    </div>
+                    <div class="field">{$selected_methods = ifset($rule, 'methods', [])}
+                        <div class="name">Способы доставки</div>
+                        <div class="value">
+                            <select name="methods_select">
+                                <option value="all"{if !$selected_methods || !is_array($selected_methods)} selected{/if}>Все</option>
+                                <option value="selected"{if !$methods} disabled{/if}{if $selected_methods && is_array($selected_methods)} selected{/if}>Только указанные</option>
+                            </select>
+                        </div>
+                        <div class="value methods-list"{if !$selected_methods || !is_array($selected_methods)} style="display: none;" {/if}>
+                            {if $methods}
+                                {foreach $methods as $m}
+                                    <label style="display: block;"><input type="checkbox" value="{$m.id}" name="selected_method[]"{if is_array($selected_methods) && in_array($m.id, $selected_methods)} checked{/if}> {$m.name|escape}</label>
+                                {/foreach}
+                            {/if}
+                        </div>
+                    </div>
+                </div>
+            </fieldset>
+            <fieldset>
+                <legend>Курьерская доставка</legend>
+                <div class="fields sdekint-courier-rule">
+                    <div class="field sdekint-status">
+                        <div class="name">Полный запрет</div>
+                        <div class="value no-shift">
+                            <input type="checkbox" class="sdekint-disable-variant-cbx"{if ifset($rule, 'courier', 'disabled', 0)} checked{/if}>
+                            <span class="hint">Запретить расчет курьерской доставки</span>
+                        </div>
+                    </div>
+                    <div class="field">
+                        <div class="name">Стоимость</div>
+                        <div class="value">{$price_type = ifset($rule, 'courier', 'type', 'asis')}{$p_setting=ifset($rule, 'courier', 'setting', [])}
+                            <select class="sdekint-price-type-select">
+                                {price_type_options selected=$price_type countries=$countries}
+                            </select>
+                        </div>
+                        <div class="value no-shift sdekint-price-type sdekint-price-type-fixed"{if $price_type !== 'fixed'} style="display: none;" {/if}>
+                            <input type="number" min="0" step="0.01" class="short numerical" placeholder="0" value="{if $price_type === 'fixed'}{ifset($rule, 'courier', 'setting', 'value', 0)}{/if}">р.<br>
+                            <span class="hint">Фиксированное значение стоимости доставки</span>
+                        </div>
+                        <div class="value no-shift sdekint-price-type sdekint-price-type-formula"{if $price_type !== 'formula'} style="display: none;" {/if}>
+                            <input type="text" class="long" placeholder="Формула для расчета" value="{if $price_type === 'formula'}{ifset($p_setting, 'value', '')}{/if}"><br>
+                            <span class="hint">Формула. Доступны переменные <b>T</b> &ndash; общая стоимость заказа, <b>S</b> &ndash; расчетная стоимость доставки и <b>W</b> &ndash; общий вес заказа</span>
+                        </div>
+                        <div class="value no-shift sdekint-price-type sdekint-price-type-grid"{if $price_type !== 'grid'} style="display: none;" {/if}>{$unit = (($price_type == 'grid') ? ifset($p_setting, 'unit', 'weight') : 'weight')}
+                            <p>Стоимость доставки зависит от <select style="width: auto" class="sdekint-grid-unit-select">
+                                    <option value="weight"{if $unit == 'weight'} selected{/if}>веса</option>
+                                    <option value="price"{if $unit == 'price'} selected{/if}>стоимости</option></select> заказа</p>
+                            <table class="light sdekint-tariff-grid" style="max-width: 500px">
+                                <thead>
+                                <tr>
+                                    <th colspan="2"><span class="unit-label">Вес</span> заказа</th>
+                                    <th></th>
+                                    <th>Доставка</th>
+                                    <th class="min-width"></th>
+                                </tr>
+                                </thead>
+                                <tfoot>
+                                <tr>
+                                    <td colspan="4">
+                                        <a href="#" class="sdekint-grid-add-row"><i class="icon16 add"></i>Добавить строку</a>
+                                    </td>
+                                    <td class="min-width"></td>
+                                </tr>
+                                </tfoot>
+                                <tbody>{$grid = ($price_type == 'grid') ? ifempty($p_setting, 'grid', [['condition'=>'', 'price'=>'']]):[['condition'=>'', 'price'=>'']]}{foreach $grid as $row}
+                                <tr>
+                                    <td class="min-width">от</td>
+                                    <td class="align-center"><input type="text" class="short numerical sdekint-grid-condition" value="{$row.condition|replace:',':'.'}"><span class="unit-value">{($unit === 'weight')?'кг.':'р.'}</span></td>
+                                    <td class="min-width"><i class="icon16 move"></i></td>
+                                    <td class="align-center"><input type="number" class="short numerical sdekint-grid-price" placeholder="0" value="{$row.price|replace:',':'.'}"> р.</td>
+                                    <td class="min-width actions">
+                                        <a href="#" class="sdekint-grid-delete-row"><i class="icon16 delete"></i></a>
+                                    </td>
+                                </tr>{/foreach}
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </fieldset>
+            <fieldset>
+                <legend>Доставка в ПВЗ</legend>
+                <div class="fields sdekint-point-rule">
+                    <div class="field sdekint-status">
+                        <div class="name">Полный запрет</div>
+                        <div class="value no-shift">
+                            <input type="checkbox" class="sdekint-disable-variant-cbx"{if ifset($rule, 'point', 'disabled', 0)} checked{/if}>
+                            <span class="hint">Запретить расчет доставки в ПВЗ</span>
+                        </div>
+                    </div>
+                    <div class="field">
+                        <div class="name">Стоимость</div>
+                        <div class="value">{$price_type = ifset($rule, 'point', 'type', 'asis')}{$p_setting=ifset($rule, 'point', 'setting', [])}
+                            <select class="sdekint-price-type-select">{price_type_options selected=$price_type}</select>
+                        </div>
+                        <div class="value no-shift sdekint-price-type sdekint-price-type-fixed"{if $price_type !== 'fixed'} style="display: none;" {/if}>
+                            <input type="number" min="0" step="0.01" class="short numerical" placeholder="0" value="{($price_type === 'fixed') ? (ifset($p_setting, 'value', '0')|round:2|replace:',':'.') : '0'}"><br>
+                            <span class="hint">Фиксированное значение стоимости доставки</span>
+                        </div>
+                        <div class="value no-shift sdekint-price-type sdekint-price-type-formula"{if $price_type !== 'formula'} style="display: none;" {/if}>
+                            <input type="text" class="long" placeholder="Формула для расчета" value="{if $price_type === 'formula'}{ifset($p_setting, 'value', '')}{/if}"><br>
+                            <span class="hint">Формула. Доступны переменные <b>T</b> &ndash; общая стоимость заказа, <b>S</b> &ndash; расчетная стоимость доставки и <b>W</b> &ndash; общий вес заказа</span>
+                        </div>
+                        <div class="value no-shift sdekint-price-type sdekint-price-type-grid"{if $price_type !== 'grid'} style="display: none;" {/if}>{$unit = (($price_type == 'grid') ? ifset($p_setting, 'unit', 'weight') : 'weight')}
+                            <p>Стоимость доставки зависит от <select style="width: auto" class="sdekint-grid-unit-select">
+                                    <option value="weight"{if $unit == 'weight'} selected{/if}>веса</option>
+                                    <option value="price"{if $unit == 'price'} selected{/if}>стоимости</option></select> заказа</p>
+                            <table class="light sdekint-tariff-grid" style="max-width: 500px">
+                                <thead>
+                                <tr>
+                                    <th colspan="2"><span class="unit-label">Вес</span> заказа</th>
+                                    <th></th>
+                                    <th>Доставка</th>
+                                    <th class="min-width"></th>
+                                </tr>
+                                </thead>
+                                <tfoot>
+                                <tr>
+                                    <td colspan="4">
+                                        <a href="#" class="sdekint-grid-add-row"><i class="icon16 add"></i>Добавить строку</a>
+                                    </td>
+                                    <td class="min-width"></td>
+                                </tr>
+                                </tfoot>
+                                <tbody>{$grid = ($price_type == 'grid') ? ifempty($p_setting, 'grid', [['condition'=>'', 'price'=>'']]):[['condition'=>'', 'price'=>'']]}{foreach $grid as $row}
+                                <tr>
+                                    <td class="min-width">от</td>
+                                    <td class="align-center"><input type="text" class="short numerical sdekint-grid-condition" value="{$row.condition|replace:',':'.'}"><span class="unit-value">{($unit === 'weight')?'кг.':'р.'}</span></td>
+                                    <td class="min-width"><i class="icon16 move"></i></td>
+                                    <td class="align-center"><input type="number" class="short numerical sdekint-grid-price" placeholder="0" value="{$row.price|replace:',':'.'}"> р.</td>
+                                    <td class="min-width actions">
+                                        <a href="#" class="sdekint-grid-delete-row"><i class="icon16 delete"></i></a>
+                                    </td>
+                                </tr>
+                                {/foreach}</tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </fieldset>
+            <fieldset>
+                <legend>Условия</legend>
+                <div class="field sdekint-rule-conditions">{$conditions = ifset($rule, 'conditions', [])}
+                    <div class="value no-shift"{if count($conditions) < 2} style="display: none;"{/if}>
+                        <select class="sdekint-rule-conditions-join-type-select">
+                            <option value="and"{if ifempty($rule, 'condition_join_type', 'and') === 'and'} selected{/if}>Если все условия верны</option>
+                            <option value="or"{if ifempty($rule, 'condition_join_type', 'and') === 'or'} selected{/if}>Если любое из условий верно</option>
+                        </select>
+                    </div>
+                    <div class="value sdekint-rule-conditions-list-container">
+                        <ul class="sdekint-rule-conditions-list">{foreach $conditions as $c}{rule_condition cond=$c countries=$countries}{/foreach}
+                            {capture name="js-template-ConditionItem"}
+                            <li class="sdekint-rule-conditions-list-item">
+                                <div class="sdekint-rule-condition-selector">
+                                    <select class="sdekint-rule-condition-select">
+                                        <optgroup label="География">
+                                            <option value="country">Страна</option>
+                                            <option value="region">Регион</option>
+                                            <option value="city_name">Название города</option>
+                                            <option value="city_sdek">Город СДЭК</option>
+                                        </optgroup>
+                                        <optgroup label="Заказ">
+                                            <option value="order_weight">Вес заказа</option>
+                                            <option value="order_price">Стоимость заказа</option>
+                                        </optgroup>
+                                    </select>
+                                    <a href="#" title="Удалить" class="sdekint-rule-condition-delete"><i class="icon16 delete"></i></a>
+                                </div>
+                                <div class="condition-type condition-type-country sdekint-has-comparison">
+                                    Значение поля адреса <i>Страна</i>
+                                    <select class="condition-type-comparison">
+                                        <option value="eq">равно</option>
+                                        <option value="ne">не равно</option>
+                                    </select>
+                                    <select class="condition-type-country-country-select">{foreach $countries as $c}
+                                        <option value="{$c.iso3letter}">{$c.name|escape}</option>{/foreach}
+                                    </select>
+                                </div>
+                                <div class="condition-type condition-type-region sdekint-has-comparison">
+                                    Значение поля адреса <i>Регион</i> страны
+                                    <select class="condition-type-region-country-select">{foreach $countries as $c}
+                                        <option value="{$c.iso3letter}" data-country='{$c|json_encode}'>{$c.name|escape}</option>{/foreach}
+                                    </select>
+                                    <select class="condition-type-comparison">
+                                        <option value="eq">равно</option>
+                                        <option value="ne">не равно</option>
+                                    </select>
+                                    <span class="condition-type-regions-region-wrapper">
+                                        {if 1}{$c=$countries[0]['iso3letter']}{/if}
+                                        {$regions = shopSdekintPlugin::helper()->regionByCountry($c)}
+                                        <select class="condition-type-regions-region"{if empty($regions)} style="display: none;"{/if}>
+                                            {foreach $regions as $r}
+                                            <option value="{$r.code|escape}">{$r.name|escape}</option>{/foreach}
+                                        </select>
+                                        <input type="text" class="condition-type-regions-region"{if !empty($regions)} style="display: none;"{/if}>
+                                        <i class="icon16 loading" style="display: none;"></i>
+                                    </span>
+                                </div>
+                                <div class="condition-type condition-type-city_name sdekint-has-comparison">
+                                    Значение поля адреса <i>Город</i>
+                                    <span class="condition-type-city_name-country-wrapper">
+                                        <br>
+                                        страны
+                                        <select class="condition-type-city_name-country-select">
+                                            <option value="0">неважно</option>{foreach $countries as $c}
+                                            <option value="{$c.iso3letter}">{$c.name|escape}</option>{/foreach}
+                                        </select>
+                                    </span>
+                                    {if 1}{$c=$countries[0]['iso3letter']}{/if}
+                                    <span class="condition-type-city_name-region-wrapper" style="display: none;">
+                                        <br>региона
+                                        <select class="condition-type-city_name-region-select">
+                                            {$regions = shopSdekintPlugin::helper()->regionByCountry($c)}
+                                            <option value="0">неважно</option>
+                                            {if !empty($regions)}
+                                                <option value="" disabled></option>{/if}
+                                            {foreach $regions as $r}
+                                            <option value="{$r.code|escape}">{$r.name|escape}</option>{/foreach}
+                                            <option value="77">Москва</option>
+                                            <option value="50">Московская область</option>
+                                        </select>
+                                        <i class="icon16 loading" style="display: none;"></i>
+                                    </span>
+                                    <br>
+                                    <select class="condition-type-comparison">
+                                        <option value="eq">равно</option>
+                                        <option value="ne">не равно</option>
+                                    </select>
+                                    <input type="text" class="long condition-type-city_name-city_input">
+                                </div>
+                                <div class="condition-type condition-type-city_sdek sdekint-has-comparison">
+                                    Значение поля адреса <i>Город СДЭК</i> страны
+                                    <select class="condition-type-city_sdek-country-select">{foreach $countries as $c}
+                                        <option value="{$c.iso3letter}">{$c.name|escape}</option>{/foreach}
+                                    </select>
+                                    <br>
+                                    <select class="condition-type-comparison">
+                                        <option value="eq">равно</option>
+                                        <option value="ne">не равно</option>
+                                    </select>
+                                    <select class="condition-type-city_sdek-city-select">
+                                    </select>
+                                </div>
+                                <div class="condition-type condition-type-order_weight sdekint-has-comparison">
+                                    Вес заказа
+                                    <select class="condition-type-comparison">
+                                        <option value="eq""{if ($ctype === 'order_weight') && $cond && (ifset($cond, 'comparison', 'gte') === 'eq')} selected{/if}>равно</option>
+                                        <option value="neq""{if ($ctype === 'order_weight') && $cond && (ifset($cond, 'comparison', 'gte') === 'neq')} selected{/if}>не равно</option>
+                                        <option value="lt""{if ($ctype === 'order_weight') && $cond && (ifset($cond, 'comparison', 'gte') === 'lt')} selected{/if}>меньше</option>
+                                        <option value="lte""{if ($ctype === 'order_weight') && $cond && (ifset($cond, 'comparison', 'gte') === 'lte')} selected{/if}>меньше либо равно</option>
+                                        <option value="gt""{if ($ctype === 'order_weight') && $cond && (ifset($cond, 'comparison', 'gte') === 'gt')} selected{/if}>больше</option>
+                                        <option value="gte""{if ($ctype === 'order_weight') && $cond && (ifset($cond, 'comparison', 'gte') === 'gte')} selected{/if}>больше либо равно</option>
+                                    </select>
+                                    <input type="number" min="0" step="0.001" class="short numerical condition-type-order_weight-value">кг
+                                </div>
+                                <div class="condition-type condition-type-order_price">
+                                    Стоимость товаров заказа без учета скидок <i>больше, либо равна</i>
+                                    <input type="number" min="0" step="0.001" class="short numerical">р.
+                                </div>
+                            </li>
+                            {/capture}
+                        </ul>
+                    </div>
+                    <div class="value">
+                        <a href="#" class="sdkint-add-rule-condition"><i class="icon16 add"></i>Добавить условие</a>
+                    </div>
+                </div>
+            </fieldset>
+            <div class="field">
+                <div class="submit value">
+                    <button type="submit" class="green submit button">[`Save`]</button>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+{foreach $smarty.capture as $name => $template}{if strpos($name, 'js-template')==0}
+    <script id="{substr($name, 12)}" type="text/x-jsrender">
+        {$template}
+    </script>
+{/if}
+{/foreach}

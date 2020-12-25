@@ -1,0 +1,74 @@
+{strip}
+{if !empty($ajax_append)}
+	<div class="comment{if ifempty($review.author.is_user) > 0} is-admin{/if}{if $review.parent_id > 0} is-reply{/if}" data-id={$review.id} data-parent-id="0" itemprop="review" itemscope itemtype="http://schema.org/Review">
+{/if}
+	<div class="comment__content">
+		<div class="comment__details">
+			{if !$review.parent_id}
+				<div class="comment__av">{$review.author.name|escape|mb_substr:0:1}</div>
+			{/if}
+			{if empty($review.site)}
+				<span class="comment__author" itemprop="author">{$review.author.name|escape}</span>
+			{else}
+				<a href="{$review.site}" class="comment__author" target="_blank" itemprop="author">{$review.author.name|escape}</a>
+			{/if}
+			{if ifempty($review.author.is_user) > 0}
+				<div class="comment__label">{$wa->shop->settings('name')}</div>
+			{/if}
+			<meta itemprop="itemReviewed" content="{$product.name|escape}">
+			<meta itemprop="datePublished" content="{$review.datetime|date_format:'Y-m-d'}">
+			{if !$review.parent_id && !empty($review.rate)}
+				{$rate = round($review.rate)}
+				<div class="comment__rating">
+					<div class="stars stars_m">
+						<div class="stars__list">
+							{for $i=1 to 5}
+								<div class="stars__i{if $i <= $rate} stars__i_checked{/if}">
+									<svg class="icon" width="16" height="15">
+										<use xlink:href="#icon-star"></use>
+									</svg>
+								</div>
+							{/for}
+						</div>
+						<div class="stars__count">({$rate} [`of`] 5)</div>
+					</div>
+				</div>
+				<span itemprop="reviewRating" itemscope itemtype="http://schema.org/Rating">
+					<meta itemprop="worstRating" content = "1">
+					<meta itemprop="ratingValue" content="{$rate}">
+					<meta itemprop="bestRating" content = "5">
+				</span>
+			{/if}
+			<div class="comment__date">{$review.datetime|wa_datetime:"humandatetime"}</div>
+		</div>
+		<div class="comment__title" itemprop="name">{if $review.title}{$review.title}{/if}</div>
+		{if $review.text}
+			<div class="comment__text" itemprop="description">{$review.text}</div>
+		{/if}
+		{if isset($review.images) && !empty($review.images)}
+			<div class="comment__photos comment__photos-{$review.id}">
+				<div class="feed-photos">
+					<div class="feed-photos__list">
+						{foreach $review.images as $_image}
+							<div class="feed-photos__item">
+								<a class="feed-photos__image" href="{$_image.url_0|escape}" title="{$_image.description|escape}" target="_blank">
+									<img class="feed-photos__img" src="{$_image.url_2|escape}" alt="{$_image.description|escape}" title="{$_image.description|escape}">
+								</a>
+							</div>
+						{/foreach}
+					</div>
+				</div>
+			</div>
+		{/if}
+		{if $reply_allowed}
+			{$_link_href = "javascript:void(0);"}
+			{if isset($reply_link)}
+				{$_link_href = $reply_link}
+			{/if}
+			<a class="comment__btn btn {$theme_settings.main_buttons_style|replace:'img/themebuttons/':''|replace:'.gif':''} btn_sec-5" href="{$_link_href}">[`reply`]</a>
+		{/if}
+	</div>
+{if !empty($ajax_append)}
+	</div>
+{/if}
+{/strip}

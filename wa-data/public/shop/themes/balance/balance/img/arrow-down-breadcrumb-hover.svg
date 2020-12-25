@@ -1,0 +1,30 @@
+
+<svg width="7px" height="4px" viewBox="0 0 7 4" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <defs>
+        <path d="M3.5,2.73879613 L6.10244787,0.153009687 C6.30777533,-0.0510032291 6.64067693,-0.0510032291 6.8460044,0.153009687 C7.05133187,0.357022604 7.05133187,0.687792896 6.8460044,0.891805812 L3.87177827,3.84699031 C3.6664508,4.05100323 3.3335492,4.05100323 3.12822173,3.84699031 L0.1539956,0.891805812 C-0.0513318667,0.687792896 -0.0513318667,0.357022604 0.1539956,0.153009687 C0.359323067,-0.0510032291 0.692224667,-0.0510032291 0.897552134,0.153009687 L3.5,2.73879613 Z" id="path-1"></path>
+    </defs>
+    <g id="CAT-&amp;-ITEM-PAGE---desktop-🔸" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="CATALOGUE-1" transform="translate(-404.000000, -602.000000)">
+            <rect fill="#FFFFFF" x="0" y="0" width="1366" height="2555"></rect>
+            <g id="CONTENT" transform="translate(38.000000, 174.000000)">
+                <g id="seo-text-top" transform="translate(264.000000, 280.000000)">
+                    <g id="options-line" transform="translate(0.000000, 125.000000)">
+                        <g id="sort" transform="translate(15.000000, 17.000000)">
+                            <g id="Stacked-Group">
+                                <g id="ui/arrows/arrow-5" transform="translate(90.500000, 8.000000) rotate(-360.000000) translate(-90.500000, -8.000000) translate(87.000000, 6.000000)">
+                                    <mask id="mask-2" fill="white">
+                                        <use xlink:href="#path-1"></use>
+                                    </mask>
+                                    <use id="Mask" fill="#BABABA" fill-rule="evenodd" xlink:href="#path-1"></use>
+                                    <g id="ui/color/color-black" mask="url(#mask-2)" fill="#000" fill-rule="evenodd">
+                                        <rect id="blue" x="0" y="0" width="7" height="4"></rect>
+                                    </g>
+                                </g>
+                            </g>
+                        </g>
+                    </g>
+                </g>
+            </g>
+        </g>
+    </g>
+</svg>

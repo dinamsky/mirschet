@@ -1,0 +1,37 @@
+{strip}
+<div class="info-sdb__wr info-sdb__wr_bd info-sdb__wr_drop-cal">
+	<div class="info-sdb__header info-sdb__header_cal">
+		<svg class="icon" width="16" height="16">
+			<use xlink:href="#icon-calendar-2"></use>
+		</svg>
+		<strong>[`Calendar`]</strong>
+	</div>
+	<ul class="info-sdb__list info-sdb__list_cal">
+		{$year=null}
+		{foreach $timeline as $year_month => $item}
+			{if $year neq $item.year}
+				{if !$item@first}
+						</ul>
+					</li>
+				{/if}
+				<li class="info-sdb__item info-sdb__item_cal{if $item.year_selected} active{/if}">
+					{$year=$item.year}
+					<a class="info-sdb__item-l" href="#">
+						<span>{$item.year|default:'NULL'}</span>
+						<svg class="icon" width="11" height="6">
+							<use xlink:href="#arrow-down-big"></use>
+						</svg>
+					</a>
+					<ul class="info-sdb__list info-sdb__list_cal info-sdb__list_dropdown">
+			{/if}
+			<li class="info-sdb__item{if $item.selected} active{/if}">
+				<a class="info-sdb__item-l" href="{$item.link}" title="{_w("%d post","%d posts",$item.count)}">{_ws(date("F",gmmktime(0,0,0,$item.month,1)))}</a>
+			</li>
+		{if $item@last}
+				</ul>
+			</li>
+		{/if}
+	{/foreach}
+	</ul>
+</div>
+{/strip}

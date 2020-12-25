@@ -1,0 +1,120 @@
+{strip}
+{include file="system.category.html" scope="parent" inline}
+{$type = waRequest::get('_balance_type', 'search', 'string')}
+<div class="catalog-pg">
+	<div class="layout-center">
+		<h2 class="catalog-pg__title category-name">
+			{if $type == 'favorites'}
+				[`Favorites`]
+				{$wa->title("[`Favorites`]")}
+				{$favorites = waRequest::cookie('shop_favorite')}
+				{$products = $wa->shop->products("id/`$favorites`")}
+				{if !$products}
+					<script>
+						$(document).ready(function(){
+							$.cookie('shop_favorite', null);
+							$(".js-wishlist-count").html("0");
+							$(".js-wishlist-status").removeClass("not-empty");
+						});
+					</script>
+				{/if}
+			{elseif $type == 'viewed'}
+				[`Viewed products`]
+				{$wa->title("[`Viewed products`]")}
+				{$viewed = waRequest::cookie('balance_viewed')}
+				{$products = $wa->shop->products("id/`$viewed`")}
+			{elseif $type == 'search'}
+				{"[`Results for “%s”`]"|replace:'%s':$title}
+			{/if}
+		</h2>
+	</div>
+	<div class="catalog-pg__main b-row">
+		<div class="b-row__inner">
+			{if !empty($_theme_config.leftbar)}
+				<aside class="catalog-pg__sidebar catalog-pg__sidebar_menu col-1-of-5">
+					{foreach $_theme_config.leftbar as $section}
+						{if $section.type eq "section"}
+							{include file="sidebar.`$section.value`.html" inline}
+						{else}
+							<div class="sidebar-section">
+								{include file="string:`$section.value`" inline}
+							</div>
+						{/if}
+					{/foreach}
+				</aside>
+			{/if}
+			<div class="catalog-pg__content col-{if !empty($_theme_config.leftbar)}{if !empty($_theme_config.rightbar)}3{else}4{/if}{else}4{/if}-of-5">
+				<!-- plugin hook: 'frontend_search' -->
+				{* @event frontend_search.%plugin_id% *}
+				{foreach $frontend_search as $_}{$_}{/foreach}
+				{if (isset($filters) && !empty($filters)) || 1}
+					<div class="catalog-pg__adaptive-btns">
+						{if isset($_theme_config.leftbar.categories) || isset($_theme_config.rightbar.categories)}
+						<div class="catalog-pg__toggle-panel catalog-pg__toggle-panel_menu">
+							<svg class="icon" width="16" height="10">
+								<use xlink:href="#icon-blog-menu"></use>
+							</svg>
+							<strong>[`Categories`]</strong>
+						</div>
+						{/if}
+						{if isset($filters) && !empty($filters)}
+							<div class="catalog-pg__toggle-panel catalog-pg__toggle-panel_filter">
+								<svg class="icon" width="16" height="16">
+									<use xlink:href="#icon-filter"></use>
+								</svg>
+								<strong>[`Filter`]</strong>
+							</div>
+						{/if}
+					</div>
+				{/if}
+				{if $products}
+					{include file="category.sorting.html" sorting=true}
+				{/if}
+				<div class="catalog-pg__items">
+					<div id="product-list">
+						{if !$products}
+							<div class="acc-info-box">
+								<div class="acc-info-box__title">[`No products were found.`]</div>
+							</div>
+						{else}
+							{$_theme_products_view_mode = waRequest::cookie('_theme_products_view_mode',$theme_settings.products_mode_default)}
+							{if !in_array($_theme_products_view_mode,["thumbs","expanded","compact"])}{$_theme_products_view_mode = "thumbs"}{/if}
+							{include file="list-`$_theme_products_view_mode`.html" show_features=false hide_description=true}
+							{if $type == 'search'}
+								{if isset($pages_count) && $pages_count > 1}
+									<div class="catalog-pg__pagination">
+										<div class="pagination lazyloading-paging"  data-times="2" data-link-text="[`Load more`]" data-loading-str="[`Loading...`]">
+											{wa_pagination total=$pages_count attrs=['class' => "pagination__list"]}
+										</div>
+									</div>
+								{/if}
+							{/if}
+						{/if}
+					</div>
+				</div>
+			</div>
+			{if !empty($_theme_config.rightbar)}
+				<aside class="catalog-pg__sidebar catalog-pg__sidebar_menu col-1-of-5">
+					{foreach $_theme_config.rightbar as $section}
+						{if $section.type eq "section"}
+							{include file="sidebar.`$section.value`.html" inline}
+						{else}
+							<div class="sidebar-section">
+								{include file="string:`$section.value`" inline}
+							</div>
+						{/if}
+					{/foreach}
+				</aside>
+			{/if}
+			<div class="bg-overlay"></div>
+		</div>
+	</div>
+</div>
+{if $wa->user()->isAdmin()}
+	<a class="show-toggle-btn" href="#">
+		<svg class="icon cent-icon" width="18" height="18">
+			<use xlink:href="#icon-info"></use>
+		</svg>
+	</a>
+{/if}
+{/strip}

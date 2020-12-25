@@ -1,0 +1,10 @@
+<div id="sdekint-wf-sdek_send"></div>
+<script type="text/javascript">
+    $(function(){
+        shopSdekintOrders.workflow({
+            wa_app_static_url: '{$wa_app_static_url}',
+            sdek_order: {$sdek_order|json_encode},
+            info: {$info|json_encode}
+        });
+    });
+</script>

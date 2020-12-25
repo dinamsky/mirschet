@@ -1,0 +1,12 @@
+{if count($settlements)>1}
+    <select name="shop_vkontakte[domain]" id="s-plugin-vkontakte-domain">
+        {foreach $settlements as $route}
+            <option value="{$route}"{if $route eq $current_domain} selected="selected"{/if}>{$route|escape}</option>
+        {/foreach}
+    </select>
+{elseif reset($settlements)}
+    {$route = reset($settlements)}
+    <input type="text" readonly="readonly" value="{$route}" name="shop_vkontakte[domain]" id="s-plugin-vkontakte-domain">
+{else}
+    <span class="errormsg">[`Check the settings for the settlement of the store.`]</span>
+{/if}

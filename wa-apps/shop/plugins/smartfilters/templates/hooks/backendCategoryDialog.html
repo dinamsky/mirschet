@@ -1,0 +1,100 @@
+<style>
+#smartfilters-category-filter .inline-link{
+    display: inline
+}
+#smartfilters-category-filter {
+    padding-top: 0;
+}
+</style>
+<input type="hidden" name="smartfilters" value="1">
+<div class="field">
+    <div class="name">
+        Smart Filters
+    </div>
+    <div class="value no-shift">
+        <label>
+            <input type="checkbox" name="allow_smartfilters" value="1" id="smartfilters-category-allow-filter" {if $allow_smartfilters}checked{/if}> Разрешить фильтрацию товаров
+            <div class="block hint">
+                Фильтрация товаров позволит покупателям подбирать товары внутри этой категории по значениям характеристик, например, по цвету, производителю, цене.<br>
+                <strong>Smart Filters</strong> поможет исключить варианты фильтров, которые не приведут к результатам. Желательно не использовать одновременно со стандартной опцией ниже.
+            </div>
+        </label>
+        <div class="block" id="smartfilters-category-filter" {if !$allow_smartfilters}style="display:none;"{/if}>
+            <ul class="menu-v compact small">
+                <li>
+                    <a href="#" class="inline-link" data-check="1"><b><i>Отметить все</i></b></a> /
+                    <a href="#" class="inline-link" data-check="0"><b><i>Снять отметки</i></b></a> /
+                    <a href="#" class="inline-link" data-show="1"{if $smartfilters_show} style="display: none"{/if}><b><i>Показать фильтры</i></b></a>
+                    <a href="#" class="inline-link" data-show="0"{if !$smartfilters_show} style="display: none"{/if}><b><i>Скрыть фильтры</i></b></a> /
+                    <label class="hint">
+                        <input type="checkbox" name="smartfilters_descendants" value="1"> Применить фильтры ко вложенным категориям
+                    </label>
+                </li>
+                {foreach $smartfilters as $feature}
+                    <li class="smartfilters-item"{if !$smartfilters_show} style="display: none"{/if}>
+                        <i class="icon16 sort"></i>
+                        <label>
+                            {$checked = !empty($feature.checked) || ($feature.id == 'price' && !$allow_smartfilters)}
+                            <input type="checkbox" name="smartfilters[]" value="{$feature.id}"{if $checked} checked{/if}>
+                            <input type="text" value="{$feature.new_name|escape|default:''}" placeholder="{$feature.name|escape}"{if $checked} name="smartfilters_name[]" {else} disabled{/if}>
+                            <span class="hint">{$feature.code|default:''}</span>
+                        </label>
+                    </li>
+                {/foreach}
+            </ul>
+        </div>
+    </div>
+
+</div>
+<script>
+(function ($) {
+$(function () {
+
+    var $scf = $('#smartfilters-category-filter');
+
+    $('#smartfilters-category-allow-filter').click(function() {
+        if (this.checked) {
+            $scf.show();
+            $('[data-show="1"]', $scf).click()
+
+            var af = $('[name="allow_filter"]');
+            if(af.is(':checked')) af.trigger('click');
+        } else {
+            $scf.hide();
+
+        }
+    });
+    $scf.sortable({
+        distance: 5,
+        opacity: 0.75,
+        items: 'li',
+        handle: '.sort',
+        cursor: 'move',
+        tolerance: 'pointer'
+    })
+    .find(':checkbox').click(function(){
+        var name = $(this).next();
+        if($(this).is(':checked')) {
+            name.prop('name', 'smartfilters_name[]')
+                .prop('disabled', false)
+        } else {
+            name.prop('name', '')
+                .prop('disabled', true);
+        }
+    });
+
+    $('[data-check]', $scf).click(function(e){
+        e.preventDefault();
+        $(this).closest('ul').find('.smartfilters-item :checkbox')
+            .prop('checked',!!$(this).data('check'));
+    });
+
+    $('[data-show]', $scf).click(function(e){
+        e.preventDefault();
+        var a = !!$(this).data('show') ? 'show' : 'hide';
+        $('.smartfilters-item', $scf)[a]();
+        $(this).hide().siblings('[data-show]').show();
+    })
+})
+})(jQuery);
+</script>

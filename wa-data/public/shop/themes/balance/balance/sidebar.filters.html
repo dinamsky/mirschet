@@ -1,0 +1,160 @@
+{strip}
+<div class="catalog-pg__outer-wrapper pos-rel" data-sidebar="filters">
+	<div class="descr-mode pos-abs"><span class="pos-rel">FILTERS</span></div>
+	<div class="catalog-pg__sidebar-header catalog-pg__sidebar-header_filter">
+		<div class="catalog-pg__sidebar-header-title">
+			<svg class="icon" width="16" height="16">
+				<use xlink:href="#icon-filter"></use>
+			</svg>
+			<strong>[`Filters`]</strong>
+		</div>
+		<div class="catalog-pg__sidebar-header-close">
+			<svg class="icon" width="10" height="10">
+				<use xlink:href="#icon-close"></use>
+			</svg>
+		</div>
+	</div>
+	<div class="catalog-pg__sidebar-inner filters">
+		<form class="catalog-pg__filter-v{if $theme_settings.filters_design eq 'free'} catalog-pg__filter-v_nobd{elseif $theme_settings.filters_design eq 'backgrounded'} catalog-pg__sidebar_grey{/if}" method="get" action="{$wa->currentUrl(0,1)}">
+			{foreach $filters as $fid => $filter}
+				<div class="catalog-pg__filter-item">
+					<div class="filter-wr">
+						{if $fid == 'price'}
+							{$c = $wa->shop->currency(true)}
+							<div class="filter-wr__header active">
+								<div class="filter-wr__title">
+									<strong>[`Price`] ({$c.sign})</strong>
+								</div>
+								<svg class="icon" width="11" height="6">
+									<use xlink:href="#arrow-down-big"></use>
+								</svg>
+							</div>
+							<div class="filter-wr__body">
+								<div class="range-slider">
+									<div class="range-slider__inputs">
+										<div class="range-slider__input">
+											<input type="text" name="price_min" class="filter-range__min" value="{(int)$wa->get('price_min',floor($filter.min))}" placeholder="{floor($filter.min)}">
+										</div>
+										<div class="range-slider__input">
+											<input type="text" name="price_max" class="filter-range__max" value="{(int)$wa->get('price_max',ceil($filter.max))}" placeholder="{ceil($filter.max)}">
+										</div>
+									</div>
+									{*<div class="range-slider__caret"></div>*}
+								</div>
+							</div>
+						{else}
+							<div class="filter-wr__header active">
+								<div class="filter-wr__title">
+									<strong>{$filter.name|escape}{if !empty($filter.unit)}({$filter.unit.title}){/if}</strong>
+									{*<div class="filter-wr__tooltip has-tooltip" data-title="Tooltip text here">?</div>*}
+								</div>
+								<svg class="icon" width="11" height="6">
+									<use xlink:href="#arrow-down-big"></use>
+								</svg>
+							</div>
+							<div class="filter-wr__body">
+								{if $filter.type == 'boolean'}
+									<div class="filter-options{if $theme_settings.filters_collapse > 0} filter-options_more {/if}"{if $theme_settings.filters_collapse > 0} data-qty="{$theme_settings.filters_collapse}"{/if}>
+										<ul class="filter-options__list">
+											<li class="filter-options__item">
+												<label>
+													<span>[`Yes`]</span>
+													<input type="radio" name="{$filter.code}"{if $wa->get($filter.code)} checked{/if} value="1">
+												</label>
+											</li>
+											<li class="filter-options__item">
+												<label>
+													<span>[`No`]</span>
+													<input type="radio" name="{$filter.code}"{if $wa->get($filter.code) === '0'} checked{/if} value="0">
+												</label>
+											</li>
+											<li class="filter-options__item">
+												<label>
+													<span>[`Any`]</span>
+													<input type="radio" name="{$filter.code}"{if $wa->get($filter.code, '') === ''} checked{/if} value="">
+												</label>
+											</li>
+										</ul>
+									</div>
+								{elseif $filter.type == 'color'}
+									<div class="filter-options{if $theme_settings.filters_collapse > 0} filter-options_more {/if}"{if $theme_settings.filters_collapse > 0} data-qty="{$theme_settings.filters_collapse}"{/if}>
+										<ul class="filter-options__list">
+											{foreach $filter.values as $v_id => $v}
+												<li class="filter-options__item">
+													<label class="form-label">
+														{$v}
+														<input type="checkbox" name="{$filter.code}[]"{if in_array($v_id, (array)$wa->get($filter.code, array()))} checked{/if} value="{$v_id}">
+													</label>
+												</li>
+											{/foreach}
+										</ul>
+										{if $theme_settings.filters_collapse|default:0 > 0 && count($filter.values)>$theme_settings.filters_collapse|default:0}
+											<div class="filter-options__qty-toggle single-line" data-hide="[`hide`]" data-show="[`show more`]">
+												<span>[`show more`]</span>
+												<svg class="icon" width="8" height="4">
+													<use xlink:href="#arrow-down-big"></use>
+												</svg>
+											</div>
+										{/if}
+									</div>
+								{elseif isset($filter.min)}
+									{$_v = $wa->get($filter.code)}
+									<div class="range-slider">
+										<div class="range-slider__inputs">
+											<div class="range-slider__input">
+												<input type="text" class="filter-range__min" name="{$filter.code}[min]"{if !empty($_v.min)} value="{$_v.min}"{/if} placeholder="{$filter.min}">
+											</div>
+											<div class="range-slider__input">
+												<input type="text" class="filter-range__max" name="{$filter.code}[max]"{if !empty($_v.max)} value="{$_v.max}"{/if} placeholder="{$filter.max}">
+											</div>
+										</div>
+										{if !empty($filter.unit)}
+											{if $filter.unit.value != $filter.base_unit.value}<input type="hidden" name="{$filter.code}[unit]" value="{$filter.unit.value}">{/if}
+										{/if}
+										{*<div class="range-slider__caret"></div>*}
+									</div>
+								{else}
+									<div class="filter-options{if $theme_settings.filters_collapse > 0} filter-options_more {/if}"{if $theme_settings.filters_collapse > 0} data-qty="{$theme_settings.filters_collapse}"{/if}>
+										<ul class="filter-options__list">
+											{foreach $filter.values as $v_id => $v}
+												<li class="filter-options__item">
+													<label class="form-label">
+														<span>{$v}</span>
+														<input type="checkbox" name="{$filter.code}[]"{if in_array($v_id, (array)$wa->get($filter.code, array()))} checked{/if} value="{$v_id}">
+													</label>
+												</li>
+											{/foreach}
+										</ul>
+										{if $theme_settings.filters_collapse|default:0 > 0 && count($filter.values)>$theme_settings.filters_collapse|default:0}
+											<div class="filter-options__qty-toggle single-line" data-hide="[`hide`]" data-show="[`show more`]">
+												<span>[`show more`]</span>
+												<svg class="icon" width="8" height="4">
+													<use xlink:href="#arrow-down-big"></use>
+												</svg>
+											</div>
+										{/if}
+									</div>
+								{/if}
+							</div>
+						{/if}
+					</div>
+				</div>
+			{/foreach}
+			<div class="catalog-pg__filter-btns">
+				{*
+				<button class="catalog-pg__btn-show btn btn {$theme_settings.main_buttons_style|replace:'img/themebuttons/':''|replace:'.gif':''} btn btn_sec-1" type="submit">
+					<div class="hover-anim"></div>
+					<span>[`Filter products`]</span>
+				</button>
+				*}
+				<a href="{$wa->currentUrl(0,1)}" class="catalog-pg__btn-reset btn btn {$theme_settings.main_buttons_style|replace:'img/themebuttons/':''|replace:'.gif':''} btn btn_sec-5">
+					<div class="hover-anim"></div>
+					<span>[`clear`]</span>
+				</a>
+			</div>
+			{if $wa->get('sort')}<input type="hidden" name="sort" value="{$wa->get('sort')|escape}">{/if}
+			{if $wa->get('order')}<input type="hidden" name="order" value="{$wa->get('order')|escape}">{/if}
+		</form>
+	</div>
+</div>
+{/strip}

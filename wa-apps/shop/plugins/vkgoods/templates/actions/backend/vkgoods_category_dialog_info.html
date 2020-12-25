@@ -1,0 +1,30 @@
+<div class="field-group">
+    <div class="field">
+        <div class="name">Витрина:</div>
+        <div class="value">{$data.storefront|escape}</div>
+    </div>
+    <div class="field">
+        <div class="name">Сообщество:</div>
+        <div class="value"><a href="https://vk.com/club{$data.group_id}" target="_blank">{$data.group_name|escape}</a></div>
+    </div>
+    <div class="field">
+        <div class="name">Подборка:</div>
+        <div class="value">{$data.album_name|escape}</div>
+    </div>
+    <div class="field">
+        <div class="name">Все фотографии:</div>
+        <div class="value">{$data.all_photo}</div>
+    </div>
+    <div class="field">
+        <div class="name">Цена:</div>
+        <div class="value">{$data.f_price}</div>
+    </div>
+    <div class="field">
+        <div class="name">Включать подкатегории:</div>
+        <div class="value">{$data.subcategories}</div>
+    </div>
+    <div class="field">
+        <div class="name">Шаблон описания:</div>
+        <div class="value">{$data.desc|escape|nl2br}</div>
+    </div>
+</div>

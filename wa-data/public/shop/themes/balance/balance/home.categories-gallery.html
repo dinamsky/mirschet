@@ -1,0 +1,46 @@
+{strip}
+{if $theme_settings.homepage_categories_gallery_view ne "none"}
+	{if !empty($theme_settings.homepage_categories_gallery_list)}
+		{$_categories = explode(",",$theme_settings.homepage_categories_gallery_list)}
+		<div class="home-pg__section home-pg__section_subcat-4{if $theme_settings.homepage_categories_gallery_view ne 'always'} {$theme_settings.homepage_categories_gallery_view}{/if} pos-rel">
+			<div class="descr-mode pos-abs"><span class="pos-rel">CATEGORIES-GALLERY</span></div>
+			{if !empty($theme_settings.homepage_categories_gallery_title)}
+				<div class="home-pg__section-header">
+					<h3 class="section-title">{$theme_settings.homepage_categories_gallery_title}</h3>
+				</div>
+			{/if}
+			<div class="home-g">
+				<div class="home-g__inner home-g__inner_custom">
+					{foreach $_categories as $c}
+						{$_category = $wa->shop->category($c)}
+						{if $_category}
+							{$_category.count = 0}
+							{if $theme_settings.homepage_categories_gallery_count}
+								{$_category.count = $wa->shop->productsCount("category/`$_category.id`")}
+							{/if}
+							{$_category._preview_image = ""}
+							{if isset($_category.params.categories_gallery_image) && !empty($_category.params.categories_gallery_image)}
+								{$_category._preview_image = $_category.params.categories_gallery_image}
+							{elseif method_exists("shopWmimageincatPlugin","getCategoryImage") && shopWmimageincatPlugin::getCategoryImage($_category.id, 'image')}
+								{$_category._preview_image = shopWmimageincatPlugin::getCategoryImage($_category.id, 'image')}
+							{/if}
+							<div class="home-g__col-1-5">
+								<div class="subcat-4">
+									<a class="subcat-4__image" href="{$wa->shop->categoryUrl($_category)}" style="background-image:url({$_category._preview_image|default:"`$wa_parent_theme_url`img/dummy200.png"});">
+										{if $_category.count > 0}
+											<span class="subcat-4__qty">
+												<span class="sub-cat-qty">{$_category.count}</span>
+											</span>
+										{/if}
+									</a>
+									<a class="subcat-4__name" href="{$wa->shop->categoryUrl($_category)}">{$_category.name|escape}</a>
+								</div>
+							</div>
+						{/if}
+					{/foreach}
+				</div>
+			</div>
+		</div>
+	{/if}
+{/if}
+{/strip}

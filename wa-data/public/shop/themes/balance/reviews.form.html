@@ -1,0 +1,306 @@
+{strip}
+{$current_user_id = $wa->userId()}
+<div class="comments-sec__form{if $reviews_count > 0} is-hidden{else} is-static{/if}">
+	<div class="form-l" id="s-reviews-form">
+		<div class="form-ui-wr form-ui-wr_m-pad">
+			<div class="form-ui-wr__inner">
+				{$_add_userform = false}
+				{if empty($current_user_id) && $require_authorization}
+					{$_add_userform = true}
+					<div class="rev-form rev-form_no-guest">
+						<div class="rev-form__form">
+							<a class="rev-form__close-btn rev-form__close-btn_js x-btn" href="#">закрыть форму</a>
+							<div class="rev-form__top">
+								<div class="rev-form__descr">
+									<h3 class="rev-form__no-guest-title">Чтобы написать отзыв нужно авторизоватся </h3>
+									<div class="rev-form__no-guest-descr">Используйте свой логин пароль или авторизуйтесь используя социальные сети </div>
+								</div>
+							</div>
+							<div class="rev-form__no-guest-auth">
+								<div class="rev-form__sign-in">
+									<div class="rev-form__sign-in-inner">
+										<div class="sign-in">
+											{$wa->loginForm($error|default:[], [
+												'show_title'          => false,
+												'show_sub_title'      => false,
+												'include_css'         => false,
+												'need_redirects'      => false,
+												'show_oauth_adapters' => false
+											])}
+										</div>
+									</div>
+								</div>
+								{$auth_adapters = $wa->authAdapters(true)}
+								{if $auth_adapters}
+									<div class="rev-form__social">
+										<div class="soc-list">
+											<h4 class="soc-list__title">Вход через социальные сети </h4>
+											<div class="soc-list__inner balance__auth-adapters">
+												{foreach $auth_adapters as $a}
+													<div class="soc-list__i">
+														<a class="soc-btn soc-btn_fb" href="{$a->getUrl()}" title="{$a->getName()}">
+															<img src="data:image/gif;base64,R0lGODlh6gDqAIAAAP///wAAACH5BAEAAAEALAAAAADqAOoAAAL+jI+py+0Po5y02ouz3rz7D4biSJbmiabqyrbuC8fyTNf2jef6zvf+DwwKh8Si8YhMKpfMpvMJjUqn1Kr1is1qt9yu9wsOi8fksvmMTqvX7Lb7DY/L5/S6/Y7P6/f8vv8PGCg4SFhoeIiYqLjI2Oj4CBkpOUlZaXmJmam5ydnp+QkaKjpKWmp6ipqqusra6voKGys7S1tre4ubq7vL2+v7CxwsPExcbHyMnKy8zNzs/AwdLT1NXW19jZ2tvc3d7f0NHi4+Tl5ufo6err7O3u7+Dh8vP09fb3+Pn6+/z9/v/w8woMCBBAsaPIgwocKFDBs6fAgxosSJFCtavIgxo8Y9jRw7evwIMqTIkSRLmjyJMqXKlSxbunwJM6bMmTRr2ryJM6fOnTx7+vwJNKjQoUSLGj2KNKnSpUybOo1UAAA7" data-src="{$a->getIcon()}" class="lazy-img" alt>
+														</a>
+													</div>
+												{/foreach}
+											</div>
+										</div>
+									</div>
+								{/if}
+							</div>
+						</div>
+					</div>
+					<script>
+					$(document).on("wa_auth_contact_logged", function(e,r) {
+						$("#review-username").html(r.name);
+						$(".rev-form.is-hidden").removeClass("is-hidden");
+						$(".rev-form_no-guest, .rev-form__f-guestonly").remove();
+					});
+					</script>
+				{/if}
+				<div class="rev-form js-reviews-form-wrapper{if $_add_userform} is-hidden{/if}">
+					<div class="rev-form__preloader"></div>
+					<form class="rev-form__form" method="post" action="{$wa->shop->productUrl($product, 'reviews')}add/" data-redirect-url="{$wa->shop->productUrl($product, 'reviews')}">
+						<a class="rev-form__close-btn rev-form__close-btn_js x-btn{if $reviews_count == 0} is-hidden{/if}" href="#">[`close`]</a>
+						<div class="u-cen-txt rev-form__f-guestonly">
+							<h4 class="rev-form__title iconed-text">
+								<svg class="icon" width="15" height="14">
+									<use xlink:href="#icon-bubble"></use>
+								</svg>
+								<span>[`Write a review`]</span>
+							</h4>
+						</div>
+						{if empty($current_user_id) && $auth_adapters}
+							<div class="rev-form__top rev-form__f-guestonly">
+								<div class="rev-form__descr">[`Authorize either by entering your contact information, or through one of the listed websites`]</div>
+								<div class="rev-form__social">
+									<div class="soc-list">
+										<div class="soc-list__inner balance__auth-adapters" id="user-auth-provider">
+											{foreach $auth_adapters as $adapter}
+												{$adapter_id = $adapter->getId()}
+												<div class="soc-list__i">
+													<a class="soc-btn{if $current_auth_source == $adapter_id} selected{/if}" href="{$adapter->getCallbackUrl(0)}&app=shop{if !$require_authorization}&guest=1{/if}" data-provider="{$adapter_id}">
+														<img src="data:image/gif;base64,R0lGODlh6gDqAIAAAP///wAAACH5BAEAAAEALAAAAADqAOoAAAL+jI+py+0Po5y02ouz3rz7D4biSJbmiabqyrbuC8fyTNf2jef6zvf+DwwKh8Si8YhMKpfMpvMJjUqn1Kr1is1qt9yu9wsOi8fksvmMTqvX7Lb7DY/L5/S6/Y7P6/f8vv8PGCg4SFhoeIiYqLjI2Oj4CBkpOUlZaXmJmam5ydnp+QkaKjpKWmp6ipqqusra6voKGys7S1tre4ubq7vL2+v7CxwsPExcbHyMnKy8zNzs/AwdLT1NXW19jZ2tvc3d7f0NHi4+Tl5ufo6err7O3u7+Dh8vP09fb3+Pn6+/z9/v/w8woMCBBAsaPIgwocKFDBs6fAgxosSJFCtavIgxo8Y9jRw7evwIMqTIkSRLmjyJMqXKlSxbunwJM6bMmTRr2ryJM6fOnTx7+vwJNKjQoUSLGj2KNKnSpUybOo1UAAA7" data-src="{$adapter->getIcon()}" class="lazy-img" alt>
+													</a>
+												</div>
+											{/foreach}
+										</div>
+									</div>
+								</div>
+							</div>
+						{/if}
+						<div class="rev-form__content">
+							<div class="rev-form__f-row rev-form__f-row_rating">
+								<div class="rev-form__f-dd">[`Rate product`]</div>
+								<div class="rev-form__f-dt">
+									<div class="rate-it" data-vote="0">
+										<div class="rate-it__wrapper">
+											{for $i = 1 to 5}
+												<div class="rate-it__star rate-it__star_js" data-rate-count="{$i}">
+													<span class="full star-colour"></span>
+													<span class="selected"></span>
+												</div>
+											{/for}
+											<input name="rate" type="hidden" value="5">
+										</div>
+										{* <a class="rate-it__clear" href="#">[`clear`]</a> *}
+									</div>
+								</div>
+							</div>
+							{if !empty($current_user_id) || $_add_userform}
+								<div class="rev-form__f-row">
+									<div class="rev-form__f-dd">[`Your name`]</div>
+									<div class="rev-form__f-dt">
+										<div class="rev-form__user-name">
+											<strong id="review-username">{$wa->user('name')}</strong>
+											<a class="link link_sec" href="?logout">([`log out`])</a>
+										</div>
+									</div>
+								</div>
+							{elseif !empty($auth_adapters[$current_auth_source])}
+								{$adapter = $auth_adapters[$current_auth_source]}
+								<div class="rev-form__f-row">
+									<div class="rev-form__f-dd">[`Your name`]</div>
+									<div class="rev-form__f-dt">
+										<div class="rev-form__user-name">
+											<strong>{$current_auth.name|escape}</strong>
+											<a class="link link_sec" href="?logout">([`log out`])</a>
+										</div>
+									</div>
+								</div>
+							{else}
+								<div class="rev-form__f-row">
+									<div class="rev-form__f-dd">[`Your name`]</div>
+									<div class="rev-form__f-dt rev-form__f-dt_short input">
+										<div class="inputs__field-wr">
+											<input type="text" name="name" id="review-name" value="">
+										</div>
+									</div>
+								</div>
+								<div class="rev-form__f-row">
+									<div class="rev-form__f-dd">[`Email`]</div>
+									<div class="rev-form__f-dt rev-form__f-dt_short input">
+										<div class="inputs__field-wr">
+											<input type="text" name="email" id="review-email">
+										</div>
+									</div>
+								</div>
+								<div class="rev-form__f-row">
+									<div class="rev-form__f-dd">[`Website`]</div>
+									<div class="rev-form__f-dt rev-form__f-dt_short input">
+										<div class="inputs__field-wr">
+											<input type="text" name="site" id="review-site">
+										</div>
+									</div>
+								</div>
+							{/if}
+							<div class="rev-form__f-row">
+								<div class="rev-form__f-dd">[`Title`]</div>
+								<div class="rev-form__f-dt input">
+									<div class="inputs__field-wr">
+										<input type="text" name="title" id="review-title">
+									</div>
+								</div>
+							</div>
+							<div class="rev-form__f-row">
+								<div class="rev-form__f-dd">[`Review`]</div>
+								<div class="rev-form__f-dt input">
+									<div class="inputs__field-wr">
+										<textarea class="rev-form__textarea" id="review-text" name="text"></textarea>
+									</div>
+								</div>
+							</div>
+							
+							
+							
+							{$_images_enabled = $wa->setting("allow_image_upload", false, "shop")}
+							{if !empty($_images_enabled)}
+								<div class="rev-form__f-row rev-form__f-row_uploader">
+									<div class="rev-form__f-dd"></div>
+									<div class="rev-form__f-dt">
+										<div class="rev-form__uploader">
+											<div class="feedback-upl" id="js-review-images-section">
+												<div class="feedback-upl__uploader">
+													<div class="feed-uploader dashed-border">
+														<div class="feed-uploader__content">
+															<div class="feed-uploader__descr">
+																<svg class="icon icon-camera" width="21" height="18">
+																	<use xlink:href="#icon-camera-2"></use>
+																</svg>
+																<div class="feed-uploader__text">[`Upload photos`] <span>[`or drag &amp; drop here (max. 10 photos)`]</span></div>
+															</div>
+															<input class="feed-uploader__input js-file-field" type="file" multiple>
+														</div>
+														<div class="feed-uploader__attached-files-list js-attached-files-section"></div>
+														<div class="js-errors-section"></div>
+													</div>
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+								{capture assign="_file_template"}
+									<div class="feed-uploader__attached-file s-file-wrapper">
+										<div class="feed-uploader__image js-image-wrapper"></div>
+										<div class="feed-uploader__descr-wrapper s-description-wrapper">
+											<div class="feed-uploader__textarea">
+												<textarea class="js-textarea" placeholder="[`Enter a description here`]"></textarea>
+											</div>
+										</div>
+										<div class="feed-uploader__actions s-actions">
+											<div class="feed-uploader__action-delete s-action js-delete-file" title='{_w("Delete")|escape}'>
+												<div class="icon-x"></div>
+											</div>
+										</div>
+									</div>
+								{/capture}
+								{capture assign="_error_template"}
+									<div class="feed-uploader__error">%text%</div>
+								{/capture}
+								<script>
+									$(document).ready(function(){
+										{$_max_post_size = waRequest::getPostMaxSize()}
+										{$_max_file_size = waRequest::getUploadMaxFilesize()}
+										{$_max_post_size_mb = floor($_max_post_size * 10/(1024))/10}
+										{$_max_file_size_mb = floor($_max_file_size * 10/(1024))/10}
+
+										new ReviewImagesSection({
+											$wrapper: $("#js-review-images-section"),
+											max_post_size: {$_max_post_size|json_encode},
+											max_file_size: {$_max_file_size|json_encode},
+											max_files: 10,
+											templates: {
+												"file": {$_file_template|json_encode},
+												"error": {$_error_template|json_encode}
+											},
+											patterns: {
+												"file": "images[%index%]",
+												"desc": "images_data[%index%][description]"
+											},
+											locales: {
+												"files_limit": {_w("You can upload a maximum of 10 photos.")|json_encode},
+												"file_type": {_w("Unsupported image type. Use PNG, GIF and JPEG image files only.")|json_encode},
+												"post_size": {_w("Total size of selected files cannot be greater than")|json_encode} + " " + {$_max_post_size_mb|json_encode} + {_w("KB")|json_encode} + ".",
+												"file_size": {_w("Each file’s size cannot be greater than")|json_encode} + " " + {$_max_file_size_mb|json_encode} + {_w("KB")|json_encode} + "."
+											}
+										});
+
+									});
+								</script>
+							{/if}
+							
+							
+							
+							
+							
+							{if $request_captcha && empty($current_user_id)}
+								<div class="rev-form__f-row rev-form__f-guestonly">
+									<div class="rev-form__f-dd"></div>
+									<div class="rev-form__f-dt rev-form__f-dt_flex">
+										<div class="balance-wa-captcha">
+											{$wa->captcha()}
+										</div>
+									</div>
+								</div>
+							{/if}
+							{if empty($current_user_id) && !empty($review_service_agreement) && !empty($review_service_agreement_hint)}
+								<div class="rev-form__f-row rev-form__f-guestonly">
+									<div class="rev-form__f-dd">
+									</div>
+									<div class="rev-form__f-dt">
+										<div class="rev-form__agreement">
+											<label id="review-service_agreement">{$review_service_agreement_hint}
+												{if $review_service_agreement == 'checkbox'}
+													<input type="hidden" name="service_agreement" value="">
+													<input type="checkbox" name="service_agreement" value="1"{if $wa->post('service_agreement') || $wa->storage('shop_review_agreement')} checked{/if}>
+												{/if}
+											</label>
+										</div>
+									</div>
+								</div>
+							{/if}
+							<div class="rev-form__f-row">
+								<div class="rev-form__f-dd"></div>
+								<div class="rev-form__f-dt">
+									<div class="rev-form__btn-wr">
+										<input type="hidden" name="parent_id" value="0">
+										<input type="hidden" name="product_id" value="{if isset($product.id)}{$product.id}{else}0{/if}">
+										<input type="hidden" name="auth_provider" value="{$current_auth_source|default:shopProductReviewsModel::AUTH_GUEST}">
+										<input type="hidden" name="count" value="{$reviews_count}">
+										<button class="rev-form__btn btn {$theme_settings.main_buttons_style|replace:'img/themebuttons/':''|replace:'.gif':''} btn_main-2" type="submit">
+											<span class="rev-form__btn-text is-status">[`Add review`]</span>
+											<span class="rev-form__btn-text__reply is-status is-hidden">[`reply`]</span>
+											<div class="hover-anim"></div>
+										</button>
+										<div class="rev-form__ctrl-submit">Ctrl+Enter</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</form>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+{/strip}

@@ -1,0 +1,484 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: shop/plugins/delpayfilter\n"
+"POT-Creation-Date: 2019-12-10T09:02:03.007Z\n"
+"Last-Translator: shop/plugins/delpayfilter\n"
+"Language-Team: shop/plugins/delpayfilter\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=3; "
+"plural=((((n%10)==1)&&((n%100)!=11))?(0):(((((n%10)>=2)&&((n%10)<=4))&&(((n%"
+"100)<10)||((n%100)>=20)))?(1):2));\n"
+
+#: C:\Server\domains\localhost\ss\wa-apps\shop\plugins\delpayfilter\js\condition.js:30
+msgid "select"
+msgstr "выберите"
+
+#: C:\Server\domains\localhost\ss\wa-apps\shop\plugins\delpayfilter\js\condition.js:32
+msgid "equal"
+msgstr "равно"
+
+#: C:\Server\domains\localhost\ss\wa-apps\shop\plugins\delpayfilter\js\condition.js:33
+msgid "not equal"
+msgstr "не равно"
+
+#: C:\Server\domains\localhost\ss\wa-apps\shop\plugins\delpayfilter\js\condition.js:43
+msgid "contains"
+msgstr "содержит"
+
+#: C:\Server\domains\localhost\ss\wa-apps\shop\plugins\delpayfilter\js\condition.js:44
+msgid "not contains"
+msgstr "не содержит"
+
+#: C:\Server\domains\localhost\ss\wa-apps\shop\plugins\delpayfilter\js\condition.js:45
+msgid "begins with"
+msgstr "начинается с"
+
+#: C:\Server\domains\localhost\ss\wa-apps\shop\plugins\delpayfilter\js\condition.js:89
+msgid "each sku is separate"
+msgstr "каждый артикул отдельно"
+
+#: C:\Server\domains\localhost\ss\wa-apps\shop\plugins\delpayfilter\js\condition.js:90
+msgid "summarize skus"
+msgstr "суммировать артикулы"
+
+#: C:\Server\domains\localhost\ss\wa-apps\shop\plugins\delpayfilter\js\condition.js:99
+msgid "virtual and real"
+msgstr "виртуальном и реальном"
+
+#: C:\Server\domains\localhost\ss\wa-apps\shop\plugins\delpayfilter\js\condition.js:100
+msgid "virtual"
+msgstr "виртуальном"
+
+#: C:\Server\domains\localhost\ss\wa-apps\shop\plugins\delpayfilter\js\condition.js:101
+msgid "real"
+msgstr "реальном"
+
+#: C:\Server\domains\localhost\ss\wa-apps\shop\plugins\delpayfilter\js\condition.js:104
+msgid "reset selection"
+msgstr "сбросить выбор"
+
+#: C:\Server\domains\localhost\ss\wa-apps\shop\plugins\delpayfilter\js\condition.js:105
+msgid "No result text"
+msgstr "Результат не найден"
+
+#: C:\Server\domains\localhost\ss\wa-apps\shop\plugins\delpayfilter\js\condition.js:107
+msgid "Select category"
+msgstr "Выберите категорию"
+
+#: C:\Server\domains\localhost\ss\wa-apps\shop\plugins\delpayfilter\js\condition.js:110
+msgid "Category"
+msgstr "Категория"
+
+#: C:\Server\domains\localhost\ss\wa-apps\shop\plugins\delpayfilter\js\condition.js:111
+msgid "Category and subcategories"
+msgstr "Категория и ее подкатегории"
+
+#: C:\Server\domains\localhost\ss\wa-apps\shop\plugins\delpayfilter\js\condition.js:112
+msgid "Product set"
+msgstr "Список товаров"
+
+#: C:\Server\domains\localhost\ss\wa-apps\shop\plugins\delpayfilter\js\condition.js:112
+msgid "Select product set"
+msgstr "Выберите список товаров"
+
+#: C:\Server\domains\localhost\ss\wa-apps\shop\plugins\delpayfilter\js\condition.js:113
+msgid "Product type"
+msgstr "Тип товаров"
+
+#: C:\Server\domains\localhost\ss\wa-apps\shop\plugins\delpayfilter\js\condition.js:113
+msgid "Select product type"
+msgstr "Выберите тип товаров"
+
+#: C:\Server\domains\localhost\ss\wa-apps\shop\plugins\delpayfilter\js\condition.js:114
+msgid "Product"
+msgstr "Товар"
+
+#: C:\Server\domains\localhost\ss\wa-apps\shop\plugins\delpayfilter\js\condition.js:114
+msgid "select product"
+msgstr "выберите товар"
+
+#: C:\Server\domains\localhost\ss\wa-apps\shop\plugins\delpayfilter\js\condition.js:116
+msgid "Product feature"
+msgstr "Характеристика товара"
+
+#: C:\Server\domains\localhost\ss\wa-apps\shop\plugins\delpayfilter\js\condition.js:117
+msgid "Select product feature"
+msgstr "Выберите характеристику товара"
+
+#: C:\Server\domains\localhost\ss\wa-apps\shop\plugins\delpayfilter\js\condition.js:119
+msgid "Select feature value"
+msgstr "Выберите значение характеристики"
+
+#: C:\Server\domains\localhost\ss\wa-apps\shop\plugins\delpayfilter\js\condition.js:123
+msgid "Service"
+msgstr "Услуга"
+
+#: C:\Server\domains\localhost\ss\wa-apps\shop\plugins\delpayfilter\js\condition.js:125
+msgid "Select service"
+msgstr "Выберите услугу"
+
+#: C:\Server\domains\localhost\ss\wa-apps\shop\plugins\delpayfilter\js\condition.js:126
+msgid "Select service variant"
+msgstr "Выберите вариант услуги"
+
+#: C:\Server\domains\localhost\ss\wa-apps\shop\plugins\delpayfilter\js\condition.js:129
+msgid "Product stock count"
+msgstr "Количество остатков товара"
+
+#: C:\Server\domains\localhost\ss\wa-apps\shop\plugins\delpayfilter\js\condition.js:131
+msgid "on "
+msgstr "на"
+
+#: C:\Server\domains\localhost\ss\wa-apps\shop\plugins\delpayfilter\js\condition.js:132
+msgid "all stocks"
+msgstr "всех складах"
+
+#: C:\Server\domains\localhost\ss\wa-apps\shop\plugins\delpayfilter\js\condition.js:143
+msgid "product quantity in the order"
+msgstr "количество товара в заказе"
+
+#: C:\Server\domains\localhost\ss\wa-apps\shop\plugins\delpayfilter\js\condition.js:145
+msgid "Total quantity of all products"
+msgstr "Общее количество всех товаров"
+
+#: C:\Server\domains\localhost\ss\wa-apps\shop\plugins\delpayfilter\js\condition.js:146
+msgid "Quantity of product"
+msgstr "Количество товара"
+
+#: C:\Server\domains\localhost\ss\wa-apps\shop\plugins\delpayfilter\js\condition.js:146
+msgid "any product"
+msgstr "любой товар"
+
+#: C:\Server\domains\localhost\ss\wa-apps\shop\plugins\delpayfilter\js\condition.js:147
+msgid "from category"
+msgstr "из категории"
+
+#: C:\Server\domains\localhost\ss\wa-apps\shop\plugins\delpayfilter\js\condition.js:147
+msgid "select category"
+msgstr "выберите категорию"
+
+#: C:\Server\domains\localhost\ss\wa-apps\shop\plugins\delpayfilter\js\condition.js:148
+msgid "from category and subcategories of"
+msgstr "из категории и ее подкатегорий"
+
+#: C:\Server\domains\localhost\ss\wa-apps\shop\plugins\delpayfilter\js\condition.js:149
+msgid "from set"
+msgstr "из списка"
+
+#: C:\Server\domains\localhost\ss\wa-apps\shop\plugins\delpayfilter\js\condition.js:150
+msgid "from type"
+msgstr "с типом товаров"
+
+#: C:\Server\domains\localhost\ss\wa-apps\shop\plugins\delpayfilter\js\condition.js:151
+msgid "Quantity of all products from category"
+msgstr "Количество всех товаров из категории"
+
+#: C:\Server\domains\localhost\ss\wa-apps\shop\plugins\delpayfilter\js\condition.js:152
+msgid "Quantity of all products from category and subcategories"
+msgstr "Количество всех товаров из категории и ее подкатегорий"
+
+#: C:\Server\domains\localhost\ss\wa-apps\shop\plugins\delpayfilter\js\condition.js:153
+msgid "Quantity of all products from set"
+msgstr "Количество всех товаров из списка"
+
+#: C:\Server\domains\localhost\ss\wa-apps\shop\plugins\delpayfilter\js\condition.js:154
+msgid "Quantity of all products from type"
+msgstr "Количество всех товаров с типом товаров"
+
+#: C:\Server\domains\localhost\ss\wa-apps\shop\plugins\delpayfilter\js\condition.js:156
+msgid "Quantity of products with features"
+msgstr "Количество товаров с характеристиками"
+
+#: C:\Server\domains\localhost\ss\wa-apps\shop\plugins\delpayfilter\js\condition.js:164
+msgid "Quantity of unique items"
+msgstr "Количество уникальных товаров"
+
+#: C:\Server\domains\localhost\ss\wa-apps\shop\plugins\delpayfilter\js\condition.js:165
+msgid "Order price with discount"
+msgstr "Общая стоимость заказа с учетом скидок"
+
+#: C:\Server\domains\localhost\ss\wa-apps\shop\plugins\delpayfilter\js\condition.js:166
+msgid "Total price of all products"
+msgstr "Общая стоимость всех товаров"
+
+#: C:\Server\domains\localhost\ss\wa-apps\shop\plugins\delpayfilter\js\condition.js:167
+msgid "Total price of products"
+msgstr "Общая цена всех товаров"
+
+#: C:\Server\domains\localhost\ss\wa-apps\shop\plugins\delpayfilter\js\condition.js:170
+msgid "Total price of all products with features"
+msgstr "Общая стоимость всех товаров с характеристиками"
+
+#: C:\Server\domains\localhost\ss\wa-apps\shop\plugins\delpayfilter\js\condition.js:180
+msgid "Total sum of features values"
+msgstr "Сумма значений характеристик товаров"
+
+#: C:\Server\domains\localhost\ss\wa-apps\shop\plugins\delpayfilter\js\condition.js:186
+msgid "Product has tag"
+msgstr "Товар имеет тег"
+
+#: C:\Server\domains\localhost\ss\wa-apps\shop\plugins\delpayfilter\js\condition.js:188
+msgid "Select tags"
+msgstr "Выберите теги"
+
+#: C:\Server\domains\localhost\ss\wa-apps\shop\plugins\delpayfilter\js\condition.js:190
+msgid "Shipping"
+msgstr "Доставка"
+
+#: C:\Server\domains\localhost\ss\wa-apps\shop\plugins\delpayfilter\js\condition.js:190
+msgid "Select shipping"
+msgstr "Выберите доставку"
+
+#: C:\Server\domains\localhost\ss\wa-apps\shop\plugins\delpayfilter\js\condition.js:191
+msgid "Payment"
+msgstr "Оплата"
+
+#: C:\Server\domains\localhost\ss\wa-apps\shop\plugins\delpayfilter\js\condition.js:191
+msgid "equals"
+msgstr "равно"
+
+#: C:\Server\domains\localhost\ss\wa-apps\shop\plugins\delpayfilter\js\condition.js:191
+msgid "Select payment"
+msgstr "Выберите оплату"
+
+#: C:\Server\domains\localhost\ss\wa-apps\shop\plugins\delpayfilter\js\condition.js:192
+msgid "Price of any product"
+msgstr "Цена любого товара"
+
+#: C:\Server\domains\localhost\ss\wa-apps\shop\plugins\delpayfilter\js\condition.js:193
+msgid "Price of each product"
+msgstr "Цена каждого товара"
+
+#: C:\Server\domains\localhost\ss\wa-apps\shop\plugins\delpayfilter\js\condition.js:194
+msgid "User category"
+msgstr "Категория пользователя"
+
+#: C:\Server\domains\localhost\ss\wa-apps\shop\plugins\delpayfilter\js\condition.js:194
+msgid "Select user category"
+msgstr "Выберите категорию пользователя"
+
+#: C:\Server\domains\localhost\ss\wa-apps\shop\plugins\delpayfilter\js\condition.js:195
+msgid "Contact"
+msgstr "Контакт"
+
+#: C:\Server\domains\localhost\ss\wa-apps\shop\plugins\delpayfilter\js\condition.js:195
+msgid "select contact"
+msgstr "выберите пользователя"
+
+#: C:\Server\domains\localhost\ss\wa-apps\shop\plugins\delpayfilter\js\condition.js:196
+msgid "Contact create datetime"
+msgstr "Дата создания контакта"
+
+#: C:\Server\domains\localhost\ss\wa-apps\shop\plugins\delpayfilter\js\condition.js:197
+msgid "User data"
+msgstr "Данные пользователя"
+
+#: C:\Server\domains\localhost\ss\wa-apps\shop\plugins\delpayfilter\js\condition.js:197
+msgid "Select data"
+msgstr "Выберите данные"
+
+#: C:\Server\domains\localhost\ss\wa-apps\shop\plugins\delpayfilter\js\condition.js:199
+msgid "Contact country and region"
+msgstr "Страна и регион доставки пользователя"
+
+#: C:\Server\domains\localhost\ss\wa-apps\shop\plugins\delpayfilter\js\condition.js:201
+msgid "Select country"
+msgstr "Выберите страну"
+
+#: C:\Server\domains\localhost\ss\wa-apps\shop\plugins\delpayfilter\js\condition.js:202
+msgid "Select region"
+msgstr "Выберите регион"
+
+#: C:\Server\domains\localhost\ss\wa-apps\shop\plugins\delpayfilter\js\condition.js:205
+msgid "User city"
+msgstr "Город доставки пользователя"
+
+#: C:\Server\domains\localhost\ss\wa-apps\shop\plugins\delpayfilter\js\condition.js:206
+msgid "authorized"
+msgstr "авторизован"
+
+#: C:\Server\domains\localhost\ss\wa-apps\shop\plugins\delpayfilter\js\condition.js:207
+msgid "Total sum of all orders"
+msgstr "Общая сумма всех заказов"
+
+#: C:\Server\domains\localhost\ss\wa-apps\shop\plugins\delpayfilter\js\condition.js:208
+msgid "Sum of orders for period from"
+msgstr "Сумма заказов за период с"
+
+#: C:\Server\domains\localhost\ss\wa-apps\shop\plugins\delpayfilter\js\condition.js:208
+msgid "to"
+msgstr "до"
+
+#: C:\Server\domains\localhost\ss\wa-apps\shop\plugins\delpayfilter\js\condition.js:209
+msgid "Quantity of all orders"
+msgstr "Количество всех заказов"
+
+#: C:\Server\domains\localhost\ss\wa-apps\shop\plugins\delpayfilter\js\condition.js:210
+msgid "Quantity of orders for period from"
+msgstr "Количество заказов за период с"
+
+#: C:\Server\domains\localhost\ss\wa-apps\shop\plugins\delpayfilter\js\condition.js:211
+msgid "Orders have product"
+msgstr "Заказы содержат товар"
+
+#: C:\Server\domains\localhost\ss\wa-apps\shop\plugins\delpayfilter\js\condition.js:212
+msgid "for period from"
+msgstr "за период с"
+
+#: C:\Server\domains\localhost\ss\wa-apps\shop\plugins\delpayfilter\js\condition.js:217
+msgid "Status of any order"
+msgstr "Статус любого заказа"
+
+#: C:\Server\domains\localhost\ss\wa-apps\shop\plugins\delpayfilter\js\condition.js:217
+msgid "Select status"
+msgstr "Выберите статус"
+
+#: C:\Server\domains\localhost\ss\wa-apps\shop\plugins\delpayfilter\js\condition.js:218
+msgid "Date"
+msgstr "Дата"
+
+#: C:\Server\domains\localhost\ss\wa-apps\shop\plugins\delpayfilter\js\condition.js:219
+msgid "Day of week"
+msgstr "День недели"
+
+#: C:\Server\domains\localhost\ss\wa-apps\shop\plugins\delpayfilter\js\condition.js:219
+msgid "Monday"
+msgstr "Понедельник"
+
+#: C:\Server\domains\localhost\ss\wa-apps\shop\plugins\delpayfilter\js\condition.js:219
+msgid "Tuesday"
+msgstr "Вторник"
+
+#: C:\Server\domains\localhost\ss\wa-apps\shop\plugins\delpayfilter\js\condition.js:219
+msgid "Wednesday"
+msgstr "Среда"
+
+#: C:\Server\domains\localhost\ss\wa-apps\shop\plugins\delpayfilter\js\condition.js:219
+msgid "Thursday"
+msgstr "Четверг"
+
+#: C:\Server\domains\localhost\ss\wa-apps\shop\plugins\delpayfilter\js\condition.js:219
+msgid "Friday"
+msgstr "Пятница"
+
+#: C:\Server\domains\localhost\ss\wa-apps\shop\plugins\delpayfilter\js\condition.js:219
+msgid "Saturday"
+msgstr "Суббота"
+
+#: C:\Server\domains\localhost\ss\wa-apps\shop\plugins\delpayfilter\js\condition.js:219
+msgid "Sunday"
+msgstr "Воскресенье"
+
+#: C:\Server\domains\localhost\ss\wa-apps\shop\plugins\delpayfilter\js\condition.js:220
+msgid "Time"
+msgstr "Время"
+
+#: C:\Server\domains\localhost\ss\wa-apps\shop\plugins\delpayfilter\js\condition.js:225
+msgid "Not isset"
+msgstr "Не существует"
+
+#: C:\Server\domains\localhost\ss\wa-apps\shop\plugins\delpayfilter\js\condition.js:228
+msgid "Storefront"
+msgstr "Витрина"
+
+#: C:\Server\domains\localhost\ss\wa-apps\shop\plugins\delpayfilter\js\condition.js:230
+msgid "Select domain"
+msgstr "Выберите домен"
+
+#: C:\Server\domains\localhost\ss\wa-apps\shop\plugins\delpayfilter\js\condition.js:231
+msgid "Select route"
+msgstr "Выберите поселение"
+
+#: C:\Server\domains\localhost\ss\wa-apps\shop\plugins\delpayfilter\js\condition.js:234
+msgid "Shipping price"
+msgstr "Стоимость доставки"
+
+#: C:\Server\domains\localhost\ss\wa-apps\shop\plugins\delpayfilter\js\condition.js:235
+msgid "Coupon"
+msgstr "Купон"
+
+#: C:\Server\domains\localhost\ss\wa-apps\shop\plugins\delpayfilter\js\condition.js:236
+msgid "Isset active coupon"
+msgstr "Имеется активный купон"
+
+#: C:\Server\domains\localhost\ss\wa-apps\shop\plugins\delpayfilter\js\condition.js:415
+msgid "All conditions return true"
+msgstr "Все условия верны"
+
+#: C:\Server\domains\localhost\ss\wa-apps\shop\plugins\delpayfilter\js\condition.js:415
+msgid "Any of condition returns true"
+msgstr "Любое из условий верно"
+
+#: C:\Server\domains\localhost\ss\wa-apps\shop\plugins\delpayfilter\js\condition.js:418
+msgid "Add condition"
+msgstr "Добавить условие"
+
+#: C:\Server\domains\localhost\ss\wa-apps\shop\plugins\delpayfilter\js\condition.js:421
+msgid "Delete"
+msgstr "Удалить"
+
+#: C:\Server\domains\localhost\ss\wa-apps\shop\plugins\delpayfilter\js\condition.js:424
+msgid "delete"
+msgstr "удалить"
+
+#: C:\Server\domains\localhost\ss\wa-apps\shop\plugins\delpayfilter\js\condition.js:486
+msgid "HH"
+msgstr "ЧЧ"
+
+#: C:\Server\domains\localhost\ss\wa-apps\shop\plugins\delpayfilter\js\condition.js:487
+msgid "MM"
+msgstr "ММ"
+
+#: C:\Server\domains\localhost\ss\wa-apps\shop\plugins\delpayfilter\js\delpayfilter.js:238
+msgid "Loading..."
+msgstr "Идет загрузка..."
+
+#: C:\Server\domains\localhost\ss\wa-apps\shop\plugins\delpayfilter\js\delpayfilter.js:321
+msgid "Select at least 1 filter rule"
+msgstr "Выберите хотя бы один фильтр"
+
+#: C:\Server\domains\localhost\ss\wa-apps\shop\plugins\delpayfilter\js\delpayfilter.js:330
+msgid "Wait, please..."
+msgstr "Пожалуйста, подождите..."
+
+#: C:\Server\domains\localhost\ss\wa-apps\shop\plugins\delpayfilter\js\delpayfilter.js:335
+msgid "Delete filter"
+msgstr "Удалить фильтр"
+
+#: C:\Server\domains\localhost\ss\wa-apps\shop\plugins\delpayfilter\js\delpayfilter.js:335
+msgid "close"
+msgstr "закрыть"
+
+#: C:\Server\domains\localhost\ss\wa-apps\shop\plugins\delpayfilter\js\delpayfilter.js:335
+msgid "Do you really want to delete filter rule?"
+msgstr "Вы действительно хотите удалить фильтр?"
+
+#: C:\Server\domains\localhost\ss\wa-apps\shop\plugins\delpayfilter\js\delpayfilter.js:431
+msgid "Do you really want to delete condition group?"
+msgstr "Вы действительно хотите удалить группу условий?"
+
+#: C:\Server\domains\localhost\ss\wa-apps\shop\plugins\delpayfilter\js\delpayfilter.js:536
+msgid "Something wrong"
+msgstr "Произошла ошибка"
+
+#: C:\Server\domains\localhost\ss\wa-apps\shop\plugins\delpayfilter\js\condition.js:155
+msgid "Quantity of all products with tags"
+msgstr "Количество всех товаров с тегами"
+
+#: C:\Server\domains\localhost\ss\wa-apps\shop\plugins\delpayfilter\js\condition.js:167
+msgid "Order price with discount + Shipping price"
+msgstr "Общая стоимость заказа с учетом скидок + Стоимость доставки"
+
+#: C:\Server\domains\localhost\ss\wa-apps\shop\plugins\delpayfilter\js\condition.js:168
+msgid "Order price without discount"
+msgstr "Общая стоимость заказа без учета скидок"
+
+#: C:\Server\domains\localhost\ss\wa-apps\shop\plugins\delpayfilter\js\condition.js:169
+msgid "Order price without discount + Shipping price"
+msgstr "Общая стоимость заказа без скидок + Стоимость доставки"
+
+#: C:\Server\domains\localhost\ss\wa-apps\shop\plugins\delpayfilter\js\condition.js:170
+msgid "Total discount"
+msgstr "Общая сумма скидок"

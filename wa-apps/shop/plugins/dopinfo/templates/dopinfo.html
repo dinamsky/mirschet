@@ -1,0 +1,312 @@
+<style type="text/css">
+    td, th {
+        padding-right: 10px;
+    }
+
+    .dopmain {
+        background-color: #f7f7f7; 
+        padding: 10px 10px 10px 10px; 
+        box-shadow: 0 -2px 10px -5px rgba(0, 0, 0, 0.7); 
+        border-radius: 6px 6px 0 0; 
+        -moz-border-radius: 6px 6px 0 0; 
+        -khtml-border-radius: 6px 6px 0 0; 
+        margin-top: 10px;
+    } 
+
+    .doparea {
+        border: 1px solid #e5e5e5; 
+        background-color: white;  
+        box-shadow: 0px 5px 10px rgba(0, 0, 0, 0.7);
+        padding: 0px 0px 5px 10px; 
+        margin: 5px 0px 10px 5px;
+        display: none;
+    } 
+
+    .dopmain h3 {
+        margin-left: 10px;
+        font-size: 1.4em; 
+        color: #8f1811;
+    }
+
+    .clickable {
+        cursor: pointer;
+        background-color: #ffc;
+    }
+
+    .hide {
+        min-width: 25px;
+        min-height: 25px;
+        cursor: pointer;
+        float: right;
+        margin-top: -30px;
+        background: url({$path|escape}/img/hide.png) no-repeat;
+    }
+
+
+</style>
+
+{if isset($isreg)}
+<span class="reginfo" style="dislpay: none;">
+    {if $isreg == 'yes'}
+    Пользователь зарегистрирован
+    {else}
+    {$isreg}
+    {/if}
+</span>
+{/if}
+
+{if isset($ip) && ($ip != 'IP отсутствует')}
+<span class="ipinfo" style="display: none;">
+    <a href="http://ipgeobase.ru/?address={$ip|escape}" target="_blank" title="посмотреть IP по GeoBase">
+        <span id="ipadress" style='color: red'>{$ip|escape}</span>
+    </a>
+</span>
+{/if}
+
+{if isset($by_phone)}
+<li class="phoneinfo" style="display: none; color: firebrick">
+    Найдено еще {count ($by_phone)} клиента(ов) с таким телефоном<br/>
+    <span id="phoneclinfo" style="cursor: pointer; color: #03c">Показать</span>    
+</li>
+{/if}
+
+{if isset($by_email['blacklist']) && !empty($by_email['blacklist'])}
+<li class="blackemail" style="display: none; color: firebrick"">
+    Внимание!!! email находится в черном списке       
+</li>
+{/if}
+
+<div style="display: none;" class="dopinfo">
+    {if isset($by_email)}
+    <div class= 'dopmain'>
+
+        <h3>Все заказы с email <span style='color: blue'>({$by_email['email']|escape})</span>
+            {if $by_email['blacklist'] }
+            <span style='color: red'><b>Внимание!!! email находится в черном списке</b></span>
+            {/if}
+        </h3>            
+        <div class = "hide email" title = "Показать/Скрыть блок"></div>
+        <div class = 'doparea email'>
+            {if is_array($by_email['status_info'])}
+            <div style = "margin-top: 10px; font-size: 1.2em;">                    
+                <h4 style='color: blue'>Отслеживаемые статусы (заданы в настройках):</h4>
+                <table>
+                    <tr>
+                        <th>Статус</th>
+                        <th>Кол-во заказов</th>
+                        <th>Общая сумма по статусу</th>
+                    </tr>
+                    {foreach $by_email['status_info'] as $status => $key}
+                    <tr style = "{$state_array[$status|escape]} border-bottom: 1px dotted;">
+                        <td>{$key['name']|escape}</td>
+                        <td style="text-align: center;">{$key['count']|escape}</td>
+                        <td style="text-align: center;">{$key['summ']|escape}</td>
+                    </tr>
+                    {/foreach}                        
+                </table>                                         
+            </div>
+            {else}
+            <h4 style='color: red'>Отслеживаемые статусы не выбраны.</h4>
+            {/if}
+            {if !empty($by_email['orders'])}
+            <div style = "margin-top: 10px; font-size: 1.2em;">
+                {if isset($orders_output) && ($orders_output == 'selected')}
+                <h4 style='color: red'>Внимание!!! Показаны не все заказы.<br/>
+                    Включена настройка "Показывать только отмеченные статусы"
+                </h4>
+                {/if}
+                <span style='color: blueviolet'>Всего заказов: {count($by_email['orders'])} На сумму: {$by_email['all_order_total']|escape}</span>
+                <br/>
+                <img src='{$path|escape}/img/ok.png' /> - заказы текущего клиента
+            </div>
+            <table style = "margin-top: 10px;">			
+                <tr style = "border-bottom: 1px solid;">                           
+                    <th>Статус</th>
+                    <th>Номер</th>
+                    <th>Сумма</th>
+                    <th>Адрес</th>
+                    <th>Способ доставки</th>
+                    <th>IP</th>
+                </tr>                        
+                {foreach $by_email['orders'] as $number => $key}
+                <tr style = "{$state_array[$key['state_id']|escape]} border-bottom: 1px dotted;" data-href = "{$wa_backend_url}shop/#/order/{$number|escape}">
+                    <td style = "min-width: 65px;">{$key['state']}<br/>{$key['date']|escape}</td>
+                    <td>{$number|escape}
+                        {if !empty($key['current_client'])}
+                        <img src='{$path|escape}/img/ok.png' />
+                        {/if}
+                    </td>				
+                    <td>{$key['total']|escape}</td>
+                    <td>({$key['zip']|escape}, {$key['region']|escape}, {$key['city']|escape}, {$key['street']|escape})</td> 
+                    <td>{$key['shipping_name']|escape}</td>
+                    <td>{if $key['ip']} {$key['ip']|escape} {else} IP отсутствует {/if}</td>				
+                </tr>
+                {/foreach}                       
+            </table>
+            {else}
+            <div style = "margin-top: 10px; font-size: 1.2em;">
+                <h4 style='color: red'>Нет заказов, удовлетворяющих заданным условиям<br/>
+                    Включена настройка "Показывать только отмеченные статусы"
+            </div>
+            {/if}
+        </div>
+    </div>    
+    {/if}
+
+
+    {if isset($by_ips)}	
+    <div class= 'dopmain'>
+        <h3>Заказы c похожего IP ({$ips|escape}.0 - {$ips|escape}.255)</h3>
+        <div class = "hide ip" title = "Показать/Скрыть блок"></div>
+        {foreach $by_ips as $by_ids}
+        <div class = 'doparea ip'>
+            <div style = "margin-top: 10px; font-size: 1.2em;">
+                <span style = "color: blue">{$by_ids['name']|escape} id {$by_ids['id']|escape} </span></b>
+                {if $by_ids['blacklist']}
+                <span style = "color: red"><b>Внимание!!! Клиент в черном списке</b></span>
+                {/if}			
+            </div>
+            <table style = "margin-top: 10px;">			
+                <tr style = "border-bottom: 1px solid;">
+                    <th>Статус</th>
+                    <th>Номер</th>				
+                    <th>Сумма</th>
+                    <th>Адрес</th>
+                    <th>Способ доставки</th>
+                    <th style = "padding-right: 10px;"><b>IP</b></th>
+                </tr>
+                {foreach $by_ids['orders'] as $number => $key}
+                <tr style = "{$state_array[$key['state_id']]} border-bottom: 1px dotted;" data-href = "{$wa_backend_url}shop/#/order/{$number|escape}">				
+                    <td>{$key['state']|escape}<br/>{$key['date']|escape}</td>
+                    <td style = "min-width: 65px;">{$number|escape}</td>				
+                    <td>{$key['total']|escape}</td>
+                    <td>({$key['zip']|escape}, {$key['region']|escape}, {$key['city']|escape}, {$key['street']|escape})</td> 
+                    <td>{$key['shipping_name']|escape}</td>
+                    <td>{if $key['ip']} {$key['ip']|escape} {else} IP отсутствует {/if}</td>				
+                </tr>
+                {/foreach}			
+            </table>
+        </div>
+        {/foreach}
+    </div>
+    {/if}
+    {if isset($by_phone)}	
+    <div id="dopphone" class= 'dopmain'>
+        <h3>Клиенты с этим телефоном (кроме текущего)</h3>
+        <div class = "hide phone" title = "Показать/Скрыть блок"></div>
+        {foreach $by_phone as $by_ids}
+        <div class = 'doparea phone'>
+            <div style = "margin-top: 10px; font-size: 1.2em;">
+                <span style = "color: blue">{$by_ids['name']|escape} id {$by_ids['id']|escape} </span></b>
+                {if $by_ids['blacklist']}
+                <span style = "color: red"><b>Внимание!!! Клиент в черном списке</b></span>
+                {/if}
+                <br/>
+                Телефон: <span style = "color: red">{$by_ids['phone']|escape}</span>
+            </div>
+            <table style = "margin-top: 10px;">			
+                <tr style = "border-bottom: 1px solid;">
+                    <th>Статус</th>
+                    <th>Номер</th>				
+                    <th>Сумма</th>
+                    <th>Адрес</th>
+                    <th>Способ доставки</th>
+                    <th style = "padding-right: 10px;"><b>IP</b></th>
+                </tr>
+                {foreach $by_ids['orders'] as $number => $key}
+                <tr style = "{$state_array[$key['state_id']]} border-bottom: 1px dotted;" data-href = "{$wa_backend_url}shop/#/order/{$number|escape}">				
+                    <td>{$key['state']|escape}<br/>{$key['date']|escape}</td>
+                    <td style = "min-width: 65px;">{$number|escape}</td>				
+                    <td>{$key['total']|escape}</td>
+                    <td>({$key['zip']|escape}, {$key['region']|escape}, {$key['city']|escape}, {$key['street']|escape})</td> 
+                    <td>{$key['shipping_name']|escape}</td>
+                    <td>{if $key['ip']} {$key['ip']|escape} {else} IP отсутствует {/if}</td>				
+                </tr>
+                {/foreach}			
+            </table>
+        </div>
+        {/foreach}
+    </div>
+    {/if}
+
+
+</div>
+<script type="text/javascript">
+
+    $(document).ready(function() {
+        
+        var name = $('.details h3');
+        var isreg = $('.reginfo');
+        
+        if(name && isreg){
+            isreg.insertAfter(name);
+            $('.reginfo').css('display', '');
+        }
+        
+        
+        var ip = $('#ipadress').text();
+        var str = $('strong:contains("' + ip + '")');
+
+        if (ip && str) {
+            str.replaceWith($('.ipinfo'));
+            $('.ipinfo').css('display', '');
+        }
+
+        var phone = $('.phoneinfo');
+        var iconphone = $('.icon16.phone');
+
+        if (phone && iconphone) {
+            var tmp = iconphone.closest('li');
+            phone.insertAfter(tmp);
+            phone.css('display', '');
+        }
+
+        var black = $('.blackemail');
+        var iconemail = $('.icon16.email');
+        if (black && iconemail) {
+            var tmp = iconemail.closest('li');
+            black.insertAfter(tmp);
+            black.css('display', '');
+        }
+
+        $(".fields").append($(".dopinfo"));
+        $(".dopinfo").css('display', '');
+
+        $('tbody tr[data-href]').hover(
+                function() {
+                    $(this).addClass("clickable");
+                },
+                function() {
+                    $(this).removeClass("clickable");
+                }
+        );
+
+        $('tbody tr[data-href]').click(
+                function() {
+                    window.open($(this).attr('data-href'), '_blank');
+                }
+        );
+
+        $(".hide.email").click(function() {
+            $(".doparea.email").toggle("normal");
+        });
+
+        $(".hide.ip").click(function() {
+            $(".doparea.ip").toggle("normal");
+        });
+
+        $(".hide.phone").click(function() {
+            $(".doparea.phone").toggle("normal");
+        });
+
+        $("#phoneclinfo").click(function() {
+            if ($(".doparea.phone").is(':hidden')) {
+                $(".doparea.phone").toggle("normal");
+            }
+            var scrollTop = $('.dopinfo').offset().top;
+            $(document).scrollTop(scrollTop - 100);
+        });
+
+    });
+
+</script>

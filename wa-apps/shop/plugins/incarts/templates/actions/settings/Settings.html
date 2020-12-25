@@ -1,0 +1,108 @@
+<style>
+.field .name {
+	width: 210px;
+}
+.field .value {
+    margin-left: 220px;
+}
+.field .value.submit {
+    margin-left: 220px;
+}
+h2 {
+	padding-top: 10px;
+}
+p {
+	margin-bottom: 5px;
+}
+.colorl {
+    display: inline-block;
+    height: 25px;
+    text-align: center;
+    width: 25px;
+}
+.colorl input {
+	margin-top: 4px;
+}
+.colorl.orange {
+	background-color:rgba(233,110,37,0.8);
+}
+.colorl.green {
+	background-color:rgba(55,185,37,0.8);
+}
+.colorl.blue {
+	background-color:rgba(73,141,239,0.8);
+}
+h1, h2, h3 {
+    color: #222;
+}
+p {
+	color: #444;
+}
+ul li {
+	padding-bottom: 10px;
+}
+</style>
+
+<h1>Этот товар уже в корзине</h1>
+
+<div class="fields form">
+    <form action="?module=plugins&id=incarts&action=save" method="post" id="plugins-settings-form">
+		{$wa->csrf()}
+	
+		{literal}
+			<h2>Описание</h2>
+			<p style="text-decoration: underline;">Плагин выделяет товар, который уже лежит в корзине.</p>
+			<p>Для работы плагина необходимо наличие хука <strong>"frontend_head"</strong> в теме дизайна.</p> 
+			<p>И добавить код в шаблоны дизайна:</p> 
+			<ul>
+			  <li><p>{shopIncartsPlugin::showInfo($p.id)}, где $p.id - идентификатор товара, в шаблон вывода списка товаров (например, list-thumbs.html).</p></li>
+			  <li><p>{shopIncartsPlugin::showInfo($product.id)}, где $product.id - идентификатор товара, в шаблон товара или блока корзины товара (например, product.cart.html).</p></li>
+			</ul>
+
+			<p>Код необходимо добавить в форму товара, между тэгом &lt;form&gt; и &lt;/form&gt;.</p>
+			<p>Например, сразу после кнопки "В корзину":</p> 
+			<pre>
+                &lt;form class="purchase addtocart" method="post" action="/add"&gt;
+                    &lt;input type="hidden" name="product_id" value="{$p.id}"&gt;
+                    ...
+                    &lt;input type="submit" value="[`В корзину`]"&gt;
+                    <strong>{shopIncartsPlugin::showInfo($p.id)}</strong>
+                &lt;/form&gt;
+			</pre>
+		{/literal}	
+	
+		<div class="field">
+			<div class="name">
+				Вывести текст на месте добавления кода
+			</div>
+			<div class="value">
+				<input type="text" name="shop_incarts[show_info]" value="{if isset($settings.show_info)}{$settings.show_info}{/if}">
+			</div>
+		</div>
+		
+		<div class="field">
+			<div class="name">
+				Изменить название кнопки
+			</div>
+			<div class="value">
+				<input type="text" name="shop_incarts[submit_name]" value="{if isset($settings.submit_name)}{$settings.submit_name}{/if}">
+			</div>
+		</div>
+		
+		<div class="field">
+			<div class="name">
+				Добавить класс к кнопке
+			</div>
+			<div class="value">
+				<input type="text" name="shop_incarts[submit_class]" value="{if isset($settings.submit_class)}{$settings.submit_class}{/if}">
+			</div>
+		</div>
+		
+		<div class="field">
+			<div class="value submit">
+				<input type="submit" class="button green" value="[s`Save`]">
+				<span id="plugins-settings-form-status" style="display:none"></span>
+			</div>
+		</div>
+    </form>
+</div>

@@ -1,0 +1,86 @@
+{strip}
+
+{capture assign="_tmp_capture"}
+	{include file="string:`$theme_settings.shop_checkout_steps_phone`" inline}
+{/capture}
+{$theme_settings.shop_checkout_steps_phone = $_tmp_capture}
+
+{capture assign="_tmp_capture"}
+	{include file="string:`$theme_settings.shop_checkout_steps_email`" inline}
+{/capture}
+{$theme_settings.shop_checkout_steps_email = $_tmp_capture}
+
+{capture assign="_tmp_capture"}
+	{include file="string:`$theme_settings.shop_checkout_steps_info_text`" inline}
+{/capture}
+{$theme_settings.shop_checkout_steps_info_text = $_tmp_capture}
+
+{capture assign="_tmp_capture"}
+	{include file="string:`$theme_settings.shop_checkout_steps_success_text`" inline}
+{/capture}
+{$theme_settings.shop_checkout_steps_success_text = $_tmp_capture}
+
+
+{* Smarty support for contact's vars for SEO-Regions *}
+
+{capture assign="_tmp_capture"}
+	{include file="string:`$theme_settings.header_contacts_phone_1`" inline}
+{/capture}
+{$theme_settings.header_contacts_phone_1 = $_tmp_capture}
+
+{capture assign="_tmp_capture"}
+	{include file="string:`$theme_settings.header_contacts_phone_1_text`" inline}
+{/capture}
+{$theme_settings.header_contacts_phone_1_text = $_tmp_capture}
+
+{capture assign="_tmp_capture"}
+	{include file="string:`$theme_settings.header_contacts_phone_2`" inline}
+{/capture}
+{$theme_settings.header_contacts_phone_2 = $_tmp_capture}
+
+{capture assign="_tmp_capture"}
+	{include file="string:`$theme_settings.header_contacts_phone_2_text`" inline}
+{/capture}
+{$theme_settings.header_contacts_phone_2_text = $_tmp_capture}
+
+{capture assign="_tmp_capture"}
+	{include file="string:`$theme_settings.header_contacts_address`" inline}
+{/capture}
+{$theme_settings.header_contacts_address = $_tmp_capture}
+
+{capture assign="_tmp_capture"}
+	{include file="string:`$theme_settings.header_contacts_workhours`" inline}
+{/capture}
+{$theme_settings.header_contacts_workhours = $_tmp_capture}
+
+{capture assign="_tmp_capture"}
+	{include file="string:`$theme_settings.footer_contacts_phone1`" inline}
+{/capture}
+{$theme_settings.footer_contacts_phone1 = $_tmp_capture}
+
+{capture assign="_tmp_capture"}
+	{include file="string:`$theme_settings.footer_contacts_phone2`" inline}
+{/capture}
+{$theme_settings.footer_contacts_phone2 = $_tmp_capture}
+
+{capture assign="_tmp_capture"}
+	{include file="string:`$theme_settings.footer_contacts_phone_text`" inline}
+{/capture}
+{$theme_settings.footer_contacts_phone_text = $_tmp_capture}
+
+{capture assign="_tmp_capture"}
+	{include file="string:`$theme_settings.footer_contacts_address`" inline}
+{/capture}
+{$theme_settings.footer_contacts_address = $_tmp_capture}
+
+{capture assign="_tmp_capture"}
+	{include file="string:`$theme_settings.footer_contacts_email`" inline}
+{/capture}
+{$theme_settings.footer_contacts_email = $_tmp_capture}
+
+{capture assign="_tmp_capture"}
+	{include file="string:`$theme_settings.address_map`" inline}
+{/capture}
+{$theme_settings.address_map = $_tmp_capture}
+
+{/strip}

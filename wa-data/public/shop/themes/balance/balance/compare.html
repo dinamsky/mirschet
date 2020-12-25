@@ -1,0 +1,237 @@
+{strip}
+<div class="compare-pg" id="compare">
+	<div class="compare-pg__sticky-header">
+		<div class="compare-pg__header">
+			<div class="layout-center">
+				<div class="compare-pg__title-wrapper">
+					<div class="compare-pg__title">
+						<h1 class="pg-heading">[`Compare products`]</h1>
+						<button class="close-x default-btn mobile-only">
+							<svg class="icon cent-icon" width="8" height="8">
+								<use xlink:href="#arrow-x"></use>
+							</svg>
+						</button>
+					</div>
+					{if count($products)}
+						<div class="compare-pg__slider-arrows">
+							<button class="slider-ar slider-ar_square pos-rel default-btn">
+								<svg class="icon cent-icon" width="7" height="11">
+									<use xlink:href="#arrow-left-small"></use>
+								</svg>
+							</button>
+							<button class="slider-ar slider-ar_square pos-rel default-btn">
+								<svg class="icon cent-icon" width="7" height="11">
+									<use xlink:href="#arrow-right-small"></use>
+								</svg>
+							</button>
+						</div>
+					{/if}
+				</div>
+			</div>
+			<div class="compare-row">
+				<div class="compare-row__inner">
+					{if count($products)}
+						<div class="col-side">
+							<div class="compare-pg__header-side compare-slide-header">
+								<div class="compare-pg__options mb20">
+									<label class="custom-radio" id="compare-all"><input type="radio" name="compare" value="0" checked>[`All features`]</label>
+									<label class="custom-radio" id="compare-diff"><input type="radio" name="compare" value="1">[`Different`]</label>
+								</div>
+								<a class="compare-pg__clear-list tabdeskonly" href="#" id="compare-clear">
+									<span class="close-x default-btn">
+										<svg class="icon cent-icon" width="8" height="8">
+											<use xlink:href="#arrow-x"></use>
+										</svg>
+									</span>
+									<span>[`Clear comparison list`]</span>
+								</a>
+							</div>
+						</div>
+						<div class="col-content">
+							<div class="compare-pg__items-slider compare-pg__items-slider_js swiper-container compare-slide-header">
+								<div class="swiper-wrapper">
+									{foreach $products as $p}
+										{$available = $wa->shop->settings('ignore_stock_count') || $p.count === null || $p.count > 0}
+										{$pre_order_only = $wa->shop->settings('ignore_stock_count') && $p.count !== null && $p.count <= 0}
+										<div class="compare-pg__slider-item swiper-slide compare-item-{$p.id}">
+											<div class="item-c item-c_1 item-c_bd item-c_remove item-c_equal item-c_equal_2 has-1-click-btn_false">
+												<form class="addtocart" {if $p.sku_count > 1}data-url="{$p.frontend_url}{if strpos($p.frontend_url, '?')}&{else}?{/if}cart=1"{/if} method="post" action="{$wa->getUrl('shop/frontendCart/add')}">
+													<button class="close-x default-btn compare-item__remove" title="[`Remove from comparison list`]" data-product="{$p.id}">
+														<svg class="icon cent-icon" width="8" height="8">
+															<use xlink:href="#arrow-x"></use>
+														</svg>
+														<span class="visually-hidden">[`Remove from comparison list`]</span>
+													</button>
+													<div class="item-c__inner">
+														<a class="item-c__image-wrapper item-c__image-wrapper_remove" href="{$p.frontend_url}">
+															{$wa->shop->productImgHtml($p, '200', ['itemprop' => 'image', 'alt' => $p.name, 'default' => "`$wa_parent_theme_url`img/dummy200.png"])}
+														</a>
+														<a class="item-c__title" href="{$p.frontend_url}">{$p.name}</a>
+														{if $theme_settings.products_show_reviews}
+															{$_rating = round($p.rating)}
+															<div class="item-rating item-c__rating">
+																<div class="item-rating__stars">
+																	<div class="stars stars_m">
+																		<div class="stars__list">
+																			{for $i=1 to 5}
+																				<div class="stars__i{if $i <= $_rating} stars__i_checked{/if}">
+																					<svg class="icon" width="16" height="15">
+																						<use xlink:href="#icon-star"></use>
+																					</svg>
+																				</div>
+																			{/for}
+																		</div>
+																	</div>
+																</div>
+															{/if}
+															<div class="item-rating__revs">
+																<svg class="icon" width="15" height="14">
+																	<use xlink:href="#icon-bubble"></use>
+																</svg>
+																<a class="grey" href="{$p.frontend_url}reviews/">{$p.rating_count}</a>
+															</div>
+														</div>
+														<div class="item-c__price">
+															<div class="price-wrapper">
+																<div class="price-wrapper__main">
+																	<div class="price">{shop_currency_html($p.price)}</div>
+																</div>
+															</div>
+														</div>
+														<div class="item-c__actions-wrapper">
+															<div class="item-c__top">
+																<button class="item-c__btn btn {$theme_settings.main_buttons_style|replace:'img/themebuttons/':''|replace:'.gif':''} btn_main-2 btn_text" type="submit">
+																	<span>[`Add to cart`]</span>
+																	<i class="hover-anim"></i>
+																</button>
+															</div>
+														</div>
+													</div>
+													<input type="hidden" name="product_id" value="{$p.id}">
+												</form>
+											</div>
+										</div>
+									{/foreach}
+								</div>
+							</div>
+						</div>
+					{else}
+						<p>[`Product comparison list is empty.`]</p>
+					{/if}
+				</div>
+			</div>
+		</div>
+	</div>
+	{if count($products)}
+		<div class="compare-pg__body">
+			<div class="compare-row">
+				<div class="compare-row__inner" id="compare-table">
+					<div class="col-side">
+						<ul class="compare-pg__char-prop-list compare-char-list list-reset">
+							{foreach $features as $f_id=>$f}
+								{if $f.type eq "divider"}{continue}{/if}
+								<li class="compare-pg__char-prop bold char-row{if $f.same} same{/if}">{$f.name}</li>
+							{/foreach}
+						</ul>
+					</div>
+					<div class="col-content">
+						<div class="compare-pg__chars-slider compare-pg__chars-slider_js swiper-container">
+							<div class="swiper-wrapper">
+								{foreach $products as $p}
+									<div class="compare-pg__slider-item swiper-slide compare-item-{$p.id}">
+										<ul class="compare-pg__char-value-list compare-char-list list-reset">
+											{foreach $features as $f_id=>$f}
+												{if $f.type eq "divider"}{continue}{/if}
+												<li class="compare-pg__char-value char-row{if $f.same} same{/if}">
+													{if isset($p.features[$f_id])}
+														<span>
+															{if is_array($p.features[$f_id])}
+																{implode('<br> ', $p.features[$f_id])}
+															{else}
+																{$p.features[$f_id]}
+															{/if}
+														</span>
+													{else}
+														<span>&mdash;</span>
+													{/if}
+												</li>
+											{/foreach}
+										</ul>
+									</div>
+								{/foreach}
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		{literal}
+		<script>
+			( function($) {
+
+				var $filter = $(".s-compare-filter"),
+					$table = $("#compare-table"),
+					$someFiels = $table.find(".same");
+
+				$("#compare-all").on("click", function () {
+					showSomeFields( $(this), true);
+				});
+
+				$("#compare-diff").on("click", function () {
+					showSomeFields( $(this), false);
+				});
+
+				$("#compare-clear").on("click", function (e) {
+					e.preventDefault();
+					clearCompare();
+				});
+
+				$(".compare-item__remove").on("click", function () {
+					compareRemove( $(this).data("product") );
+				});
+
+				function showSomeFields( $button, show ) {
+					if (show) {
+						$someFiels.show();
+					} else {
+						$someFiels.hide();
+					}
+				}
+
+				function clearCompare() {
+					$.cookie('shop_compare', null, {path: '/'});
+					location.href = location.href.replace(/compare\/.*/, 'compare/');
+					$(".js-compare-count").html("0");
+				}
+
+				function compareRemove( product_id ) {
+					var compare = $.cookie('shop_compare');
+					if (compare) {
+						compare = compare.split(',');
+					} else {
+						compare = [];
+					}
+
+					var i = $.inArray(product_id + "", compare);
+					if (i != -1) {
+						compare.splice(i, 1);
+					}
+
+					if (compare.length) {
+						$.cookie('shop_compare', compare.join(','), { expires: 30, path: '/'});
+						$(".compare-item-"+product_id).remove();
+						$(".js-compare-count").html(compare.length);
+					} else {
+						$.cookie('shop_compare', null, {path: '/'});
+						$(".js-compare-count").html("0");
+						location.reload();
+					}
+				}
+
+			})(jQuery);
+		</script>
+		{/literal}
+	{/if}
+</div>
+{$wa->title("[`Compare products`]")}
+{/strip}
